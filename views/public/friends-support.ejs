@@ -1,0 +1,137 @@
+<%- partial('./partials/header.ejs') %>
+
+<header class="padding-top80 white-bg">
+
+	<div class="container white-bg">
+
+		<div class="banner-content text-center animation animated animation-fade-in-down" data-animation="animation-fade-in-down">
+			<a href="/"><img src="/images/triforce-tokens-banner-logo-2.png" alt="TriForce Tokens Ltd Logo" /></a>
+		</div>
+		
+	</div>
+
+</header>
+
+<div class="section">
+
+	<div class="container">
+	
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			
+			<div class="text-center">
+				<h1>Friends &amp; Family Token Discount</h1>
+			</div>
+		
+
+            <% if(flash.has('errors')){ %>
+			<br /><br />
+            <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+                <% flash.get('errors').forEach(function (message) { %>
+                <h4 class="error"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<%- message %></h4>
+                <% }) %>
+            </div>
+            <% } %>
+
+            <% if(flash.has('success')){ %>
+			<br /><br />
+            <div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+                <% flash.get('success').forEach(function (message) { %>
+                <h4 class="success"><i class="fa fa-exclamation-check"></i> &nbsp;&nbsp;<%- message %></h4>
+                <% }) %>
+            </div>
+            <% } %>
+			
+			
+			<br />
+			<div class="col-lg-8 col-md-8 cl-sm-12 col-xs-12 col-lg-offset-2 col-md-2 text-left">
+				<p>We are offering our friends &amp; family a signficant discount on the purchase of our new universal games currency, called FORCE tokens.</p>
+				
+				<br />
+				<br />
+				<h3>What are FORCE tokens?</h3>
+				<p>This is a completely new universal game currency that can be used on all gaming platforms and games.</p>
+				<p>Specifically players will be able to reward each other or pay each other for in-game services such as skills coaching, helping
+				each other to level up. Additionally game developers and publishers will be given new revenue models via transaction fees for
+				integrating the technology being built. So it is a solution that has benefits for all.</p>
+				<p>It is recommended to review the information about our project fully, using the links below:</p>
+				
+				<ul>
+					<li><a href="/">Home Page</a></li>
+					<li><a href="/resources/white-paper-v3.3.pdf">White Paper</a></li>
+					<li><a href="/resources/one-page-summary.pdf">One Pager</a></li>
+				</ul>
+				
+				<br />
+				<br />
+				<h3>What will your investment be used on?</h3>
+				<p>Any investment you send to us for the project will go into our 'smart contracts'.</p>
+				<p>This means your investment is protected should we fail to reach out goals. If we do not reach a minimum of &dollar;500,000 you receive your investment back 
+				in Ether cryptocurrency or we can convert it back into &pound; GBP and send back. This is only available to you.</p>
+				<p>If our token crowdsale is successfull, meaning we raise more than &dollar;500,000, you will receive the equivelant of your investment in FORCE tokens.</p>
+				<p>We can hold your FORCE tokens for you or help guide you on creating a digital wallet to store them in.</p>
+				
+				<br />
+				<br />
+				<h3>What special discount rates are offered?</h3>
+				<p>The general public are being offered FORCE tokens at a discounted rate of 25&percnt;.</p>
+				<p><strong>Friends and family will receive a discounted rate of 50&percnt;.</strong></p>
+				<p><strong>This means instead of receiving the standard 7,500 FORCE tokens per 1 ETH, you will receive 9,000 FORCE tokens per 1 ETH.</strong></p>
+				<p><a href="https://www.coingecko.com/en/price_charts/ethereum/gbp">You can check the currenct price of ETH here.</a></p>
+				
+				
+				<br />
+				<br />
+				<h3>How to Buy</h3>
+				<p>You can send payment now and our team will secure your FORCE tokens and manage the investment for you.</p>
+				<p><strong>Decide how much you would like to invest in our project and send payment to the following bank details:</strong></p>
+				
+				<br />
+				<table class="table bank-detail-table">
+					<tr>
+						<td>Account Name:</td>
+						<td>TriForce Tokens Ltd</td>
+					</tr>
+					<tr>
+						<td>Sort Code:</td>
+						<td>60-02-13</td>
+					</tr>
+					<tr>
+						<td>Account Number:</td>
+						<td>71232370</td>
+					</tr>
+				</table>
+				
+				<br />
+				<p>Alternatively, if you know how, you can send Ether to the following wallet address:</p>
+				<br />
+				
+				<p class="text-center"><strong>0x829f909bc8127525554678144addb3024cf22495</strong></p>
+				
+				<br />
+				
+				<p><strong>Please email either pete@triforcetokens.io or jake@triforcetokens.io once payment has been sent with the reference number or transaction ID.</strong></p>
+				
+				<br />
+				<br />
+				<h3>Final Steps</h3>
+				<p>Once we confirm payment, we will keep your funds secure. On the 20th February we will then convert your funds
+				to Ether equivilant. This Ether will then be sent to our smart contract which will store them securely until
+				we raise our minimum of $500,000 in Ether.</p>
+				<p>If we fail to raise the &dollar;500,000 minimum, we will return your investment back in Ether or alternatively convert it back into &pound;GBP. <strong>However
+				you must be aware that during this period the rate of Ether will fluctuate and you may get back much less than you originally invested.</strong></p>
+				<p>If we raise our minimum, you will then own the relevant number of FORCE tokens. We can either hold these for you or
+				alternatively help you set up a digitial wallet and transfer them to you.</p>
+			</div>
+
+			
+		</div>
+		
+		
+	</div>
+
+</div>
+
+<br />
+<br />
+<br />
+<%- partial('./partials/footer.ejs') %>

@@ -1,0 +1,73 @@
+<%- partial('./partials/header.ejs') %>
+
+<header class="padding-top60 white-bg">
+
+	<div class="container white-bg">
+
+		<div class="banner-content text-center animation animated animation-fade-in-down" data-animation="animation-fade-in-down">
+			<a href="/"><img src="/images/triforce-tokens-banner-logo-2.png" alt="TriForce Tokens Ltd Logo" /></a>
+		</div>
+		
+	</div>
+
+</header>
+
+<div class="section">
+
+	<div class="container">
+	
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			
+			<h3 class="subscribe-form-heading">please click "i agree" below to advance the project and receive 10% extra bonus</h3>
+			
+            <% if(flash.has('errors')){ %>
+			<br /><br />
+            <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+                <% flash.get('errors').forEach(function (message) { %>
+                <h4 class="error"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<%- message %></h4>
+                <% }) %>
+            </div>
+            <% } %>
+
+            <% if(flash.has('success')){ %>
+			<br /><br />
+            <div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+                <% flash.get('success').forEach(function (message) { %>
+                <h4 class="success"><i class="fa fa-exclamation-check"></i> &nbsp;&nbsp;<%- message %></h4>
+                <% }) %>
+            </div>
+            <% } %>
+			
+
+			<div class="text-left col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+				<p>I, <%= data.user.firstName + ' ' + data.user.lastName %>, agree that my contribution can be released by Coinpayments to the project team so that they may
+				advance the project in the following areas:</p>
+				
+				<ol>
+					<li>Create a fully branded subsidiary engagement platform</li>
+					<li>Engage with more high profile advisors</li>
+					<li>Complete marketing campaigns to bring on board industry influencers</li>
+					<li>Complete campaigns to build real user adoption</li>
+				</ol>
+							
+				<p>I understand that by doing so I will receive an additional 10&percnt; TFT bonus based on my contribution level, increasing
+				my overall bonus to 70&percnt;.</p>
+				
+				<div class="text-center">
+					<a class="btn btn-lg btn-success" href="/contributor-help?uid=<%= req.param("uid") + "&confirm=true" %>">I Agree</a>
+				</div>
+			</div>
+			
+
+		
+		</div>
+		
+		
+	</div>
+
+</div>
+
+<br />
+<br />
+<br />
+<%- partial('./partials/footer.ejs') %>

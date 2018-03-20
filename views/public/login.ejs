@@ -1,0 +1,89 @@
+<%- partial('./partials/header.ejs') %>
+
+<header class="padding-top80 white-bg">
+
+	<div class="container white-bg">
+
+		<div class="banner-content text-center animation animated animation-fade-in-down" data-animation="animation-fade-in-down">
+			<a href="/"><img src="/images/triforce-tokens-banner-logo-2.png" alt="TriForce Tokens Ltd Logo" /></a>
+		</div>
+
+	</div>
+
+</header>
+
+<div class="section">
+
+	<div class="container">
+
+		<div class="col-sm-12 col-md-12 col-lg-12">
+
+			<div class="text-center">
+				<h1><%- __('Account Login') %></h1>
+			</div>
+
+
+
+			<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 col-lg-offset-3 col-md-offset-2 col-sm-offset-1">
+
+				<br />
+
+
+				<% if(flash.has('errors')){ %>
+				<br /><br />
+				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+					<% flash.get('errors').forEach(function (message) { %>
+					<p class="error"><%- message %></p>
+					<% }) %>
+				</div>
+				<% } %>
+
+				<% if(flash.has('success')){ %>
+				<br /><br />
+				<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+					<% flash.get('success').forEach(function (message) { %>
+					<p class="success"><%- message %></p>
+					<% }) %>
+				</div>
+				<% } %>
+
+				<br />
+
+
+				<form method="post" action="/login">
+
+					<div class="form-group form-group-lg">
+						<input class="form-control" type="email" name="email" placeholder="<%- __('email') %>">
+					</div>
+
+					<div class="form-group form-group-lg">
+						<input class="form-control" type="password" name="password" placeholder="<%- __('password') %>">
+					</div>
+
+					<div class="form-group form-group-lg">
+						<%- recaptchaForm %>
+					</div>
+
+
+					<div class="form-group form-group-lg">
+						<input class="btn btn-block btn-cta" type="submit" value="Login" />
+					</div>
+
+					<br />
+					<a href="/forgot-password"><%- __('Forgot your password?') %></a> &nbsp;&nbsp;&nbsp;
+					<a href="/join-whitelist"><%- __('Need an account?') %></a>
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
+
+</div>
+
+<br />
+<br />
+<br />
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<%- partial('./partials/footer.ejs') %>

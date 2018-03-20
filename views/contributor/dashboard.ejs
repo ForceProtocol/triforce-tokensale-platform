@@ -1,0 +1,588 @@
+<%- partial('./partials/header.ejs') %>
+
+<% let from_tft_team = false;
+try {
+  if (user && user.email) {
+    let userDomain = user.email.split('@').pop();
+
+    from_tft_team = userDomain === 'triforcetokens.io';
+
+  }
+}catch(_ex){}
+
+const totalTokens = Number(_.isObject(txns) && txns.totalTFTs ? txns.totalTFTs : 0);
+
+if(typeof isWlAdded === 'boolean'){
+%>
+<script>window.isWlAdded = <%= isWlAdded %></script>
+<% } %>
+
+
+
+<!-- <div class=""> -->
+
+	<div class="container">
+    <div id="r-msg"></div>
+		<div class="pull-left currency-symbol">
+			<img class="currency-ticker-symbol" src="/images/force-currency-symbol-white.png" alt="FORCE" /> <span><%= totalTokens.toLocaleString(2) %> FORCE</span>
+		</div>
+			
+		<div class="pull-right logout-link">
+			<a class="white-link" href="/logout">Logout <i class="fa fa-sign-out"></i></a>
+		</div>
+		<div class="row bs-wizard setup-panel" style="border-bottom:0;">
+			<% if (user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') { %>
+				<div class="col-xs-4 bs-wizard-step complete">
+			<% } else { %>
+				<div class="col-xs-4 bs-wizard-step active">
+			<% } %>
+				<div class="text-center bs-wizard-stepnum">KYC</div>
+				<div class="progress"><div class="progress-bar"></div></div>
+				<a href="#step-1" type="button" class="bs-wizard-dot" ></a>
+			</div>
+			<% if ((user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') && ((user.whitelistEthAddress).length == 0)) { %>
+				<div class="col-xs-4 bs-wizard-step active">
+			<% } else if (_.isString(user.whitelistEthAddress) && user.whitelistEthAddress.length > 0) { %>
+				<div class="col-xs-4 bs-wizard-step complete">
+			<% } else { %>
+				<div class="col-xs-4 bs-wizard-step disabled">
+			<% } %>					
+				<div class="text-center bs-wizard-stepnum">Whitelist Me</div>
+				<div class="progress"><div class="progress-bar"></div></div>
+				<a href="#step-2" type="button" class="bs-wizard-dot" disabled="disabled"></a>
+			</div>
+			<% if (_.isString(user.whitelistEthAddress) && user.whitelistEthAddress.length > 0) { %>
+				<div class="col-xs-4 bs-wizard-step complete">
+			<% } else { %>
+				<div class="col-xs-4 bs-wizard-step disabled">
+			<% } %>
+				<div class="text-center bs-wizard-stepnum">Purchase Tokens</div>
+				<div class="progress"><div class="progress-bar"></div></div>
+				<a href="#step-3" type="button" class="bs-wizard-dot" disabled="disabled"></a>
+			</div>				
+		</div>
+		<div class="contributor-body highlight-msg" style="margin-bottom:10px">
+				<% if (user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') { %>
+						<div class="whitelist-form-container setup-content" id="step-1">
+				<% } else { %>
+						<div class="whitelist-form-container setup-content active" id="step-1">
+				<% } %>
+					<h3><%- __('Your KYC Status') %></h3>
+					<% if (user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') { %>
+						<div class="alert alert-success">
+							<p>APPROVED</p>
+						</div>
+					<% } else if (user.approvalStatus == 'REJECTED') { %>
+						<div class="alert alert-danger">
+							<p>REJECTED</p>
+						</div>
+					<% } else { %>
+						<div class="alert alert-warning">
+							<p>PENDING</p>
+						</div>
+					<% } %>
+					<% if (user.approvalStatus == 'REJECTED') { %>
+						<div class="row">
+								<div class="col-lg-4 col-md-4 col-sm-6 col-xs-8 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
+									<button id="resubmit-kyc" type="button" class="btn btn-green-highlight pull-right btn-block">Resubmit KYC Application</button>
+								</div>
+						</div>
+					<% } %>
+					<%- partial('./partials/kyc-form.ejs') %>				
+			</div>
+
+			<% if ((user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') && (user.whitelistEthAddress.length == 0)) { %>
+				<div class="whitelist-form-container setup-content active" id="step-2">
+			<% } else { %>
+				<div class="whitelist-form-container setup-content" id="step-2">
+				<% } %>
+						<% if (_.isString(user.whitelistEthAddress) && user.whitelistEthAddress.length > 0) { %>
+				<div class="alert alert-success">
+					<p><%- __('Your whitelisted sending address:') %>
+					<% if(_.isString(user.whitelistEthAddress) && user.whitelistEthAddress.length > 0){ %>
+						<strong><%= user.whitelistEthAddress %></strong>
+					<% } %>
+					</p>
+				</div>
+				<p><strong><%- __('Want to switch your ERC20 wallet? Do not worry! You can update this wallet address in next step!') %></strong></p>
+			<% } else { %>
+				<h3><%- __('Whitelist your ERC20 wallet address') %></h3>
+				<div class="alert alert-info"><p><%- __('It is important that you do not enter a wallet address from an exchange like coinbase, poloniex or bittrex. We recommend using MyEtherWallet or other wallets that you have the private key to and are ERC-20 compatible.') %></p></div>
+				<div id="scroll-to-warning-message" class="warning-message"></div>
+				<div id="scroll-to-warning-message" class="success-message"></div>
+				<form id="whitelistForm" class="text-left whitelist-form" action="">
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label"><%- __('Your Ethereum Wallet Address') %></label>
+						<div class="col-sm-10">
+							<input required="required" name="ethAddress" type="text" class="form-control" id="inputEthAddress" placeholder="0xa.....">
+							<small class="form-text text-muted form-input-note"><strong><%- __('Enter the Ethereum address you will be buying tokens with.') %><br />
+							<%- __('Please ensure it is not from an exchange otherwise you may not receive your tokens.') %><br />
+							<a target="_BLANK" href="https://docs.google.com/document/d/1BriLzrcOOloLyUcqeUr0ZpZhGXkYJc3OejKh99Tzfew/edit#heading=h.juzr9u87d5da">MyEtherWallet</a> <%- __('is one of the best wallets to use for this purpose.') %></strong></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-8 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
+							<button id="whitelist-my-address" type="button" class="btn btn-green-highlight pull-right btn-block">Whitelist My Address</button>
+						</div>
+					</div>
+				</form>
+				<% } %>
+			</div>
+			
+			<% if ((user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') && (user.whitelistEthAddress.length > 0)) { %>
+			<div class="whitelist-form-container setup-content active" id="step-3">
+				<% } else { %>
+			<div class="whitelist-form-container setup-content" id="step-3">
+				<% } %>
+				<% if(flash.has('errors')){ %>
+				<div class="alert alert-danger">
+					<% flash.get('errors').forEach(function (message) { %>
+					<p class="error"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<%= message %></p>
+					<% }); %>
+				</div>
+				<% } %>
+				<% if(flash.has('success')){ %>
+				<div class="alert alert-success">
+					<% flash.get('success').forEach(function (message) { %>
+					<p class="error"><i class="fa fa-exclamation-check"></i> &nbsp;&nbsp;<%= message %></p>
+					<% }) %>
+				</div>
+				<% } %>
+
+
+				<ul class="nav nav-tabs nav-tabs-responsive" role="tablist">
+					<li role="presentation" class="active"><a href="#nav-home" aria-controls="nav-home" role="tab" data-toggle="tab"><%- __('Buy FORCE Tokens') %></a></li>
+					<li role="presentation" class="next"><a href="#nav-transactions" aria-controls="transactions" role="tab" data-toggle="tab"><span class="text"><%- __('Your Purchases') %></span></a></li>
+					<li role="presentation"><a href="#nav-wallet" aria-controls="wallet" role="tab" data-toggle="tab"><span class="text"><%- __('Your Ether Wallet') %></span></a></li>
+					<li role="presentation"><a href="#nav-howto" aria-controls="nav-howto" role="tab" data-toggle="tab"><span class="text"><%- __('How To Guides') %></span></a></li>
+					<li role="presentation"><a href="#nav-support" aria-controls="nav-support" role="tab" data-toggle="tab"><span class="text"><%- __('Support') %></span></a></li>
+					<li class="pull-right"><h4><span class="xs-hide"><%- __('KYC Application:') %></span>
+						<% if(user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED'){ %>
+							<span class="whitelist-status"><%- __('APPROVED') %> <i class="fa fa-check green"></i></span>
+						<% }else if(user.approvalStatus == 'REJECTED'){ %>
+							<span class="whitelist-status-rejected"><%- __('REJECTED') %> <i class="fa fa-times"></i></span>
+						<% }else{ %>
+							<span class="whitelist-status-pending"><%- __('PENDING...') %> </span>
+						<% } %></h4></li>
+				</ul>
+
+
+				<div class="tab-content" id="nav-tabContent">
+
+					<div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+
+						<div class="hide-when-live">
+							<br />
+							<h3 class="text-center"><%- __('The token sale will open in...') %></h3>
+							<br />
+
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2 wow fadeInUp">
+									<div class="col-xs-3 panel-chart-wrapper">
+										<span data-percent="75" class="panel-chart days-remain-chart"><span class="percent days-remain">0</span></span>
+										<p><%- __('Days') %></p>
+									</div>
+									<div class="col-xs-3 panel-chart-wrapper">
+										<span data-percent="50" class="panel-chart hours-remain-chart"><span class="percent hours-remain">0</span></span>
+										<p><%- __('Hours') %></p>
+									</div>
+									<div class="col-xs-3 panel-chart-wrapper">
+										<span data-percent="60" class="panel-chart minutes-remain-chart"><span class="percent minutes-remain">0</span></span>
+										<p><%- __('Minutes') %></p>
+									</div>
+									<div class="col-xs-3 panel-chart-wrapper">
+										<span data-percent="25" class="panel-chart seconds-remain-chart"><span class="percent seconds-remain">0</span></span>
+										<p><%- __('Seconds') %></p>66
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- <div class="row display-when-live stats" style="display:none;">
+							<br />
+							<div class="col-md-12 fadeInUp">
+								<div class="col-lg-4 col-md-4 col-xs-4 panel-chart-wrapper panel-chart-side">
+									<span data-percent="100" class="panel-chart discount-level-chart"><span class="percent discount-level">25&percnt;</span></span>
+									<p class="panel-chart-content"><%- __('Current<br /><span>Discount Level</span>') %></p>
+								</div>
+
+								<div class="col-xs-4 panel-chart-wrapper panel-chart-center">
+									<span data-percent="0" class="panel-chart-lg tokens-sold-chart"><span class="percent tokens-sold">0</span></span>
+									<p class="panel-chart-content"><%- __('Total FORCE<br /><span>Tokens Sold</span>') %></p>
+								</div>
+
+								<div class="col-xs-4 panel-chart-wrapper panel-chart-side">
+									<span data-percent="75" class="panel-chart"><span class="percent">20&percnt;</span></span>
+									<p class="panel-chart-content"><%- __('Next Bonus<br /><span>Level') %></span></p>
+								</div>
+							</div>
+						</div> -->
+
+
+						<div class="row" style="padding-top:20px;">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="alert alert-info">
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<strong><p>To ensure that you successfully purchase FORCE tokens, check the following:</p>
+											<ul>
+												<li>The minimum amount to send is 0.1ETH</li>
+												<li>Recommended GAS: 300000</li>
+												<li>Recommended GWEI: 4+</li>
+											</ul></strong>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<strong><p>Copy and paste these settings to add FORCE custom token into MEW or MetaMask:</p>
+											<ul>
+												<li>Contract Address: 0x794eb1f985f472c0b44c4041b4198478366f9940</li>
+												<li>Symbol: FORCE</li>
+												<li>Decimals: 18</li>
+											</ul></strong>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion" style="padding-bottom:20px;">
+							
+							<div class="row contributor-page-centre">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<h3>
+										<span id="triggerDirectBuy" data-toggle="collapse" data-target="#buyDirect" aria-expanded="true" aria-controls="buyDirect">
+											<img src="/images/button_buy-force-tokens-direct.png" alt="Buy With MetaMask" />
+										</span>
+									</h3>	
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span id="triggerMetamaskBuy" data-toggle="collapse" data-target="#buyWithMetamask" aria-expanded="false" aria-controls="buyWithMetamask">
+										<img src="/images/button_buy-force-with-metamask.png" alt="Buy With MetaMask" />
+									</span>
+								</div>
+							</div>
+
+							<div class="row contributor-page-centre collapse" aria-labelledby="triggerDirectBuy" id="buyDirect" data-parent="#triggerDirectBuy">
+								<% if(user.approvalStatus != 'CLEARED' && user.approvalStatus != 'ACCEPTED' && user.approvalStatus != 'PENDING'){ %>
+
+										<h3><%- __('You cannot purchase FORCE tokens') %></h3>
+										<br />
+										<p>Unfortunately you will be unable to enter our token sale due to failed KYC/AML checks.</p>
+										<p>If you feel that this is geniunely in error please contact us in the telegram channel and we will do our best to resolve.</p>
+										<p>Due to compliancy regulations we have to ensure that strict procedures are adhered to and so we may be unable
+										to reverse the decision.</p>
+
+									<% }else if(user.approvalStatus != 'PENDING'){ %>
+										<h3><%- __('Buy FORCE Tokens Direct') %></h3>
+										<br />
+
+										<div class="alert alert-success"><p><%- __('Your sending address:') %>
+											<% if(_.isString(user.whitelistEthAddress) && user.whitelistEthAddress.length > 0){ %>
+											<strong><%= user.whitelistEthAddress %></strong>
+											<% } %>
+										</p></div>
+
+										<p><%- __('Send ETH to the following wallet address to buy FORCE tokens') %></p>
+										<pre class="text-center ico-address"><%- __('please wait...token sale not open') %></pre>
+
+										<div class="alert alert-info"><p><%- __('Please ensure you are NOT sending from an exchange wallet. You must have the private key to an ERC20 standard wallet such as MyEtherWallet, Nano Ledger S, Trezor or MetaMask.') %></p></div>
+									<% }else{ %>
+
+										<h3><%- __('Buy FORCE Tokens Direct') %></h3>
+										<br />
+										<p><%- __('Buy FORCE tokens by sending ETH to the following wallet address') %></p>
+										<pre class="text-center"><%- __('please wait...token sale not open') %></pre>
+
+										<div class="alert alert-success"><p><%- __('Please ensure you are NOT sending from an exchange wallet. You must have the private key to an ERC20 standard wallet such as MyEtherWallet, Nano Ledger S, Trezor or MetaMask.</p>') %>
+										<p><%- __('Here is a <a href="https://docs.google.com/document/d/1BriLzrcOOloLyUcqeUr0ZpZhGXkYJc3OejKh99Tzfew/edit?usp=sharing">MyEtherWallet guide</a>') %>.</p></div>
+
+									<% } %>
+							</div>
+								
+							<div class="row contributor-page-centre collapse" aria-labelledby="triggerMetamaskBuy" id="buyWithMetamask"  data-parent="#triggerMetamaskBuy">
+											<h3><%- __('Buy FORCE Tokens with MetaMask') %></h3>
+											<br />
+											<div id="mm-msg"></div>
+											<p><%- __('Purchase FORCE tokens with ease using MetaMask chrome extension.') %></p>
+		
+											<br />
+											<div class="col-lg-12 col-md-12 col-sm-10 col-xs-12 text-center">
+												<div class="form-group display-when-live" style="display:none;">
+													<label><%- __('How much Ether (ETH) do you want to send via MetaMask?') %></label>
+													<input class="form-control ether_address input-block" type="number" name="ether_amount" id="ether_amount" placeholder="e.g. 1.2345" min="0.1" max="100">
+												</div>
+												<div class="metamask-buy-btn metamask-btn display-when-live" style="display:none;" onClick="web3Obj.send()"><img src="/images/buy-force-with-metamask-btn.png" alt="Buy With MetaMask" /></div>
+												<div class="metamask-download-btn metamask-btn" style="display:none" onclick="web3Obj.gotoMetamask()"><img src="/images/download-metamask-btn.png" alt="Download With MetaMask" /></div>
+											</div>
+							</div>
+
+						</div>
+
+					</div>
+
+
+					<div class="tab-pane fade" id="nav-wallet" role="tabpanel" aria-labelledby="nav-wallet-tab">
+
+						<h2><%- __('Wallet Address') %></h2>
+
+						<% if(user.approvalStatus != 'CLEARED' && user.approvalStatus != 'ACCEPTED' && user.approvalStatus != 'PENDING'){ %>
+						<% }else{ %>
+
+						<div class="alert alert-info"><p><%- __('It is important that you do not enter a wallet address from an exchange like coinbase, poloniex or bittrex. We recommend using MyEtherWallet or other wallets that you have the private key to and are ERC-20 compatible.') %></p></div>
+
+
+						<% if(_.isString(user.whitelistEthAddress) && user.whitelistEthAddress.length > 0){ %>
+						<p><strong><%- __('Your whitelisted wallet address is currently set to:') %></strong></p>
+						<pre><%= user.whitelistEthAddress %></pre>
+						<br />
+						<p><strong><%- __('You can change this wallet address in the form below:') %></strong></p>
+						<% }else{ %>
+						<p><strong><%- __('Please enter your Ethereum wallet address to receive your FORCE tokens below.') %></strong></p>
+						<% } %>
+
+
+						<form method="post">
+							<div class="form-group">
+								<input class="form-control ether_address" type="text" name="ether_address"  etherAddressInput="0" placeholder="<%- __('Enter Your Ethereum Address') %>">
+							</div>
+							<button class="btn btn-success" type="button" onclick="contribute.requestAddressChange(this)" etherAddressInput="0" ><%- __('Save Wallet Address') %></button>
+						</form>
+
+						<% } %>
+
+					</div>
+
+
+
+					<div class="tab-pane fade" id="nav-transactions" role="tabpanel" aria-labelledby="nav-transactions-tab">
+
+
+						<h2><%- __('Transactions') %></h2>
+
+						<p><%- __('Please allow up to an hour for your contributions to appear below once sent.') %></p>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th><%- __('Amount') %></th>
+									<th><%- __('Date') %></th>
+									<th><%- __('Estimated FORCE') %></th>
+									<th><%- __('Bonus FORCE') %></th>
+									<th><%- __('Total FORCE') %></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% if(totalTokens < 1){ %>
+										<tr>
+											<td colspan="5"><%- __('No contributions received yet.') %></td>
+										<tr>
+								<% }else{
+
+									const {r1txns, r2txns} = txns;
+
+
+								if(_.isArray(r2txns.transactions)) {
+									for(let txn of r2txns.transactions){ %>
+								<tr>
+									<td>ETH <%= Number(txn.ethContribution).toFixed(2) %></td>
+									<td><%= moment(txn.createdAt).calendar() %></td>
+									<td><%= Number(txn.forceBoughtFrmtd).toFixed(2) %></td>
+									<td><%= Number(Number(txn.forceEarnedFrmtd) - Number(txn.forceBoughtFrmtd)).toFixed(2) %></td>
+									<td><a target="_blank" href="https://etherscan.io/tx/<%= txn.transactionHash %>"><%= Number(txn.forceEarnedFrmtd).toFixed(2) %></a></td>
+								</tr>
+								<% } }
+
+
+								if(_.isArray(r1txns.transactions) && r1txns.transactions.length) { %>
+									<tr><td colspan="5" style="text-align:center">PRE-ICO CONTRIBUTIONS <strong>WITH SPECIAL DISCOUNT</strong>
+										<br>
+										<small>*All contributions are converted to ETH equivalent based on market rate at the time of transaction</small>
+										</td></tr>
+									<% for(let txn of r1txns.transactions){ %>
+										<tr>
+											<td>ETH* <%= Number(txn.inEth).toFixed(2) %></td>
+											<td><%= moment(txn.createdAt).calendar() %></td>
+											<td><%= Number(Number(txn.forceEarned) - Number(txn.forceBonus)).toFixed(2) %></td>
+											<td><%= Number(txn.forceBonus).toFixed(2) %></td>
+											<td><%= Number(txn.forceEarned).toFixed(2) %></td>
+										</tr>
+										<% } }
+
+							%>
+
+							<% } %>
+							</tbody>
+						</table>
+					</div>
+
+
+					<div class="tab-pane fade" id="nav-howto" role="tabpanel" aria-labelledby="nav-howto-tab">
+
+						<h2><%- __('How To Guides') %></h2>
+
+						<br />
+						<p><%- __('How to purchase guide:') %> <br /><a target="_BLANK" href="https://docs.google.com/document/d/1mEdDvIR5GSFPqZ0nvmpz6ZvvVZWkr4XOe7ww0NFWQrI/edit?usp=sharing">https://docs.google.com/document/d/1mEdDvIR5GSFPqZ0nvmpz6ZvvVZWkr4XOe7ww0NFWQrI/edit?usp=sharing</a></p>
+						<p><%- __('Using MyEtherWallet:') %> <br /><a target="_BLANK" href="https://docs.google.com/document/d/1BriLzrcOOloLyUcqeUr0ZpZhGXkYJc3OejKh99Tzfew/edit?usp=sharing">https://docs.google.com/document/d/1BriLzrcOOloLyUcqeUr0ZpZhGXkYJc3OejKh99Tzfew/edit?usp=sharing</a></p>
+
+					</div>
+
+
+					<div class="tab-pane fade" id="nav-support" role="tabpanel" aria-labelledby="nav-support-tab">
+
+						<h2><%- __('Support') %></h2>
+
+						<br />
+						<p><%- __('If you require any support or questions you can reach us on telegram or bitcointalk at the links below:') %></p>
+
+						<br />
+
+						<a class="" href="https://t.me/triforcetokens">Telegram</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="" href="https://bitcointalk.org/index.php?topic=2222731">Bitcointalk.org</a>
+
+						<br />
+						<br />
+						<p><%- __('Or alternatively if we are available in the live chat box below. Please click the large green icon in the bottom right of this screen.') %></p>
+
+					</div>
+				</div>
+
+				<input id="kycProgress" value="<% if(user.approvalStatus != 'CLEARED' && user.approvalStatus != 'ACCEPTED' && user.approvalStatus != 'REJECTED' && (!user.documentId || user.documentId == '' || user.documentId == null)){ %>false<% }else{ %>true<% } %>" type="hidden" />
+				
+				
+			</div>
+		</div>
+	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="completeKycModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body highlight-msg">
+
+					<div style="display:none;" class="loading-window">
+						<span>Processing Please Wait...</span>
+						<div class="loading">Loading&#8230;</div>
+					</div>
+
+					<div id="scroll-to-warning-message" class="warning-message"></div>
+
+					<div id="completeKycIntro" class="complete-kyc-intro">
+						<h2><%- __('Welcome! You\'re nearly there...') %></h2>
+						<br />
+						<p><%- __('To be able to buy FORCE, there is just one last step to complete.') %></p>
+
+						<ul>
+							<li><%- __('Upload a photocard ID') %></li>
+							<li><%- __('Upload a clear selfie image') %></li>
+						</ul>
+
+						<p><%- __('This is the final check as part of a legal requirement for token sales.') %></p>
+
+						<br />
+						<button id="kyc-step-2" class="btn btn-lg btn-block btn-success" name=""><%- __('Continue') %> &raquo;</button>
+						<br />
+						<p><small><i class="fa fa-lock"></i> &nbsp;<%- __('Your data is protected as we use world class Cynopsis Solutions as our service provider.') %></small></p>
+					</div>
+
+
+					<form id="finalKycForm" action="" enctype="multipart/form-data" method="POST">
+
+					<div id="kycDocumentUploadSection" class="upload-document-id-form" style="display:none;">
+						<h3>Upload photocard ID</h3>
+
+						<p><%- __('Please make sure you have one of the following forms of ID available:') %></p>
+
+						<ul class="enhance-list">
+							<li><%- __('Passport') %></li>
+							<li><%- __('National ID card') %></li>
+							<li><%- __('Drivers Licence') %></li>
+						</ul>
+
+						<br />
+
+						<p><strong><%- __('Acceptable file types are: .jpeg, .jpg, .png and .gif only. Do not upload PDF files.') %></strong></p>
+						<p><strong><%- __('Please ensure the details on the card are clear and fully visible.') %></strong></p>
+
+						<img class="img img-responsive center-block" src="/images/diagrams/scanned-id-correct.png" alt="" />
+
+						<br />
+
+						<div class="form-group row">
+							<label for="inputEmail3" class="col-sm-12 col-form-label">1) <%- __('Upload Photo ID Document') %></label>
+							<div class="col-sm-10">
+
+								<label><%- __('Upload scanned/photo of ID card only') %></label>
+								<input type="file" required="required" name="uploadDocument" id="inputDocument" class="fileUpload" />
+
+								<small class="form-text text-muted form-input-note"><strong><%- __('Upload either: Your Passport, National ID card, Drivers Licence') %><br />
+								<%- __('Max. upload file size is 4MB') %></strong></small>
+							</div>
+						</div>
+						<br />
+						<button id="kyc-step-3" type="button" class="btn btn-lg btn-block btn-success" name=""><%- __('Continue') %> &raquo;</button>
+						<br />
+					</div>
+
+					<div id="kycSelfieUploadSection" class="upload-selfie-form" style="display:none;">
+						<h3><%- __('Upload Selfie, Final Step!') %></h3>
+
+						<p><%- __('When uploading your selfie, please ensure your face is clear and fully visible.') %></p>
+
+						<img class="img img-responsive center-block" src="/images/diagrams/take-selfie-clear.png" alt="" />
+
+
+						<br />
+
+						<div class="form-group row">
+							<label for="inputEmail3" class="col-sm-2 col-form-label">2) <%- __('Upload Selfie') %></label>
+							<div class="col-sm-10">
+
+								<label><%- __('Upload selfie photo') %></label>
+								<input type="file" required="required" name="uploadSelfie" id="inputSelfie" class="fileUpload" />
+
+								<small class="form-text text-muted form-input-note"><strong><%- __('Upload a picture of yourself.') %><br />
+								<%- __('Make sure your face is fully visible and clear.<br /> Max. upload file size is 4MB') %></strong></small>
+							</div>
+						</div>
+
+						<br />
+						<button id="kyc-complete" type="button" class="btn btn-lg btn-block btn-success" name=""><%- __('Finish') %> &raquo;</button>
+						<br />
+					</div>
+
+					</form>
+
+
+					<div id="kycSuccessSection" style="display:none;">
+						<h3><%- __('Success! You have been approved') %></h3>
+						<img src="/images/big-success-banner.png" alt="" />
+						<p>You will now be able to buy some of the limited available supply of FORCE tokens on 12:30pm UTC on 20th February.</p>
+						<br />
+						<button data-dismiss="modal" class="btn btn-lg btn-block btn-success" name=""><%- __('Close') %> &raquo;</button>
+						<br />
+					</div>
+
+					<div id="kycRejectedSection" style="display:none;">
+						<h3><%- __('Hmm.. your KYC came back as rejected') %></h3>
+						<p>Unfortunately due to the information provided we are unable to accept you as a contributor in our token sale.</p>
+						<br />
+						<button data-dismiss="modal" class="btn btn-lg btn-block btn-success" name=""><%- __('Close') %> &raquo;</button>
+						<br />
+					</div>
+
+					<div id="kycPendingSection" style="display:none;">
+						<h3><%- __('Manual Review Required') %></h3>
+						<p>Don't panic, in some cases the automated face matching technology fails to detect legitimate matches of selfie and photocard ID.</p>
+						<p>Our team are likely already on the case and will perform a manual approval for you.</p>
+						<p>Sit tight, we will get you approved as soon as possible.</p>
+						<br />
+						<button data-dismiss="modal" class="btn btn-lg btn-block btn-success" name=""><%- __('Close') %> &raquo;</button>
+						<br />
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+<input type="hidden" id="sessionToken" type="text" name="sessionToken" value="<%= req.session.token %>" />

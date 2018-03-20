@@ -1,0 +1,110 @@
+<%- partial('./partials/header.ejs') %>
+
+<header class="padding-top80 white-bg">
+
+    <div class="container white-bg">
+
+
+    </div>
+
+</header>
+
+<div class="section">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h3 class="section-sub-heading margin-top0">get in touch</h3>
+
+				<% if(flash.has('errors')){ %>
+				<div class="alert alert-danger">
+					<% flash.get('errors').forEach(function (message) { %>
+					<p class="error"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<%= message %></p>
+					<% }); %>
+				</div>
+				<% } %>
+				<% if(flash.has('success')){ %>
+				<div class="alert alert-success">
+					<% flash.get('success').forEach(function (message) { %>
+					<p class="error"><i class="fa fa-exclamation-check"></i> &nbsp;&nbsp;<%= message %></p>
+					<% }) %>
+				</div>
+				<% } %>
+
+                <div class="padding-top20">
+
+					<h3>reach us on telegram</h3>
+
+					<p>The fastest way you can reach the team is by joining our telegram channel:</p>
+
+					<p><a href="https://t.me/triforcetokens">&raquo; Enter Telegram Channel &laquo;</a></p>
+
+					<p>Once you enter ask for Jake or Pete who are the most active in there.</p>
+
+
+					<br />
+					<hr />
+					<br />
+
+
+					<h3>reach us on facebook</h3>
+
+					<p>You can also send a direct request to the team on the facebook page:</p>
+
+					<p><a href="https://www.facebook.com/triforcetokens">&raquo; Join Facebook Group &laquo;</a></p>
+
+
+					<br />
+					<hr />
+					<br />
+
+
+					<h3>email us</h3>
+
+
+					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2 text-left">
+
+						<p>Alternatively if your enquiry is best dealt with by email, complete the form below:</p>
+						<br />
+
+
+						<form method="post" action="">
+
+							<div class="form-group">
+								<label>Your Name</label>
+								<input required="required" type="text" name="fullName" class="form-control" />
+							</div>
+
+							<div class="form-group">
+								<label>Your Email</label>
+								<input required="required" type="email" name="email" class="form-control" />
+							</div>
+
+							<div class="form-group">
+								<label>Enquiry</label>
+								<textarea required="required" type="text" name="message" class="form-control" rows="12"></textarea>
+							</div>
+
+							<div class="form-group row">
+								<%- recaptchaForm %>
+							</div>
+
+							<div class="form-group">
+								<input type="submit" name="contact-form" class="btn btn-success btn-block" value="Send &raquo;" />
+							</div>
+
+						</form>
+					</div>
+
+
+				</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<%- partial('./partials/footer.ejs') %>

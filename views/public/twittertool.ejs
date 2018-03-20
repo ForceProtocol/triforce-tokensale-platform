@@ -1,0 +1,210 @@
+<%- partial('./partials/header.ejs') %>
+
+
+
+<div class="container padding-top80">
+
+		<% if(flash.has('errors')){ %>
+		<div class="alert alert-danger">
+			<% flash.get('errors').forEach(function (message) { %>
+			<p class="error"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<%= message %></p>
+			<% }); %>
+		</div>
+		<% } %>
+		<% if(flash.has('success')){ %>
+		<div class="alert alert-success">
+			<% flash.get('success').forEach(function (message) { %>
+			<p class="error"><i class="fa fa-exclamation-check"></i> &nbsp;&nbsp;<%= message %></p>
+			<% }) %>
+		</div>
+		<% } %>
+		
+	
+	<!--
+	<h2>Track Retweets and Likes for a specific tweet we posted</h2>
+	<br />
+	
+	<p>The bearer token below is required. To obtain it must follow the steps here: <a href="https://developer.twitter.com/en/docs/basics/authentication/overview/application-only">https://developer.twitter.com/en/docs/basics/authentication/overview/application-only</a>.</p>
+	
+	<p>The below token should already work, but if invalidated, need to perform teh step above and make sure to be logged out of twitter when POSTing the request.</p>
+	<br />
+	
+	<form method="post" action="">
+	
+		<div class="form-group">
+			<label>Bearer Token:</label>
+			<input class="form-control" type="text" name="bearer_token" value="AAAAAAAAAAAAAAAAAAAAAFjt3gAAAAAABmaKWnks8wjHD%2FGYuX2czXELPvk%3DgILvu77Me8YPSpN3qe7FY8PwStki8tm0Hp00FybameAkhlyRxf" />
+		</div>
+		
+		<div class="form-group">
+			<label>Enter the twitter tweet ID</label>
+			<input class="form-control" type="text" name="tweetId" value="" />
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" name="action" value="checkTweet">Get Retweets</button>
+		</div>
+	</form>
+	
+	
+	-->
+	
+	<h2>Track Retweets and Likes for a specific tweet we posted</h2>
+	<br />
+	
+	<p>The bearer token below is required. To obtain it must follow the steps here: <a href="https://developer.twitter.com/en/docs/basics/authentication/overview/application-only">https://developer.twitter.com/en/docs/basics/authentication/overview/application-only</a>.</p>
+	
+	<p>The below token should already work, but if invalidated, need to perform teh step above and make sure to be logged out of twitter when POSTing the request.</p>
+	<br />
+	
+	<form method="post" action="" enctype="multipart/form-data">
+	
+		<div class="form-group">
+			<label>CSV File</label>
+			<file type="text" name="csvFile" />
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" name="action" value="removeFollowersAsStakes">Remove Follower Stakes</button>
+		</div>
+	</form>
+	
+	
+	<br />
+	<hr />
+	<br />
+	
+	<form method="post" action="">
+	
+		<div class="form-group">
+			<label>Bearer Token:</label>
+			<input class="form-control" type="text" name="bearer_token" value="AAAAAAAAAAAAAAAAAAAAAFjt3gAAAAAABmaKWnks8wjHD%2FGYuX2czXELPvk%3DgILvu77Me8YPSpN3qe7FY8PwStki8tm0Hp00FybameAkhlyRxf" />
+		</div>
+		
+		<div class="form-group">
+			<label>usernames</label>
+			<input class="form-control" type="text" name="usernames" value="" />
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" name="action" value="getUserIds">Get UserIds</button>
+		</div>
+	</form>
+	
+	
+	<br />
+	<br />
+	
+	<hr />
+	
+	<br />
+	<br />
+	
+	
+	<h2>Download Latest Stakes Spreadsheet</h2>
+	<br />
+	
+	<form method="post" action="">
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" name="action" value="downloadSpreadsheet">Download</button>
+		</div>
+	</form>
+
+	<br />
+	<br />
+	
+	<hr />
+	
+	<br />
+	<br />
+	
+	<!--
+	<h2>Connect to Stream API</h2>
+	<br />
+	
+	<form method="post" action="">
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" name="action" value="connectToStream">Connect</button>
+		</div>
+	</form>
+	
+	<br />
+	<br />
+	
+	<hr />
+	
+	<br />
+	<br />-->
+	
+	
+	<h2>Add a new twitter bounty follower</h2>
+	<br />
+	
+	<form method="post" action="">
+		
+		<div class="form-group">
+			<label>Twitter Username</label>
+			<input class="form-control" type="text" name="username" value="" required="required" />
+		</div>
+		
+		<div class="form-group">
+			<label>Twitter User ID</label>
+			<input class="form-control" type="text" name="uid" value="" required="required" />
+		</div>
+		
+		<div class="form-group">
+			<label>bitcoinTalk Username</label>
+			<input class="form-control" type="text" name="bitcoinTalkUsername" value="" required="required" />
+		</div>
+		
+		<div class="form-group">
+			<label>bitcoinTalk Profile URL</label>
+			<input class="form-control" type="text" name="bitcoinTalkProfile" value="" required="required" />
+		</div>
+		
+		<div class="form-group">
+			<label>Eth Address</label>
+			<input class="form-control" type="text" name="ethAddress" value="" required="required" />
+		</div>
+		
+		<div class="form-group">
+			<label>Twitter Follower Count</label>
+			<input class="form-control" type="text" name="followers" value="" required="required" />
+		</div>
+		
+		<div class="form-group">
+			<label>Current Stakes</label>
+			<input class="form-control" type="text" name="stakes" value="0" required="required" />
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" name="action" value="addFollower">Add Follower</button>
+		</div>
+	</form>
+	
+	<br />
+	<br />
+	
+	<h2>Manually Approve RUNCPA lead</h2>
+	<br />
+	
+	<p>This is required to manually approve a qualified lead with RunCPA</p>
+	<br />
+	
+	<form method="post" action="">
+	
+		<div class="form-group">
+			<label>Enter the User ID</label>
+			<input class="form-control" type="text" name="userId" value="" />
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit" name="action" value="runCpaLead">Reward RunCPA Affiliate</button>
+		</div>
+	</form>
+	
+	<br />
+	<br />
+	<br />
+
+</div>
