@@ -18,10 +18,10 @@ module.exports = {
 	
 
 		return new sails.bluebird(function(resolve, reject) {
-		
+			
 			var twitterClient = new Twitter({
-				consumer_key: 'Ief0uelYEH3sHIBusJmaXrUyK',
-				consumer_secret: '08fWVfdyGZiHX0vF31zm7O3ZtoZ8tS9WyJizp7ITckvJtMz6yK',
+				consumer_key: sails.config.twitterService.consumer_key,
+				consumer_secret: sails.config.twitterService.consumer_key,
 				bearer_token: bearerToken
 			});
 			

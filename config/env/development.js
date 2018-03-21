@@ -115,6 +115,11 @@ module.exports = {
 
   contacts: {
     team: ['raza@triforcetokens.io', 'pete@triforcetokens.io', 'jake@triforcetokens.io']
+  },
+  
+  /** Twitter - service  Keys */
+  twitterService: {
+    consumer_key: 'Ief0uelYEH3sHIBusJmaXrUyK',
+    consumer_secret: '08fWVfdyGZiHX0vF31zm7O3ZtoZ8tS9WyJizp7ITckvJtMz6yK',
   }
-
 };
