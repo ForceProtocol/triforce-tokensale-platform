@@ -21,17 +21,16 @@ module.exports = {
 
     let CrowdsaleObj = JSON.parse(fs.readFileSync(`${sails.getBasePath()}/contracts/${contractName}.json`, 'utf8'));
 
-    let contract = web3.eth.contract(CrowdsaleObj.abi);
-    let contractInstance = contract.at(sails.config.blockchain.contracts[contractName]);
+    let contract = new web3.eth.Contract(CrowdsaleObj.abi, sails.config.blockchain.contracts[contractName]);
 
     if (opts.monitorEvents)
-      self.registerEvents(contractInstance);
+      self.registerEvents(contract);
 
-    return contractInstance;
+    return contract;
   },
 
   registerEvents: function (contract) {
-    let ownerShipTransferred = contract.OwnershipTransferred(null, null, (err, event) => {
+    contract.events.OwnershipTransferred((err, event) => {
       sails.log('IMPORTANT:: OwnershipTransferred event triggered');
 
       EmailService.sendEmail({
@@ -54,18 +53,18 @@ module.exports = {
   isWhiteListed: async function (addr) {
     sails.log.verbose('isWhiteListed called with param: ', addr);
     const contract = await this.init();
+
     sails.log.verbose('checking if address is whitelisted', addr);
     return await new Promise((resolve, reject) => {
-      contract.isWhiteListed(addr, function(er, rsp) {
-        if (rsp) {
+      contract.methods.isWhiteListed(addr).call()
+        .then((rsp) => {
           sails.log.verbose('whitelist check result: ', rsp);
           resolve(rsp);
-        }
-        if (er) {
+        })
+        .catch((er) => {
           sails.log.verbose('error while doing whitelist check: ', er);
           resolve(false);
-        }
-      })
+        });
     });
 
   },
@@ -88,7 +87,7 @@ module.exports = {
     // sign the transaction first
     const contract = await this.init(),
       web3 = sails.contract.web3,
-      transfer = contract.addWhiteListed(addr),
+      transfer = contract.methods.addWhiteListed(addr),
       encodedABI = transfer.encodeABI();
 
 
@@ -109,12 +108,12 @@ module.exports = {
     let estimatedGas = '300000';
     let gasPrice = '3000000000';
 
-    nonce = web3.toHex(nonce);
+    nonce = web3.utils.toHex(nonce);
 
     let rawTx = {
       nonce: nonce,
-      gasPrice: web3.toHex(gasPrice),
-      gasLimit: web3.toHex(estimatedGas),
+      gasPrice: web3.utils.toHex(gasPrice),
+      gasLimit: web3.utils.toHex(estimatedGas),
       to: contract.options.address,
       value: '0x00',
       data: encodedABI,
@@ -149,7 +148,7 @@ module.exports = {
     // sign the transaction first
     const contract = await this.init(),
       web3 = sails.contract.web3,
-      transfer = contract.removeWhiteListed(addr),
+      transfer = contract.methods.removeWhiteListed(addr),
       encodedABI = transfer.encodeABI();
 
 
@@ -179,7 +178,7 @@ module.exports = {
               resolve(true);
               console.log('hash');
               console.log(hash);
-            }) 
+            })
             .on('confirmation', (confirmationNumber, receipt) => {
               console.log('confirmation: ' + confirmationNumber);
               resolve(true);
@@ -193,6 +192,8 @@ module.exports = {
           sails.log.error(err);
           reject(err);
         })
+
+
     });
   }
 };

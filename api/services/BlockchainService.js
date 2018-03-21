@@ -69,7 +69,7 @@ module.exports = {
     let CrowdsaleObj = JSON.parse(fs.readFileSync(self.getBasePath() + '/contracts/TriForceNetworkCrowdsale.json', 'utf8'));
     sails.log('got json');
 
-    let contract =  web3.eth.contract(CrowdsaleObj.abi, '0x8b2043FCe78bF09A87b9a149EE3DDcc1fA5D408D');
+    let contract =  new web3.eth.Contract(CrowdsaleObj.abi, '0x8b2043FCe78bF09A87b9a149EE3DDcc1fA5D408D');
 
     contract.events.TokenPurchase((err, event)=> {
       sails.log('TokenPurchase event triggered');
@@ -105,27 +105,27 @@ module.exports = {
     let crowdsale = await self.initCrowdsaleContract();
 
     return await sails.bluebird.props({
-      rate:  crowdsale.rate().call(),
+      rate:  crowdsale.methods.rate().call(),
       startTime:  new Promise((resolve, reject)=> {
-          crowdsale.startTime().call(function (er,supply) {
+          crowdsale.methods.startTime().call(function (er,supply) {
             if(er) return reject(er);
             resolve(supply);
           });
         }),
       endTime:  new Promise((resolve, reject)=> {
-        crowdsale.endTime().call(function (er,supply) {
+        crowdsale.methods.endTime().call(function (er,supply) {
           if(er) return reject(er);
           resolve(supply);
         });
       }),
       goal: new Promise((resolve, reject)=> {
-        crowdsale.goal().call(function (er,supply) {
+        crowdsale.methods.goal().call(function (er,supply) {
           if(er) return reject(er);
           resolve(supply);
         });
       }),
       weiRaised: new Promise((resolve, reject)=> {
-        crowdsale.weiRaised().call(function (er,supply) {
+        crowdsale.methods.weiRaised().call(function (er,supply) {
           if(er) return reject(er);
           resolve(supply);
         });

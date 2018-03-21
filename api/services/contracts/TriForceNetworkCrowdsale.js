@@ -24,12 +24,12 @@ module.exports = {
 
     let CrowdsaleObj = JSON.parse(fs.readFileSync(`${sails.getBasePath()}/contracts/${contractName}.json`, 'utf8'));
 
-    let contract = web3.eth.contract(CrowdsaleObj.abi);
-    let contractInstance = contract.at(sails.config.blockchain.contracts[contractName]);  
-    if(opts.monitorEvents)
-      self.registerEvents(contractInstance);
+    let contract =  new web3.eth.Contract(CrowdsaleObj.abi, sails.config.blockchain.contracts[contractName]);
 
-    return contractInstance;
+    if(opts.monitorEvents)
+      self.registerEvents(contract);
+
+    return contract;
   },
 
   processOldEvents: async function (contract) {
@@ -90,7 +90,7 @@ module.exports = {
   registerEvents : function(contract) {
     sails.log.verbose('monitoring events for ' + contractName);
 
-    contract.OwnershipTransferred(null, null, (err, event)=> {
+    contract.events.OwnershipTransferred((err, event)=> {
       sails.log('IMPORTANT:: OwnershipTransferred event triggered');
 
       EmailService.sendEmail({
@@ -133,15 +133,14 @@ module.exports = {
     web3 = await BlockchainService.connect(),
     BN = require('bn.js');
 
-    let crowdsale = await self.init();
-    console.log(crowdsale);
+    let crowdsale = await self.init(),
       bonusPercent = CpService.subtractBigNumbers(await self.getCurrentBonusFactor(), 100, true),
-      weiRaised = await crowdsale.weiRaised(),
-      ethRaised = web3.fromWei(new BN(weiRaised)).toString(),
-      goal = await crowdsale.goal(),
-      goalEth = web3.fromWei(new BN(goal)).toString(),
-      forceDistributedWei = await crowdsale.totalSupply(), //TODO:: verify if totalSupply is actually force distributed
-      forceDistributed = web3.fromWei(new BN(forceDistributedWei)).toString();
+      weiRaised = await crowdsale.methods.weiRaised().call(),
+      ethRaised = web3.utils.fromWei(new BN(weiRaised)).toString(),
+      goal = await crowdsale.methods.goal().call(),
+      goalEth = web3.utils.fromWei(new BN(goal)).toString(),
+      forceDistributedWei = await crowdsale.methods.totalSupply().call(), //TODO:: verify if totalSupply is actually force distributed
+      forceDistributed = web3.utils.fromWei(new BN(forceDistributedWei)).toString();
 
     forceDistributed = new bigNumber(forceDistributed).add('2262381.4402954476').toString();
 
@@ -155,9 +154,9 @@ module.exports = {
     totalContributors = parseInt(totalContributors) + 131;
 
     return await sails.bluebird.props({
-      rate:  crowdsale.rate(),
-      startTime:  crowdsale.startTime(),
-      endTime:  crowdsale.endTime(),
+      rate:  crowdsale.methods.rate().call(),
+      startTime:  crowdsale.methods.startTime().call(),
+      endTime:  crowdsale.methods.endTime().call(),
       goal,
       goalEth,
       weiRaised,
@@ -175,7 +174,7 @@ module.exports = {
 
   getCurrentBonusFactor: async function() {
     let contract = await this.init();
-    return await contract.bonusFactor();
+    return await contract.methods.bonusFactor().call();
   }
 
 };
