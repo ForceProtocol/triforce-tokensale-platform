@@ -94,7 +94,7 @@ module.exports = {
     icoClose: new Date('2018-03-16T12:30:00.329Z'),
     connection: {
       // ws: 'ws://localhost:8646',
-      ws: 'https://ropsten.infura.io/7RU8T58C7rBMPgXjluUm',
+      ws: 'https://rinkeby.infura.io/7RU8T58C7rBMPgXjluUm',
       rpc: '',
       ipc: ''
     },
@@ -103,14 +103,17 @@ module.exports = {
      * System will use these contract addresses to connect to contracts and watch events/perform actions
      */
     contracts: {
-      WhiteList: '0x04b91588ea2465d7A696742f45cC72afC681E52B',
+      WhiteList: '0x8fc1aac5a4083e5466ed6def32b119e704c7b8bf',
+      //WhiteList: '0x04b91588ea2465d7A696742f45cC72afC681E52B',
       // WhiteList: '0x5913a4b42BbB8150e016905EdA08C84dE869D203',
       // TriForceNetworkCrowdsale: '0x8b2043FCe78bF09A87b9a149EE3DDcc1fA5D408D'
-      TriForceNetworkCrowdsale: '0x5f58988f9325e8255f8E6A4Bce50dDe300B027F7'
+      // TriForceNetworkCrowdsale: '0x5f58988f9325e8255f8E6A4Bce50dDe300B027F7'
+      TriForceNetworkCrowdsale: '0xc0e95ed492fa0520f191d954e040c684f04259f2'
+      
     },
 
-    owner: '0x71Dac043a1E056b23491Fa514132DaE040C7f19e',
-    privateKey: 'b2ea2591f45943e74b2e7487bc7ed1749fedb005087601b76cce9f024c3862a5'
+    owner: '0x96E3F15894944FFd32DeFc2016da209dD4f8d69b',
+    privateKey: '303c5abc397464fc13f8d99d0a97afc11f5f20ed88a13b5d2c8a6c6548d3ee8b'
   },
 
   contacts: {

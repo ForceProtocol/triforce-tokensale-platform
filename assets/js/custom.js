@@ -752,8 +752,7 @@ $(document).ready(function () {
 			.fail(err => {
 				$('#whitelistForm #whitelist-my-address').removeClass('nextBtn');
 				$("html, body").animate({ scrollTop: $('#scroll-to-warning-message').offset().top - 80 }, 1000);
-				$('.warning-message').html("<div class='alert alert-danger'>" + err + "</div>");
-				alert(JSON.stringify(err));
+				$('.warning-message').html("<div class='alert alert-danger'>" + err.statusText + "</div>");
 			}) 
 	})
 })
