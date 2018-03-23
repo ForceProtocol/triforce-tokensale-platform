@@ -141,6 +141,13 @@ a.hvr-outline-out {
 	transform: rotateY(360deg);
 }
 
+.rp-social {
+	padding-top: 20px;
+	text-align: center
+}
+.rp-social > a {
+	padding: 0 15px;
+}
 /***--Responsive--***/
 
 @media only screen and (max-width : 1180px) {

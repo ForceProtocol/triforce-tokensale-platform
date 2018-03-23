@@ -1128,7 +1128,6 @@ module.exports = {
 		ArtemisApiService.submitIndividual(ssic, ssoc, onboardingMode, paymentMode, productServiceComplexity,
 			firstName, lastName, email, nationality, country, gender, dateOfBirth, userId)
 			.then(function (response) {
-				console.log(response);
 				request({
 					method: 'POST',
 					json: true,
@@ -1646,7 +1645,8 @@ module.exports = {
 
 		recaptcha.verify(function (success, error_code) {
 			if (success) {
-				AirdropUsers.create({ email: email, wallet: wallet }).exec(function (err, result) {
+				AirdropUsers.create({email:email,wallet:wallet, reward: 5}).exec(function(err,result){
+					err && sails.log.error(err);
 					req.addFlash('success', 'Congrats! You have been subscribed to the AirDrop campaign');
 					return res.redirect('/airdrop');
 				});

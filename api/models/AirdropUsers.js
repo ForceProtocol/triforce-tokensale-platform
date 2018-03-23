@@ -9,7 +9,6 @@
 module.exports = {
 
 	attributes: {
-		
 		email: {
 			type: 'email',
 			maxLength: 255,
@@ -20,8 +19,11 @@ module.exports = {
 			type: 'string',
 			maxLength: 255
 		},
+		reward: {
+			type: 'integer',
+			defaultsTo: 0
+		}
 	},
-	
+
 
 };
-

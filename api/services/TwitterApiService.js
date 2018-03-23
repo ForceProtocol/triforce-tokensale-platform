@@ -21,7 +21,7 @@ module.exports = {
 			
 			var twitterClient = new Twitter({
 				consumer_key: sails.config.twitterService.consumer_key,
-				consumer_secret: sails.config.twitterService.consumer_key,
+				consumer_secret: sails.config.twitterService.consumer_secret,
 				bearer_token: bearerToken
 			});
 			
