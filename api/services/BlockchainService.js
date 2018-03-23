@@ -3,12 +3,7 @@ const Web3 = require('web3'),
   fs = require('fs'),
   ethSigner = require('ethjs-signer');
 
-const conf = sails.config.blockchain || {
-  url: 'https://ropsten.infura.io/cKnrrjWgLkZqVj0Z6ukq',
-  account: "0xc9A0c14D18240CCef02eCa938dFB5e93330b4dF6",
-  privateKey: "0xcb051dc319a678da3277e70247f8aced38177a1196ef215760b25c1e5aef8cc0",
-  contractAddr: "0x25a444918b5b850a7457151fE786A72d718b6696"
-};
+const conf = sails.config.blockchain;
 
 const contracts = require('./contracts');
 

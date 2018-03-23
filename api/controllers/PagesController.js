@@ -9,8 +9,8 @@ const request = require('request-promise'),
 	Recaptcha = require('recaptcha-v2').Recaptcha,
 	fs = require('fs');
 
-var RECAPTCHA_PUBLIC_KEY = '6LejfD8UAAAAAIuIZcStpaeaazsQH5brs32sDWza',
-	RECAPTCHA_PRIVATE_KEY = '6LejfD8UAAAAAKmBbSB5Jss5CiQQ5fOhh1QRvCfD';
+var RECAPTCHA_PUBLIC_KEY = sails.config.RECAPTCHA.PUBLIC_KEY,
+	RECAPTCHA_PRIVATE_KEY = sails.config.RECAPTCHA.PRIVATE_KEY;
 
 Recaptcha.prototype.toHTML = function (callbackFunction) {
 
@@ -1051,57 +1051,57 @@ module.exports = {
 			},
 			uri: sails.config.API_URL + 'register-kyc'
 		})
-		.then((rsp) => {
+			.then((rsp) => {
 
-			// User is already cleared for KYC
-			if (rsp.status == 'cleared' || rsp.status == 'rejected') {
-				req.addFlash('success', 'You have already completed the KYC process. Please login to your account.');
-				return res.json(rsp);
-			}
+				// User is already cleared for KYC
+				if (rsp.status == 'cleared' || rsp.status == 'rejected') {
+					req.addFlash('success', 'You have already completed the KYC process. Please login to your account.');
+					return res.json(rsp);
+				}
 
-			req.session.user = rsp.user;
-			req.session.token = rsp.token;
-			// req.session.etherAddress = rsp.etherAddress;
-			req.session.kyc = true;
+				req.session.user = rsp.user;
+				req.session.token = rsp.token;
+				// req.session.etherAddress = rsp.etherAddress;
+				req.session.kyc = true;
 
-			// Submit signup request to API server
-			ArtemisApiService.submitIndividual(ssic, ssoc, onboardingMode, paymentMode, productServiceComplexity,
-				firstName, lastName, email, nationality, country, gender, dateOfBirth, rsp.user.id).then(function (response) {
+				// Submit signup request to API server
+				ArtemisApiService.submitIndividual(ssic, ssoc, onboardingMode, paymentMode, productServiceComplexity,
+					firstName, lastName, email, nationality, country, gender, dateOfBirth, rsp.user.id).then(function (response) {
 
-					// Submit Atremis response to update user in API server
-					request({
-						method: 'POST',
-						json: true,
-						body: {
-							userId: rsp.user.id,
-							approvalStatus: response.approval_status,
-							checkStatusUrl: response.check_status_url
-						},
-						uri: sails.config.API_URL + 'update-user-kyc'
-					}).then((rsp) => {
-						return res.json({ status: 'success', rfrId: rsp[0].id, validateToken: rsp[0].validateToken });
-					}).catch(err => {
+						// Submit Atremis response to update user in API server
+						request({
+							method: 'POST',
+							json: true,
+							body: {
+								userId: rsp.user.id,
+								approvalStatus: response.approval_status,
+								checkStatusUrl: response.check_status_url
+							},
+							uri: sails.config.API_URL + 'update-user-kyc'
+						}).then((rsp) => {
+							return res.json({ status: 'success', rfrId: rsp[0].id, validateToken: rsp[0].validateToken });
+						}).catch(err => {
+							let msg = err.error ? err.error.err : err.message;
+							sails.log.error("Failed to update the users step 1 KYC information:", err);
+							errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
+							return res.json({ status: 'error', errMsgs: errMsgs });
+						});
+
+
+					}).catch(function (err) {
 						let msg = err.error ? err.error.err : err.message;
-						sails.log.error("Failed to update the users step 1 KYC information:", err);
+						sails.log.error("Failed to get a good response from Artemis API for KYC step 1:", err);
 						errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
 						return res.json({ status: 'error', errMsgs: errMsgs });
 					});
 
-
-				}).catch(function (err) {
-					let msg = err.error ? err.error.err : err.message;
-					sails.log.error("Failed to get a good response from Artemis API for KYC step 1:", err);
-					errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
-					return res.json({ status: 'error', errMsgs: errMsgs });
-				});
-
-		})
-		.catch(err => {
-			let msg = err.error ? err.error.err : err.message;
-			sails.log.error("Failed to submit step 1 KYC data to API server:", err);
-			errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
-			return res.json({ status: 'error', errMsgs: errMsgs });
-		});
+			})
+			.catch(err => {
+				let msg = err.error ? err.error.err : err.message;
+				sails.log.error("Failed to submit step 1 KYC data to API server:", err);
+				errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
+				return res.json({ status: 'error', errMsgs: errMsgs });
+			});
 	},
 
 

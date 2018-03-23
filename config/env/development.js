@@ -87,8 +87,6 @@ module.exports = {
   BASE_URL: 'http://localhost:1337/',
   APP_URL: 'http://localhost:1338/',
 
-
-
   blockchain: {
     icoLaunch: new Date('2018-01-20T12:30:00.329Z'),
     icoClose: new Date('2018-03-16T12:30:00.329Z'),
@@ -109,9 +107,7 @@ module.exports = {
       // TriForceNetworkCrowdsale: '0x8b2043FCe78bF09A87b9a149EE3DDcc1fA5D408D'
       // TriForceNetworkCrowdsale: '0x5f58988f9325e8255f8E6A4Bce50dDe300B027F7'
       TriForceNetworkCrowdsale: '0xc0e95ed492fa0520f191d954e040c684f04259f2'
-      
     },
-
     owner: '0x96E3F15894944FFd32DeFc2016da209dD4f8d69b',
     privateKey: '303c5abc397464fc13f8d99d0a97afc11f5f20ed88a13b5d2c8a6c6548d3ee8b'
   },
@@ -124,5 +120,14 @@ module.exports = {
   twitterService: {
     consumer_key: 'Ief0uelYEH3sHIBusJmaXrUyK',
     consumer_secret: '08fWVfdyGZiHX0vF31zm7O3ZtoZ8tS9WyJizp7ITckvJtMz6yK',
-  }
+  },
+
+  RECAPTCHA: {
+    PUBLIC_KEY: '6LejfD8UAAAAAIuIZcStpaeaazsQH5brs32sDWza',
+    PRIVATE_KEY: '6LejfD8UAAAAAKmBbSB5Jss5CiQQ5fOhh1QRvCfD'
+  },
+
+  MAILCHIMP_KEY: '17718b6328f312bc750f542d8fbefd5c-us16',
+
+  RUNCPA_API_KEY: 'KsukkSrO3yL5-Dm5Kl0NqA16MJ58V4A9/cpl44516',
 };

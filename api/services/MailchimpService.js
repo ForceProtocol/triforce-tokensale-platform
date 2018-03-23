@@ -6,8 +6,8 @@
  */
 
 var Mailchimp = require('mailchimp-api-v3')
-var mailchimp = new Mailchimp('17718b6328f312bc750f542d8fbefd5c-us16');
-var mandrill = require('node-mandrill')('EHaaGsImRCQrLW9vrWSedA');
+var mailchimp = new Mailchimp(sails.config.MAILCHIMP_KEY);
+var mandrill = require('node-mandrill')(sails.config.MANDRILL_KEY);
 
 module.exports = {
 
