@@ -30,6 +30,8 @@ var cssFilesToInject = [
 var jsFilesToInject = [
   'js/dependencies/sails.io.js',
   'js/jquery-3.2.1.min.js',
+  'js/wow.min.js',
+  'js/jquery.timelinr-0.9.6.js',
   'js/jquery.easing.min.js',
   'js/bootstrap.min.js',
   'js/particles.min.js',
