@@ -3333,3 +3333,12 @@ margin: 0 auto 20px;
 	font-weight: bold;
 	font-size: 20px;
 }
+
+.intro .tokensale-open-banner .softcap-success-heading
+{
+	font-size: 30px;
+	font-weight: bold;	
+	line-height: 40px;
+	color: #c1962e;
+	letter-spacing: -1px;
+}

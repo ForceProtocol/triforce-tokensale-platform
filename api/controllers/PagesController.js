@@ -979,7 +979,8 @@ module.exports = {
 	/** Step 1 KYC
 	*/
 	postKycStep1: function (req, res) {
-
+		
+		return res.json({status:'error',errMsgs:["<p>Token sale is currently closed.</p>"]});
 		var ssic = 'UNKNOWN',
 			ssoc = 'UNKNOWN',
 			onboardingMode = 'NON FACE-TO-FACE',

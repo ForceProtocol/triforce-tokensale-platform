@@ -11,87 +11,7 @@
 	<!-- Intro Header -->
 	<header class="intro p-b-0" id="banner">
 
-		<div class="countdown-banner hide-when-live">
-			<div class="container">
-				<div class="row">
-
-
-					<% if(flash.has('errors')){ %>
-						<br />
-						<div class="container">
-							<div class="row">
-								<div class="alert alert-danger">
-									<% flash.get('errors').forEach(function (message) { %>
-									<p class="error"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<%- message %></p>
-									<% }); %>
-								</div>
-							</div>
-						</div>
-						<br />
-						<% } %>
-						<% if(flash.has('success')){ %>
-						<br />
-						<div class="container">
-							<div class="row">
-								<br />
-								<div class="alert alert-success">
-								<% flash.get('success').forEach(function (message) { %>
-								<p class="error"><i class="fa fa-exclamation-check"></i> &nbsp;&nbsp;<%- message %></p>
-								<% }); %>
-								</div>
-							</div>
-						</div>
-						<br />
-					<% } %>
-
-					<div class="col-md-8 col-md-offset-2">
-						<div class="logo">
-							<img src="images/logo.png" />
-						</div>
-						<h1 class="brand-heading f-900 wow fadeInDown"><span class="block white"><%- __('Empowering the </span>Games Community') %></h1>
-						<h2 class="brand-second-heading m-b-30 white wow fadeInDown"><%= __('Be part of the revolution') %></h2>
-							<% if(req.session.token){ %>
-            <a class="hvr-outline-out trigger-cta-clicked-event" href="/contributor" class="btn btn-primary btn-cta-lg"><strong><%= __('Contributor Dashboard') %></strong></a>
-						<% } else {%>
-            <a class="hvr-outline-out trigger-cta-clicked-event" href="/join-whitelist" class="btn btn-primary btn-cta-lg"><strong><%= __('Join Token Sale') %></strong></a>
-            <% } %>
-						<br />
-						<br class="xs-hide" />
-						<br />
-
-						<p class="intro-text white"><%= __('The token sale will open in...') %></p>
-						<div class="row">
-							<div class="col-md-8 col-md-offset-2 wow fadeInUp">
-								<div class="col-xs-3 panel-chart-wrapper">
-									<span data-percent="75" class="panel-chart days-remain-chart"><span class="percent days-remain">0</span></span>
-									<p><%- __('Days') %></p>
-								</div>
-								<div class="col-xs-3 panel-chart-wrapper">
-									<span data-percent="50" class="panel-chart hours-remain-chart"><span class="percent hours-remain">0</span></span>
-									<p><%- __('Hours') %></p>
-								</div>
-								<div class="col-xs-3 panel-chart-wrapper">
-									<span data-percent="60" class="panel-chart minutes-remain-chart"><span class="percent minutes-remain">0</span></span>
-									<p><%- __('Minutes') %></p>
-								</div>
-								<div class="col-xs-3 panel-chart-wrapper">
-									<span data-percent="25" class="panel-chart seconds-remain-chart"><span class="percent seconds-remain">0</span></span>
-									<p><%- __('Seconds') %></p>
-								</div>
-							</div>
-
-
-						</div>
-						<a href="#about" class="btn btn-circle page-scroll hide">
-							<i class="fa fa-angle-double-down animated"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="tokensale-open-banner display-when-live" style="display:none;">
+		<div class="tokensale-open-banner display-when-live">
 			<div class="container">
 				<div class="row">
 
@@ -106,23 +26,23 @@
 						<br class="xs-hide"/>
 						<br />
             <div id="r-msg-home"></div>
-						<div class="row stats">
+						<div class="softcap-success-heading">
 							<div class="col-md-12 fadeInUp">
-
-								<div class="col-xs-4 panel-chart-wrapper panel-chart-side">
-									<span data-percent="100" class="panel-chart discount-level-chart"><span class="percent discount-level">25&percnt;</span></span>
-									<p class="panel-chart-content"><%- __('Current <br /><span>Discount Level</span>') %></p>
-								</div>
-
-								<div class="col-xs-4 panel-chart-wrapper panel-chart-center">
-									<span data-percent="0" class="panel-chart-lg tokens-sold-chart"><span class="percent tokens-sold">0</span></span>
-									<p class="panel-chart-content"><%- __('Total FORCE<br /><span>Tokens Sold</span>') %></p>
-								</div>
-
-								<div class="col-xs-4 panel-chart-wrapper panel-chart-side">
-									<span data-percent="75" class="panel-chart"><span class="percent">20&percnt;</span></span>
-									<p class="panel-chart-content"><%- __('Next Bonus<br /><span>Level') %></span></p>
-								</div>
+								<span class="white">
+									Exciting announcement for our community 
+								</span>
+								<br>
+								<span class="white">
+									Congrats! We have hit the soft cap! 
+								</span>
+								<br>
+								<span>
+									WE ARE NOW ONE STEP CLOSER IN REDEFINING THE GLOBAL GAMING EXPERIENCE!
+								</span>
+								<br>
+								<span class="white" style="font-weight:bold;">
+									The next token sale will be announced soon!</span><span> STAY TUNED!  
+								</span>
 							</div>
 						</div>
 
@@ -167,7 +87,7 @@
       </section>-->
 
 
-      <!-- Video Section -->
+      <!-- Video Section 
       <section class="content-section video-section text-center p-0">
          <div class="video-section-inn">
             <div class="container">
@@ -190,7 +110,7 @@
                </div>
             </div>
          </div>
-      </section>
+      </section>-->
 
 
       <!-- Patner Section -->
@@ -228,13 +148,13 @@
                   <h2 class="f-400 m-b-50 gold-heading"><%- __('document downloads') %></h2>
                   <div class="row">
                      <div class="col-md-3 col-lg-3 col-sm-4">
-						<a href="/resources/pitch-deck-v1.4.2.pdf">
+						<a href="/">
 							<span class="triangle m-b-20"></span>
 							<p class="white"><%- __('Pitch Deck') %></p>
 						</a>
                      </div>
                      <div class="col-md-3 col-lg-3 col-sm-4">
-						<a href="/resources/one-page-summary.pdf">
+						<a href="/">
 							<span class="triangle m-b-20"></span>
 							<p class="white"><%- __('One page Summary') %></p>
 						</a>
@@ -268,7 +188,6 @@
                      <a target="_BLANK" href="https://www.gov.uk/government/organisations/innovate-uk"><img src="images/patner-icon-2.png" /></a>
                      <a target="_BLANK" href="https://cryptovalley.swiss"><img src="images/patner-icon-3.png" /></a>
                      <img src="images/patner-icon-4.png" />
-					<img src="images/brand-logos/pdsl-logo.png" />
                      <a target="_BLANK" href="https://tiga.org/"><img src="images/patner-icon-5.png" /></a>
                      <img src="images/patner-icon-6.png" />
                      <a target="_BLANK" href="https://www.fanstudio.co.uk/"><img src="images/patner-icon-7.png" /></a>
@@ -558,7 +477,6 @@
                         </div>
                         <div class="tl-body">
                            <p><%- __('Introduction of new team members and work starts on prototypes of the network and visual mock-ups.') %></p>
-                           <p><%- __('First advisor, Nazaraf Shah, a Professor of Ethical Hacking and security at Coventry University joins the project.') %></p>
                         </div>
                      </div>
                   </li>
@@ -874,7 +792,6 @@
                      <li><%- __('Advisers who have worked on multi-million pound accounts') %></li>
 					 <li><%- __('CEO proven technology start-up experience for leading UK technology platform') %></li>
 					 <li><%- __('CTO holds masters in software engineering and is a certified Ethereum blockchain developer') %></li>
-					 <li><%- __('Professor of Coventry University, Nazaraf Shah, is a senior lecturer in ethical hacking and computer security') %></li>
 					 <li><%- __('Committed to growing the team significantly based upon funding level') %></li>
                   </ul>
             </div>
@@ -1029,24 +946,7 @@
 
 							</div>
 
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-raza" src="/images/icons/blnk-pixl-foricn.png" alt="Raza Ahmed">
-								<h4 class="subheading-gold">raza ahmed</h4>
-								<h5 class="h_txt">CTO</h5>
-								<p class="p_txt"><%- __('PDSL Senior Full Stack and Qualified Blockchain developer, MSc Software Development') %></p>
-
-								<div class="col-md-12">
-								<div class="team_icon">
-							<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/razaahmed47/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://twitter.com/se_raza"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://github.com/theraaz"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
-								</p>
-							</div>
-							</div>
-
-							</div>
-
+						
 							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 								<img class="mem mem-jacob" src="/images/icons/blnk-pixl-foricn.png" alt="Jacob Ashby">
 								<h4 class="subheading-gold">jacob ashby</h4>
@@ -1064,13 +964,7 @@
 								</div>
 
 							</div>
-						</div>
-
-					</div>
-
-
-					<div class="row team-row wow fadeInUp">
-						<div class="row">
+							
 							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 								<img class="mem mem-jkb" src="/images/icons/blnk-pixl-foricn.png" alt="Jakub Kafarski">
 								<h4 class="subheading-gold">jakub kafarski</h4>
@@ -1078,56 +972,39 @@
 								<p class="p_txt">CycloMedia Technology, Ericsson</p>
 
 								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/jakub-kafarski/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://twitter.com/jakub_kafarski"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://github.com/jakubkafarski"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
-								</p>
+									<div class="team_icon">
+										<p>
+											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/jakub-kafarski/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
+											<a target="_blank" rel="nofollow" href="https://twitter.com/jakub_kafarski"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
+											<a target="_blank" rel="nofollow" href="https://github.com/jakubkafarski"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
+										</p>
+									</div>
+								</div>
 							</div>
-							</div>
-
-							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-sorina" src="/images/icons/blnk-pixl-foricn.png" alt="Sorina Rusu">
-								<h4 class="subheading-gold">sorina rusu</h4>
-								<h5 class="h_txt"><%- __('System Developer') %></h5>
-								<p class="p_txt"><%- __('MCA Computer Science') %></p>
-								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/sorina-rusu-1b73a668/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://twitter.com/SorinaRusu0403"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://github.com/sorinarusu"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
-								</p>
-							</div>
-							</div>
-							</div>
-
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-haider" src="/images/icons/blnk-pixl-foricn.png" alt="Haider Malik">
-								<h4 class="subheading-gold">haider malik</h4>
-								<h5 class="h_txt"><%- __('Senior Full Stack Developer') %></h5>
-								<p class="p_txt"><%- __('Instructor at Udemy and Fullstackhour, Javascript Expert') %></p>
-
-								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/haider-malik-41521a8b/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://twitter.com/haidermalik504"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://github.com/HaiderMalik12"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
-								</p>
-							</div>
-
-							</div>
+							
 						</div>
 
 					</div>
 
 					<div class="row team-row wow fadeInUp">
 						<div class="row">
+						
+							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+								<img class="mem mem-sorina" src="/images/icons/blnk-pixl-foricn.png" alt="Sorina Rusu">
+								<h4 class="subheading-gold">sorina rusu</h4>
+								<h5 class="h_txt"><%- __('System Developer') %></h5>
+								<p class="p_txt"><%- __('MCA Computer Science') %></p>
+								<div class="col-md-12">
+									<div class="team_icon">
+										<p>
+											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/sorina-rusu-1b73a668/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
+											<a target="_blank" rel="nofollow" href="https://twitter.com/SorinaRusu0403"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
+											<a target="_blank" rel="nofollow" href="https://github.com/sorinarusu"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
+										</p>
+									</div>
+								</div>
+							</div>
+							
 							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 								<img class="mem mem-tib" src="/images/icons/blnk-pixl-foricn.png" alt="Tib Palin">
 								<h4 class="subheading-gold">tib palin</h4>
@@ -1148,27 +1025,13 @@
 								<h5 class="h_txt"><%- __('Social Media and Content Manager') %></h5>
 								<p class="p_txt"><%- __('Account manager for Bitcoin PR Buzz') %></p>
 								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://twitter.com/Bit_Fellas"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://www.facebook.com/way.no.3766"><img src="/images/icons/icon-facebook.png" alt="Facebook Profile"></a>
-								</p>
-							</div>
-							</div>
-							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-ali" src="/images/icons/blnk-pixl-foricn.png" alt="Ali Arshad">
-								<h4 class="subheading-gold">ali arshad</h4>
-								<h5 class="h_txt">UI/UX Designer</h5>
-								<p class="p_txt"><%- __('Front end developer, MicroMerger') %></p>
-								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/ali-arshad-54a6aa6b/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-								</p>
-							</div>
-							</div>
+									<div class="team_icon">
+										<p>
+											<a target="_blank" rel="nofollow" href="https://twitter.com/Bit_Fellas"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
+											<a target="_blank" rel="nofollow" href="https://www.facebook.com/way.no.3766"><img src="/images/icons/icon-facebook.png" alt="Facebook Profile"></a>
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -1223,10 +1086,10 @@
 								<p class="p_txt"><%- __('CEO Bitcoin PR Buzz, worked closely on <strong>NEM</strong>, <strong>UTRUST</strong> and <strong>Lisk</strong>') %></p>
 								<div class="col-md-12">
 								<div class="team_icon">
-								<p><a target="_blank" rel="nofollow" href="https://twitter.com/bitcoinprbuzz"><img src="/images/icons/icon-twitter.png" alt="Bitcoin PR Buzz Profile"></a></p>
+									<p><a target="_blank" rel="nofollow" href="https://twitter.com/bitcoinprbuzz"><img src="/images/icons/icon-twitter.png" alt="Bitcoin PR Buzz Profile"></a></p>
+								</div>
+							</div>
 						</div>
-							</div>
-							</div>
 
 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<img class="mem mem-ashby" src="/images/icons/blnk-pixl-foricn.png" alt="Owen Ashby">
@@ -1234,13 +1097,13 @@
 								<h5 class="h_txt"><%- __('Business Strategy') %></h5>
 								<p class="p_txt"><%- __('Business Analyst, Market Intelligence and Corporate Strategy') %></p>
 								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-								<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/owen-ashby-a12722/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-								<a target="_blank" rel="nofollow" href="https://twitter.com/owenashby"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-							</p>
-						</div>
-						</div>
+									<div class="team_icon">
+										<p>
+											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/owen-ashby-a12722/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
+											<a target="_blank" rel="nofollow" href="https://twitter.com/owenashby"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -1248,64 +1111,47 @@
 
 					<div class="row wow fadeInUp">
 						<div class="row">
-							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 								<img class="mem" src="/images/rick-oniell-profile.png" alt="Rick Oneill">
 								<h4 class="subheading-gold">rick o'neill</h4>
 								<h5 class="h_txt"><%- __('Brand Strategy') %></h5>
 								<p class="p_txt"><%- __('Owner of award winning digital marketing company, Look Touch &amp; Feel Ltd in the UK.') %></p>
 								<div class="col-md-12">
-								<div class="team_icon">
-								<p><a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/looktouchfeel/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a></p>
-						</div>
+									<div class="team_icon">
+										<p><a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/looktouchfeel/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a></p>
+									</div>
+								</div>
 							</div>
-							</div>
-
-							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 								<img class="mem mem-kate" src="/images/icons/blnk-pixl-foricn.png" alt="Kate Breed">
 								<h4 class="subheading-gold">kate breed</h4>
 								<h5 class="h_txt"><%- __('Senior Management Mentoring') %></h5>
 								<p class="p_txt"><%- __('Former molecular biologist, Senior consultant in systems engineering, Councillor') %></p>
 								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/kate-breed-bb082819/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-									<a target="_blank" rel="nofollow" href="https://twitter.com/ksbreed"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-								</p>
-						</div>
-							</div>
+									<div class="team_icon">
+										<p>
+											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/kate-breed-bb082819/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
+											<a target="_blank" rel="nofollow" href="https://twitter.com/ksbreed"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
+										</p>
+									</div>
+								</div>
 							</div>
 
-							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 								<img class="mem mem-zahid" src="/images/icons/blnk-pixl-foricn.png" alt="Zahid Ali">
 								<h4 class="subheading-gold">zahid ali</h4>
 								<h5 class="h_txt"><%- __('Investor Relations &amp; Networking') %></h5>
 								<p class="p_txt"><%- __('Key member of highly successful Viuly project and a Graduate Diploma in Law') %></p>
 								<div class="col-md-12">
 								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/zahid-ali-9b899a40/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-								</p>
-						</div>
-							</div>
-							</div>
-
-							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<img class="mem mem-shah" src="/images/icons/blnk-pixl-foricn.png" alt="Dr. Nazaraf Shah">
-								<h4 class="subheading-gold">dr. nazaraf shah</h4>
-								<h5 class="h_txt"><%- __('PhD Research Engineer') %></h5>
-								<p class="p_txt"><%- __('Senior Lecturer in Ethical Hacking and Computer Security at Coventry University') %></p>
-								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://pureportal.coventry.ac.uk/en/persons/nazaraf-shah"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-								</p>
-						</div>
-							</p>
-						</div>
+									<p>
+										<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/zahid-ali-9b899a40/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
+									</p>
+								</div>
 							</div>
 						</div>
 
-
+					</div>
 				</div>
 			</div>
 

@@ -34,7 +34,8 @@
 					<p>Full details to be announced soon.</p>
 				</div>
 
-				<form id="kycForm" class="text-left whitelist-form" action="">
+				
+				<!--<form id="kycForm" class="text-left whitelist-form" action="">
 
 					<input type="hidden" id="rfrId" name="rfrId" value="<%- req.session.token && req.session.user ? req.session.user.id : '' %>" />
 					<input type="hidden" id="validateToken" name="validateToken" value="<%- req.session.token ? req.session.token : '' %>" />
@@ -84,7 +85,19 @@
 
 
 					<div class="form-step" style="display:none;" id="form-step-2">
-					
+
+						<div class="form-group row">
+							<label for="inputEmail3" class="col-sm-2 col-form-label"><%- __('Your Ethereum Wallet Address') %></label>
+							<div class="col-sm-10">
+								<input required="required" name="ethAddress" type="text" class="form-control" id="inputEthAddress" placeholder="0xa.....">
+								<small class="form-text text-muted form-input-note"><strong><%- __('Enter the Ethereum address you will be buying tokens with.') %><br />
+								<%- __('Please ensure it is not from an exchange otherwise you may not receive your tokens.') %><br />
+								<a target="_BLANK" href="https://docs.google.com/document/d/1BriLzrcOOloLyUcqeUr0ZpZhGXkYJc3OejKh99Tzfew/edit#heading=h.juzr9u87d5da">MyEtherWallet</a> <%- __('is one of the best wallets to use for this purpose.') %></strong></small>
+							</div>
+						</div>
+
+						<hr />
+
 						<div class="form-group row">
 							<label for="inputEmail3" class="col-sm-2 col-form-label"><%- __('Your Gender') %></label>
 
@@ -845,11 +858,11 @@
 						</div>
 
 
-					</div>-->
+					</div>
 
 
 
-				</form>
+				</form>-->
 
 
 				<div class="form-group row">
