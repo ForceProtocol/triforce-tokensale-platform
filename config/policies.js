@@ -83,6 +83,7 @@ module.exports.policies = {
 	BlockchainController: {
 		'*': 'tokenAuth',
 		'getIcoSummary': true,
+		'getUserTransactions': ['tokenAuthBackend'],
 		'addWhiteListed': ['tokenAuthBackend', 'isAdmin'],
 		'removeWhiteListed': ['tokenAuthBackend', 'isAdmin'],
 		'isWhiteListed': ['tokenAuthBackend']

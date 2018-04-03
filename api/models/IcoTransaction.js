@@ -56,14 +56,14 @@ module.exports = {
 
       if('forceEarned' in obj && 'forceBonus' in obj){
         obj.forceBought = CpService.subtractBigNumbers(obj.forceEarned, obj.forceBonus, true);
-        obj.forceBoughtFrmtd = web3.utils.fromWei(new BN(obj.forceBought)).toString();
+        obj.forceBoughtFrmtd = web3.fromWei(new BN(obj.forceBought)).toString();
       }
       if('forceEarned' in obj){
-        obj.forceEarnedFrmtd = web3.utils.fromWei(new BN(obj.forceEarned)).toString();
+        obj.forceEarnedFrmtd = web3.fromWei(new BN(obj.forceEarned)).toString();
       }
 
       if('weiContribution' in obj){
-        obj.ethContribution = web3.utils.fromWei(new BN(obj.weiContribution)).toString();
+        obj.ethContribution = web3.fromWei(new BN(obj.weiContribution)).toString();
       }
 
 

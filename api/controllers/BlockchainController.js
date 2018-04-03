@@ -52,6 +52,7 @@ module.exports = {
   },
 
   getUserTransactions: (req, res)=> {
+
     const processReq = async ()=> {
       const web3 = await BlockchainService.connect(),
         BN = require('bn.js');
@@ -69,8 +70,8 @@ module.exports = {
         sort: 'createdAt DESC',
         limit: 1000
       });
-
-      let estimatedTFTs = web3.utils.fromWei(new BN(CpService.sumBigNumbers(txns.map(_txn=>_txn.forceEarned)))).toString();
+      
+      let estimatedTFTs = web3.fromWei(new BN(CpService.sumBigNumbers(txns.map(_txn=>_txn.forceEarned)))).toString();
       let r1estTFTs = CpService.sumBigNumbers(txns_r1rec.map(_txn=>_txn.forceEarned));
 
       let totalTFTs = _.clone(estimatedTFTs);
