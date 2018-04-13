@@ -1,2 +1,3 @@
-# triforce-tokensale-platform
-Tiforce-Marketing and TF-API merged.
+# triforcetokens.io
+
+a [Sails](http://sailsjs.org) application

@@ -1,0 +1,23 @@
+<form class="form" method="post" action="/join-landing-page">					
+	<div class="form-group">
+		<input required="required" placeholder="<%= __("First Name") %>" class="form-control input-group-lg" type="text" name="firstName" value="" />
+	</div>
+
+	<div class="form-group">
+		<input required="required" placeholder="<%= __("Last Name") %>" class="form-control input-group-lg" type="text" name="lastName" value="" />
+	</div>
+
+	<div class="form-group">
+		<input required="required" placeholder="<%= __("Enter Your Email") %>" class="form-control input-group-lg" type="email" name="email" value="" />
+	</div>
+	
+	<%- recaptchaForm %>
+
+	<input type="hidden" name="ltfSuccessPage" value="/thanks-uk" />
+	<input type="hidden" name="firstNameFieldValue" value="cm-f-dytkwut" />
+	<input type="hidden" name="lastNameFieldValue" value="cm-f-dytkwui" />
+	<input type="hidden" name="emailFieldValue" value="cm-udlhydk-udlhydk" />
+	<input type="hidden" name="ltfUrl" value="http://login.yourcampaignmanager.co.uk/t/r/s/udlhydk/" />
+	
+	<button type="submit" class="btn btn-cta btn-cta-large btn-subscribe-cta btn-cta-landingpage btn-block"><%= __("Join Today") %></button>
+</form>

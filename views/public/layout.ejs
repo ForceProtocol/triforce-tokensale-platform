@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><%= typeof title == 'undefined' ? 'TriForce Tokens Ltd' : title %></title>
+		<meta name="description" content="<%= typeof metaDescription == 'undefined' ? "" : metaDescription %>">
+
+		<link rel="canonical" href="<%= "https://triforcetokens.io" + req.path %>" />
+
+        <!-- Viewport mobile tag for sensible mobile support -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+		<meta name="google-site-verification" content="Te36QGBZpJQvKPcD9WiupYrXQXMN3cQAuxRfk_T3hIQ" />
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+		<link rel="manifest" href="/icons/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+
+        <!--STYLES-->
+        <link rel="stylesheet" href="/styles/bootstrap.min.css">
+        <link rel="stylesheet" href="/manual/fonts/stylesheet.css">
+        <link rel="stylesheet" href="/styles/animate.css">
+        <link rel="stylesheet" href="/styles/importer.css">
+        <link rel="stylesheet" href="/styles/responsive.css">
+        <!--STYLES END-->
+
+		<!--<link rel="stylesheet" href="/manual/styles/github.css">-->
+		<link rel="stylesheet" href="/manual/styles/font-awesome.min.css">
+		<link rel="stylesheet" href="/manual/styles/public-v2.css">
+
+		<% if(req.session.token){ %>
+		  <script>localStorage.setItem('token', '<%- req.session.token %>');TOKEN = localStorage.getItem('token');API_URL = '<%- sails.config.API_URL %>'</script>
+		<% } %>
+    </head>
+
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+	<div class="se-pre-con"></div>
+    <%- body %>
+
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+	<input type="hidden" name="" value="<%= sails.config.API_URL %>" id="environmentApi" />
+
+	<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>-->
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/jquery.timelinr-0.9.6.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/manual/js/highlight.pack.js"></script>
+    <script src="/js/contribute.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/easy-pie-chart/jquery.easypiechart.js"></script>
+    <script src="/js/easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/socket.js"></script>
+    <script src="/js/sparkline/jquery.sparkline.min.js"></script>
+    <!--SCRIPTS END-->
+
+	<!-- Plugin JavaScript -->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>-->
+	<!--<script src="/manual/js/highlight.pack.js"></script>-->
+
+  <script>
+		// Socket Connections
+    io.sails.url = "<%-sails.config.API_URL%>";
+
+		<% if(typeof req.cookies.track_id !== 'undefined' && req.cookies.track_id == 'ico-512'){ %>
+			var js_track_id = 'ico-512';
+		<% } %>
+
+		hljs.initHighlightingOnLoad();
+	</script>
+
+  <!-- GOOGLE ANALYTICS -->
+  <% if(sails.config.environment === 'production'){ %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-104636616-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '459095067825433');
+    fbq('init', '2270124119880972'); <!-- VALENTIN -->
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" src="https://www.facebook.com/tr?id=459095067825433&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
+
+  <!-- Twitter universal website tag code - VALENTIN -->
+  <script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+      a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','nyy1t');
+    twq('track','PageView');
+  </script>
+  <!-- End Twitter universal website tag code -->
+
+  <!-- DO NOT MODIFY - VALENTIN -->
+  <!-- Quora Pixel Code (JS Helper) -->
+  <script>
+    !function(q,e,v,n,t,s){if(q.qp) return; n=q.qp=function(){n.qp?n.qp.apply(n,arguments):n.queue.push(arguments);}; n.queue=[];t=document.createElement(e);t.async=!0;t.src=v; s=document.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);}(window, 'script', 'https://a.quora.com/qevents.js');
+    qp('init', 'e2e6cc0408bb4c3f9602522ef3445354');
+    qp('track', 'ViewContent');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/e2e6cc0408bb4c3f9602522ef3445354/pixel?tag=ViewContent&noscript=1"/></noscript>
+  <!-- End of Quora Pixel Code -->
+
+  <% } %>
+
+  <!-- Global site tag (gtag.js) - Google AdWords: 831491415 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-831491415"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-831491415');
+  </script>
+  <!-- Event snippet for Remarketing Tag 1 remarketing page -->
+  <script>
+    gtag('event', 'conversion', {
+      'send_to': 'AW-831491415/mzO7CMKGsXsQ15q-jAM',
+      'value': 1.0,
+      'currency': 'GBP',
+      'aw_remarketing_only': true
+    });
+  </script>
+		<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+
+		<script>
+		  window.intercomSettings = {
+			app_id: "ucmtxxel"
+		  };
+		</script>
+		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ucmtxxel';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+    </body>
+</html>
