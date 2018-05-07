@@ -879,58 +879,61 @@ Team
 	font-size: 18px;
 }
 .mem-pete {
-	background: url("/images/team-sprite-v0.6.png") -870px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -870px 0 no-repeat;
 }
 .mem-raza {
-	background: url("/images/team-sprite-v0.6.png") 0 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") 0 0 no-repeat;
 }
 .mem-jkb {
-	background: url("/images/team-sprite-v0.6.png") -175px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -175px 0 no-repeat;
 }
 .mem-kate {
-	background: url("/images/team-sprite-v0.6.png") -349px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -349px 0 no-repeat;
 }
 .mem-shah {
-	background: url("/images/team-sprite-v0.6.png") -1217px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -1217px 0 no-repeat;
 }
 .mem-sorina {
-	background: url("/images/team-sprite-v0.6.png") -522px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -522px 0 no-repeat;
 }
 .mem-simona {
-	background: url("/images/team-sprite-v0.6.png") -1043px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -1043px 0 no-repeat;
 }
 .mem-ashby {
-	background: url("/images/team-sprite-v0.6.png") -696px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -696px 0 no-repeat;
 }
 .mem-haider {
-	background: url("/images/team-sprite-v0.6.png") -1390px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -1390px 0 no-repeat;
 }
 .mem-aida {
-	background: url("/images/team-sprite-v0.6.png") -1737px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -1737px 0 no-repeat;
 }
 .mem-amos {
-	background: url("/images/team-sprite-v0.6.png") -1563px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -1563px 0 no-repeat;
 }
 .mem-jacob {
-	background: url("/images/team-sprite-v0.6.png") -1912px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -1912px 0 no-repeat;
 }
 .mem-ali {
-	background: url("/images/team-sprite-v0.6.png") -2260px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -2260px 0 no-repeat;
 }
 .mem-tib {
-	background: url("/images/team-sprite-v0.6.png") -2085px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -2085px 0 no-repeat;
 }
 .mem-wayne {
-	background: url("/images/team-sprite-v0.6.png") -2438px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -2438px 0 no-repeat;
 }
 .mem-zahid {
-	background: url("/images/team-sprite-v0.6.png") -2792px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -2792px 0 no-repeat;
 }
 .mem-marek {
-	background: url("/images/team-sprite-v0.6.png") -2614px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -2614px 0 no-repeat;
 }
 .mem-vadim {
-	background: url("/images/team-sprite-v0.6.png") -2969px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -2969px 0 no-repeat;
+}
+.mem-ankur {
+	background: url("/images/team-sprite-v0.7.png") -3146px 0 no-repeat;
 }
 .advisers {
 	background: #fff;
@@ -948,7 +951,7 @@ Team
 	margin: -10px 30px 0 30px;
 }
 .project-goals-content .mem-pete {
-	background: url("/images/team-sprite-v0.6.png") -434px 0 no-repeat;
+	background: url("/images/team-sprite-v0.7.png") -434px 0 no-repeat;
 }
 .project-goals-content .author-name {
 	font-weight: bold;
