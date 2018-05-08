@@ -2294,7 +2294,7 @@ a:hover, a:focus {
 	text-align: center;
 	color: white;
 	position: relative;
-	min-height: 1140px;
+	min-height: 850px;
 	background-color: #cea630;
 }
 
@@ -2333,14 +2333,12 @@ a:hover, a:focus {
 }
 .intro .tokensale-open-banner {
 	vertical-align: middle;
-	background: url(../../../images/home-token-sasle-open-bg.png) no-repeat bottom center;
+	background: url(../../../images/home-token-sale-banner-open.png) no-repeat bottom center;
 	background-color: transparent;
 	position: relative;
 	z-index: 2;
 	height: 100%;
-  min-height:1000px;
-	clip-path: polygon(0% 68%, 0 0%, 100% 0, 100% 88%);
-	-webkit-clip-path: polygon(0% 68%, 0 0%, 100% 0, 100% 88%);
+  /* min-height:1000px; */
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -3329,9 +3327,9 @@ margin: 0 auto 20px;
     height: 30px;
     background-color: #cea630;
 }
-.reduce-top-banner-height {
+/* .reduce-top-banner-height {
 	min-height: 1000px;
-}
+} */
 .bank-detail-table {
 	font-weight: bold;
 	font-size: 20px;

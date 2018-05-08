@@ -908,3 +908,11 @@ $(document).ready(function () {
 
 	})
 })
+
+$('.material-card').materialCard({
+  icon_close: 'fa-chevron-left',
+  icon_open: 'fa-thumbs-o-up',
+  icon_spin: 'fa-spin-slow',
+  card_activator: 'hover' // or hover
+});
+
