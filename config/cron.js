@@ -156,97 +156,97 @@ module.exports.cron = {
     }
   },
 
-	addPendingToWhitelist: {
-		schedule: '*/3 * * * *',
-		onTick: function() {
-			sails.log.info(new Date(), 'started adding pending users to whitelist');
+	// addPendingToWhitelist: {
+	// 	schedule: '*/3 * * * *',
+	// 	onTick: function() {
+	// 		sails.log.info(new Date(), 'started adding pending users to whitelist');
 
-      let processed = 0;
-      const processReq = async () => {
+  //     let processed = 0;
+  //     const processReq = async () => {
 
-        let users = await User.find({
-          approvalStatus: ['CLEARED', 'APPROVED', 'ACCEPTED'],
-          wlStatus: {'!': 3},
-          select: ['id', 'whitelistEthAddress']
-        }).sort('updatedAt DESC').limit(150);
-        sails.log.info(`found ${users.length} users. started adding them to whitelist`);
-        for (let user of users) {
-          let bcRsp = false;
-          if(!user.whitelistEthAddress) {
-            sails.log.info(`id: ${user.id}'s wallet address is not right. ignoring`);
-            continue;
-          }
-          try {
-            bcRsp = await BlockchainService.contracts.WhiteList.addWhiteListed(user.whitelistEthAddress);
-            sails.log.info(`whitelist BC rsp for user ${user.id}: `, bcRsp);
-            processed++;
+  //       let users = await User.find({
+  //         approvalStatus: ['CLEARED', 'APPROVED', 'ACCEPTED'],
+  //         wlStatus: {'!': 3},
+  //         select: ['id', 'whitelistEthAddress']
+  //       }).sort('updatedAt DESC').limit(150);
+  //       sails.log.info(`found ${users.length} users. started adding them to whitelist`);
+  //       for (let user of users) {
+  //         let bcRsp = false;
+  //         if(!user.whitelistEthAddress) {
+  //           sails.log.info(`id: ${user.id}'s wallet address is not right. ignoring`);
+  //           continue;
+  //         }
+  //         try {
+  //           bcRsp = await BlockchainService.contracts.WhiteList.addWhiteListed(user.whitelistEthAddress);
+  //           sails.log.info(`whitelist BC rsp for user ${user.id}: `, bcRsp);
+  //           processed++;
 
-          }catch(e){
-            sails.log.error(`error while adding user to whitelist using crontask user ${user.id}: `, e.message);
-          }
-          user.wlStatus = bcRsp === true ? 3 : 2;
-          await user.save();
-        }
+  //         }catch(e){
+  //           sails.log.error(`error while adding user to whitelist using crontask user ${user.id}: `, e.message);
+  //         }
+  //         user.wlStatus = bcRsp === true ? 3 : 2;
+  //         await user.save();
+  //       }
 
-        return true;
-      };
+  //       return true;
+  //     };
 
-      processReq().then(() => {
-        sails.log.info(`successfully processed ${processed} whitelist users`);
-      })
-        .catch(err => {
-          sails.log.info('successfully processed few: ', processed);
-          sails.log.error('error while adding user to whitelist using crontask: ', err.message);
+  //     processReq().then(() => {
+  //       sails.log.info(`successfully processed ${processed} whitelist users`);
+  //     })
+  //       .catch(err => {
+  //         sails.log.info('successfully processed few: ', processed);
+  //         sails.log.error('error while adding user to whitelist using crontask: ', err.message);
 
-        })
+  //       })
 
-		}
-	},
+	// 	}
+	// },
 
-  //check for pending again which we requested in previous crontask
-	addPendingToWhitelist2: {
-		schedule: '*/7 * * * *',
-		onTick: function() {
-			sails.log.info(new Date(), 'started adding pending users to whitelist2');
+  // //check for pending again which we requested in previous crontask
+	// addPendingToWhitelist2: {
+	// 	schedule: '*/7 * * * *',
+	// 	onTick: function() {
+	// 		sails.log.info(new Date(), 'started adding pending users to whitelist2');
 
-      let processed = 0;
-      const processReq = async () => {
+  //     let processed = 0;
+  //     const processReq = async () => {
 
-        let users = await User.find({
-          approvalStatus: ['CLEARED', 'APPROVED', 'ACCEPTED'],
-          wlStatus: 2,
-          select: ['id', 'whitelistEthAddress']
-        }).sort('updatedAt DESC').limit(200);
+  //       let users = await User.find({
+  //         approvalStatus: ['CLEARED', 'APPROVED', 'ACCEPTED'],
+  //         wlStatus: 2,
+  //         select: ['id', 'whitelistEthAddress']
+  //       }).sort('updatedAt DESC').limit(200);
 
-        for (let user of users) {
-          let bcRsp = false;
-          if(!user.whitelistEthAddress) continue;
-          try {
-            bcRsp = await BlockchainService.contracts.WhiteList.addWhiteListed(user.whitelistEthAddress);
-            sails.log.info(`whitelist BC rsp for user ${user.id}: `, bcRsp);
-            processed++;
+  //       for (let user of users) {
+  //         let bcRsp = false;
+  //         if(!user.whitelistEthAddress) continue;
+  //         try {
+  //           bcRsp = await BlockchainService.contracts.WhiteList.addWhiteListed(user.whitelistEthAddress);
+  //           sails.log.info(`whitelist BC rsp for user ${user.id}: `, bcRsp);
+  //           processed++;
 
-          }catch(e){
-            sails.log.error(`error while adding user to whitelist using crontask user ${user.id}: `, e.message);
-          }
-          user.wlStatus = bcRsp === true ? 3 : 2;
-          await user.save();
-        }
+  //         }catch(e){
+  //           sails.log.error(`error while adding user to whitelist using crontask user ${user.id}: `, e.message);
+  //         }
+  //         user.wlStatus = bcRsp === true ? 3 : 2;
+  //         await user.save();
+  //       }
 
-        return true;
-      };
+  //       return true;
+  //     };
 
-      processReq().then(() => {
-        sails.log.info(`successfully processed ${processed} whitelist users`);
-      })
-        .catch(err => {
-          sails.log.info('successfully processed few: ', processed);
-          sails.log.error('error while adding user to whitelist using crontask: ', err.message);
+  //     processReq().then(() => {
+  //       sails.log.info(`successfully processed ${processed} whitelist users`);
+  //     })
+  //       .catch(err => {
+  //         sails.log.info('successfully processed few: ', processed);
+  //         sails.log.error('error while adding user to whitelist using crontask: ', err.message);
 
-        })
+  //       })
 
-		}
-	},
+	// 	}
+	// },
 
 
 };
