@@ -26,7 +26,7 @@ module.exports = {
       adapter: 'sails-mysql',
       host: 'localhost',
       user: 'root',
-      password: 'root',
+      password: '',
       database: 'triforcetokens_dev'
     },
     localDiskDb: {
