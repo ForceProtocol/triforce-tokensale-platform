@@ -111,6 +111,8 @@ module.exports.cron = {
 		schedule: '*/1 * * * *',  // every 30 minutes
 
 		onTick: function () {
+		
+			/**
 
 			sails.log.info(new Date(), 'started processing KYC CHECK cron task');
 
@@ -138,7 +140,7 @@ module.exports.cron = {
 					});
 				}
 
-			});
+			});**/
 
 		}
 	},
@@ -148,11 +150,15 @@ module.exports.cron = {
     schedule: '*/1 * * * *',
 
     onTick: function () {
+	
+		/**
 
-      sails.log.info(new Date(), 'started processing pending ICO txns cron task');
+		  sails.log.info(new Date(), 'started processing pending ICO txns cron task');
 
-      BlockchainService.contracts.TriForceNetworkCrowdsale.processOldEvents()
-        .catch(_err => sails.log.error('error while processing ico pending txns ', _err));
+		  BlockchainService.contracts.TriForceNetworkCrowdsale.processOldEvents()
+			.catch(_err => sails.log.error('error while processing ico pending txns ', _err));
+			
+		**/
     }
   },
 
