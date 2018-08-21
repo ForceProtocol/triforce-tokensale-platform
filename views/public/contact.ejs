@@ -1,22 +1,15 @@
 <%- partial('./partials/header.ejs') %>
 
-<header class="padding-top80 white-bg">
-
-    <div class="container white-bg">
 
 
-    </div>
+<main id="content" role="main">
 
-</header>
 
-<div class="section">
+	<div class="container u-space-4">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <h3 class="section-sub-heading margin-top0">get in touch</h3>
+		<div class="row justify-content-lg-between">
 
-				<% if(flash.has('errors')){ %>
+			<% if(flash.has('errors')){ %>
 				<div class="alert alert-danger">
 					<% flash.get('errors').forEach(function (message) { %>
 					<p class="error"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<%= message %></p>
@@ -29,82 +22,104 @@
 					<p class="error"><i class="fa fa-exclamation-check"></i> &nbsp;&nbsp;<%= message %></p>
 					<% }) %>
 				</div>
-				<% } %>
+			<% } %>
 
-                <div class="padding-top20">
 
-					<h3>reach us on telegram</h3>
+			<div class="col-lg-6 mb-9 mb-lg-0">
+				<h3 class="section-sub-heading margin-top0">Get in touch... We're not shy!</h3>
 
-					<p>The fastest way you can reach the team is by joining our telegram channel:</p>
+				<div class="embed-responsive embed-responsive-21by9 u-gmap-v1 min-height-300 mb-4">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4419.310857982004!2d-0.7414740623745925!3d51.997926222433684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xab6c668894377f73!2sBletchley+Park!5e0!3m2!1sen!2suk!4v1533637682755" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
 
-					<p><a href="https://t.me/triforcetokens">&raquo; Enter Telegram Channel &laquo;</a></p>
+				<div class="media">
+		            <div class="d-flex mr-3">
+		              <h4 class="h6">Office:</h4>
+		            </div>
+		            <div class="media-body">
+		              <p class="small mb-0">TriForce Tokens Ltd, Bletchley Park Science &amp; Technology Center, Bletchley, MK3 6DS</p>
+		            </div>
+		          </div>
 
-					<p>Once you enter ask for Jake or Pete who are the most active in there.</p>
+		          <br />
 
+				<div class="media">
+		            <div class="d-flex mr-3">
+		              <h4 class="h6">Open Hours:</h4>
+		            </div>
+		            <div class="media-body">
+		              <p class="small mb-0">Monday - Friday: 09:00 AM - 06:00 PM</p>
+		              <p class="small mb-0">Closed on Sunday &amp; Holidays</p>
+		            </div>
+	          	</div>
+
+	          	<br />
+	          	<br />
+
+	          	<div class="row">
+					<h3>Join our Discord!</h3>
+
+					<p>The fastest way you can reach the team is by joining our discord channel</p>
+
+					<p><a class="btn btn-success" href="https://discord.gg/ueyw6Z">Join Discord Server</a></p>
 
 					<br />
-					<hr />
-					<br />
-
-
-					<h3>reach us on facebook</h3>
+				</div>
+				<br />
+				<hr />
+				<br />
+				<div class="row">
+					<h3>Reach out on Facebook!</h3>
 
 					<p>You can also send a direct request to the team on the facebook page:</p>
 
-					<p><a href="https://www.facebook.com/triforcetokens">&raquo; Join Facebook Group &laquo;</a></p>
-
-
-					<br />
-					<hr />
-					<br />
-
-
-					<h3>email us</h3>
-
-
-					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2 text-left">
-
-						<p>Alternatively if your enquiry is best dealt with by email, complete the form below:</p>
-						<br />
-
-
-						<form method="post" action="">
-
-							<div class="form-group">
-								<label>Your Name</label>
-								<input required="required" type="text" name="fullName" class="form-control" />
-							</div>
-
-							<div class="form-group">
-								<label>Your Email</label>
-								<input required="required" type="email" name="email" class="form-control" />
-							</div>
-
-							<div class="form-group">
-								<label>Enquiry</label>
-								<textarea required="required" type="text" name="message" class="form-control" rows="12"></textarea>
-							</div>
-
-							<div class="form-group row">
-								<%- recaptchaForm %>
-							</div>
-
-							<div class="form-group">
-								<input type="submit" name="contact-form" class="btn btn-success btn-block" value="Send &raquo;" />
-							</div>
-
-						</form>
-					</div>
-
-
+					<p><a class="btn btn-success" href="https://www.facebook.com/triforcetokens">Join Facebook Group</a></p>
 				</div>
 
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<br />
-<br />
-<script src='https://www.google.com/recaptcha/api.js'></script>
+			</div>
+
+
+			<div class="col-lg-6 mb-9 mb-lg-0">
+
+				<h3>Email us</h3>
+
+				<p>Alternatively if your enquiry is best dealt with by email, complete the form below:</p>
+					<br />
+
+
+				<form method="post" action="">
+
+					<div class="form-group">
+						<label>Your Name</label>
+						<input required="required" type="text" name="fullName" class="form-control" />
+					</div>
+
+					<div class="form-group">
+						<label>Your Email</label>
+						<input required="required" type="email" name="email" class="form-control" />
+					</div>
+
+					<div class="form-group">
+						<label>Enquiry</label>
+						<textarea required="required" type="text" name="message" class="form-control" rows="6"></textarea>
+					</div>
+
+					<div class="form-group row" style="margin-left:1px;">
+						<%- recaptchaForm %>
+					</div>
+
+					<div class="form-group">
+						<input type="submit" name="contact-form" class="btn btn-success btn-block" value="Send &raquo;" />
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
+
+</main>
+
 <%- partial('./partials/footer.ejs') %>

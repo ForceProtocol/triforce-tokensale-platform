@@ -31,40 +31,12 @@ module.exports = {
 
 		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
 
-
-		function next() {
-			return res.view('public/home', {
-				layout: 'public/layout',
-				title: 'TriForce Tokens Ltd',
-				metaDescription: 'TriForce Tokens will become the industry standard on multiple gaming platforms introducing new revenue models. Join our crypto-currency ICO crowdfund today.',
-				recaptchaForm: recaptcha.toHTML()
-			});
-		}
-
-		//check if user is already logged-in
-		if (req.cookies && req.cookies.token && !req.session.token) {
-
-			request({
-				method: 'GET',
-				uri: sails.config.API_URL + 'user',
-				json: true,
-				headers: {
-					'Authorization': 'Bearer ' + req.cookies.token
-				},
-			}).then((rsp) => {
-				req.session.user = rsp;
-				req.session.token = req.cookies.token;
-
-				next();
-			})
-				.catch(err => {
-					sails.log('login token error: ', err);
-					next();
-				});
-
-		} else {
-			next();
-		}
+		return res.view('public/home', {
+			layout: 'public/layout',
+			title: 'TriForce Tokens Ltd',
+			metaDescription: 'TriForce Tokens will become the industry standard on multiple gaming platforms introducing new revenue models. Join our crypto-currency ICO crowdfund today.',
+			recaptchaForm: recaptcha.toHTML()
+		});
 
 	},
 

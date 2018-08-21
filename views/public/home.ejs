@@ -1,1136 +1,581 @@
 <%- partial('./partials/header.ejs') %>
 
+
+<main id="content" role="main">
+
 <div class="modal fade alert-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-		<div class="alert-message"></div>
+    <div class="alert-message">
+      </div>
     </div>
   </div>
 </div>
 
-	<!-- Intro Header -->
-	<header class="intro p-b-0" id="banner">
-
-		<div class="tokensale-open-banner display-when-live">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-10 col-md-10 col-sm-10 col-sm-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-						<div class="logo">
-							<img src="images/logo.png" />
-						</div>
-						<h1 class="brand-heading f-900 wow fadeInDown"><%- __('<span class="white">A GLOBAL GAMES PUBLISHER FRAMEWORK</span><br /><span class="small">SUPPORTED BY DISTRIBUTED LEDGER TECHNOLOGY</span>') %></h1>
-
-						<h3 class="f-900 wow fadeInDown"><%- __('TRY OUR FIRST PRODUCT RELEASE BELOW') %></h3>
-						<a  target="_BLANK" class="hvr-outline-out" href="https://raidparty.io">
-							<img src="images/raidparty-logo.png" style="width:11%;" />&nbsp;&nbsp;
-							<strong><%= __('Play Games') %></strong>
-						</a>
-						
-						<br />
-						<br class="xs-hide"/>
-						<br />
-						<br />
-						<p class="f-900"><a href="https://www.the-blocks.com/"><img src="/images/brand-logos/triforce-tokens-winners-the-blocks-award-2018.png" alt="Most innovative use of Blockchain in Gaming and Entertainment 2018" /></a></p>
-						<p class="f-900"><%- __('Winners of <a href="https://www.the-blocks.com/">The Blocks Awards</a> category for "Most innovative use of Blockchain in Gaming and Entertainment 2018"') %></p>
-						<br />
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
-
-
-      <!-- About Section -
-      <section class=" content-section form-section text-center p-t-0">
+   <div class="d-flex align-items-center position-relative u-bg-gradient-v1 u-space-4-top u-space-5-top--md u-space-0--lg min-height-100vh--lg">
+         <!-- Content -->
          <div class="container">
-            <div class="row">
-               <div class="col-lg-6 col-lg-offset-3 p-0">
-                  <h2 class="f-400 m-b-50 minus-90 gold-heading"><%- __('Join The Gaming Revolution') %></h2>
+           <div class="row">
+             <div class="col-lg-5">
+
+             
+               <div class="g-mb-32">
+                 <h1 class="display-4 font-size-48--md-down mb-3">Launch Your Game Successfully</h1>
+                 <p>Real technology innovation to help <span class="text-primary">
+                     <strong class="header-typed-text"></strong>
+                   </span> launch in a crowded market</p>
                </div>
-               <div class="col-lg-6 col-lg-offset-3 m-b-50 wow fadeInUp">
 
-					<p><%- __('Get ready to own some FORCE tokens. Limited spaces available for presale.') %></p>
+               <div class="d-flex align-items-center">
+                 <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="/studio-signup">Get Started</a>
 
-					<a class="hvr-outline-out trigger-cta-clicked-event" href="/join-whitelist" class="btn btn-primary btn-cta-lg"><strong><%- __('Buy FORCE Tokens') %></strong></a>
-
-					<br />
-					<br />
-
-					<a href="/login"><%- __('User Login') %></a>
-
+                 <!-- Fancybox -->
+                 <a class="js-fancybox media align-items-center u-media-player ml-3" href="javascript:;" 
+                 data-src="//vimeo.com/167434033" 
+                 data-speed="200" 
+                 data-animate-in="zoomIn" 
+                 data-animate-out="zoomOut"
+                 data-caption="TriForce Tokens Vision">
+                   <span class="d-flex mr-3">
+                     <span class="u-media-player__icon u-media-player__icon--success">
+                       <span class="fa fa-play u-media-player__icon-inner"></span>
+                     </span>
+                   </span>
+                   <span class="media-body">
+                     Play video
+                   </span>
+                 </a>
+                 <!-- End Fancybox -->
                </div>
-            </div>
+             </div>
+           </div>
          </div>
-      </section>-->
+         <!-- End Content -->
+       </div>
 
 
-      <!-- Video Section 
-      <section class="content-section video-section text-center p-0">
-         <div class="video-section-inn">
-            <div class="container">
-               <div class="col-lg-8 col-lg-offset-2">
-                  <div class="video-border minus-110 wow fadeInUp">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/gpAz4SEjfoo?rel=0&amp;showinfo=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
-				  </div>
-				  <br />
-                  <p class="white">Follow us on</p>
-                  <div class="follow_img">
-                  <a href="https://twitter.com/triforcetokens"><img src="images/icon-1.png" /></a>
-                  <a href="https://www.facebook.com/triforcetokens"><img src="images/icon-2.png" /></a>
-                  <a href="https://t.me/triforcetokens"><img src="images/icon-3.png" /></a>
-                  <a href="https://bitcointalk.org/index.php?topic=2222731"><img src="images/icon-4.png" /></a>
-                  <a href="https://medium.com/triforcetokens"><img src="images/icon-5.png" /></a>
-                  <a href="https://github.com/TriForceNetwork"><img src="images/icon-6.png" /></a>
-                  <a href="https://www.linkedin.com/company/11265929/"><img src="images/icon-7.png" /></a>
-                  <a href="https://www.youtube.com/channel/UCzXH1e2bclPu8NkuM1yICfg"><img src="images/icon-8.png" /></a>
-                  </div>
-               </div>
-            </div>
+       <div class="col-lg-9 col-xl-7 d-none d-lg-block position-absolute-top-right-0 pr-0" style="margin-top: 105.6px;">
+           <figure class="w-100">
+             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1374.7 1083.6" style="enable-background:new 0 0 1374.7 1083.6;" xml:space="preserve">
+               <path class="u-fill-primary" opacity=".05" d="M285.2,170.1c-94.5,8.6-181.2,57.4-235.9,134.8C-34.7,423.6-54.5,621.5,349,879.8
+                 c636.5,407.6,600,9.3,591.9-47.4c-0.8-5.5-1.4-11.1-2-16.6l-34.2-374.1C888.4,262,729.2,129.6,549.4,146L285.2,170.1z"></path>
+               <g>
+                 <defs>
+                   <path id="heroBlock1" d="M1374.7,0H687.6l-278,279.7c-150,150.9-148.1,395.3,4.4,543.8l0,0C554.1,960,774.9,968.7,925.4,843.6
+                     l449.3-373.4V0z"></path>
+                 </defs>
+                 <clipPath id="heroBlock2">
+                   <use xlink:href="#heroBlock1" style="overflow:visible;"></use>
+                 </clipPath>
+                 <g transform="matrix(1 0 0 1 0 0)" style="clip-path:url(#heroBlock2);">
+                   <!-- Apply your (750px width to 750px height) image here -->
+                   <image style="overflow:visible;" width="750" height="750" xlink:href="/images/banner-image-eximius.png" transform="matrix(1.4462 0 0 1.4448 290.09 0)"></image>
+                 </g>
+               </g>
+             </svg>
+           </figure>
          </div>
-      </section>-->
 
 
-      <!-- Patner Section -->
-      <section class=" patner-section text-center">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-2">
-                  <a target="_BLANK" href="https://www.ccn.com/triforce-tokens-annoucnes-beta-release-mobile-app-token-sale/"><img src="images/logo-1.png" /></a>
-               </div>
-               <div class="col-md-2">
-                  <a target="_BLANK" href="https://www.icocountdown.com/"><img src="images/logo-2.png" /></a>
-               </div>
-               <div class="col-md-2">
-                  <a target="_BLANK" href="https://www.coinspeaker.com/tag/triforce-tokens/"><img src="images/logo-3.png" /></a>
-               </div>
-               <div class="col-md-2">
-                  <a target="_BLANK" href="http://www.newsbtc.com/2017/09/28/triforce-tokens-ico-early-birds-get-free-ledger-nano-s/"><img src="images/logo-4.png" /></a>
-               </div>
-               <div class="col-md-2">
-                  <a target="_BLANK" href="https://www.advfn.com/news_TriForce-Tokens-Blockchain-Gaming-Supported-by-Cov_75815619.html"><img src="images/logo-5.png" class="w-auto" /></a>
-               </div>
-               <div class="col-md-2">
-                  <a target="_BLANK" href="https://blog.icoalert.com/ico-alert-report-triforce-d24e2314a841"><img src="images/logo-6.png" /></a>
-               </div>
-            </div>
+   <div class="container u-space-3">
+         <!-- Title -->
+         <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
+           <span class="u-label u-label--sm u-label--success mb-2">What we do?</span>
+           <h2>Front makes designing fast and easy</h2>
          </div>
-      </section>
+         <!-- End Title -->
+
+         <div class="row">
+           <div class="col-md-4 mb-7">
+             <!-- Icon Blocks -->
+             <div class="text-center px-lg-3">
+               <span class="u-icon u-icon-danger--air u-icon--xl rounded-circle mb-7">
+                 <span class="fab fa-yelp u-icon__inner u-icon__inner-bottom-minus"></span>
+               </span>
+               <h3 class="h5">Professional Design</h3>
+               <p class="mb-md-0">Achieve virtually any look and layout from within the one template.</p>
+             </div>
+             <!-- End Icon Blocks -->
+           </div>
+
+           <div class="col-md-4 mb-7">
+             <!-- Icon Blocks -->
+             <div class="text-center px-lg-3">
+               <span class="u-icon u-icon-primary--air u-icon--xl rounded-circle mb-7">
+                 <span class="fas fa-fire u-icon__inner u-icon__inner-bottom-minus"></span>
+               </span>
+               <h3 class="h5">Front Strategy</h3>
+               <p class="mb-md-0">We strive to figure out ways to help your audience grow through all platforms.</p>
+             </div>
+             <!-- End Icon Blocks -->
+           </div>
+
+           <div class="col-md-4 mb-7">
+             <!-- Icon Blocks -->
+             <div class="text-center px-lg-3">
+               <span class="u-icon u-icon-success--air u-icon--xl rounded-circle mb-7">
+                 <span class="fab fa-whmcs u-icon__inner u-icon__inner-bottom-minus"></span>
+               </span>
+               <h3 class="h5">Unlimited Power</h3>
+               <p class="mb-md-0">Find what you need in one template and combine features at will.</p>
+             </div>
+             <!-- End Icon Blocks -->
+           </div>
+         </div>
+
+         <img class="img-fluid d-none d-md-block w-75 mx-auto mb-7" src="../../assets/svg/pointers/svg-pointer1.svg" alt="SVG Arrow">
+
+         <!-- Title -->
+         <div class="w-md-60 w-lg-50 text-center mx-auto mb-7">
+           <h4 class="h5">
+             It is fast and easy. <span class="font-weight-normal">Create your first and ongoing website with Front.</span>
+           </h4>
+         </div>
+         <!-- End Title -->
+
+         <!-- Mockup Browser -->
+         <div class="u-browser-v1 mx-auto mb-4">
+           <!-- SVG Background Shape -->
+           <figure>
+             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1109.8 797.1" style="enable-background:new 0 0 1109.8 797.1;" xml:space="preserve">
+               <path class="u-fill-primary" opacity=".1" d="M105.1,267.1C35.5,331.5-3.5,423,0.3,517.7c5.8,145.3,110.7,314.2,588,273.1c753-64.7,481.3-358.3,440.4-398.3
+                 c-4-3.9-7.9-7.9-11.7-12L761.9,104.8C639.4-27.6,432.5-35.6,299.9,87L105.1,267.1z"></path>
+             </svg>
+           </figure>
+           <!-- End SVG Background Shape -->
+
+           <!-- Mockup Browser -->
+           <figure class="u-browser-v1__svg">
+             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 857 670" style="enable-background:new 0 0 857 670;" xml:space="preserve">
+               <g>
+                 <defs>
+                   <path id="browserV1_1" d="M833,665H25c-10.5,0-19-8.5-19-19V24.9c0-10.5,8.5-19,19-19h808c10.5,0,19,8.5,19,19V646C852,656.5,843.5,665,833,665z"></path>
+                 </defs>
+                 <clipPath id="browserV1_2">
+                   <use xlink:href="#browserV1_1" style="overflow:visible;"></use>
+                 </clipPath>
+                 <!-- Apply your (855px width to 655px height) image here -->
+                 <image style="overflow:visible;clip-path:url(#browserV1_2);" width="855" height="655" xlink:href="../../assets/img/855x665/img1.jpg" transform="matrix(1 0 0 1.0075 0 0)"></image>
+                 <use xlink:href="#browserV1_1" class="u-fill-none u-stroke-white" stroke-width="10" stroke-miterlimit="10" style="overflow:visible;"></use>
+               </g>
+               <g>
+                 <path class="u-fill-white" d="M856.8,40.2H0.8V19c0-10.5,8.5-19,19-19h818c10.5,0,19,8.5,19,19V40.2z"></path>
+               </g>
+               <g>
+                 <ellipse class="u-fill-danger" cx="28.5" cy="20.1" rx="6" ry="6"></ellipse>
+                 <ellipse class="u-fill-warning" cx="48.4" cy="20.1" rx="6" ry="6"></ellipse>
+                 <ellipse class="u-fill-success" cx="68.4" cy="20.1" rx="6" ry="6"></ellipse>
+               </g>
+             </svg>
+           </figure>
+           <!-- End Mockup Browser -->
+         </div>
+         <!-- End Mockup Browser -->
+
+         <div class="w-50 w-md-40 w-lg-30 text-center mx-auto">
+           <p class="small">We are launching soon. Join the priority list for information and early access.</p>
+         </div>
+       </div>
 
 
-      <!-- Download Section -->
-      <section class="content-section download-section text-center" id="downloads">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 col-md-8 col-md-offset-2 col-sm-12 col-xs-12 col-lg-offset-2">
-                  <h2 class="f-400 m-b-50 gold-heading"><%- __('document downloads') %></h2>
-                  <div class="row">
-                     <div class="col-md-3 col-lg-3 col-sm-4">
-						<a href="/">
-							<span class="triangle m-b-20"></span>
-							<p class="white"><%- __('Pitch Deck') %></p>
-						</a>
-                     </div>
-                     <div class="col-md-3 col-lg-3 col-sm-4">
-						<a href="/">
-							<span class="triangle m-b-20"></span>
-							<p class="white"><%- __('One page Summary') %></p>
-						</a>
-                     </div>
-                     <div class="col-md-3 col-lg-3 col-sm-4">
-						<a href="/resources/newzoo-2016-global-games-report.pdf">
-							<span class="triangle m-b-20"></span>
-							<p class="white"><%- __('Gaming Industry Report') %></p>
-						</a>
-                     </div>
-                     <div class="col-md-3 col-lg-3 col-sm-4">
-						<a href="/resources/white-paper-v3.3.pdf">
-							<span class="triangle m-b-20"></span>
-							<p class="white"><%- __('White Paper') %></p>
-						</a>
-                     </div>
-                  </div>
+
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-5 mb-7 mb-lg-0">
+             <!-- Title -->
+             <div class="pr-lg-4 mb-7">
+               <span class="u-label u-label--sm u-label--success mb-2">Pricing plans</span>
+               <h2>No additional costs.<br>Pay for what you use.</h2>
+               <p>Choose the most suitable service for your needs with reasonable price.</p>
+             </div>
+             <!-- End Title -->
+
+             <!-- Button Group -->
+             <div class="btn-group btn-group-toggle">
+               <a class="js-animation-link btn btn-outline-secondary u-btn-wide--sm u-pricing-v1-toggler active" href="javascript:;" data-target="#pricingMonthly" data-link-group="idPricing" data-animation-in="slideInUp">Monthly</a>
+               <a class="js-animation-link btn btn-outline-secondary u-btn-wide--sm u-pricing-v1-toggler" href="javascript:;" data-target="#pricingYearly" data-link-group="idPricing" data-animation-in="slideInUp">
+                 Yearly
+                 <span class="badge badge-success badge-pill u-badge-bigger u-badge-pos u-pricing-v1-toggler-pos">10% OFF</span>
+               </a>
+             </div>
+             <!-- End Button Group -->
+           </div>
+
+           <div class="col-lg-7">
+             <!-- Monthly Plans -->
+             <div id="pricingMonthly" class="row align-items-center mb-3" data-target-group="idPricing">
+               <div class="col-sm-6 mb-7 mb-sm-0">
+                 <!-- Pricing v1 -->
+                 <div class="u-pricing-v1">
+                   <header class="u-pricing-v1__header">
+                     <h3 class="h4 mb-1">Individual Plan</h3>
+                     <span class="d-block">
+                       <span class="align-top">$</span>
+                       <span class="display-4 font-weight-bold">22</span>
+                       <span>/month</span>
+                     </span>
+
+                     <!-- SVG Shape -->
+                     <figure class="w-100 position-absolute-bottom-0">
+                       <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="20 -20 300 100" style="margin-bottom: -8px;" xml:space="preserve">
+                         <path class="u-fill-white" opacity=".4" d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+                     c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"></path>
+                         <path class="u-fill-white" opacity=".4" d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+                     c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"></path>
+                         <path class="u-fill-white" opacity="0" d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+                     H42.401L43.415,98.342z"></path>
+                         <path class="u-fill-white" d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+                     c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"></path>
+                       </svg>
+                     </figure>
+                     <!-- End SVG Shape -->
+                   </header>
+
+                   <!-- Content -->
+                   <div class="u-pricing-v1__content">
+                     <ul class="list-unstyled mb-4">
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         Community support
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         400+ pages
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         100+ header variations
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item disabled py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         20+ home page options
+                       </li>
+                     </ul>
+
+                     <button type="button" class="btn btn-sm btn-block u-btn-primary--air transition-3d-hover">Get Started</button>
+                   </div>
+                   <!-- End Content -->
+                 </div>
+                 <!-- End Pricing v1 -->
                </div>
-            </div>
-         </div>
-      </section>
-      <!-- Support Section -->
-      <section class="support-section text-center p-0" id="partners">
-         <div class="video-section-inn">
-            <div class="container">
-               <div class="col-lg-12">
-                  <h2 class="f-400 m-b-30 gold-heading"><%- __('supporters and partners') %></h2>
-                  <h4><%- __('Working with and supported by globally recognised companies') %></h4>
-                  <div class="patner-logo">
-                     <a target="_BLANK" href="https://www.coinpayments.net/"><img src="images/patner-icon-1.png" /></a>
-                     <a target="_BLANK" href="https://www.gov.uk/government/organisations/innovate-uk"><img src="images/patner-icon-2.png" /></a>
-                     <a target="_BLANK" href="https://cryptovalley.swiss"><img src="images/patner-icon-3.png" /></a>
-                     <img src="images/patner-icon-4.png" />
-                     <a target="_BLANK" href="https://tiga.org/"><img src="images/patner-icon-5.png" /></a>
-                     <img src="images/patner-icon-6.png" />
-                     <a target="_BLANK" href="https://www.fanstudio.co.uk/"><img src="images/patner-icon-7.png" /></a>
-                     <a target="_BLANK" href="https://www.itgovernance.co.uk/"><img src="images/patner-icon-8.png" /></a>
-                     <a target="_BLANK" href="https://bitcoinprbuzz.com/"><img src="images/patner-icon-9.png" /></a>
-                     <a target="_BLANK" href="https://tokenguru.net/ico/triforce-ico-review/"><img src="images/brand-logos/tokenguru-logo.png" /></a>
-                     <a target="_BLANK" href="https://www.buscatodo.com/"><img src="images/brand-logos/busca-todo-logo.png" /></a>
-                     <a target="_BLANK" href="https://www.levelup.com/"><img src="images/brand-logos/level-up-dark-250.png" /></a>
-                     <a target="_BLANK" href="https://www.tarreo.com"><img src="images/brand-logos/tarreo-logo.png" /></a>
-                     <a target="_BLANK" href="https://goralaw.com"><img src="images/brand-logos/gora-law-attorneys-at-law-dark.png" /></a>
-                     <a target="_BLANK" href="https://viuly.com"><img src="images/brand-logos/viuly.png" style="max-width: 65px;" /></a>
-                     <a target="_BLANK" href="https://techracers.com"><img src="images/brand-logos/techracers-logo.png" style="max-width: 300px;" /></a>
-                     <a target="_BLANK" href="https://www.donnelleylanguagesolutions.com/"><img src="images/brand-logos/donnelley-logo.png" style="max-width: 300px;" /></a>
-                  </div>
+
+               <div class="col-sm-6">
+                 <!-- Pricing v1 -->
+                 <div class="u-pricing-v1">
+                   <header class="u-pricing-v1__header">
+                     <h3 class="h4 mb-1">Enterprise Plan</h3>
+                     <span class="d-block">
+                       <span class="align-top">$</span>
+                       <span class="display-4 font-weight-bold">99</span>
+                       <span>/month</span>
+                     </span>
+
+                     <!-- SVG Shape -->
+                     <figure class="w-100 position-absolute-bottom-0">
+                       <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="20 -20 300 100" style="margin-bottom: -8px;" xml:space="preserve">
+                         <path class="u-fill-white" opacity=".4" d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+                     c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"></path>
+                         <path class="u-fill-white" opacity=".4" d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+                     c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"></path>
+                         <path class="u-fill-white" opacity="0" d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+                     H42.401L43.415,98.342z"></path>
+                         <path class="u-fill-white" d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+                     c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"></path>
+                       </svg>
+                     </figure>
+                     <!-- End SVG Shape -->
+                   </header>
+
+                   <!-- Content -->
+                   <div class="u-pricing-v1__content">
+                     <ul class="list-unstyled mb-4">
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         24/7 support
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         400+ pages
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         200+ header variations
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         40+ home page options
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         E-commerce
+                       </li>
+                     </ul>
+
+                     <button type="button" class="btn btn-sm btn-block u-btn-primary--air transition-3d-hover">Get Started</button>
+                   </div>
+                   <!-- End Content -->
+                 </div>
+                 <!-- End Pricing v1 -->
                </div>
-            </div>
-         </div>
-      </section>
+             </div>
+             <!-- End Monthly Plans -->
 
+             <!-- Yearly Plans -->
+             <div id="pricingYearly" class="row align-items-center mb-3" style="display: none; opacity: 0;" data-target-group="idPricing">
+               <div class="col-sm-6 mb-7 mb-sm-0">
+                 <!-- Pricing v1 -->
+                 <div class="u-pricing-v1">
+                   <header class="u-pricing-v1__header">
+                     <h3 class="h4 mb-1">Individual Plan</h3>
+                     <span class="d-block">
+                       <span class="align-top">$</span>
+                       <span class="display-4 font-weight-bold">242</span>
+                       <span>/year</span>
+                     </span>
 
-      <!-- Token Section 
-      <section class="token-section text-center" id="token-sale-details">
-         <div class="container">
-            <div class="col-lg-8 col-lg-offset-2">
-               <h2 class="f-400 m-b-30 gold-heading">token sale</h2>
-               <h4 class="m-b-30"><%- __('Key information about the FORCE token sale') %></h4>
-          <div class="table-responsive">
-               <table class="table table-striped table-bordered m-b-50">
-                  <tbody>
-                     <tr>
-                        <th><%- __('Total Supply') %></th>
-                        <td>200,000,000 FORCE</td>
-                     </tr>
-                     <tr>
-                        <th><%- __('Available Supply') %></th>
-                        <td>150,000,000 FORCE</td>
-                     </tr>
-                     <tr>
-                        <th><%- __('Soft-Cap') %></th>
-                        <td>&dollar;500,000</td>
-                     </tr>
-                     <tr>
-                        <th><%- __('Hard-Cap') %></th>
-                        <td>&dollar;20,000,000</td>
-                     </tr>
-                     <tr>
-                        <th><%- __('Tokens Distributed') %></th>
-                        <td><%- __('Immediately') %></td>
-                     </tr>
-					  <tr>
-                        <th><%- __('Tokens Standard') %></th>
-                        <td>ERC-223</td>
-                     </tr>
-                     <tr>
-                        <th><%- __('Open Date') %></th>
-                        <td><%- __('20th February 2018') %></td>
-                     </tr>
-                     <tr>
-                        <th><%- __('Base Rate') %></th>
-                        <td>1 ETH = 6,000 FORCE</td>
-                     </tr>
-                  </tbody>
-               </table>
-				</div>
+                     <!-- SVG Shape -->
+                     <figure class="w-100 position-absolute-bottom-0">
+                       <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="20 -20 300 100" style="margin-bottom: -8px;" xml:space="preserve">
+                         <path class="u-fill-white" opacity=".4" d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+                     c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"></path>
+                         <path class="u-fill-white" opacity=".4" d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+                     c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"></path>
+                         <path class="u-fill-white" opacity="0" d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+                     H42.401L43.415,98.342z"></path>
+                         <path class="u-fill-white" d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+                     c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"></path>
+                       </svg>
+                     </figure>
+                     <!-- End SVG Shape -->
+                   </header>
 
-               <h4 class="m-b-30 info"><%- __('token discount structure') %></h4>
-               <p><%- __('Token discounts will be awarded based on supply that is sold. As more tokens are distributed, the discounts will decrease. To make sure you receive the highest bonus, you should try to contribute as early as possible.') %></p>
-               <p><%- __('The full discount structure is defined below:') %></p>
-          <div class="table-responsive">
-               <table class="table table-striped table-bordered m-b-50">
-                  <thead>
-                     <tr>
-                        <th><%- __('Supply Sold') %></th>
-                        <th class="th-lg"><%- __('Supply') %> &percnt;</th>
-                        <th class="th-lg"><%- __('Discount') %> &percnt;</th>
-                        <th class="th-lg">1 Ether Contribution</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td>0 - 15,000,000</td>
-                        <td>1&percnt;</td>
-                        <td>25&percnt;</td>
-                        <td>7,500 FORCE</td>
-                     </tr>
-                     <tr>
-                        <td>15,000,001 - 45,000,000</td>
-                        <td>2&percnt;</td>
-                        <td>20&percnt;</td>
-                        <td>7,200 FORCE</td>
-                     </tr>
-                     <tr>
-                        <td>45,000,001 - 120,000,000</td>
-                        <td>5&percnt;</td>
-                        <td>10&percnt;</td>
-                        <td>6,600 FORCE</td>
-                     </tr>
-                     <tr>
-                        <td>120,000,001 - 570,000,000</td>
-                        <td>30&percnt;</td>
-                        <td>5&percnt;</td>
-                        <td>6,300 FORCE</td>
-                     </tr>
-                     <tr>
-                        <td>570,000,001 - 1,170,000,000</td>
-                        <td>40&percnt;</td>
-                        <td>3&percnt;</td>
-                        <td>6,180 FORCE</td>
-                     </tr>
-                     <tr>
-                        <td>1,170,000,001 - 1,500,000,000</td>
-                        <td>22&percnt;</td>
-                        <td>No Discount</td>
-                        <td>6,000 FORCE</td>
-                     </tr>
-                  </tbody>
-               </table>
-				</div>
-               <div class="graph_img">
-					<h4 class="m-b-30 info"><%- __('Token Distribution') %></h4>
-					<img src="images/graph-img2.png" />
-			   </div>
-            </div>
-         </div>
-      </section>-->
+                   <!-- Content -->
+                   <div class="u-pricing-v1__content">
+                     <ul class="list-unstyled mb-4">
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         24/7 support
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         400+ pages
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         100+ header variations
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         20+ home page options
+                       </li>
+                     </ul>
 
-      <!-- Token sale Section -->
-      <section class="token-sale-section text-center p-0">
-         <div class="token-sale-section-inner">
-            <div class="container">
-               <div class="row">
-                  <div class="col-lg-8 col-lg-offset-2">
-                     <h2 class="f-400 m-b-30 gold-heading"><%- __('DON\'T MISS THE TOKEN SALE') %></h2>
-                  </div>
-                  <div class="col-lg-12 ">
-                     <form class="form-horizontal" method="get" action="/join-whitelist">
-                        <div class="form-group m-b-30">
-                           <div class="col-xs-3">
-                              <input required="required" name="firstName" type="text" class="form-control" placeholder="<%- __('First Name') %>">
-                           </div>
-                           <div class="col-xs-3">
-                              <input required="required" name="lastName" type="text" class="form-control" placeholder="<%- __('Last Name') %>">
-                           </div>
-                           <div class="col-xs-3">
-                              <input required="required" name="email" type="email" class="form-control" id="inputEmail" placeholder="<%- __('Your email address') %>">
-                           </div>
-                           <div class="col-xs-3">
-                              <button type="submit" class="btn btn-primary f-900 pull-left"><%- __('join community') %></button>
-                           </div>
-                        </div>
-                     </form>
-                  </div>
+                     <button type="button" class="btn btn-sm btn-block u-btn-primary--air transition-3d-hover">Get Started</button>
+                   </div>
+                   <!-- End Content -->
+                 </div>
+                 <!-- End Pricing v1 -->
                </div>
-            </div>
-         </div>
-      </section>
-      <!-- media Section -->
 
+               <div class="col-sm-6">
+                 <!-- Pricing v1 -->
+                 <div class="u-pricing-v1">
+                   <header class="u-pricing-v1__header">
+                     <h3 class="h4 mb-1">Enterprise Plan</h3>
+                     <span class="d-block">
+                       <span class="align-top">$</span>
+                       <span class="display-4 font-weight-bold">1089</span>
+                       <span>/year</span>
+                     </span>
 
-      <section class="media-section text-center p-0">
-         <div class="video-section-inn">
-            <div class="container">
-               <div class="col-lg-12">
-                  <h2 class="f-400 m-b-30"><%- __('recent media') %></h2>
-                  <h4 class="m-b-50"><%- __('Check out the latest media and article publications') %></h4>
-                  <div class="row">
-                     <div class="col-md-4">
-                        <h4>Published on ICO Alert</h4>
-                        <a target="_BLANK" href="https://blog.icoalert.com/ico-alert-report-triforce-d24e2314a841"><img src="images/media-img-2.png" /></a>
-                        <p><%- __('Full report completed by one of the top ICO listing sites, icoalert.com.') %></p>
-                        <a target="_BLANK" href="https://blog.icoalert.com/ico-alert-report-triforce-d24e2314a841"><%- __('Read the full story') %></a>
-                     </div>
-                     <div class="col-md-4">
-                        <h4><%- __('Publication on TheMerkle') %></h4>
-                        <a target="_BLANK" href="https://themerkle.com/triforce-tokens-readying-for-beta-launch-of-raidparty-app/"><img src="images/media-img-3.png" /></a>
-                        <p><%- __('Blockchain Gaming Platform TriForce Tokens Supported by Coventry University Enterprise') %></p>
-                        <a target="_BLANK" href="https://themerkle.com/triforce-tokens-readying-for-beta-launch-of-raidparty-app/"><%- __('Read the full story') %></a>
-                     </div>
-                     <div class="col-md-4">
-                        <h4><%- __('published on CryptoCoinNews') %></h4>
-                        <a target="_BLANK" href="https://www.ccn.com/triforce-tokens-annoucnes-beta-release-mobile-app-token-sale/"><img src="images/media-img-4.png" /></a>
-                        <p><%- __('TriForce Tokens Annoucnes Beta Release of Mobile App and Token Sale') %></p>
-                        <a target="_BLANK" href="https://www.ccn.com/triforce-tokens-annoucnes-beta-release-mobile-app-token-sale/"><%- __('Read the full story') %></a>
-                     </div>
-                  </div>
+                     <!-- SVG Shape -->
+                     <figure class="w-100 position-absolute-bottom-0">
+                       <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="20 -20 300 100" style="margin-bottom: -8px;" xml:space="preserve">
+                         <path class="u-fill-white" opacity=".4" d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+                     c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"></path>
+                         <path class="u-fill-white" opacity=".4" d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+                     c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"></path>
+                         <path class="u-fill-white" opacity="0" d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+                     H42.401L43.415,98.342z"></path>
+                         <path class="u-fill-white" d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+                     c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"></path>
+                       </svg>
+                     </figure>
+                     <!-- End SVG Shape -->
+                   </header>
+
+                   <!-- Content -->
+                   <div class="u-pricing-v1__content">
+                     <ul class="list-unstyled mb-4">
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         24/7 support
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         400+ pages
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         200+ header variations
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         40+ home page options
+                       </li>
+                       <li class="d-flex align-items-center u-pricing-v1__list-item py-2">
+                         <span class="u-icon u-icon-primary--air u-icon--xs rounded-circle mr-3">
+                           <span class="fa fa-check u-icon__inner"></span>
+                         </span>
+                         E-commerce
+                       </li>
+                     </ul>
+
+                     <button type="button" class="btn btn-sm btn-block u-btn-primary--air transition-3d-hover">Get Started</button>
+                   </div>
+                   <!-- End Content -->
+                 </div>
+                 <!-- End Pricing v1 -->
                </div>
-            </div>
+             </div>
+             <!-- End Yearly Plans -->
+
+             <p class="small text-muted text-center">
+               * <a class="u-link-muted" href="../pages/page-terms.html">Terms</a> are subject to change.
+             </p>
+           </div>
          </div>
-      </section>
-      <!--project Section -->
-      <section class="project-section text-center ">
-         <div class="container">
-            <div class="col-lg-8 col-lg-offset-2">
-               <h2 class="f-400 m-b-30 gold-heading"><%- __('global vision') %></h2>
-               <p class="white"><%- __('TriForce Tokens will become the most universally acceptable gaming currency on multiple gaming platforms offering player-to-player trading, anti-piracy and a unique honorary system that rewards collaborative game play.') %></p>
-               <p class="white"><%- __('Our technology will give developers new revenue models, lower player attrition rate, player behavioural analysis and creates a new gaming experience for players where they can build a digital asset empire.') %></p>
-               <h4 class="m-b-30 white"><%- __('three core foundations of the technology') %></h4>
-			   <br />
-            </div>
-            <div class="row project-list m-b-20 wow fadeInLeft">
-               <div class="col-md-3">
-                  <img src="images/project-logo.png" />
-               </div>
-               <div class="col-md-9 text-left">
-                  <h5><%- __('Revenue generation') %></h5>
-                  <ul class="circle-list">
-                     <li><%- __('Players can trade items on an open market') %></li>
-                     <li><%- __('Players can compete with each other for rewards') %></li>
-                     <li><%- __('Developers can incentivise players to complete tasks') %></li>
-                     <li><%- __('Developers can set a fee for any p2p transaction') %></li>
-                     <li><%- __('Transactions happen almost instantly and seamlessly across platforms') %></li>
-                  </ul>
-               </div>
-            </div>
-            <div class="row project-list m-b-20 wow fadeInLeft" data-wow-delay="0.4">
-               <div class="col-md-3">
-                  <img src="images/project-logo.png" />
-               </div>
-               <div class="col-md-9 text-left">
-                  <h5><%- __('player and developer protection') %></h5>
-                  <ul class="circle-list">
-                     <li><%- __('Authentication network for multiple platforms to detect piracy') %></li>
-                     <li><%- __('Provide developers methods to extract revenue from pirated content') %></li>
-                     <li><%- __('Big data interrogation and behavioural tracking to provide deep insights into players') %></li>
-                     <li><%- __('Player activity profiles and honours provides community trust') %></li>
-                  </ul>
-               </div>
-            </div>
-            <div class="row project-list m-b-20 wow fadeInLeft" data-wow-delay="0.8">
-               <div class="col-md-3">
-                  <img src="images/project-logo.png" />
-               </div>
-               <div class="col-md-9 text-left">
-                  <h5><%- __('community collaboration') %></h5>
-                  <ul class="circle-list">
-					<li><%- __('Players are rewarded by their peers for positive collaboration') %></li>
-					<li><%- __('Trustworthy profiles are built that are transparent and verifiable') %></li>
-					<li><%- __('Players will earn revenue simply by helping others') %></li>
-					<li><%- __('They can stay in communication with each other across all platforms in one central place') %></li>
-                  </ul>
-               </div>
-            </div>
+       </div>
+
+
+
+       <div class="u-gradient-half-primary-v2">
+         <div class="container u-space-3 px-lg-7">
+           <!-- Title -->
+           <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
+             <span class="u-label u-label--sm u-label--success mb-2">News &amp; Blog</span>
+             <h2>Read our latest news</h2>
+             <p>Our duty towards you is to share our experience we're reaching in our work path with you.</p>
+           </div>
+           <!-- End Title -->
+
+           <!-- News Carousel -->
+           <div class="js-slick-carousel u-slick u-slick--equal-height u-slick--gutters-3 slick-initialized slick-slider slick-dotted" data-slides-show="3" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow u-slick__arrow--offset u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fa fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left" data-arrow-right-classes="fa fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right" data-pagi-classes="text-center u-slick__pagination mt-7 mb-0" data-responsive="[{
+                  &quot;breakpoint&quot;: 992,
+                  &quot;settings&quot;: {
+                    &quot;slidesToShow&quot;: 2
+                  }
+                }, {
+                  &quot;breakpoint&quot;: 768,
+                  &quot;settings&quot;: {
+                    &quot;slidesToShow&quot;: 1
+                  }
+                }, {
+                  &quot;breakpoint&quot;: 554,
+                  &quot;settings&quot;: {
+                    &quot;slidesToShow&quot;: 1
+                  }
+                }]"><div class="js-prev d-none d-lg-inline-block u-slick__arrow u-slick__arrow--offset u-slick__arrow-centered--y rounded-circle fa fa-arrow-left u-slick__arrow-inner u-slick__arrow-inner--left slick-arrow slick-disabled" aria-disabled="true" style=""></div>
+             <!-- Blog News -->
+             <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1795px; transform: translate3d(0px, 0px, 0px);"><a class="js-slide u-bg-img-hero u-gradient-overlay-half-dark-v1 transition-3d-hover rounded-pseudo my-4 slick-slide slick-current slick-active" href="../blog/single-article-classic.html" style="background-image: url(&quot;../../assets/img/400x500/img1.jpg&quot;); width: 327px; height: auto;" data-slick-index="0" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00">
+               <article class="align-self-end w-100 text-center p-6">
+                 <h3 class="h4 text-white">How to make trust your competitive advantage</h3>
+                 <div class="mt-4">
+                   <strong class="d-block u-text-light mb-2">Neyton Burchie</strong>
+                   <img class="img-fluid u-sm-avatar rounded-circle mx-auto" src="../../assets/img/100x100/img3.jpg" alt="Image Description">
+                 </div>
+               </article>
+             </a><div class="js-slide position-relative bg-white shadow-sm transition-3d-hover rounded my-4 slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 327px; height: auto;" tabindex="0" role="tabpanel" id="slick-slide01" aria-describedby="slick-slide-control01">
+               <article class="align-self-end w-100 text-center p-6">
+                 <h3 class="h6 font-weight-normal">" How to help your team excel at remote collaboration. Here are tips and tools we use on the content team at InVision to keep our remote collaboration game strong. Trust is both a complex and nuanced topic. Its very nature makes it difficult to tackle through direct effort. "</h3>
+                 <div class="my-4">
+                   <strong class="d-block mb-2">Keith Margaret</strong>
+                   <img class="img-fluid u-sm-avatar rounded-circle mx-auto" src="../../assets/img/100x100/img2.jpg" alt="Image Description">
+                 </div>
+                 <a class="btn btn-sm u-btn-primary--air u-btn-wide transition-3d-hover" href="../blog/single-article-classic.html" tabindex="0">Read More</a>
+               </article>
+             </div><a class="js-slide u-bg-img-hero u-gradient-overlay-half-dark-v1 transition-3d-hover rounded-pseudo my-4 slick-slide slick-active" href="../blog/single-article-classic.html" style="background-image: url(&quot;../../assets/img/400x500/img2.jpg&quot;); width: 327px; height: auto;" data-slick-index="2" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide02" aria-describedby="slick-slide-control02">
+               <article class="align-self-end w-100 text-center p-6">
+                 <h3 class="h4 text-white">Remote workers, here's how to dodge distractions</h3>
+                 <div class="mt-4">
+                   <strong class="d-block u-text-light mb-2">Tina Krueger</strong>
+                   <img class="img-fluid u-sm-avatar rounded-circle mx-auto" src="../../assets/img/100x100/img1.jpg" alt="Image Description">
+                 </div>
+               </article>
+             </a><div class="js-slide position-relative bg-white shadow-sm transition-3d-hover rounded my-4 slick-slide" data-slick-index="3" aria-hidden="true" style="width: 327px; height: auto;" tabindex="-1" role="tabpanel" id="slick-slide03" aria-describedby="slick-slide-control03">
+               <article class="align-self-end w-100 text-center p-6">
+                 <h3 class="h6 font-weight-normal">" 4 salary negotiation mistakes you've probably made. Four years ago, I was making $25 per hour as a freelance digital designer building ecommerce sites. I had no idea how to increase my hourly rate, even if I'd wanted to. "</h3>
+                 <div class="my-4">
+                   <strong class="d-block mb-2">Neyton Burchie</strong>
+                   <img class="img-fluid u-sm-avatar rounded-circle mx-auto" src="../../assets/img/100x100/img3.jpg" alt="Image Description">
+                 </div>
+                 <a class="btn btn-sm u-btn-primary--air u-btn-wide transition-3d-hover" href="../blog/single-article-classic.html" tabindex="-1">Read More</a>
+               </article>
+             </div><a class="js-slide u-bg-img-hero u-gradient-overlay-half-dark-v1 transition-3d-hover rounded-pseudo my-4 slick-slide" href="../blog/single-article-classic.html" style="background-image: url(&quot;../../assets/img/400x500/img3.jpg&quot;); width: 327px; height: auto;" data-slick-index="4" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide04" aria-describedby="slick-slide-control04">
+               <article class="align-self-end w-100 text-center p-6">
+                 <h3 class="h4 text-white">Steal these ideas to stay happy and productive</h3>
+                 <div class="mt-4">
+                   <strong class="d-block u-text-light mb-2">Liza Nelson</strong>
+                   <img class="img-fluid u-sm-avatar rounded-circle mx-auto" src="../../assets/img/100x100/img4.jpg" alt="Image Description">
+                 </div>
+               </article>
+             </a></div></div>
+             <!-- End Blog News -->
+
+             <!-- Blog News -->
+             
+             <!-- End Blog News -->
+
+             <!-- Blog News -->
+             
+             <!-- End Blog News -->
+
+             <!-- Blog News -->
+             
+             <!-- End Blog News -->
+
+             <!-- Blog News -->
+             
+             <!-- End Blog News -->
+           <div class="js-next d-none d-lg-inline-block u-slick__arrow u-slick__arrow--offset u-slick__arrow-centered--y rounded-circle fa fa-arrow-right u-slick__arrow-inner u-slick__arrow-inner--right slick-arrow" style="" aria-disabled="false"></div><ul class="js-pagination text-center u-slick__pagination mt-7 mb-0" style="" role="tablist"><li class="slick-active slick-current" role="presentation"><span></span></li><li role="presentation"><span></span></li><li role="presentation"><span></span></li></ul></div>
+           <!-- End News Carousel -->
          </div>
-      </section>
+       </div>
 
-
-      <!--project history Section 
-      <section class="project-history-section text-center p-0">
-         <div class="container">
-            <div class="col-lg-8 col-lg-offset-2">
-               <h2 class="f-400 m-b-30 gold-heading"><%- __('project history') %></h2>
-               <p><%- __('From innovation to vision realisation.') %></p>
-
-               <ul class="list-inline text-center m-b-30">
-					<li class="">
-						<a href="#!" class="hexagon-date">
-							<div class="hexagon-text">2015</div>
-						</a>
-					</li>
-					<li class="m-l-10">
-						<a href="#!" class="hexagon-date">
-							<div class="hexagon-text">2016</div>
-						</a>
-					</li>
-					<li class="active m-l-10">
-						<a href="#!" class="hexagon-date">
-							<div class="hexagon-text">2017</div>
-						</a>
-					</li>
-			   </ul>
-               <ul class="timeline">
-                  <li>
-                     <div><img src="images/time-line-img.png" /></div>
-                  </li>
-                  <li>
-                     <div class="tl-circ"></div>
-                     <div class="timeline-panel">
-                        <div class="timeline-image"></div>
-                        <div class="tl-heading">
-                           <h4><%- __('February') %></h4>
-                        </div>
-                        <div class="tl-body">
-                           <p><%- __('Introduction of new team members and work starts on prototypes of the network and visual mock-ups.') %></p>
-                        </div>
-                     </div>
-                  </li>
-                  <li class="timeline-inverted text-right">
-                     <div class="tl-circ"></div>
-                     <div class="timeline-panel">
-                        <div class="timeline-image"></div>
-                        <div class="tl-heading">
-                           <h4><%- __('May') %></h4>
-                        </div>
-                        <div class="tl-body">
-                           <p class="text-uppercase"><%- __('Technology proven on prototype game') %></p>
-                           <p><%- __('Successfully integrated prototype technology into a mobile game prototype') %></p>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                     <div class="tl-circ"></div>
-                     <div class="timeline-panel">
-                        <div class="timeline-image"></div>
-                        <div class="tl-heading">
-                           <h4><%- __('June') %></h4>
-                        </div>
-                        <div class="tl-body">
-                           <p class="text-uppercase"><%- __('Business registration') %></p>
-                           <p><%- __('Officially registered in the UK at Companies House as a Limited Company.') %></p>
-                           <p><%- __('Investigation into UK regulatory framework requirements to launch an crypto token sale, start of discussions with FCA and Gambling Commission requirements.') %></p>
-                        </div>
-                     </div>
-                  </li>
-                  <li class="timeline-inverted">
-                     <div class="tl-circ"></div>
-                     <div class="timeline-panel">
-                        <div class="timeline-image"></div>
-                        <div class="tl-heading">
-                           <h4><%- __('july') %></h4>
-                        </div>
-                        <div class="tl-body">
-                           <p class="text-uppercase"><%- __('New advisers join') %></p>
-                           <p><%- __('Introduction of advisers to the project:') %></p>
-                           <ul>
-                              <li><%- __('Amos Anderson, Lecturer at Coventry University, MBA Business Administration') %></li>
-                              <li><%- __('Kate Breed, Former Molecular Biologist, Business Change Management') %></li>
-                              <li><%- __('Owen Ashby, Business Analyst, Market Intelligence and Corporate Strategy') %></li>
-                              <li><%- __('Registered with the Information Commissioners Office relating to data protection policies.') %></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                     <div class="tl-circ"></div>
-                     <div class="timeline-panel">
-                        <div class="timeline-image"></div>
-                        <div class="tl-heading">
-                           <h4><%- __('August') %></h4>
-                        </div>
-                        <div class="tl-body">
-                           <p class="text-uppercase"><%- __('Early partnerships formed') %></p>
-                           <p><%- __('Became full member of TIGA, a game, publisher and trade association') %></p>
-                           <p><%- __('Partnered with IT Governance Ltd, providing technology audit and assurances') %></p>
-                           <p><%- __('Partnered with Bitcoin PR Buzz to manage marketing communications.') %></p>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                     <div ><img src="images/time-line-img.png" /></div>
-                  </li>
-               </ul>
-            </div>
-         </div>
-      </section>-->
-
-
-      <!--project goals Section -->
-      <section class="project-goals-section text-center p-0">
-         <div class="project-goals-inn p-a">
-         <div class="container">
-            <div class="col-lg-8 col-lg-offset-2 m-b-50">
-               <h2 class="f-400 m-b-30 white"><%- __('the world\'s gaming experience') %></h2>
-            </div>
-            <div class="col-lg-12 text-left">
-			   <div class="row">
-				<div class="col-md-5 wow fadeInLeft">
-					<h3><%- __('Redefining gaming for everyone') %></h3>
-					<p class="black"><%- __('"Imagine a gaming community that is so collaborative, interactive; alive, you as a player can create and shape your own destiny and wealth. What if, as a developer you could integrate with ease into a live, analytical platform with deep player insights and new unique revenue generation models? What if as a player you could create a revenue stream by simply playing the games you love? Well, this is TriForce Tokens, the future of gaming."') %></p>
-					<p class="black">Pete Mardell, Founder &amp; CEO</p>
-				</div>
-				<div class="col-md-7 wow fadeInRight"><img src="images/project-img.png" class="image" /></div>
-			   </div>
-            </div>
-            <div class="col-lg-8 col-lg-offset-2 m-b-50">
-               <h2 class="f-400 m-b-50 white"><%- __('Access platform prototype') %></h2>
-			   <div class="row">
-				<div class="col-md-3 text-center col-lg-offset-1 p-0">
-					<div class="access_icon">
-					<a href="https://appstaging.raidparty.io">
-						<span class="hexagon m-b-20"></span>
-						<p><%- __('Access developer platform prototype') %></p>
-						</div>
-					</a>
-				 </div>
-				<div class="col-md-3 text-center col-lg-offset-4 p-0">
-					<div class="access_icon">
-					<a href="https://raidparty.io">
-						<span class="hexagon black m-b-20"></span>
-						<p><%- __('Access player platform prototype') %></p>
-						</div>
-					</a>
-				 </div>
-			   </div>
-            </div>
-         </div>
-         </div>
-      </section>
-
-
-	<!-- Roadmap Section -->
-	<section class="slider-section roadmap-section" id="roadmap">
-		<div class="container">
-			<div class="col-lg-10 col-lg-offset-1">
-
-				<h2 class="f-400 m-b-30 text-center gold-heading"><%- __('project roadmap') %></h2>
-				<p class="text-center"><%- __('Our strategy to become the most universal of gaming currencies worldwide') %></p>
-
-				<div id="timeline">
-					<div id="timeline-inn">
-						<ul id="issues" class="m-b-0">
-							<li id="slide">
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold "><%- __('February 2018') %></h4>
-											<p class="text-uppercase "><%- __('central api beta release') %></p>
-											<p><%- __('Our central intelligence engine, connected to the Ethereum mainnet will be deployed') %></p>
-											<p><strong><%- __('Progress: In development') %></strong></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold 0"><%- __('February 2018') %></h4>
-											<p class="text-uppercase "><%- __('game developer portal') %></p>
-											<p><%- __('First release of our game developer application launchpad with goal of attracting game developers via an airdrop campaign.') %></p>
-											<p><strong><%- __('Progress: In development') %></strong></p>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li id="slide2">
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold "><%- __('April 2018') %></h4>
-											<p class="text-uppercase"><%- __('final token distribution') %></p>
-											<p><%- __('We complete our main token sale and distribute remaining tokens to bounty participants, team and advisers.') %></p>
-											<p></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold 0"><%- __('May 2018') %></h4>
-											<p class="text-uppercase "><%- __('RaidParty beta mobile app') %></p>
-											<p><%- __('We release a unique social games engagement platform for iOS and Android.') %></p>
-											<p><strong><%- __('Progress: In development') %></strong></p>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li id="slide3">
-
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold "><%- __('June 2018') %></h4>
-											<p class="text-uppercase "><%- __('Game integration kits released') %></p>
-											<p><%- __('We will release full integration kits for game developers on popular platforms; Play store, App store, Unity3d and unreal.') %></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold 0"><%- __('July 2018') %></h4>
-											<p class="text-uppercase "><%- __('ISO27001 Application') %></p>
-											<p><%- __('To ensure high quality standards of IT governance, we will be applying for ISO27001 industry standard for tech companies.') %></p>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li id="slide4">
-								<div class="col-md-6">
-
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold"><%- __('November 2018') %></h4>
-											<p class="text-uppercase "><%- __('phase 2 features') %></p>
-											<p><%- __('We introduce more advanced features into our beta central API intelligence engine and connected applications.') %></p>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold 0"><%- __('December 2018') %></h4>
-											<p class="text-uppercase "><%- __('become most established') %></p>
-											<p><%- __('By the end of 2018 we want to be the most universal of all game currencies.') %></p>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li id="slide5">
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold "><%- __('January 2019') %></h4>
-											<p class="text-uppercase "><%- __('global expansion') %></p>
-											<p><%- __('Once the foundation is established in Europe, we will move to expanding into other territories.') %></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-3">
-											<div class="timeline-icon-line"><div class="timeline-icon"></div></div>
-										</div>
-										<div class="col-md-9 m-t-30">
-											<h4 color="gold 0"><%- __('March 2019') %></h4>
-											<p class="text-uppercase "><%- __('full production release') %></p>
-											<p><%- __('Our entire technology stack will be in full production by this point.') %></p>
-											<p><%- __('This includes the central intelligence hub, game developer portal, gamer platform and RaidParty mobile application.') %></p>
-										</div>
-									</div>
-								</div>
-							</li>
-
-						</ul>
-
-					</div>
-
-					<ul id="dates">
-						<li><a href="#slide1" data-autoscroll="#ignore">&nbsp;</a></li>
-						<li><a href="#slide2" data-autoscroll="#ignore">&nbsp;</a></li>
-						<li><a href="#slide3" data-autoscroll="#ignore">&nbsp;</a></li>
-						<li><a href="#slide4" data-autoscroll="#ignore">&nbsp;</a></li>
-						<li><a href="#slide5" data-autoscroll="#ignore">&nbsp;</a></li>
-					</ul>
-
-					<span id="next" class="timeline-slide-button" data-autoscroll="#ignore">+</span>
-					<span id="prev" class="timeline-slide-button" data-autoscroll="#ignore">-</span>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-
-		<!-- Token Section -->
-		<section class="token-section assurance text-center" id="assurances">
-         <div class="container">
-            <div class="col-lg-8 col-lg-offset-2">
-               <h2 class="f-400 m-b-30 gold-heading"><%- __('buyer protection') %></h2>
-               <p class="m-b-30"><%- __('Clear and transparent assurances that your contribution is protected and utilised entirely on advancing the project') %></p>
-            </div>
-            <div class="row">
-            <div class="col-lg-6 text-left">
-				  <img src="images/icon-seurity.png" class="m-b-20" />
-                  <h4 class="gold-heading"><%- __('fund security') %></h4>
-                  <ul class="circle-list">
-                     <li><%- __('Funds managed by independent escrow provider and global leaders, <a href="https://www.coinpayments.net">CoinPayments</a>') %></li>
-                     <li><%- __('All received funds to be held offline in cold storage') %></li>
-                     <li><%- __('Funds to be released upon milestones achieved, not all up front') %></li>
-                     <li><%- __('A dedicated relations manager to be appointed') %></li>
-                     <li><%- __('Transparency policy in place with bi-weekly updates') %></li>
-                  </ul>
-            </div>
-            <div class="col-lg-6 text-left">
-				  <img src="images/icon-team.png" class="m-b-20" />
-                  <h4 class="gold-heading"><%- __('team') %></h4>
-                  <ul class="circle-list">
-                     <li><%- __('Advisers who have worked on multi-million pound accounts') %></li>
-					 <li><%- __('CEO proven technology start-up experience for leading UK technology platform') %></li>
-					 <li><%- __('CTO holds masters in software engineering and is a certified Ethereum blockchain developer') %></li>
-					 <li><%- __('Committed to growing the team significantly based upon funding level') %></li>
-                  </ul>
-            </div>
-						</div>
-						<div class="row">
-            <div class="col-lg-6 text-left">
-				  <img src="images/icon-techonlogy.png" class="m-b-20" />
-                  <h4 class="gold-heading"><%- __('sound technology') %></h4>
-                  <ul class="circle-list">
-                     <li><%- __('Smart Contracts independently reviewed and audited') %></li>
-                     <li><%- __('Working with IT Governance Ltd to implement full technology audit and governance') %></li>
-                     <li><%- __('Developer platform prototype developed') %></li>
-                     <li><%- __('Player platform prototype developed') %></li>
-                     <li><%- __('Mobile game prototype developed') %></li>
-                  </ul>
-            </div>
-            <div class="col-lg-6 text-left">
-				  <img src="images/icon-user.png" class="m-b-20" />
-                  <h4 class="gold-heading"><%- __('market opportunity') %></h4>
-                  <ul class="circle-list">
-                     <li><%- __('86&percnt; of surveyed indie developers said they loved the idea of our project') %></li>
-					 <li><%- __('Global games market revenue at &dollar;108.9Bn in 2017') %></li>
-					 <li><%- __('Global games market revenue estimated to grow 6.2&percnt; year on year') %></li>
-					 <li><%- __('Our technology solves some of the top concerns expressed by gaming companies') %></li>
-                  </ul>
-            </div>
-			</div>
-         </div>
-      </section>
-
-
-	  <!-- Token sale Section -->
-      <section class="token-sale-section token-sale-section-2 text-center p-0">
-         <div class="token-sale-section-inner">
-            <div class="container">
-               <div class="row">
-                  <div class="col-lg-8 col-lg-offset-2">
-                     <h2 class="f-400 m-b-30 gold-heading"><%- __('DON\'T MISS THE TOKEN SALE') %></h2>
-                  </div>
-                  <div class="col-lg-12 ">
-                     <form class="form-horizontal" method="get" action="/join-whitelist">
-                        <div class="form-group m-b-30">
-                           <div class="col-xs-3">
-                              <input required="required" name="firstName" type="text" class="form-control" placeholder="<%- __('First Name') %>">
-                           </div>
-                           <div class="col-xs-3">
-                              <input required="required" name="lastName" type="text" class="form-control" placeholder="<%- __('Last Name') %>">
-                           </div>
-                           <div class="col-xs-3">
-                              <input required="required" name="email" type="email" class="form-control" id="inputEmail" placeholder="<%- __('Your email address') %>">
-                           </div>
-                           <div class="col-xs-3">
-                              <button type="submit" class="btn btn-primary f-900 pull-left"><%- __('join community') %></button>
-                           </div>
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-
-
-		<!-- Team Section -->
-		<section class="team-section section team text-center" id="team">
-			<div class="container">
-				<div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
-
-					<!---- Advisor Team ---->
-
-					<h2 class="f-400 m-b-30 gold-heading"><%- __('Games Industry Advisers') %></h2>
-					<p class="sub-heading"><%- __('Our amazing game industry expert line-up. Helping to shape our vision.') %></p>
-
-					<br />
-
-					<div class="row team-row wow fadeInUp m-b-70">
-
-						<div class="row">
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-vadim" src="/images/icons/blnk-pixl-foricn.png" alt="Vadim Bulatov">
-								<h4 class="subheading-gold">vadim bulatov</h4>
-								<h5 class="h_txt"><%- __('Games Industry Adviser') %></h5>
-								<p class="p_txt"><%- __('Head of SMM for World of Tanks, World of Warships, World of Warplanes') %></p>
-
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p><a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/vadim-bulatov-646a8478/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a></p>
-									</div>
-								</div>
-
-							</div>
-
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem" src="/images/fazefrod-profile.png" alt="Danny Montaner">
-								<h4 class="subheading-gold">danny montaner</h4>
-								<h5 class="h_txt">AKA fRoD</h5>
-								<p class="p_txt"><%- __('E-sports manager to the largest competitive team FaZe Clan and former world champion of CS:GO.') %></p>
-
-								<div class="col-md-12">
-									<div class="team_icon">
-										<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/danielmontaner/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-										<a target="_blank" rel="nofollow" href="https://twitter.com/officialfrod"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-									</div>
-								</div>
-
-							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem" src="/images/dandychap-profile.png" alt="Tyrin Davidson">
-								<h4 class="subheading-gold">tyrin davidson</h4>
-								<h5 class="h_txt">AKA DandyChap</h5>
-								<p class="p_txt"><%- __('Former competitive League of Legends player, Challenger Rank (top 200 in Europe)!') %></p>
-
-								<div class="col-md-12">
-									<div class="team_icon">
-										<a target="_blank" rel="nofollow" href="https://twitter.com/TyrinLoL"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-
-					</div>
-
-					<br />
-
-					<!---- Core Team ---->
-
-					<h2 class="f-400 m-b-30 gold-heading"><%- __('CORE TEAM') %></h2>
-					<p class="sub-heading"><%- __('Our team is incredibly passionate, with strong development skills and a love of the games industry.') %></p>
-
-					<br>
-
-					<div class="row team-row wow fadeInUp">
-
-						<div class="row">
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-pete" src="/images/icons/blnk-pixl-foricn.png" alt="Pete Mardell">
-								<h4 class="subheading-gold">pete mardell</h3>
-								<h5 class="h_txt">Founder &amp; CEO</h5>
-								<p class="p_txt"><%- __('Former head of development of a UK recruitment platform, passionate gamer and crypto enthusiast') %></p>
-
-								<div class="col-md-12">
-									<div class="team_icon">
-									<p>
-										<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/petemardell/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-										<a target="_blank" rel="nofollow" href="https://twitter.com/petedmardell"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-										<a target="_blank" rel="nofollow" href="https://github.com/mrpetef10"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
-									</p>
-									</div>
-								</div>
-
-							</div>
-
-						
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-jacob" src="/images/icons/blnk-pixl-foricn.png" alt="Jacob Ashby">
-								<h4 class="subheading-gold">jacob ashby</h4>
-								<h5 class="h_txt">Chief Operations Officer</h5>
-								<p class="p_txt"><%- __('University of Westminster, Bachelors Degree, International Business') %></p>
-
-
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p>
-											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/jacob-ashby-04186a39/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://twitter.com/jacobashby"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-										</p>
-									</div>
-								</div>
-
-							</div>
-							
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-jkb" src="/images/icons/blnk-pixl-foricn.png" alt="Jakub Kafarski">
-								<h4 class="subheading-gold">jakub kafarski</h4>
-								<h5 class="h_txt"><%- __('Front-end Engineer') %></h5>
-								<p class="p_txt">CycloMedia Technology, Ericsson</p>
-
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p>
-											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/jakub-kafarski/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://twitter.com/jakub_kafarski"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://github.com/jakubkafarski"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
-										</p>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-
-					</div>
-
-					<div class="row team-row wow fadeInUp">
-						<div class="row">
-						
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-sorina" src="/images/icons/blnk-pixl-foricn.png" alt="Sorina Rusu">
-								<h4 class="subheading-gold">sorina rusu</h4>
-								<h5 class="h_txt"><%- __('System Developer') %></h5>
-								<p class="p_txt"><%- __('MCA Computer Science') %></p>
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p>
-											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/sorina-rusu-1b73a668/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://twitter.com/SorinaRusu0403"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://github.com/sorinarusu"><img src="/images/icons/icon-github.png" alt="Github Profile"></a>
-										</p>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-tib" src="/images/icons/blnk-pixl-foricn.png" alt="Tib Palin">
-								<h4 class="subheading-gold">tib palin</h4>
-								<h5 class="h_txt"><%- __('Blockchain Tech Consultant') %></h5>
-								<p class="p_txt"><%- __('Also consulted for UTRUST and Viuly ICO\'s') %></p>
-								<div class="col-md-12">
-								<div class="team_icon">
-								<p>
-									<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/tibpalin/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-								</p>
-							</div>
-							</div>
-							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-wayne" src="/images/icons/blnk-pixl-foricn.png" alt="Wayne Barker">
-								<h4 class="subheading-gold">wayne barker</h4>
-								<h5 class="h_txt"><%- __('Social Media and Content Manager') %></h5>
-								<p class="p_txt"><%- __('Account manager for Bitcoin PR Buzz') %></p>
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p>
-											<a target="_blank" rel="nofollow" href="https://twitter.com/Bit_Fellas"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://www.facebook.com/way.no.3766"><img src="/images/icons/icon-facebook.png" alt="Facebook Profile"></a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-					</div>
-
-
-				</div>
-			</div>
-		</section>
-
-
-		<!-- Advisor Section -->
-		<section class="team-section section team text-center" id="team">
-			<div class="container">
-				<div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
-
-					<h2 class="f-400 m-b-30 gold-heading"><%- __('BOARD OF ADVISERS') %></h2>
-					<p class="sub-heading"><%- __('Our advisor board have a wide breadth of experience across multiple-sectors - helping to guide the core team en-route to success.') %></p>
-
-					<div class="row wow fadeInUp">
-
-						<div class="row">
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-ankur" src="/images/icons/blnk-pixl-foricn.png" alt="Ankur Maheshwari">
-								<h4 class="subheading-gold">ankur maheshwari</h4>
-								<h5 class="h_txt"><%- __('Blockchain Tech Adviser') %></h5>
-								<p class="p_txt"><%- __('Director of Blockchain Research at Techracers') %></p>
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p><a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/ankur-maheshwari-9ab2a215/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a></p>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-amos" src="/images/icons/blnk-pixl-foricn.png" alt="Blake Pope">
-								<h4 class="subheading-gold">blake pope</h4>
-								<h5 class="h_txt"><%- __('ICO &amp; Token Sale Strategy') %></h5>
-								<p class="p_txt"><%- __('CEO Bitcoin PR Buzz, worked closely on <strong>NEM</strong>, <strong>UTRUST</strong> and <strong>Lisk</strong>') %></p>
-								<div class="col-md-12">
-								<div class="team_icon">
-									<p><a target="_blank" rel="nofollow" href="https://twitter.com/bitcoinprbuzz"><img src="/images/icons/icon-twitter.png" alt="Bitcoin PR Buzz Profile"></a></p>
-								</div>
-							</div>
-						</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-ashby" src="/images/icons/blnk-pixl-foricn.png" alt="Owen Ashby">
-								<h4 class="subheading-gold">owen ashby</h4>
-								<h5 class="h_txt"><%- __('Business Strategy') %></h5>
-								<p class="p_txt"><%- __('Business Analyst, Market Intelligence and Corporate Strategy') %></p>
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p>
-											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/owen-ashby-a12722/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://twitter.com/owenashby"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-
-					<div class="row wow fadeInUp">
-						<div class="row">
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem" src="/images/rick-oniell-profile.png" alt="Rick Oneill">
-								<h4 class="subheading-gold">rick o'neill</h4>
-								<h5 class="h_txt"><%- __('Brand Strategy') %></h5>
-								<p class="p_txt"><%- __('Owner of award winning digital marketing company, Look Touch &amp; Feel Ltd in the UK.') %></p>
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p><a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/looktouchfeel/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a></p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-kate" src="/images/icons/blnk-pixl-foricn.png" alt="Kate Breed">
-								<h4 class="subheading-gold">kate breed</h4>
-								<h5 class="h_txt"><%- __('Senior Management Mentoring') %></h5>
-								<p class="p_txt"><%- __('Former molecular biologist, Senior consultant in systems engineering, Councillor') %></p>
-								<div class="col-md-12">
-									<div class="team_icon">
-										<p>
-											<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/kate-breed-bb082819/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-											<a target="_blank" rel="nofollow" href="https://twitter.com/ksbreed"><img src="/images/icons/icon-twitter.png" alt="Twitter Profile"></a>
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<img class="mem mem-zahid" src="/images/icons/blnk-pixl-foricn.png" alt="Zahid Ali">
-								<h4 class="subheading-gold">zahid ali</h4>
-								<h5 class="h_txt"><%- __('Investor Relations &amp; Networking') %></h5>
-								<p class="p_txt"><%- __('Key member of highly successful Viuly project and a Graduate Diploma in Law') %></p>
-								<div class="col-md-12">
-								<div class="team_icon">
-									<p>
-										<a target="_blank" rel="nofollow" href="https://www.linkedin.com/in/zahid-ali-9b899a40/"><img src="/images/icons/icon-linkedin.png" alt="LinkedIn Profile"></a>
-									</p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-		</section>
-
-
-
-	  <!--
-	  <section class="token-section assurance text-center hide" style="min-height:800px">
-         <div class="container">
-            <div class="col-lg-8 col-lg-offset-2">
-               <h2 class="f-400 m-b-30"><%- __('frequently asked questions') %></h2>
-
-            </div>
-         </div>
-      </section>-->
-
+   </main>
 
 <%- partial('./partials/footer.ejs') %>

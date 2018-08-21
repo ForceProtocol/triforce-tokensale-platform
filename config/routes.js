@@ -2,26 +2,28 @@ module.exports.routes = {
 
 	/** Public Routes */
 	'GET /': 'PagesController.getHomePage',
+
+  /** Strategy Pages */
+  'GET /game-publishing': 'PagesController.getGamePublishing',
+  'GET /market-place': 'PagesController.getMarketPlace',
+  'GET /player-community': 'PagesController.getPlayerCommunity',
+  'GET /dynamic-advertisement': 'PagesController.getDynamicAdvertisement',
+
+
 	'GET /login': 'PagesController.getLogin',
 	'POST /subscribe': 'PagesController.subscribeUser',
-	
-	'GET /airdrop': 'PagesController.getAirdrop',
-	'POST /airdrop': 'PagesController.postAirdrop',
-
 	'POST /subscribe-presale': 'PagesController.preSaleSubscribeUser',
 	'GET /contributor-help': 'PagesController.getContributorHelp',
 	'GET /faq': 'PagesController.getFaq',
 	'GET /documents': 'PagesController.getDocuments',
+
+  
 	'GET /contact': 'PagesController.getContact',
 	'POST /contact': 'PagesController.postContact',
 
-    //slack invite
-    'GET /slack-invite': 'PagesController.getSlackInvitePage',
-    'POST /slack-invite': 'PagesController.postSlackInvite',
-
-    //terms and conditions
-    'GET /terms-of-token-sale': 'PagesController.getTermsConditions',
-    'GET /privacy': 'PagesController.getPrivacy',
+  //terms and conditions
+  'GET /terms-of-token-sale': 'PagesController.getTermsConditions',
+  'GET /privacy': 'PagesController.getPrivacy',
 	
 
 	// New Subscribe Landing Pages
@@ -36,10 +38,6 @@ module.exports.routes = {
 	'POST /join-whitelist-step-1': 'PagesController.postKycStep1',
 	'POST /join-whitelist-step-2': 'PagesController.postKycStep2',
 	
-	// Friends and Family Landing Page
-	'GET /friends-only-discount': 'PagesController.getFriendsSupport',
-	'POST /friends-only-discount': 'PagesController.postFriendsSupport',
-	
 	
 	// Subscriber thank you pages
 	'GET /thanks-uk': 'PagesController.getThanksUk',
@@ -51,10 +49,6 @@ module.exports.routes = {
 	'GET /thanks-korea': 'PagesController.getThanksKorea',
 	'GET /thanks-japan': 'PagesController.getThanksJapan',
 	'GET /thanks-china': 'PagesController.getThanksChina',
-	
-
-	// Investing in Crypto Currencies Guide
-	'GET /how-to-invest-in-crypto-currencies-and-bitcoin-in-2017': 'PagesController.investInCryptoCurrencies',
 
 	'GET /verify-email': 'PagesController.verifyEmail',
 	'GET /verify-ether-request': 'PagesController.verifyEtherAddress',
@@ -149,85 +143,4 @@ module.exports.routes = {
   /** whiteList step route */
   'POST /whitelist-address': 'UserController.whitelistAddress',
 
-  '/ipn': function (req, res) {
-    sails.log('IPN received');
-    CpService.IPN(req.body);
-    res.ok();
-  },
-
-  '/test-withdrawal': function (req, res) {
-    const Coinpayment = require('coinpayments');
-    let client = new Coinpayment(sails.config.COINPAYMENT_OPTS);
-    let addr = req.param('address');
-    client.createWithdrawal({
-      'currency': 'LTCT',
-      'amount': 1,
-      'address': addr || 'mtXCiJTkFWfSSQCapd8QQzUEECeXjzoYtP'
-    }, function (err, result) {
-      console.log(err, result);
-      res.ok(result);
-    });
-
-  },
-
-  '/update-pre-ico-force': function (req, res) {
-    let bigNumber = require('bignumber.js');
-    bigNumber.config({ EXPONENTIAL_AT: [-7, 2000] });
-
-    const processReq = async ()=>{
-
-      const etherRate = '0.0613690925';
-      const getInEther = function (btcRate, amount) {
-        let inBtc = new bigNumber(btcRate).mul(amount);
-        return inBtc.div(etherRate).toString();
-      };
-      const getForce = function (etherContribution, extraDiscount) {
-        let bonus = extraDiscount ? 70 : 60;
-        let forcePrice = 6000;
-        let forceBought = new bigNumber(etherContribution).mul(forcePrice);
-
-        let bonusEarned = forceBought.times(bonus).dividedBy(100);
-
-        return {forceBought, bonusEarned, totalForce: new bigNumber(forceBought).add(bonusEarned).toString()}
-      };
-
-      let txns = await Transaction.find({statusId: Status.LIVE, limit: 1000}).populate('user');
-
-
-      for(let txn of txns) {
-        //get ether value
-        let ethContrib = getInEther(txn.btcRate, txn.amount);
-
-        let isSpecial = false;
-        if(_.isObject(txn.user) && txn.user.releaseFundingConfirmed)
-          isSpecial = true;
-
-        let force = getForce(ethContrib, isSpecial);
-
-        txn.inEth = ethContrib;
-        txn.forceEarned = force.totalForce;
-        txn.forceBonus = force.bonusEarned;
-        await txn.save();
-
-        // calculate tokens
-        // 6000 + 60% or 70% depending on acceptance
-      }
-
-      return true;
-    };
-
-    processReq()
-      .then(res.ok);
-  },
-
-  '/process-pending1': function (req, res){
-    BlockchainService.contracts.TriForceNetworkCrowdsale.processOldEvents()
-      .catch(_err => sails.log.error('error while processing ico pending txns ', _err));
-  },
-
-  '/tmp': function (req, res) {
-    BlockchainService.contracts.WhiteList.isWhiteListed('0x4271aF2959dd5A2a1189bfF20d7bcAe9820B1500')
-      .then(res.ok)
-      .catch(res.badRequest);
-  }
 };

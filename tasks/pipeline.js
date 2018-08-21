@@ -17,10 +17,9 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-	'styles/bootstrap.min.css',
-  'manual/fonts/stylesheet.css',
-  // 'manual/styles/font-awesome.min.css',
-  // '',
+	'styles/bootstrap.css',
+  'styles/fontawesome-all.min.css',
+  'styles/front.css',
   'styles/**/*.css',
 ];
 
@@ -28,15 +27,13 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-  'js/dependencies/sails.io.js',
-  'js/jquery-3.2.1.min.js',
-  'js/wow.min.js',
-  'js/jquery.timelinr-0.9.6.js',
-  'js/jquery.easing.min.js',
+  'js/jquery.min.js',
+  'js/jquery-migrate.min.js',
+  'js/popper.min.js',
   'js/bootstrap.min.js',
-  'js/particles.min.js',
-  'manual/js/highlight.pack.js',
   'js/dependencies/**/*.js',
+  'js/typed.min.js',
+  'js/hs.core.js',
   'js/**/*.js'
 ];
 

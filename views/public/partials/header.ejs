@@ -1,95 +1,370 @@
- <!-- Navigation -->
-      <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-         <div class="navbar-gradient">
-            <div class="container text-center">
-               <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                  Menu <i class="fa fa-bars"></i>
-                  </button>
-                  <!-- <a class="navbar-brand page-scroll" href="#page-top">
-                     <i class="fa fa-play-circle"></i> <span class="light">Start</span> Bootstrap
-                     </a>-->
-               </div>
-               <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="navbar-collapse collapse navbar-main-collapse">
-                  <ul class="nav navbar-nav">
-					 <li>
-                        <a class="page-scroll" href="/">Home</a>
-                     </li>
-					 <li>
-                        <a class="page-scroll" href="/join-whitelist">buy FORCE tokens</a>
-                     </li>
-                     <li>
-                        <a class="page-scroll" href="/resources/white-paper-v3.3.pdf">White Paper</a>
-                     </li>
-                     <li>
-                        <a class="page-scroll" href="/#partners">supporters and partners</a>
-                     </li>
-                     <li>
-                        <a class="page-scroll" href="/#team">team</a>
-                     </li>
-                     <li>
-                        <a class="page-scroll" href="/#roadmap">development</a>
-                     </li>
-					 <li>
-                     <% if(req.session.token){ %>
-                     <a class="hvr-outline-out" href="/contributor" class="btn btn-primary btn-cta-lg"><strong>Dashboard</strong></a>
-                     <% } else {%>
-                     <a class="hvr-outline-out" href="/login" class="btn btn-primary btn-cta-lg"><strong>User Login</strong></a>
-                     <% } %>
+<header id="header" class="u-header u-header--abs-top-md u-header--bg-transparent u-header--show-hide-md" data-header-fix-moment="500" data-header-fix-effect="slide">
+    
 
-                     </li>
-                  </ul>
-               </div>
+    <div class="u-header__section">
+      <!-- Topbar -->
+      <div class="container u-header__hide-content pt-2">
+        <div class="d-flex align-items-center mb-0">
+          <!-- Language -->
+          <div class="position-relative">
+            <a id="languageDropdownInvoker" class="d-flex align-items-center u-unfold-wrapper" href="javascript:;" role="button" aria-controls="languageDropdown" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+               <img class="u-unfold__icon" src="/images/flags/united-kingdom.png" alt="SVG">
+              <span class="d-inline-block d-sm-none">EN</span>
+              <span class="d-none d-sm-inline-block">English</span>
+              <span class="fa fa-angle-down u-unfold__icon-pointer"></span>
+            </a>
 
+            <div id="languageDropdown" class="u-unfold mt-2 u-unfold--css-animation u-unfold--hidden fadeOut" aria-labelledby="languageDropdownInvoker" style="animation-duration: 300ms;">
+              <a class="active u-list__link" href="#">Español‎</a>
+              <a class="u-list__link" href="#">Chinese</a>
+              <a class="u-list__link" href="#">Deutsch</a>
             </div>
-         </div>
+          </div>
+          <!-- End Language -->
 
-      </nav>
+          <div class="ml-auto">
+            <!-- Jump To -->
+            <div class="d-inline-block d-sm-none position-relative mr-2">
+              <a id="jumpToDropdownInvoker" class="d-flex align-items-center u-unfold-wrapper" href="javascript:;" role="button" aria-controls="jumpToDropdown" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#jumpToDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                Jump to
+                <span class="fa fa-angle-down u-unfold__icon-pointer"></span>
+              </a>
+
+              <div id="jumpToDropdown" class="u-unfold mt-2 u-unfold--css-animation u-unfold--hidden fadeOut" aria-labelledby="jumpToDropdownInvoker" style="animation-duration: 300ms;">
+                <a class="u-list__link" href="/contact">Contact Us</a>
+              </div>
+            </div>
+            <!-- End Jump To -->
+
+            <!-- Links -->
+            <div class="d-none d-sm-inline-block ml-sm-auto">
+               <ul class="list-inline mb-0">
+                  <li class="list-inline-item mr-0">
+                     <a class="u-header__topbar-nav-link" href="https://discord.gg/ueyw6Z"><i class="fab fa-discord"></i></a>
+                  </li>
+                  <li class="list-inline-item mr-0">
+                     <a class="u-header__topbar-nav-link" href="https://twitter.com/triforcetokens"><i class="fab fa-twitter-square"></i></a>
+                  </li>
+                  <li class="list-inline-item mr-0">
+                     <a class="u-header__topbar-nav-link" href="https://www.facebook.com/triforcetokens"><i class="fab fa-facebook-square"></i></a>
+                  </li>
+                  <li class="list-inline-item mr-0">
+                     <a class="u-header__topbar-nav-link" href="https://github.com/TriForceNetwork"><i class="fab fa-github"></i></a>
+                  </li>
+                  <li class="list-inline-item mr-0">
+                     <a class="u-header__topbar-nav-link" href="https://medium.com/@triforcetokens"><i class="fab fa-medium"></i></a>
+                  </li>
+                  <li class="list-inline-item mr-0">
+                     <a class="u-header__topbar-nav-link" href="/faq">FAQ</a>
+                  </li>
+                  <li class="list-inline-item mr-0">
+                     <a class="u-header__topbar-nav-link" href="/contact">Contact Us</a>
+                  </li>
+                <li class="list-inline-item">
+                 <!-- Account Sidebar Toggle Button -->
+                 <a id="sidebarNavToggler" class="btn btn-xs u-btn--icon u-btn-text-secondary u-sidebar__toggler target-of-invoker-has-unfolds" href="javascript:;" role="button" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                   <span class="fa fa-user-circle u-btn--icon__inner font-size-14"></span>
+                 </a>
+                 <!-- End Account Sidebar Toggle Button -->
+               </li>
+              </ul>
+            </div>
+            <!-- End Links -->
+          </div>
+        </div>
+      </div>
+      <!-- End Topbar -->
+
+      <div id="logoAndNav" class="container">
+        <!-- Nav -->
+        <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar hs-menu-initialized hs-menu-horizontal">
+          <!-- Logo -->
+          <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space" href="/" aria-label="TriForce Tokens Ltd">
+            <img src="/images/triforce-tokens-logo-standard-200-150.png" alt="Logo">
+          </a>
+          <!-- End Logo -->
+
+          <!-- Responsive Toggle Button -->
+          <button type="button" class="navbar-toggler btn u-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
+            <span id="hamburgerTrigger" class="u-hamburger__box">
+              <span class="u-hamburger__inner"></span>
+            </span>
+          </button>
+          <!-- End Responsive Toggle Button -->
+
+          <!-- Navigation -->
+          <div id="navBar" class="collapse navbar-collapse py-0">
+            <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
+              <!-- Home -->
+              <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened" 
+               data-event="hover" 
+               data-animation-in="slideInUp" data-animation-out="fadeOut" 
+               data-position="left">
+                <a id="homeMegaMenu" class="nav-link u-header__nav-link pl-0" href="javascript:;" aria-haspopup="true" aria-expanded="false">
+                  Strategy
+                  <span class="fa fa-angle-down u-header__nav-link-icon"></span>
+                </a>
+
+
+                <!-- Home - Mega Menu -->
+                <div class="hs-mega-menu u-header__sub-menu w-100 u-header__mega-menu-wrapper-v2" aria-labelledby="homeMegaMenu">
+                  <div class="row p-0 mr-0">
+                    <div class="col-lg-6 pr-0">
+                      <!-- Banner Image -->
+                      <div class="d-none d-lg-block u-header__banner-v1" data-bg-img-src="/images/dynamic-advertisement-menu-display.png">
+                        <div class="w-100 text-center u-header__banner-v1-content u-content-centered-y p-4">
+                          <div class="mb-4">
+                              <span class="badge badge-success ml-1">New</span>
+                              <strong class="d-block u-header__banner-v1-title mb-2">Dynamic Advertisement</strong>
+                              <span class="u-header__banner-v1-text">Less-intrusive advertisement can bring extra revenue without disrupting gameplay.</span>
+                          </div>
+                          <a target="_blank" class="btn btn-primary u-btn-primary btn-sm transition-3d-hover" href="https://studio.raidparty.io">Learn More <span class="fa fa-angle-right ml-2"></span></a>
+                        </div>
+                      </div>
+                      <!-- End Banner Image -->
+                    </div>
+
+                    <div class="col-lg-6 u-header__mega-menu-wrapper-v3">
+                      <div class="row u-header__mega-menu-wrapper-v1">
+                        <div class="col-sm-6">
+                          <strong class="d-block mb-2">Services</strong>
+
+                          <!-- Links -->
+                          <ul class="list-unstyled mb-4">
+                            <li><a class="nav-link u-list__link py-2 px-0" href="/game-publishing">Game Publishing</a></li>
+                            <li><a class="nav-link u-list__link py-2 px-0" href="/market-place">Market Place</a></li>
+                            <li><a class="nav-link u-list__link py-2 px-0" href="/player-community">Player Community</a></li>
+                            <li><a class="nav-link u-list__link py-2 px-0" href="/dynamic-advertisement">Dynamic Advertisement</a></li>
+                          </ul>
+                          <!-- End Links -->
+
+                        </div>
+
+                        <div class="col-sm-6">
+                          <strong class="d-block mb-2">Comming Soon!</strong>
+
+                          <!-- Links -->
+                          <ul class="list-unstyled mb-4">
+                            <li><a class="nav-link u-list__link py-2 px-0" href="/force-blockchain">FORCE Blockchain</a></li>
+                            <li><a class="nav-link u-list__link py-2 px-0" href="/force-wallet">FORCE Wallet</a></li>
+                            <li><a class="nav-link u-list__link py-2 px-0" href="#">Custom Game Tokens</a></li>
+                          </ul>
+                          <!-- End Links -->
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Home - Mega Menu -->
+              </li>
+              <!-- End Home -->
+
+
+              <!-- Documents -->
+              <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened" data-event="hover" 
+              data-animation-in="slideInUp" data-animation-out="fadeOut"
+              data-position="right">
+                <a id="documentsMegaMenu" class="nav-link u-header__nav-link" href="javascript:;" aria-haspopup="true" aria-expanded="false">
+                  Investor Resources
+                  <span class="fa fa-angle-down u-header__nav-link-icon"></span>
+                </a>
+
+                <!-- Works - Mega Menu -->
+                <div class="hs-mega-menu w-50 u-header__sub-menu u-header__mega-menu-wrapper-v1 animated hs-position-right fadeOut" aria-labelledby="documentsMegaMenu">
+                  <div class="row">
+
+                     <div class="col-sm-6 col-lg-6 mb-12 mb-lg-0">
+                      <strong class="d-block mb-2">Getting Started</strong>
+
+                      <!-- Links -->
+                      <ul class="list-unstyled u-list">
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/">Legal Notices</a></li>
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/">Completing KYC</a></li>
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/private-buyers">Private Investors</a></li>
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/token-offering">Public Token Offering</a></li>
+                      </ul>
+                      <!-- End Links -->
+                    </div>
+
+                     
+                    <div class="col-sm-6 col-lg-6 mb-12 mb-lg-0">
+                      <strong class="d-block mb-2">Documents</strong>
+
+                      <!-- Links -->
+                      <ul class="list-unstyled u-list">
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/pitch-deck">Pitch Deck</a></li>
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/whitepaper">General Whitepaper</a></li>
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/">Technical Whitepaper</a></li>
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/">Economic Whitepaper</a></li>
+                        <li><a class="nav-link u-list__link py-2 px-0" href="/">Token Offer Summary</a></li>
+                      </ul>
+                      <!-- End Links -->
+                    </div>
+
+
+                    
+                  </div>
+                </div>
+                <!-- End Works - Mega Menu -->
+              </li>
+              <!-- End Works -->
+
+
+              <!-- Videos -->
+              <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened" data-event="hover" 
+              data-animation-in="slideInUp" data-animation-out="fadeOut"
+              data-position="right">
+                <a id="videosMegaMenu" class="nav-link u-header__nav-link" href="javascript:;" aria-haspopup="true" aria-expanded="false">
+                  Videos
+                  <span class="fa fa-angle-down u-header__nav-link-icon"></span>
+                </a>
+
+                <!-- videos - Mega Menu -->
+                <div class="hs-mega-menu w-50 u-header__sub-menu u-header__mega-menu-wrapper-v1 animated hs-position-right fadeOut" aria-labelledby="videosMegaMenu">
+                  <div class="row">
+
+                    <div class="col-sm-6 col-lg-6 mb-6 mb-lg-0">
+                      <strong class="d-block mb-2">Technology</strong>
+
+                      <!-- Links -->
+                      <ul class="list-unstyled u-list">
+                        <li><a class="js-fancybox media u-media-player nav-link u-list__link py-2 px-0"
+                           data-src="https://youtu.be/vNSnWaWLBsA"
+                           href="javascript:;"
+                           data-speed="200" 
+                           data-animate-in="zoomIn" 
+                           data-animate-out="zoomOut"
+                           data-caption="Changing The Games Industry">Changing The Games Industry</a></li>
+                        <li><a class="js-fancybox media u-media-player nav-link u-list__link py-2 px-0"
+                           data-src="https://youtu.be/vNSnWaWLBsA"
+                           href="javascript:;"
+                           data-speed="200" 
+                           data-animate-in="zoomIn" 
+                           data-animate-out="zoomOut"
+                           data-caption="Dynamic Advertisement">Dynamic Advertisement</a></li>
+                        <li><a class="js-fancybox media u-media-player nav-link u-list__link py-2 px-0"
+                           data-src="https://youtu.be/vNSnWaWLBsA"
+                           href="javascript:;"
+                           data-speed="200" 
+                           data-animate-in="zoomIn" 
+                           data-animate-out="zoomOut"
+                           data-caption="Player Reward Platform">Player Reward Platform</a></li>
+                        <li><a class="js-fancybox media u-media-player nav-link u-list__link py-2 px-0"
+                           data-src="https://youtu.be/vNSnWaWLBsA"
+                           href="javascript:;"
+                           data-speed="200" 
+                           data-animate-in="zoomIn" 
+                           data-animate-out="zoomOut"
+                           data-caption="Market Place">Market Place</a></li>
+                      </ul>
+                      <!-- End Links -->
+                    </div>
+
+                    <div class="col-sm-6 col-lg-6 mb-6 mb-lg-0">
+                      <strong class="d-block mb-2">Team</strong>
+
+                      <!-- Links -->
+                      <ul class="list-unstyled u-list">
+                        <li><a class="js-fancybox media u-media-player nav-link u-list__link py-2 px-0"
+                           data-src="https://youtu.be/n9WI3w1XPKo"
+                           href="javascript:;"
+                           data-speed="200" 
+                           data-animate-in="zoomIn" 
+                           data-animate-out="zoomOut"
+                           data-caption="Project Launch Promo">Project Launch Promo</a></li>
+
+                        <li><a class="js-fancybox media u-media-player nav-link u-list__link py-2 px-0"
+                           data-src="https://youtu.be/gpAz4SEjfoo"
+                           href="javascript:;"
+                           data-speed="200" 
+                           data-animate-in="zoomIn" 
+                           data-animate-out="zoomOut"
+                           data-caption="Project Introduction">Project Introduction</a></li>
+
+                        <li><a class="js-fancybox media u-media-player nav-link u-list__link py-2 px-0"
+                           data-src="https://youtu.be/Ap0p517EcyY"
+                           href="javascript:;"
+                           data-speed="200" 
+                           data-animate-in="zoomIn" 
+                           data-animate-out="zoomOut"
+                           data-caption="Pete Mardell, Founder and CEO Intro">Pete Mardell, Founder and CEO Intro</a></li>
+                        
+                      </ul>
+                      <!-- End Links -->
+                    </div>
 
 
 
+                  </div>
+                </div>
+                <!-- End Works - Mega Menu -->
+              </li>
+              <!-- End Works -->
 
-<!--
-<nav class="navbar navbar-default navbar-static-top navbar-fixed-top scrollable-nav">
-	<div class="telegram-notice-header">
-		<p><strong><i class="fa fa-telegram"></i> &nbsp;&nbsp;<a href="https://t.me/triforcetokens">hey! don't forget to join the telegram channel to get the latest information fast and ask your questions. click here to join.</a></strong></p>
-	</div>
 
-	<div class="container navbar-center">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-				<span class="sr-only"><%= __("Toggle navigation") %></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-		</div>
 
-		<div id="navbar" class="collapse navbar-collapse">
-			<ul class="nav navbar-nav nav-links">
-				<li><a target="_BLANK" href="/resources/white-paper-v3.3.pdf"><span>-</span>&nbsp; <%= __("white paper") %></a></li>
-				<li><a href="/#investor-assurances"><span>-</span>&nbsp; <%= __("contributor assurances") %></a></li>
-				<li><a href="/#supporters-partners"><span>-</span>&nbsp; <%= __("supporters and partners") %></a></li>
-				<li><a href="/#team"><span>-</span>&nbsp; <%= __("team") %></a></li>
-				<li><a href="/#project-goals"><span>-</span>&nbsp; <%= __("development roadmap") %></a></li>
-				<li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language fa-2x" aria-hidden="true"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-level">
-                        <li><a href="?lang=en">english</a></li>
-						<li><a href="?lang=ru">russian</a></li>
-						<li><a href="?lang=es">spanish</a></li>
-						<li><a href="?lang=pt">portuguese</a></li>
-                        <li><a href="?lang=ja">japanese</a></li>
-                        <li><a href="?lang=zh">chinese</a></li>
-                        <li><a href="?lang=ko">korean</a></li>
-						<li><a href="?lang=de">deutsch</a></li>
-                        <li><a href="?lang=fr">francais</a></li>
-                    </ul>
-                </li>
-			</ul>
-		</div>
+              <!-- Publications -->
+              <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened" data-event="hover" 
+              data-animation-in="slideInUp" data-animation-out="fadeOut"
+              data-position="right">
+                <a id="publicationsMegaMenu" class="nav-link u-header__nav-link" href="javascript:;" aria-haspopup="true" aria-expanded="false">
+                  Publications 
+                  <span class="fa fa-angle-down u-header__nav-link-icon"></span>
+                </a>
 
-	</div>
-</nav>
--->
+                <!-- videos - Mega Menu -->
+                <div class="hs-mega-menu w-100 u-header__sub-menu u-header__mega-menu-wrapper-v1 animated hs-position-right fadeOut" aria-labelledby="publicationsMegaMenu">
+                  <div class="row">
+
+                     <div class="col-sm-6 col-lg-6 mb-12 mb-lg-0">
+                        <strong class="d-block mb-2">Getting Started</strong>
+
+                           <!-- Links -->
+                           <ul class="list-unstyled u-list">
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/">Legal Notices</a></li>
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/">Completing KYC</a></li>
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/private-buyers">Private Investors</a></li>
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/token-offering">Public Token Offering</a></li>
+                           </ul>
+                           <!-- End Links -->
+                        </div>
+
+                     
+                       <div class="col-sm-6 col-lg-6 mb-12 mb-lg-0">
+                         <strong class="d-block mb-2">Documents</strong>
+
+                         <!-- Links -->
+                         <ul class="list-unstyled u-list">
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/pitch-deck">Pitch Deck</a></li>
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/whitepaper">General Whitepaper</a></li>
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/">Technical Whitepaper</a></li>
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/">Economic Whitepaper</a></li>
+                           <li><a class="nav-link u-list__link py-2 px-0" href="/">Token Offer Summary</a></li>
+                         </ul>
+                         <!-- End Links -->
+                       </div>
+
+                     </div>
+                   </div>
+                   <!-- End Works - Mega Menu -->
+                 </li>
+                 <!-- End Works -->
+
+
+              <!-- Button -->
+              <li class="nav-item d-none d-md-inline-block pl-3 pr-0">
+                <a class="btn btn-sm btn-primary u-btn-primary transition-3d-hover" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/" target="_blank">
+                  Join The Community
+                </a>
+              </li>
+              <!-- End Button -->
+            </ul>
+          </div>
+          <!-- End Navigation -->
+        </nav>
+        <!-- End Nav -->
+      </div>
+    </div>
+  </header>
