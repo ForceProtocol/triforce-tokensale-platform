@@ -4202,13 +4202,13 @@ svg {
   padding-right: 0.75rem;
 }
 
-.u-cubeportfolio .u-cubeportfolio__item:first-child {
+/*.u-cubeportfolio .u-cubeportfolio__item:first-child {
   padding-left: 0;
 }
 
 .u-cubeportfolio .u-cubeportfolio__item:last-child {
   padding-right: 0;
-}
+}*/
 
 .u-cubeportfolio .u-cubeportfolio__item:hover {
   color: #1e2022;
@@ -7595,6 +7595,9 @@ svg {
   }
   .min-height-100vh--lg {
     min-height: 100vh;
+  }
+  .min-height-90vh--lg {
+    min-height: 90vh;
   }
 }
 

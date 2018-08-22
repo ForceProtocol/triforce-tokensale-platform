@@ -4,22 +4,35 @@ module.exports.routes = {
 	'GET /': 'PagesController.getHomePage',
 
   /** Strategy Pages */
+  'GET /token-offering': 'PagesController.getTokenOffering',
   'GET /game-publishing': 'PagesController.getGamePublishing',
-  'GET /market-place': 'PagesController.getMarketPlace',
+  'GET /marketplaces': 'PagesController.getMarketplaces',
   'GET /player-community': 'PagesController.getPlayerCommunity',
   'GET /dynamic-advertisement': 'PagesController.getDynamicAdvertisement',
+  'GET /raidparty': 'PagesController.getRaidParty',
+  'GET /dynamic-advertisement': 'PagesController.getDynamicAdvertisement',
+  'GET /technology': 'PagesController.getTechnology',
+  'GET /team': 'PagesController.getTeam',
+  'GET /our-story': 'PagesController.getOurStory',
+  'GET /force-blockchain': 'PagesController.getForceBlockchain',
+  'GET /force-wallet': 'PagesController.getForceWallet',
+  'GET /custom-game-tokens': 'PagesController.getCustomGameTokens',
 
+  'GET /studio-signup': 'PagesController.getStudioSignup',
+
+  /** Help and Support */
+  'GET /contributor-help': 'PagesController.getContributorHelp',
+  'GET /faq': 'PagesController.getFaq',
+  'GET /contact': 'PagesController.getContact',
+  'POST /contact': 'PagesController.postContact',
 
 	'GET /login': 'PagesController.getLogin',
 	'POST /subscribe': 'PagesController.subscribeUser',
 	'POST /subscribe-presale': 'PagesController.preSaleSubscribeUser',
-	'GET /contributor-help': 'PagesController.getContributorHelp',
-	'GET /faq': 'PagesController.getFaq',
+
 	'GET /documents': 'PagesController.getDocuments',
 
   
-	'GET /contact': 'PagesController.getContact',
-	'POST /contact': 'PagesController.postContact',
 
   //terms and conditions
   'GET /terms-of-token-sale': 'PagesController.getTermsConditions',
