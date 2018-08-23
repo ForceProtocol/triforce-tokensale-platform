@@ -1,144 +1,443 @@
 <%- partial('./partials/header.ejs') %>
 
-<header class="padding-top80 faq-bg">
+<main id="content" role="main">
+	<div class="container u-space-4-top u-space-3-bottom">
+      <div class="row">
+        <div id="stickyBlockStartPoint" class="col-lg-3 mb-9 mb-lg-0">
+          <!-- Nav -->
+          <nav class="js-sticky-block bg-primary shadow-primary-sm rounded" data-has-sticky-header="true" data-offset-target="#logoAndNav" data-sticky-view="lg" data-start-point="#stickyBlockStartPoint" data-end-point="#stickyBlockEndPoint" data-offset-top="24" data-offset-bottom="24" style="z-index: 1; top: 96px; width: 255px; height: 228px;">
+            <ul id="scrollNav" class="list-unstyled u-list u-list--white py-3 px-5">
+              <li class="py-2 active">
+                <a class="d-block u-list__link" href="#basics">Basics</a>
+              </li>
+              <li class="py-2">
+                <a class="d-block u-list__link" href="#syncing">Syncing</a>
+              </li>
+              <li class="py-2">
+                <a class="d-block u-list__link" href="#account">Account</a>
+              </li>
+              <li class="py-2">
+                <a class="d-block u-list__link" href="#privacy">Privacy</a>
+              </li>
+            </ul>
+          </nav>
+          <!-- End Nav -->
+        </div>
+
+        <div class="col-lg-9">
+          <div id="basics" class="u-space-2-bottom active">
+            <!-- Title -->
+            <div class="mb-3">
+              <h3 class="text-primary font-weight-bold">Basics</h3>
+            </div>
+            <!-- End Title -->
+
+            <!-- Basics Accordion -->
+            <div id="basicsAccordion">
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="basicsHeadingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn p-3" data-toggle="collapse" data-target="#basicsCollapseOne" aria-expanded="true" aria-controls="basicsCollapseOne">
+                      Do you have any built-in caching?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="basicsCollapseOne" class="collapse show" aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="basicsHeadingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#basicsCollapseTwo" aria-expanded="false" aria-controls="basicsCollapseTwo">
+                      Can I add/upgrade my plan at any time?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="basicsCollapseTwo" class="collapse" aria-labelledby="basicsHeadingTwo" data-parent="#basicsAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="basicsHeadingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#basicsCollapseThree" aria-expanded="false" aria-controls="basicsCollapseThree">
+                      What access comes with my hosting plan?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="basicsCollapseThree" class="collapse" aria-labelledby="basicsHeadingThree" data-parent="#basicsAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="basicsHeadingFour">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#basicsCollapseFour" aria-expanded="false" aria-controls="basicsCollapseFour">
+                      How do I change my password?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="basicsCollapseFour" class="collapse" aria-labelledby="basicsHeadingFour" data-parent="#basicsAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+            </div>
+            <!-- End Basics Accordion -->
+          </div>
+
+          <hr class="my-0">
+
+          <div id="syncing" class="u-space-2 active">
+            <!-- Title -->
+            <div class="mb-3">
+              <h3 class="text-primary font-weight-bold">Syncing</h3>
+            </div>
+            <!-- End Title -->
+
+            <!-- Syncing Accordion -->
+            <div id="syncingAccordion">
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="syncingHeadingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn p-3" data-toggle="collapse" data-target="#syncingCollapseOne" aria-expanded="false" aria-controls="syncingCollapseOne">
+                      How does syncing work?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="syncingCollapseOne" class="collapse show" aria-labelledby="syncingHeadingOne" data-parent="#syncingAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="syncingHeadingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#syncingCollapseTwo" aria-expanded="false" aria-controls="syncingCollapseTwo">
+                      How do I upload files from my phone or tablet?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="syncingCollapseTwo" class="collapse" aria-labelledby="syncingHeadingTwo" data-parent="#syncingAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="syncingHeadingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#syncingCollapseThree" aria-expanded="false" aria-controls="syncingCollapseThree">
+                      How do I link to a file or folder?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="syncingCollapseThree" class="collapse" aria-labelledby="syncingHeadingThree" data-parent="#syncingAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+            </div>
+            <!-- End Syncing Accordion -->
+          </div>
+
+          <hr class="my-0">
+
+          <div id="account" class="u-space-2">
+            <!-- Title -->
+            <div class="mb-3">
+              <h3 class="text-primary font-weight-bold">Account</h3>
+            </div>
+            <!-- End Title -->
+
+            <!-- Account Accordion -->
+            <div id="accountAccordion">
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="accountHeadingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn p-3" data-toggle="collapse" data-target="#accountCollapseOne" aria-expanded="false" aria-controls="accountCollapseOne">
+                      How do I change my password?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="accountCollapseOne" class="collapse show" aria-labelledby="accountHeadingOne" data-parent="#accountAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="accountHeadingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#accountCollapseTwo" aria-expanded="false" aria-controls="accountCollapseTwo">
+                      How do I delete my account?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="accountCollapseTwo" class="collapse" aria-labelledby="accountHeadingTwo" data-parent="#accountAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="accountHeadingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#accountCollapseThree" aria-expanded="false" aria-controls="accountCollapseThree">
+                      How do I change my account settings?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="accountCollapseThree" class="collapse" aria-labelledby="accountHeadingThree" data-parent="#accountAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="accountHeadingFour">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#accountCollapseFour" aria-expanded="false" aria-controls="accountCollapseFour">
+                      I forgot my password. How do I reset it?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="accountCollapseFour" class="collapse" aria-labelledby="accountHeadingFour" data-parent="#accountAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+            </div>
+            <!-- End Account Accordion -->
+          </div>
+
+          <hr class="my-0">
+
+          <div id="privacy" class="u-space-2-top">
+            <!-- Title -->
+            <div class="mb-3">
+              <h3 class="text-primary font-weight-bold">Privacy</h3>
+            </div>
+            <!-- End Title -->
+
+            <!-- Privacy Accordion -->
+            <div id="privacyAccordion">
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="privacyHeadingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn p-3" data-toggle="collapse" data-target="#privacyCollapseOne" aria-expanded="false" aria-controls="privacyCollapseOne">
+                      Can I specify my own private key?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="privacyCollapseOne" class="collapse show" aria-labelledby="privacyHeadingOne" data-parent="#privacyAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="privacyHeadingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#privacyCollapseTwo" aria-expanded="false" aria-controls="privacyCollapseTwo">
+                      My files are missing! How do I get them back?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="privacyCollapseTwo" class="collapse" aria-labelledby="privacyHeadingTwo" data-parent="#privacyAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="privacyHeadingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#privacyCollapseThree" aria-expanded="false" aria-controls="privacyCollapseThree">
+                      How can I access my privacy data?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="privacyCollapseThree" class="collapse" aria-labelledby="privacyHeadingThree" data-parent="#privacyAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-header u-card-header" id="privacyHeadingFour">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link btn-block d-flex justify-content-between u-card-btn collapsed p-3" data-toggle="collapse" data-target="#privacyCollapseFour" aria-expanded="false" aria-controls="privacyCollapseFour">
+                      How can I control if other search engines can link to my profile?
+
+                      <span class="u-card-btn__arrow">
+                        <span class="fa fa-arrow-down small"></span>
+                      </span>
+                    </button>
+                  </h5>
+                </div>
+                <div id="privacyCollapseFour" class="collapse" aria-labelledby="privacyHeadingFour" data-parent="#privacyAccordion">
+                  <div class="card-body u-card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+            </div>
+            <!-- End Privacy Accordion -->
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="container">
-	
-		<div class="row">
-			<div class="banner-logo-white-top-left">
-				<a href="/"><img src="/images/banner-logo-white.svg" alt="TriForce Tokens Ltd Logo" /></a>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="text-center faq-banner">
-				<h1>what would you like to know?</h1>
-				
-				<div class="form-group col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2">
-					<select class="form-control input-lg">
-						<option>--- Please select a topic ---</option>
-						<option>The project</option>
-						<option>The token sale</option>
-						<option>The team</option>
-					</select>
-				</div>
-			</div>
-		</div>
-			
-		
-    </div>
+      <div class="row">
+        <div class="col-lg-6 u-ver-divider u-ver-divider--none-lg mb-7 mb-lg-0 u-space-1-bottom">
+          <!-- Contacts Info -->
+          <div class="media pr-lg-9">
+            <div class="d-flex pr-4">
+              <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-4">
+                <span class="fa fa-envelope u-icon__inner"></span>
+              </span>
+            </div>
 
-</header>
+            <div class="media-body">
+              <h3 class="h5">Can't find your answer?</h3>
+              <p class="mb-1">We want to answer all of your queries. Get in touch and we'll get back to you as soon as we can.</p>
+              <a class="font-size-14" href="/contact">Contact us <span class="fa fa-angle-right align-middle ml-2"></span></a>
+            </div>
+          </div>
+          <!-- End Contacts Info -->
+        </div>
 
-<div class="section">
+        <div class="col-lg-6">
+          <!-- Contacts Info -->
+          <div class="media pl-lg-9">
+            <div class="d-flex pr-4">
+              <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-4">
+                <span class="fab fa-discord u-icon__inner"></span>
+              </span>
+            </div>
 
-    <div class="container text-left faq-topics">
-	
-	
-		<div class="alert alert-info">
-			<p><strong>Contributing more than 25Eth?</strong> Reach out to someone on our team who will hapily answer your questions.</p>
-		</div>
-	
-	
-		<div class="row topic">
-		
-			<div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
-				<h2>Why join TriForce Tokens?</h2>
-				<p>General information about the project.</p>
-			</div>
-			
-			<div class="col-lg-7 col-md-7 col-sm-6">
-			
-				<ul class="faq-questions-list">
-					<li><a href="">What is TriForce Tokens?</a></li>
-					<li><a href="">What is TriForce Tokens?</a></li>
-				</ul>
-				
-			</div>
-			
-		</div>
-		
-		
-		<div class="row topic">
-		
-			<div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
-				<h2>Token Sale</h2>
-				<p>All related questions about our public token sale events.</p>
-			</div>
-			
-			<div class="col-lg-7 col-md-7 col-sm-6">
-			
-				<ul class="faq-questions-list">
-					<li><a href="">Can US investors join?</a></li>
-					<li><a href="">What is TriForce Tokens?</a></li>
-				</ul>
-				
-			</div>
-			
-		</div>
-		
-		
-		<div class="row topic">
-		
-			<div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
-				<h2>The Technology</h2>
-				<p>Deep dive into the technology that makes our project awesome.</p>
-			</div>
-			
-			<div class="col-lg-7 col-md-7 col-sm-6">
-			
-				<ul class="faq-questions-list">
-					<li><a href="">What is TriForce Tokens?</a></li>
-					<li><a href="">What is TriForce Tokens?</a></li>
-				</ul>
-				
-			</div>
-			
-		</div>
-		
-		
-		<div class="row topic">
-		
-			<div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
-				<h2>The Team</h2>
-				<p>Discover more about the team and organisation.</p>
-			</div>
-			
-			<div class="col-lg-7 col-md-7 col-sm-6">
-			
-				<ul class="faq-questions-list">
-					<li><a href="">What is TriForce Tokens?</a></li>
-					<li><a href="">What is TriForce Tokens?</a></li>
-				</ul>
-				
-			</div>
-			
-		</div>
-		
-		
-		
-		<div class="row topic">
-		
-			<div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
-				<h2>Legal</h2>
-				<p>What</p>
-			</div>
-			
-			<div class="col-lg-7 col-md-7 col-sm-6">
-			
-				<ul class="faq-questions-list">
-					<li><a href="">What is TriForce Tokens?</a></li>
-					<li><a href="">What is TriForce Tokens?</a></li>
-				</ul>
-				
-			</div>
-			
-		</div>
-		
-		
-	
-    </div>
-	
-</div>
+            <div class="media-body">
+              <h3 class="h5">Technical questions</h3>
+              <p class="mb-1">Have some technical questions? Reach out to us on Discord.</p>
+              <a class="font-size-14" href="https://discord.gg/Bnfpqrk">Discord Server <span class="fa fa-angle-right align-middle ml-2"></span></a>
+            </div>
+          </div>
+          <!-- End Contacts Info -->
+        </div>
+      </div>
+
+      <hr class="my-0">
+
+  </main>
 
 <%- partial('./partials/footer.ejs') %>

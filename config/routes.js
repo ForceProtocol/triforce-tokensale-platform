@@ -21,7 +21,6 @@ module.exports.routes = {
   'GET /documents': 'PagesController.getDocuments',
 
   /** Help and Support */
-  'GET /contributor-help': 'PagesController.getContributorHelp',
   'GET /faq': 'PagesController.getFaq',
   'GET /contact': 'PagesController.getContact',
   'POST /contact': 'PagesController.postContact',

@@ -280,15 +280,16 @@ module.exports = {
 
 
 	/**
-	* Return the survey
+	* Return the privacy policy page
 	*/
-	getSurvey: function (req, res) {
-		return res.view('public/survey', {
+	getTeam: function (req, res) {
+		return res.view('public/team', {
 			layout: 'public/layout',
-			title: 'TriForce Tokens - Market Research Survey',
-			metaDescription: 'A real digital currency to use in every game you play.'
+			title: 'Meet The Team',
+			metaDescription: 'The TriForce Tokens team.'
 		});
 	},
+
 
 
 	/**
