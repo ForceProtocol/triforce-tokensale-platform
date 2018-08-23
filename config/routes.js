@@ -57,11 +57,10 @@ module.exports.routes = {
 
 
 	/** INVESTOR DASHBOARD */
-	'GET /signup': 'PagesController.getSignUp',
-	'POST /signup': 'DashboardController.signup',
-  'GET /login': 'PagesController.getLogin',
-	'POST /login': 'DashboardController.login',
-	'POST /token-login': 'DashboardController.tokenLogin',
+	'GET /contributor-signup': 'PagesController.getContributorSignUp',
+	'POST /contributor-signup': 'PagesController.postContributorSignup',
+  'GET /contributor-login': 'PagesController.getContributorLogin',
+	'POST /contributor-login': 'PagesController.postContributorLogin',
 	'GET /logout': 'DashboardController.logout',
 	'GET /contributor': 'DashboardController.getDashboard',
 	'/contributor/set-ethereum-address': 'DashboardController.setEthereumAddress',

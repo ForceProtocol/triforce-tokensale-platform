@@ -11,33 +11,23 @@
 
       <div class="container">
         <div class="row no-gutters">
-          <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 u-space-3 u-space-0--lg">
+          <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 u-space-2 u-space-0--lg">
             <!-- Form -->
-            <form class="js-validate mt-5">
+            <form method="POST" class="js-validate mt-5">
               <!-- Title -->
               <div class="mb-7">
-                <h2 class="h3 text-primary font-weight-normal mb-0">Welcome <span class="font-weight-bold">back</span></h2>
-                <p>Login to access your account.</p>
+                <h2 class="h3 text-primary font-weight-normal mb-0">Token Sale <span class="font-weight-bold">Login</span></h2>
+                <p>Welcome back.</p>
               </div>
               <!-- End Title -->
 
               <% if(flash.has('errors')){ %>
-				<br /><br />
-				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
-					<% flash.get('errors').forEach(function (message) { %>
-					<p class="error"><%- message %></p>
-					<% }) %>
-				</div>
-				<% } %>
-
-				<% if(flash.has('success')){ %>
-				<br /><br />
-				<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
-					<% flash.get('success').forEach(function (message) { %>
-					<p class="success"><%- message %></p>
-					<% }) %>
-				</div>
-				<% } %>
+      				<div class="alert alert-danger">
+      					<% flash.get('errors').forEach(function (message) { %>
+      					<%- message %><br />
+      					<% }) %>
+      				</div>
+      				<% } %>
 
               <!-- Input -->
 
@@ -45,7 +35,7 @@
                 <label class="h6 small d-block text-uppercase">Email address</label>
 
                 <div class="js-focus-state input-group u-form">
-                  <input type="email" class="form-control u-form__input" name="email" required="" placeholder="hodl@hodllife.com" aria-label="hodl@hodllife.com" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                  <input type="email" value="<%= !req.param('email') ? '' : req.param('email') %>" class="form-control u-form__input" name="email" required="" placeholder="hodl@hodllife.com" aria-label="hodl@hodllife.com" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
                 </div>
               </div>
               <!-- End Input -->
@@ -83,7 +73,7 @@
               <div class="row align-items-center mb-5">
                 <div class="col-6">
                   <span class="small text-muted">Don't have an account?</span>
-                  <a class="small" href="/tokensale-signup">Signup</a>
+                  <a class="small" href="/contributor-signup">Signup</a>
                 </div>
 
                 <div class="col-6 text-right">
@@ -94,6 +84,27 @@
             </form>
             <!-- End Form -->
           </div>
+
+          <div class="col-lg-9 col-xl-7 d-none d-lg-block position-absolute-top-right-0 pr-0" style="margin-top: 105.6px;z-index: -5;">
+          <figure class="w-100">
+             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1374.7 1083.6" style="enable-background:new 0 0 1374.7 1083.6;" xml:space="preserve">
+               <g>
+                 <defs>
+                   <path id="heroBlock1" d="M1374.7,0H687.6l-278,279.7c-150,150.9-148.1,395.3,4.4,543.8l0,0C554.1,960,774.9,968.7,925.4,843.6
+                     l449.3-373.4V0z"></path>
+                 </defs>
+                 <clipPath id="heroBlock2">
+                   <use xlink:href="#heroBlock1" style="overflow:visible;"></use>
+                 </clipPath>
+                 <g transform="matrix(1 0 0 1 0 0)" style="clip-path:url(#heroBlock2);">
+                   <!-- Apply your (750px width to 750px height) image here -->
+                   <image style="overflow:visible;" width="750" height="750" xlink:href="/images/light-large-pill-background.png" transform="matrix(1.4462 0 0 1.4448 290.09 0)"></image>
+                 </g>
+               </g>
+             </svg>
+           </figure>
+        </div>
+        
         </div>
       </div>
     </div>

@@ -73,6 +73,82 @@ module.exports = {
 	},
 
 
+
+	/**
+	* Return the contributor login page
+	*/
+	getContributorLogin: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/contributor-login', {
+			layout: 'public/layout',
+			title: 'Contributor Login',
+			metaDescription: '',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
+
+	postContributorLogin: function (req, res) {
+	    // Confirm recapture success
+	    var data = {
+	      remoteip: req.connection.remoteAddress,
+	      response: req.param("g-recaptcha-response"),
+	      secret: RECAPTCHA_PRIVATE_KEY
+	    };
+
+	    var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
+
+	    var email = req.param("email");
+
+	    recaptcha.verify(function (success, error_code) {
+
+	      if (success) {
+	        request({
+	          method: 'POST',
+	          json: true,
+	          body: req.allParams(),
+	          uri: sails.config.API_URL + 'auth'
+	        }).then((rsp) => {
+	          req.session.user = rsp.user;
+	          req.session.token = rsp.token;
+	          res.redirect('/contributor');
+	        }).catch(err => {
+
+	          let msg = err.error ? err.error.err : err.message;
+
+	          if (typeof msg == 'undefined' || msg.length == 0) {
+	            sails.log.error("Failed to login user  - but no error returned");
+	            req.addFlash('errors', "There was a problem logging in to your account. Please contact us at pete@triforcetokens.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
+	            return res.redirect("/contributor-login?email=" + email);
+	          }
+
+	          rUtil.errorResponseRedirect(err, req, res, "/contributor-login?email=" + email);
+	        });
+	      } else {
+	        req.addFlash('errors', "There was a problem logging in to your account. Please make sure to check the recaptcha form.");
+	        return res.redirect("/contributor-login?email=" + email);
+	      }
+	    });
+  	},
+
+
+	/**
+	* Get Contributor Sign Up
+	*/
+	getContributorSignUp: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/contributor-signup', {
+			layout: 'public/layout',
+			title: 'Contributor Signup',
+			metaDescription: '',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
 	/**
 	* Game Publishing
 	*/
@@ -363,10 +439,10 @@ module.exports = {
 
 					if (typeof msg == 'undefined' || msg.length == 0) {
 						req.addFlash('errors', "There was a problem trying to issue you a reset password link. Please contact us at pete@triforcetokens.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
-						return res.redirect("/");
+						return res.redirect("/forgot-password");
 					}
 
-					rUtil.errorResponseRedirect(err, req, res, '/');
+					rUtil.errorResponseRedirect(err, req, res, '/forgot-password');
 				});
 			} else {
 				req.addFlash('errors', "There was a problem trying to issue you a reset password link. Please make sure to fill out the captcha form.");

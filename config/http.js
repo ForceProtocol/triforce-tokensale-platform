@@ -42,7 +42,6 @@ module.exports.http = {
        'startRequestTimer',
        'cookieParser',
        'session',
-       'runCpaSetCookie',
        'partnerTrackingCookie',
        'bodyParser',
        'handleBodyParserError',
@@ -57,18 +56,6 @@ module.exports.http = {
        '500'
      ],
 
-	runCpaSetCookie: function (req, res, next) {
-		// Check that the tracking cookie does not already exist
-		if(typeof req.cookies.run_cpa_track_id === 'undefined' && typeof req.cookies.track_id === 'undefined'){
-			
-			// Check if this is an affiliate sent visitor
-			if(typeof req.param("track_id") !== 'undefined'){
-				// Set the tracking cookie - 90 days maximum
-				res.cookie('run_cpa_track_id', req.param("track_id"), { maxAge: 7776000000});
-			}
-		}
-		return next();
-	},
 	
 	partnerTrackingCookie: function (req, res, next) {
 		// Check if this is a file request

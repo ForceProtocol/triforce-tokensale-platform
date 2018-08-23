@@ -36,11 +36,7 @@ module.exports.policies = {
 	},
 
 	'DashboardController': {
-		'getDashboard': ['tokenAuth', 'localize'],
-		'setEthereumAddress': ['tokenAuth', 'localize'],
-		'signup': ['isGuest', 'localize'],
-		'login': ['isGuest', 'localize'],
-		'tokenLogin': ['isGuest', 'localize']
+		'*': ['tokenAuth', 'localize'],
 	},
 
 	/* TF-API Backend Policies */
