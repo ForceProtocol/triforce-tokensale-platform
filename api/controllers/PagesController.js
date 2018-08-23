@@ -240,6 +240,18 @@ module.exports = {
 	},
 
 
+	/**
+	* Return the website terms of use
+	*/
+	getTermsOfUse: function (req, res) {
+		return res.view('public/terms-of-use', {
+			layout: 'public/layout',
+			title: 'Website Terms of Use',
+			metaDescription: 'Legal terms on your usage and interaction with this website'
+		});
+	},
+
+
 
 	/**
 	* Return the privacy policy page
@@ -253,42 +265,6 @@ module.exports = {
 	},
 
 
-
-	/**
-	* Return the friends and family landing page
-	*/
-	getFriendsSupport: function (req, res) {
-		return res.view('public/friends-support', {
-			layout: 'public/layout',
-			title: 'Special friends and family discount for FORCE tokens',
-			metaDescription: ''
-		});
-	},
-
-
-	/**
-	* Return the friends and family landing page
-	*/
-	postFriendsSupport: function (req, res) {
-		return res.view('public/friends-support', {
-			layout: 'public/layout',
-			title: 'Special friends and family discount for FORCE tokens',
-			metaDescription: ''
-		});
-	},
-
-
-
-	/**
-	 * Return the terms and conditions page
-	 */
-	getTermsConditions: function (req, res) {
-		return res.view('public/terms', {
-			layout: 'public/layout',
-			title: 'TriForce Tokens Terms and Conditions',
-			metaDescription: 'TriForce Tokens Terms and Conditions'
-		});
-	},
 
 
 	/**

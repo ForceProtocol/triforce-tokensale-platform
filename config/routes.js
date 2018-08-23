@@ -4,7 +4,8 @@ module.exports.routes = {
 	'GET /': 'PagesController.getHomePage',
 
   /** Strategy Pages */
-  'GET /token-offering': 'PagesController.getTokenOffering',
+  'GET /token-sale': 'PagesController.getTokenSale',
+  'GET /private-sale': 'PagesController.getPrivateSale',
   'GET /game-publishing': 'PagesController.getGamePublishing',
   'GET /marketplaces': 'PagesController.getMarketplaces',
   'GET /player-community': 'PagesController.getPlayerCommunity',
@@ -44,7 +45,7 @@ module.exports.routes = {
 
   /** Legal / Terms and Conditions, Privacy */
   'GET /token-sale-legal': 'PagesController.getTokenSaleLegal',
-  'GET /terms-of-token-offering': 'PagesController.getTermsConditions',
+  'GET /terms-of-use': 'PagesController.getTermsOfUse',
   'GET /privacy': 'PagesController.getPrivacy',
 	
 	

@@ -33,22 +33,10 @@ module.exports.bootstrap = function(cb) {
     sails.ARTEMIS_API_TOKEN = "2610db88-301e-46af-a5ae-57d23a31eb65";
   }
 
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  setTimeout(function () {
-    contracts.initAll();
-  }, 1000);
-  //calling it couple of times to make sure its called properly bcz sometimes system takes more than 1000ms to load
-  // calling multiple times wont have any effect if its already initialized
-  setTimeout(function () {
-    contracts.initAll();
-  }, 9000);
-  setTimeout(function () {
-    contracts.initAll();
-  }, 90000);
+
 	
-	TwitterApiService.connectStream().then(function(connected){}).catch(function(err){
-	});
+	/**TwitterApiService.connectStream().then(function(connected){}).catch(function(err){
+	});*/
 	
 	cb();
 };
