@@ -39,3 +39,10 @@
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
+.u-stop-color-gold-light {
+    stop-color: #ead87a;
+}
+.u-stop-color-gold-dark {
+    stop-color: #cba43c;
+}

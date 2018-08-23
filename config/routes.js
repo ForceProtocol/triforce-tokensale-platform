@@ -17,32 +17,35 @@ module.exports.routes = {
   'GET /force-blockchain': 'PagesController.getForceBlockchain',
   'GET /force-wallet': 'PagesController.getForceWallet',
   'GET /custom-game-tokens': 'PagesController.getCustomGameTokens',
-
-  'GET /studio-signup': 'PagesController.getStudioSignup',
+  'GET /documents': 'PagesController.getDocuments',
 
   /** Help and Support */
   'GET /contributor-help': 'PagesController.getContributorHelp',
   'GET /faq': 'PagesController.getFaq',
   'GET /contact': 'PagesController.getContact',
   'POST /contact': 'PagesController.postContact',
+  'GET /completing-kyc': 'PagesController.getCompletingKyc',
 
-	'GET /login': 'PagesController.getLogin',
+
+  /** Accounts / Auth */
+  'GET /studio-signup': 'PagesController.getStudioSignup',
+  'POST /studio-signup': 'PagesController.postStudioSignup',
+  'GET /verify-email': 'PagesController.verifyEmail',
+  'GET /verify-ether-request': 'PagesController.verifyEtherAddress',
+
+  'GET /forgot-password': 'PagesController.getForgotPassword',
+  'POST /forgot-password': 'PagesController.forgotPassword',
+  'GET /reset-password/:token': 'PagesController.getResetPassword',
+  'POST /reset-password/:token': 'PagesController.postResetPassword',
+
+  /** Email Subscribe */
 	'POST /subscribe': 'PagesController.subscribeUser',
 	'POST /subscribe-presale': 'PagesController.preSaleSubscribeUser',
 
-	'GET /documents': 'PagesController.getDocuments',
-
-  
-
-  //terms and conditions
-  'GET /terms-of-token-sale': 'PagesController.getTermsConditions',
+  /** Legal / Terms and Conditions, Privacy */
+  'GET /token-sale-legal': 'PagesController.getTokenSaleLegal',
+  'GET /terms-of-token-offering': 'PagesController.getTermsConditions',
   'GET /privacy': 'PagesController.getPrivacy',
-	
-
-	// New Subscribe Landing Pages
-	'GET /join': 'PagesController.getJoinUk',
-	'GET /join/:locale': 'PagesController.getJoinLocale',
-	'POST /join-landing-page': 'PagesController.postJoinLandingPage',
 	
 	
 	// KYC Process
@@ -50,30 +53,12 @@ module.exports.routes = {
 	'POST /join-whitelist': 'PagesController.postJoinWhitelist',
 	'POST /join-whitelist-step-1': 'PagesController.postKycStep1',
 	'POST /join-whitelist-step-2': 'PagesController.postKycStep2',
-	
-	
-	// Subscriber thank you pages
-	'GET /thanks-uk': 'PagesController.getThanksUk',
-	'GET /thanks-russia': 'PagesController.getThanksRussia',
-	'GET /thanks-germany': 'PagesController.getThanksGermany',
-	'GET /thanks-france': 'PagesController.getThanksFrance',
-	'GET /thanks-spain': 'PagesController.getThanksSpain',
-	'GET /thanks-brazil': 'PagesController.getThanksBrazil',
-	'GET /thanks-korea': 'PagesController.getThanksKorea',
-	'GET /thanks-japan': 'PagesController.getThanksJapan',
-	'GET /thanks-china': 'PagesController.getThanksChina',
 
-	'GET /verify-email': 'PagesController.verifyEmail',
-	'GET /verify-ether-request': 'PagesController.verifyEtherAddress',
-	'POST /verify-tfa': 'PagesController.verifyTFA',
-	'GET /forgot-password': 'PagesController.getForgotPassword',
-	'POST /forgot-password': 'PagesController.forgotPassword',
-	'GET /reset-password/:token': 'PagesController.getResetPassword',
-	'POST /reset-password/:token': 'PagesController.postResetPassword',
 
 	/** INVESTOR DASHBOARD */
 	'GET /signup': 'PagesController.getSignUp',
 	'POST /signup': 'DashboardController.signup',
+  'GET /login': 'PagesController.getLogin',
 	'POST /login': 'DashboardController.login',
 	'POST /token-login': 'DashboardController.tokenLogin',
 	'GET /logout': 'DashboardController.logout',

@@ -74,6 +74,23 @@ module.exports = {
 
 
 	/**
+	* Game Publishing
+	*/
+	getGamePublishing: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/game-publishing', {
+			layout: 'public/layout',
+			title: 'Game Publishing',
+			metaDescription: 'Our team will work closely with you to ensure the best publishing campaigns are delivered to give your game maximum exposure.',
+			recaptchaForm: recaptcha.toHTML()
+		});
+
+	},
+
+
+	/**
 	* Subscribe User
 	*/
 	subscribeUser: function (req, res) {
@@ -263,282 +280,6 @@ module.exports = {
 
 
 	/**
-	* Return the join landing page uk
-	*/
-	getJoinUk: function (req, res) {
-
-		return res.redirect("/");
-		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
-
-		return res.view('public/landingpage/join', {
-			layout: 'public/layout',
-			title: 'Join TriForce Tokens today',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018',
-			recaptchaForm: recaptcha.toHTML()
-		});
-	},
-
-	/**
-	* Return the join landing page uk
-	*/
-	getJoinLocale: function (req, res) {
-
-		return res.redirect("/");
-		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
-
-		return res.view('public/landingpage/join', {
-			layout: 'public/layout',
-			title: 'Join TriForce Tokens today',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018',
-			locale: req.param('locale'),
-			recaptchaForm: recaptcha.toHTML()
-		});
-	},
-
-
-	/**
-	* Pre-Sale Subscribe User
-	*/
-	postJoinLandingPage: function (req, res) {
-
-		var email = req.param("email"),
-			firstName = req.param("firstName"),
-			lastName = req.param("lastName"),
-			referrerId = '',
-			referrerWebId = '',
-			runCpaId = '',
-			ltfUrl = req.param('ltfUrl'),
-			successPage = req.param('ltfSuccessPage');
-
-		// Check if this is referral ID by cookie
-		if (typeof req.cookies !== 'undefined' && typeof req.cookies.track_id !== 'undefined') {
-			referrerId = req.cookies.track_id;
-
-			if (typeof req.cookies.track_id_web_id !== 'undefined') {
-				referrerWebId = req.cookies.track_id_web_id;
-			}
-		} else if (typeof req.cookies.run_cpa_track_id !== 'undefined') {
-			runCpaId = req.cookies.run_cpa_track_id;
-		}
-
-		if (typeof successPage == 'undefined' || successPage.length < 1) {
-			successPage = '/';
-		}
-
-		// Submit post request to LTF subscribe list
-		var ltfFormVars = {
-			[req.param('firstNameFieldValue')]: firstName,
-			[req.param('lastNameFieldValue')]: lastName,
-			[req.param('emailFieldValue')]: email
-		};
-
-		// Confirm recapture success
-		var data = {
-			remoteip: req.connection.remoteAddress,
-			response: req.param("g-recaptcha-response"),
-			secret: RECAPTCHA_PRIVATE_KEY
-		};
-
-		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
-
-		recaptcha.verify(function (success, error_code) {
-
-			if (success) {
-				request({
-					method: 'POST',
-					uri: ltfUrl,
-					formData: ltfFormVars,
-					headers: {
-						'content-type': 'application/x-www-form-urlencoded'
-					}
-				}).then((rsp) => {
-				}).catch(err => {
-				});
-
-				Subscribers.findOrCreate({ email: email, firstName: firstName, lastName: lastName, referrerId: referrerId, referrerWebId: referrerWebId, runCpaId: runCpaId, runCpaTrackedOn: new Date(), active: true }).exec(function (err, created) {
-				});
-
-				req.addFlash('success', 'Thank you for registering your interest in joining the pre-sale. Please check your email inbox and possibly junk inbox for your confirmation email.');
-
-				return res.redirect(successPage);
-			} else {
-				req.addFlash('errors', 'There was a problem confirming your request. Please make sure you complete the captcha request.');
-				return res.redirect(successPage);
-			}
-		});
-
-	},
-
-
-
-	/**
-	* Return the subscriber thanks uk
-	*/
-	getThanksUk: function (req, res) {
-		return res.view('public/subscriber/thanks-uk', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks Russia
-	*/
-	getThanksRussia: function (req, res) {
-		return res.view('public/subscriber/thanks-russia', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks germany
-	*/
-	getThanksGermany: function (req, res) {
-		return res.view('public/subscriber/thanks-germany', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks France
-	*/
-	getThanksFrance: function (req, res) {
-		return res.view('public/subscriber/thanks-france', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks Spain
-	*/
-	getThanksSpain: function (req, res) {
-		return res.view('public/subscriber/thanks-spain', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks Brazil
-	*/
-	getThanksBrazil: function (req, res) {
-		return res.view('public/subscriber/thanks-brazil', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks Korea
-	*/
-	getThanksKorea: function (req, res) {
-		return res.view('public/subscriber/thanks-korea', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks Japan
-	*/
-	getThanksJapan: function (req, res) {
-		return res.view('public/subscriber/thanks-japan', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-	/**
-	* Return the subscriber thanks China
-	*/
-	getThanksChina: function (req, res) {
-		return res.view('public/subscriber/thanks-china', {
-			layout: 'public/layout',
-			title: 'Congratulations on Joining TriForce Tokens',
-			metaDescription: 'We will keep you informed of updates as we lead up to our next Token Sale on 20th Feb 2018'
-		});
-	},
-
-
-
-	/**
-	* Submit the survey
-	*/
-	postSurvey: function (req, res) {
-		var params = req.allParams();
-
-		// Verify param values posted
-		if (typeof params.email === 'undefined' ||
-			params.email.length == 0) {
-			req.addFlash('error', 'You should provide an email address with your response so we' +
-				' can send your Bitcoin reward.');
-		}
-
-
-		// Subscribe this respondent
-		if (typeof params.optin !== 'undefined') {
-			Subscribers.create({ email: params.email, active: true }).exec(function (err, created) {
-
-				if (err || typeof created == 'undefined') {
-					sails.log.error("failed to subscribe from the survey: ", err, params);
-				}
-
-				req.addFlash('success', 'Thank you for subscribing to future updates.');
-			});
-		}
-
-		if (typeof params.platforms == "undefined") {
-			params.platforms = '';
-		}
-
-		if (params.hasRankingSystem == 'true') {
-			params.hasRankingSystem = true;
-		} else {
-			params.hasRankingSystem = false;
-		}
-
-		SurveyResponses.create({
-			email: params.email, rewardInPound: '50', companyType: params.companyType, platforms: params.platforms,
-			largestRevenue: params.largestRevenue, inappRevenue: params.inappRevenue, switchProvider: params.switchProvider,
-			offerOwnCurrency: params.offerOwnCurrency, offerPlayerBetting: params.offerPlayerBetting,
-			offerPlayerItemTrading: params.offerPlayerItemTrading, goodIdea: params.goodIdea, hasRankingSystem: params.hasRankingSystem,
-			useRankingSystem: params.useRankingSystem, becomeSupporter: params.becomeSupporter, comments: params.comments,
-			reliability: params.rel, companyName: params.companyName
-		}).exec(function (err, created) {
-
-			if (err || typeof created == 'undefined') {
-				sails.log.error("Failed to create survey response: ", err, params);
-				req.addFlash('error', 'Sorry, there was a problem recording your survey results.' +
-					' Please check your details and try again.');
-				req.addFlash('error', 'If you are keep experiencing issues, please email us at support@triforcetokens.io.');
-			} else {
-				req.addFlash('success', 'Fantastic! Thank you for completing the survey. Once we analyse the results' +
-					' we will be in touch about your Bitcoin reward.');
-			}
-
-			return res.redirect('/survey-for-bitcoin-2017');
-		});
-	},
-
-
-	/**
-	 * Return the slack invite page
-	 */
-	getSlackInvitePage: function (req, res) {
-		return res.redirect("/");
-	},
-
-	/**
-	 * Process the slack invite
-	 */
-	postSlackInvite: function (req, res) {
-		return res.redirect("/");
-	},
-
-	/**
 	 * Return the terms and conditions page
 	 */
 	getTermsConditions: function (req, res) {
@@ -546,6 +287,18 @@ module.exports = {
 			layout: 'public/layout',
 			title: 'TriForce Tokens Terms and Conditions',
 			metaDescription: 'TriForce Tokens Terms and Conditions'
+		});
+	},
+
+
+	/**
+	 * Return the terms and conditions page
+	 */
+	getTokenSaleLegal: function (req, res) {
+		return res.view('public/token-sale-legal', {
+			layout: 'public/layout',
+			title: 'Token Sale Legal Information',
+			metaDescription: 'Token sale legal notices'
 		});
 	},
 
