@@ -409,6 +409,45 @@ module.exports = {
 
 
 
+	/**
+	* Get force blockchain
+	*/
+	getForceBlockchain: function (req, res) {
+
+		return res.view('public/force-blockchain', {
+			layout: 'public/layout',
+			title: 'FORCE Blockchain',
+			metaDescription: 'FORCE Blockchain',
+		});
+	},
+
+
+	/**
+	* Get force blockchain
+	*/
+	getCustomGameTokens: function (req, res) {
+
+		return res.view('public/custom-game-tokens', {
+			layout: 'public/layout',
+			title: 'Custom Game Tokens',
+			metaDescription: 'Custom Game Tokens',
+		});
+	},
+
+
+	/**
+	* Get force wallet
+	*/
+	getForceWallet: function (req, res) {
+
+		return res.view('public/force-wallet', {
+			layout: 'public/layout',
+			title: 'FORCE Wallet',
+			metaDescription: 'FORCE Wallet',
+		});
+	},
+
+
 	/** User forgot password - send them reset link by email
 	**/
 	forgotPassword: function (req, res) {
