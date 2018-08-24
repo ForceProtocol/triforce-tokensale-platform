@@ -167,6 +167,87 @@ module.exports = {
 
 
 	/**
+	* Our Story
+	*/
+	getOurStory: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/our-story', {
+			layout: 'public/layout',
+			title: 'Our Story',
+			metaDescription: '.',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
+
+	/**
+	* RaidParty
+	*/
+	getRaidParty: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/raidparty', {
+			layout: 'public/layout',
+			title: 'RaidParty',
+			metaDescription: '.',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
+
+
+	/**
+	* Technology
+	*/
+	getTechnology: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/technology', {
+			layout: 'public/layout',
+			title: 'Our Technology',
+			metaDescription: '.',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
+
+	/**
+	* Marketplace
+	*/
+	getMarketplace: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/marketplace', {
+			layout: 'public/layout',
+			title: 'Marketplace',
+			metaDescription: '.',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
+
+	/**
+	* DynamicAdvertisement
+	*/
+	getDynamicAdvertisement: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/dynamic-advertisement', {
+			layout: 'public/layout',
+			title: 'Dynamic Advertisement',
+			metaDescription: '.',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
+
+	/**
 	* Subscribe User
 	*/
 	subscribeUser: function (req, res) {

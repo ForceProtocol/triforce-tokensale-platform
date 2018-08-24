@@ -2,6 +2,7 @@
   Animate.css
 ------------------------------------*/
 
+
 @keyframes fadeInUp {
   from {
   	opacity: 0;
@@ -20,7 +21,7 @@
 
 @keyframes slideInUp {
   from {
-    transform: translate3d(0, 12px, 0);
+    transform: translate3d(0, 10px, 0);
     visibility: visible;
   }
 
@@ -45,4 +46,9 @@
 }
 .u-stop-color-gold-dark {
     stop-color: #cba43c;
+}
+
+.u-header__section,
+.u-header--bg-transparent:not(.js-header-fix-moment) .u-header__section {
+  background-color: #fff;
 }
