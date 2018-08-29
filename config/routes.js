@@ -7,7 +7,7 @@ module.exports.routes = {
   'GET /token-sale': 'PagesController.getTokenSale',
   'GET /private-sale': 'PagesController.getPrivateSale',
   'GET /game-publishing': 'PagesController.getGamePublishing',
-  'GET /marketplaces': 'PagesController.getMarketplaces',
+  'GET /marketplace': 'PagesController.getMarketplace',
   'GET /player-community': 'PagesController.getPlayerCommunity',
   'GET /dynamic-advertisement': 'PagesController.getDynamicAdvertisement',
   'GET /raidparty': 'PagesController.getRaidParty',
