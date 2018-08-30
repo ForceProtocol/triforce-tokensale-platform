@@ -19,6 +19,7 @@ module.exports.routes = {
   'GET /force-wallet': 'PagesController.getForceWallet',
   'GET /custom-game-tokens': 'PagesController.getCustomGameTokens',
   'GET /documents': 'PagesController.getDocuments',
+  'GET /partners': 'PagesController.getPartners',
 
   /** Help and Support */
   'GET /faq': 'PagesController.getFaq',
