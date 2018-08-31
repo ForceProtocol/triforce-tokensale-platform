@@ -92,6 +92,52 @@ module.exports = {
 
 
 	/**
+	* Post Studio Submit game
+	*/
+	postStudioSignup: function (req, res) {
+sails.log.debug("posting game");
+		// Confirm recapture success
+	    var data = {
+	      remoteip: req.connection.remoteAddress,
+	      response: req.param("g-recaptcha-response"),
+	      secret: RECAPTCHA_PRIVATE_KEY
+	    };
+
+	    var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
+
+	    var email = req.param("email"),
+	    studioName = req.param("studioName"),
+	    telephone = req.param("telephone"),
+	    name = req.param("name"),
+	    description = req.param("description");
+
+
+	    recaptcha.verify(function (success, error_code) {
+	      if (success) {
+	      	// Send email to us
+	      	message = `Studio game submission
+
+	      	Studio: ${studioName},
+	      	Person: ${name},
+	      	Email: ${email},
+	      	Telephone: ${telephone},
+	      	Game Details: ${description} `;
+
+	      	sails.log.debug("emailing game");
+
+			// Submit the email to the team
+			MailchimpService.sendMandrillEmail([{ email: 'pete@triforcetokens.io', name: 'Pete Mardell' }], 'pete@triforcetokens.io', "Studio Game Submission", message);
+
+	        req.addFlash('success', 'Thank you for your game submission, our team will be in touch soon!');
+	        return res.redirect("/studio-signup?email=" + email);
+	      } else {
+	        req.addFlash('errors', 'There was a problem submitting your game, please try again or <a href="/contact">contact us</a>.');
+	        return res.redirect("/studio-signup?email=" + email);
+	      }
+	    });
+	},
+
+	/**
 	* Return the contributor login page
 	*/
 	getContributorLogin: function (req, res) {

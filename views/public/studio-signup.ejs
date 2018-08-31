@@ -11,7 +11,7 @@
         <div class="row no-gutters">
           <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 u-space-3 u-space-0--lg">
             <!-- Form -->
-            <form class="js-validate mt-5">
+            <form class="js-validate mt-5" method="POST">
               <!-- Title -->
               <div class="mb-7">
                 <h2 class="h3 text-primary font-weight-normal mb-0">Tell us about <span class="font-weight-bold">your game</span></h2>
@@ -20,22 +20,22 @@
               <!-- End Title -->
 
               <% if(flash.has('errors')){ %>
-				<br /><br />
-				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
-					<% flash.get('errors').forEach(function (message) { %>
-					<p class="error"><%- message %></p>
-					<% }) %>
-				</div>
-				<% } %>
+        				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+        					<% flash.get('errors').forEach(function (message) { %>
+        					<%- message %>
+        					<% }) %>
+        				</div>
+                <br />
+        				<% } %>
 
-				<% if(flash.has('success')){ %>
-				<br /><br />
-				<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
-					<% flash.get('success').forEach(function (message) { %>
-					<p class="success"><%- message %></p>
-					<% }) %>
-				</div>
-				<% } %>
+        				<% if(flash.has('success')){ %>
+        				<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+        					<% flash.get('success').forEach(function (message) { %>
+        					<%- message %>
+        					<% }) %>
+        				</div>
+                <br />
+        				<% } %>
 
               <!-- Input -->
 
