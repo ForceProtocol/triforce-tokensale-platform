@@ -1,0 +1,142 @@
+<%- partial('./partials/header.ejs') %>
+
+
+<main id="content" role="main">
+    <!-- Form -->
+    <div class="d-flex align-items-center position-relative u-space-3-top">
+
+
+
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 u-space-3 u-space-0--lg">
+            <!-- Form -->
+            <form class="js-validate mt-5">
+              <!-- Title -->
+              <div class="mb-7">
+                <h2 class="h3 text-primary font-weight-normal mb-0">Tell us about <span class="font-weight-bold">your game</span></h2>
+                <p>We will get back to you as soon as possible after reviewing your information.</p>
+              </div>
+              <!-- End Title -->
+
+              <% if(flash.has('errors')){ %>
+				<br /><br />
+				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+					<% flash.get('errors').forEach(function (message) { %>
+					<p class="error"><%- message %></p>
+					<% }) %>
+				</div>
+				<% } %>
+
+				<% if(flash.has('success')){ %>
+				<br /><br />
+				<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+					<% flash.get('success').forEach(function (message) { %>
+					<p class="success"><%- message %></p>
+					<% }) %>
+				</div>
+				<% } %>
+
+              <!-- Input -->
+
+              <div class="js-form-message mb-4">
+                <label class="h6 small d-block text-uppercase">Email address</label>
+
+                <div class="js-focus-state input-group u-form">
+                  <input type="email" class="form-control u-form__input" name="email" required="" placeholder="studio@creatingthefuture.com" aria-label="studio@creatingthefuture.com" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                </div>
+              </div>
+              <!-- End Input -->
+
+              <!-- Input -->
+              <div class="js-form-message mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <label class="h6 small d-block text-uppercase">Studio Name</label>
+                </div>
+
+                <div class="js-focus-state input-group u-form">
+                  <input type="text" class="form-control u-form__input" name="studioName" required="" placeholder="" aria-label="" data-msg="Please enter your studio name or game name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                </div>
+              </div>
+              <!-- End Input -->
+
+
+              <!-- Input -->
+              <div class="js-form-message mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <label class="h6 small d-block text-uppercase">Your Name</label>
+                </div>
+
+                <div class="js-focus-state input-group u-form">
+                  <input type="text" class="form-control u-form__input" name="name" required="" placeholder="" aria-label="" data-msg="Please provide your name." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                </div>
+              </div>
+              <!-- End Input -->
+
+
+             
+              <!-- Input -->
+              <div class="js-form-message mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <label class="h6 small d-block text-uppercase">Contact Telephone Number</label>
+                </div>
+
+                <div class="js-focus-state input-group u-form">
+                  <input type="text" class="form-control u-form__input" name="telephone" required="" placeholder="" aria-label="" data-msg="Please provide a contact number including country code." data-error-class="u-has-error" data-success-class="u-has-success" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                </div>
+              </div>
+              <!-- End Input -->
+
+
+               <!-- Input -->
+              <div class="js-form-message mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <label class="h6 small d-block text-uppercase">Tell us about your game</label>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p><small>Please include any links you have about your game such as steam listing.</small></p>
+                </div>
+
+                <div class="js-focus-state input-group u-form">
+                  <textarea rows="8" class="form-control u-form__input" name="description" ></textarea>
+                </div>
+              </div>
+              <!-- End Input -->
+
+
+              <!-- Input -->
+              <div class="js-form-message mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  	<div class="form-group form-group-lg">
+						<%- recaptchaForm %>
+					</div>
+                </div>
+              </div>
+              <!-- End Input -->
+
+              
+
+              <!-- Button -->
+              <div class="row align-items-center mb-5">
+                <div class="col-6">
+                  <span class="small text-muted">Want to speak to us directly?</span>
+                  <a class="small" href="/contact">Contact Us</a>
+                </div>
+
+                <div class="col-6 text-right">
+                	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                  <button type="submit" value="submit" class="btn btn-primary u-btn-primary transition-3d-hover">Submit Game Info &raquo;</button>
+                </div>
+              </div>
+              <!-- End Button -->
+            </form>
+            <!-- End Form -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Form -->
+  </main>
+
+
+<%- partial('./partials/footer.ejs') %>

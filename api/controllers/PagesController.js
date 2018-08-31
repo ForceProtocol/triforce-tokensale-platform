@@ -75,6 +75,23 @@ module.exports = {
 
 
 	/**
+	* Get Sign Up
+	*/
+	getStudioSignup: function (req, res) {
+
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
+		return res.view('public/studio-signup', {
+			layout: 'public/layout',
+			title: 'TriForce Tokens - Submit your game',
+			metaDescription: 'Submit your game to become part of the TriForce Tokens family.',
+			recaptchaForm: recaptcha.toHTML()
+		});
+	},
+
+
+
+	/**
 	* Return the contributor login page
 	*/
 	getContributorLogin: function (req, res) {
