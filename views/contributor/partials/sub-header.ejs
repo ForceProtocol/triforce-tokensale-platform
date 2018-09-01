@@ -5,6 +5,21 @@
             <div class="d-flex text-white d-lg-inline-block justify-content-between justify-content-lg-end align-items-center align-items-lg-start">
                 <div class="force-balance"><img src="/images/tri-icon.png" alt="Balance: " />
                 <%- parseFloat(txns.totalTFTs).toLocaleString() %></div>
+                <!-- Breadcrumb Nav Toggle Button -->
+              <div class="d-lg-none">
+                <button type="button" class="navbar-toggler btn u-hamburger u-hamburger--white"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="breadcrumbNavBar"
+                        data-toggle="collapse"
+                        data-target="#breadcrumbNavBar">
+                  <span id="breadcrumbHamburgerTrigger" class="u-hamburger__box">
+                    <span class="u-hamburger__inner"></span>
+                  </span>
+                </button>
+              </div>
+              <!-- End Breadcrumb Nav Toggle Button -->
+
             </div>
           </div>
 
