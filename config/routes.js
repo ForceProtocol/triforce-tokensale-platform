@@ -63,7 +63,7 @@ module.exports.routes = {
   'GET /contributor/transactions': 'DashboardController.getTransactions',
   'GET /contributor/kyc': 'DashboardController.getKyc',
   'GET /contributor/buy-force': 'DashboardController.getBuyForce',
-  'GET /contributor/buy-force': 'DashboardController.postBuyForce',
+  'POST /contributor/buy-force': 'DashboardController.postBuyForce',
   'GET /contributor/change-password': 'DashboardController.getChangePassword',
   'POST /contributor/change-password': 'DashboardController.postChangePassword',
   'GET /logout': 'DashboardController.logout',
