@@ -167,13 +167,16 @@ module.exports = {
         'Authorization': 'Bearer ' + req.session.token
       },
     });
+
+    sails.log.debug("txns is: ",txns.r1txns,txns.r2txns);
     
     return res.view('contributor/transactions', {
       layout: 'contributor/layout',
       title: 'Transactions',
       metaDescription: '',
       user: req.session.user,
-      txns: txns
+      txns: txns,
+      moment: require('moment')
     });
   },
 

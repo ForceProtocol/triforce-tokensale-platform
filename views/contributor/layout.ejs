@@ -102,6 +102,7 @@
     <script src="/js/hs.validation.js"></script>
     <script src="/js/hs.video-player.js"></script>
     <script src="/js/jquery.cubeportfolio.min.js"></script>
+    <script src="/js/jquery.dataTables.js"></script>
     <script src="/js/jquery.fancybox.min.js"></script>
     <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/js/jquery.validate.min.js"></script>
@@ -138,6 +139,8 @@
           }
         });
 
+        // Datatables
+        $.HSCore.components.HSDatatables.init('.js-datatable');
 
         // initialization of header
         $.HSCore.components.HSHeader.init($('#header'));

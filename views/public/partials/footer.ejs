@@ -148,20 +148,6 @@
       .join(' ') %>
                 </div>
 
-                <!-- Settings -->
-                <div class="btn-group position-relative ml-auto mb-auto">
-                  <a id="sidebar-account-settings-invoker" class="btn btn-xs u-btn--icon u-btn-text-secondary rounded" href="javascript:;" role="button" aria-controls="sidebar-account-settings" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-unfold-event="click" data-unfold-target="#sidebar-account-settings" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                    <span class="fa fa-ellipsis-v u-btn--icon__inner"></span>
-                  </a>
-
-                  <div id="sidebar-account-settings" class="u-unfold right-0 mt-4 u-unfold--css-animation u-unfold--hidden fadeOut" aria-labelledby="sidebar-account-settings-invoker" style="min-width: 200px; animation-duration: 300ms;">
-                    <a class="u-list__link" href="/contributor/change-password">Change password</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="u-list__link" href="/logout">Logout</a>
-                  </div>
-                </div>
-                <!-- End Settings -->
-
             </header>
             <!-- End Holder Info -->
 
@@ -172,6 +158,12 @@
                     <a class="u-sidebar--account__list-link" href="/contributor/change-password">
                       <i class="fas fa-key mr-2"></i>
                       Change Password
+                    </a>
+                  </li>
+                  <li class="u-sidebar--account__list-item">
+                    <a class="u-sidebar--account__list-link" href="/logout">
+                      <i class="fas fa-sign-out-alt mr-2"></i>
+                      Logout
                     </a>
                   </li>
                 </ul>

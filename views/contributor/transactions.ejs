@@ -5,8 +5,114 @@
     
 	<%- partial('./partials/sub-header.ejs') %>
 
+	<div class="u-bg-light-blue-50">
+      <div class="container u-space-2">
 
 
+		<!-- Basic Table -->
+		<div class="table-responsive-md u-datatable">
+		  <table class="js-datatable table">
+		    <thead>
+		      <tr class="text-uppercase font-size-14">
+		        <th scope="col" class="font-weight-medium">
+		          <div class="d-flex justify-content-between align-items-center">
+		            Transaction
+		            <div class="ml-2">
+		              <span class="fa fa-angle-up u-datatable__thead-icon"></span>
+		              <span class="fa fa-angle-down u-datatable__thead-icon"></span>
+		            </div>
+		          </div>
+		        </th>
+		        <th scope="col" class="font-weight-medium">
+		          <div class="d-flex justify-content-between align-items-center">
+		            Amount
+		            <div class="ml-2">
+		              <span class="fa fa-angle-up u-datatable__thead-icon"></span>
+		              <span class="fa fa-angle-down u-datatable__thead-icon"></span>
+		            </div>
+		          </div>
+		        </th>
+		        <th scope="col" class="font-weight-medium">
+		          <div class="d-flex justify-content-between align-items-center">
+		            Date
+		            <div class="ml-2">
+		              <span class="fa fa-angle-up u-datatable__thead-icon"></span>
+		              <span class="fa fa-angle-down u-datatable__thead-icon"></span>
+		            </div>
+		          </div>
+		        </th>
+		        <th scope="col" class="font-weight-medium">
+		          <div class="d-flex justify-content-between align-items-center">
+		            FORCE
+		            <div class="ml-2">
+		              <span class="fa fa-angle-up u-datatable__thead-icon"></span>
+		              <span class="fa fa-angle-down u-datatable__thead-icon"></span>
+		            </div>
+		          </div>
+		        </th>
+		        <th scope="col" class="font-weight-medium">
+		          <div class="d-flex justify-content-between align-items-center">
+		            Bonus
+		            <div class="ml-2">
+		              <span class="fa fa-angle-up u-datatable__thead-icon"></span>
+		              <span class="fa fa-angle-down u-datatable__thead-icon"></span>
+		            </div>
+		          </div>
+		        </th>
+		        <th scope="col" class="font-weight-medium">
+		          <div class="d-flex justify-content-between align-items-center">
+		            Total
+		            <div class="ml-2">
+		              <span class="fa fa-angle-up u-datatable__thead-icon"></span>
+		              <span class="fa fa-angle-down u-datatable__thead-icon"></span>
+		            </div>
+		          </div>
+		        </th>
+		      </tr>
+		    </thead>
+		    <tbody class="font-size-14">
+
+		    	<% 
+		    	const totalTokens = Number(_.isObject(txns) && txns.totalTFTs ? txns.totalTFTs : 0);
+		    	if(totalTokens < 1){ %>
+					<tr>
+						<td colspan="6"><%- __('No contributions made yet.') %></td>
+					<tr>
+				<% }else{
+					const {r1txns, r2txns} = txns;
+					if(_.isArray(r2txns.transactions)) {
+						for(let txn of r2txns.transactions){ %>
+					<tr>
+						<td><a target="_BLANK" href="https://etherscan.io/tx/<%- txn.transactionHash %>"><%- txn.transactionHash.substr(0,8) + '...' %></a></td>
+						<td>ETH <%= Number(txn.ethContribution).toFixed(2) %></td>
+						<td><%= moment(txn.createdAt).calendar() %></td>
+						<td><%= Number(txn.forceBoughtFrmtd).toFixed(2) %></td>
+						<td><%= Number(Number(txn.forceEarnedFrmtd) - Number(txn.forceBoughtFrmtd)).toFixed(2) %></td>
+						<td><a target="_blank" href="https://etherscan.io/tx/<%= txn.transactionHash %>"><%= Number(txn.forceEarnedFrmtd).toFixed(2) %></a></td>
+					</tr>
+					<% } }
+					if(_.isArray(r1txns.transactions) && r1txns.transactions.length) { %>
+						<tr><td colspan="5" style="text-align:center">PRE-ICO CONTRIBUTIONS <strong>WITH SPECIAL DISCOUNT</strong>
+							<br>
+							<small>*All contributions are converted to ETH equivalent based on market rate at the time of transaction</small>
+							</td></tr>
+						<% for(let txn of r1txns.transactions){ %>
+							<tr>
+								<td><a target="_BLANK" href="https://etherscan.io/tx/<%- txn.cpTxnId %>"><%- txn.cpTxnId.substr(0,8) + '...' %></a></td>
+								<td>ETH* <%= Number(txn.inEth).toFixed(2) %></td>
+								<td><%= moment(txn.createdAt).calendar() %></td>
+								<td><%= Number(Number(txn.forceEarned) - Number(txn.forceBonus)).toFixed(2) %></td>
+								<td><%= Number(txn.forceBonus).toFixed(2) %></td>
+								<td><%= Number(txn.forceEarned).toFixed(2) %></td>
+							</tr>
+							<% } }
+				%>
+				<% } %>
+
+		    </tbody>
+		  </table>
+		</div>
+		<!-- End Basic Table -->
 
 
 </main>
