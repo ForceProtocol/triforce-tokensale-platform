@@ -9,13 +9,153 @@
       <div class="container u-space-2">
 
       	<div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
-	        <span class="u-label u-label--sm u-label--primary mb-2">KYC Status: </span>
-	        <h2 class="h3 font-weight-normal">Our public token sale is currently closed</h2>
-	        <p>We will be opening our final public token sale on <strong>8th October 2018 at 12:00pm UTC</strong>.</p>
-	        <p>Check back on that date to purchase FORCE with a bonus.</p>
 
-	        <h4>Want to enter the private sale?</h4>
-	        <p>Our private sale is now open to accredited investors. Please contact the company CEO Pete Mardell at <a href="mailto:pete@triforcetokens.io">pete@triforcetokens.io</a></p>
+	        
+	        <% if (user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') { %>
+
+	        	<span class="u-label u-label--sm u-label--success mb-2">Approved</span>
+
+	        	<h2 class="font-weight-normal">Your KYC Status has been Approved</h2>
+
+	        	<br />
+
+	        	<a class="btn btn-success" href="/contributor/buy-force">Purchase FORCE &raquo;</a>
+
+	        	<br /><br />
+
+	        	<p>The information you provided to us is:</p><br />
+
+	        	<table class="table table-hover text-left">
+	        		<thead>
+	        			<tr>
+	        				<th>Data</th>
+	        				<th>Entry</th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        			<tr>
+	        				<th>Gender</th>
+	        				<td><%- user.gender %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Country</th>
+	        				<td><%- user.country %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Nationality</th>
+	        				<td><%- user.nationality %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Date of Birth</th>
+	        				<td><%- user.dateOfBirth %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Whitelisted ETH Address</th>
+	        				<td><%- user.whitelistEthAddress %></td>
+	        			</tr>
+	        		</tbody>
+	        	</table>
+
+        	<% }else if(user.approvalStatus == 'PENDING'){ %>
+
+        		<span class="u-label u-label--sm u-label--primary mb-2">Pending</span>
+
+        		<h2 class="font-weight-normal">Your KYC Status is Pending</h2>
+
+        		<div class="text-left">
+        		<p>Our process usually only takes a few minutes, however in some cases manual reviews must take place.</p>
+        		<p>In such an event please allow our team up to 48 hours to complete your verification checks.</p>
+        		<p>If you have been waiting for longer than this, please <a href="/contact">contact us</a> and we will be happy to assist.</p>
+        		</div>
+
+        		<p>The information you provided to us is:</p><br />
+
+	        	<table class="table table-hover text-left">
+	        		<thead>
+	        			<tr>
+	        				<th>Data</th>
+	        				<th>Entry</th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        			<tr>
+	        				<th>Gender</th>
+	        				<td><%- user.gender %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Country</th>
+	        				<td><%- user.country %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Nationality</th>
+	        				<td><%- user.nationality %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Date of Birth</th>
+	        				<td><%- user.dateOfBirth %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Whitelisted ETH Address</th>
+	        				<td><%- user.whitelistEthAddress %></td>
+	        			</tr>
+	        		</tbody>
+	        	</table>
+
+    		<% }else if(user.approvalStatus == 'REJECTED'){ %>
+
+    		<span class="u-label u-label--sm u-label--danger mb-2">Rejected</span>
+
+    		<h2 class="font-weight-normal">Your KYC has been Rejected</h2>
+
+    		<p>We appologise that we have been unable to accept your contribution to purchase FORCE.</p>
+    		<p>Unfortunately this is required by law that we must obey strict KYC/AML processes.</p>
+
+        		<p>The information you provided to us is:</p><br />
+
+	        	<table class="table table-hover text-left">
+	        		<thead>
+	        			<tr>
+	        				<th>Data</th>
+	        				<th>Entry</th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        			<tr>
+	        				<th>Gender</th>
+	        				<td><%- user.gender %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Country</th>
+	        				<td><%- user.country %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Nationality</th>
+	        				<td><%- user.nationality %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Date of Birth</th>
+	        				<td><%- user.dateOfBirth %></td>
+	        			</tr>
+	        			<tr>
+	        				<th>Whitelisted ETH Address</th>
+	        				<td><%- user.whitelistEthAddress %></td>
+	        			</tr>
+	        		</tbody>
+	        	</table>
+
+			<% }else{ %>
+
+				<span class="u-label u-label--sm u-label--info mb-2">Application</span>
+
+    			<h2 class="font-weight-normal">Complete the KYC Process</h2>
+
+    			<p>Unfortunately the KYC process is currently paused until such a time when we
+    			re-open our final token sale.</p>
+    			<p>We will however notify you when the KYC process re-opens and you can complete it prior to contributing
+    			to receive FORCE tokens.</p>
+
+			<% } %>
+
       	</div>
 
       </div>

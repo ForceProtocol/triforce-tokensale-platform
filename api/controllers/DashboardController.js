@@ -256,11 +256,25 @@ module.exports = {
   /**
   * Return the KYC
   */
-  getKyc: function (req, res) {
+  getKyc: async (req, res) => {
+    const txns = await request({
+      method: 'GET',
+      uri: sails.config.API_URL + 'ico/user/txns',
+      json: true,
+      headers: {
+        'Authorization': 'Bearer ' + req.session.token
+      },
+    });
+
+    // Get most up to date data on user
+    let userData = await User.findOne({id:req.session.user.id});
+    
     return res.view('contributor/kyc', {
       layout: 'contributor/layout',
-      title: 'KYC Process',
+      title: 'Review and update your KYC/AML',
       metaDescription: '',
+      user: userData,
+      txns: txns
     });
   },
 
