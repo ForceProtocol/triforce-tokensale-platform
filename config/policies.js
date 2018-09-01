@@ -32,7 +32,10 @@ module.exports.policies = {
 		'getContributorLogin': ['isGuest', 'localize'],
 		'getContributorSignup': ['isGuest', 'localize'],
 		'postKycStep2': ['tokenAuthBackend', 'localize'],
-		'resubmitKYC': ['tokenAuthBackend', 'localize']
+		'resubmitKYC': ['tokenAuthBackend', 'localize'],
+		'getResetPassword': 'tokenAuthBackend',
+		'postResetPassword': 'tokenAuthBackend',
+		'activateAccount': 'tokenAuthBackend',
 	},
 
 	'DashboardController': {

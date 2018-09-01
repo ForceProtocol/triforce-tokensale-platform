@@ -29,6 +29,14 @@
       				</div>
       				<% } %>
 
+              <% if(flash.has('success')){ %>
+              <div class="alert alert-success">
+                <% flash.get('success').forEach(function (message) { %>
+                <%- message %><br />
+                <% }) %>
+              </div>
+              <% } %>
+
               <!-- Input -->
 
               <div class="js-form-message mb-4">

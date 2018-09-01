@@ -27,6 +27,7 @@ module.exports = {
 
     const processReq = async ()=>{
         if(!addr){
+          sails.log.debug("checking whitelist bs");
           const user = await User.findOne({id: req.token.user.id, select:['whitelistEthAddress']});
           if(_.isObject(user) && user.whitelistEthAddress)
             addr = user.whitelistEthAddress;

@@ -45,10 +45,7 @@ module.exports = {
 
     let activationToken = jwToken.issue({
       route: sails.config.BASE_URL + 'user/activate',
-      data: {
-        email: email,
-        userId: user.id
-      }
+      user:user.toJSON()
     }, sails.config.ACCOUNT_ACTIVATION_TOKEN_EXPIRY);
 
     let msg = `Hello and welcome to TriForce Tokens. Please click on the link below to activate your account
@@ -76,11 +73,7 @@ module.exports = {
 
     let activationToken = jwToken.issue({
       route: sails.config.BASE_URL + 'user/verify-ether-request',
-      data: {
-        email: user.email,
-        userId: user.id,
-        etherAddress
-      }
+      user:user.toJSON()
     }, sails.config.ACCOUNT_ACTIVATION_TOKEN_EXPIRY);
 
     let msg = `Hello ${user.firstName},
@@ -122,10 +115,7 @@ module.exports = {
 
     let activationToken = jwToken.issue({
       route: sails.config.BASE_URL + 'user/reset',
-      data: {
-        email: email,
-        userId: user.id
-      }
+      user: user.toJSON()
     }, sails.config.ACCOUNT_ACTIVATION_TOKEN_EXPIRY);
 
     let msg = `You have made a request to reset your password. Please visit the link below to enter a new password

@@ -18,6 +18,14 @@
               </div>
               <br />
             <% } %>
+            <% if(flash.has('success')){ %>
+              <div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+                <% flash.get('success').forEach(function (message) { %>
+                <%- message %>
+                <% }) %>
+              </div>
+              <br />
+            <% } %>
            
              <div class="g-mb-32">
                <h1 class="display-4 font-size-48--md-down mb-3">Launch Your Game Successfully</h1>

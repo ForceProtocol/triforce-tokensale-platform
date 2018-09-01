@@ -45,13 +45,19 @@ module.exports = function (req, res, next) {
         isDeleted: false
       });
 
-      if(!user)throw new CustomError('',{status: 401});
+      if(!user){
+        throw new CustomError('',{status: 401});
+      }
+
       req.token = {user};
+
       let _tft = await Triforce.findOne(1);
-      if(!_tft)
+      if(!_tft){
         _tft = await Triforce.create({icoActive:false});
+      }
 
       sails.config.TFT = _tft;
+
       return user;
     };
 

@@ -606,28 +606,28 @@ module.exports = {
 
 		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
 
+		var email = req.param("email");
+
 		recaptcha.verify(function (success, error_code) {
 
 			if (success) {
 				// Submit request to API server to issue password reset link
-				request({
-					method: 'POST',
-					json: true,
-					body: req.allParams(),
-					uri: sails.config.API_URL + 'user/forgot-password'
-				}).then((rsp) => {
-					req.addFlash('success', 'A password reset link will be emailed to you. Please now check your inbox and possibly junk inbox for a password reset email.');
-					res.redirect('/');
-				}).catch(err => {
-					let msg = err.error ? err.error.err : err.message;
+				// Make sure user email is valid
+				User.findOne({email:email}).then(function(user){
 
-					if (typeof msg == 'undefined' || msg.length == 0) {
-						req.addFlash('errors', "There was a problem trying to issue you a reset password link. Please contact us at pete@triforcetokens.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
-						return res.redirect("/forgot-password");
+					if(user.statusId == Status.SUSPENDED || 
+						user.statusId == Status.DELETED){
+						req.addFlash('errors', "Your account has been blocked");
+						return rUtil.errorResponseRedirect("Your account has been blocked.", req, res, '/');
 					}
 
-					rUtil.errorResponseRedirect(err, req, res, '/forgot-password');
+					UserService.sendResetPasswordEmail(email).then(()=>{
+						req.addFlash('success', 'A password reset link will be emailed to you. Please now check your inbox and possibly junk inbox for a password reset email.');
+						return res.redirect('/');
+					}).catch(err=> rUtil.errorResponse(err, res));
+
 				});
+
 			} else {
 				req.addFlash('errors', "There was a problem trying to issue you a reset password link. Please make sure to fill out the captcha form.");
 				return res.redirect("/forgot-password");
@@ -717,6 +717,8 @@ module.exports = {
      */
 	getResetPassword: function (req, res) {
 
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
 		// Make sure token is valid
 		var resetToken = req.param("token");
 
@@ -725,11 +727,11 @@ module.exports = {
 			return res.redirect("/");
 		}
 
-
 		return res.view('public/reset-password', {
 			layout: 'public/layout',
 			title: 'TriForce Tokens | Reset Your Password',
-			metaDescription: 'TriForce Tokens Reset Password Form'
+			metaDescription: 'TriForce Tokens Reset Password Form',
+			recaptchaForm: recaptcha.toHTML()
 		});
 	},
 
@@ -739,25 +741,66 @@ module.exports = {
      */
 	postResetPassword: function (req, res) {
 
-		// Make sure token is valid
-		var resetToken = req.param("token");
+		// Confirm recapture success
+		var data = {
+			remoteip: req.connection.remoteAddress,
+			response: req.param("g-recaptcha-response"),
+			secret: RECAPTCHA_PRIVATE_KEY
+		};
 
-		if (typeof resetToken == 'undefined') {
-			req.addFlash('errors', 'Your reset link has expired. Please complete the password reset form again.');
-			return res.redirect("/");
-		}
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
 
-		// Submit request to API server to reset the password
-		request({
-			method: 'POST',
-			json: true,
-			body: req.allParams(),
-			uri: sails.config.API_URL + 'user/reset-password'
-		}).then((rsp) => {
-			req.addFlash('success', 'Your password change has been accepted. Please now login to your account.');
-			res.redirect('/');
-		}).catch(err => {
-			rUtil.errorResponseRedirect(err, req, res, req.path);
+		recaptcha.verify(function (success, error_code) {
+
+			if(!success){
+				req.addFlash('errors', 'You did not complete the captcha field.');
+				return res.redirect("/reset-password/" + resetToken);
+			}else{
+
+				// Make sure token is valid
+				var resetToken = req.param("token");
+
+				if (typeof resetToken == 'undefined' || !req.token || !req.token.user.id) {
+					req.addFlash('errors', 'Your reset link has expired. Please complete the password reset form again.');
+					return res.redirect("/");
+				}
+
+				let password = req.param('password'),
+				pwdChk = req.param('password-check');
+
+			    if(!_.isString(password) || password.length < 7){
+		    		req.addFlash('errors', 'Please provide a valid password. Password length must be greater than 6');
+					return res.redirect("/reset-password/" + resetToken);
+			    }
+
+			    if(password !== pwdChk){
+			      	req.addFlash('errors', 'Your passwords did not match. Please check and try again.');
+					return res.redirect("/reset-password/" + resetToken);
+			    }
+
+			    const processRequest = async ()=>{
+			      	let user = await User.update({
+				        id: req.token.user.id,
+				        isDeleted: false,
+				        statusId: [Status.PENDING, Status.LIVE, Status.ACTIVE, Status.INACTIVE]
+			      	}, {
+				        statusId: Status.ACTIVE,
+				        password
+			      	});
+
+			      	if(!user || !user.length){
+			      		throw new CustomError('Invalid request to process', {status: 404});
+		    		}
+
+			      return {msg: 'Your password has been updated successfully'};
+			    };
+
+			    processRequest()
+			      .then(function(){
+			      	req.addFlash('success', 'Your password has been changed successfully. Please login below.');
+					return res.redirect("/contributor-login");
+			      }).catch(err=> rUtil.errorResponseRedirect(err, req, res, '/'));
+			  }
 		});
 	},
 
