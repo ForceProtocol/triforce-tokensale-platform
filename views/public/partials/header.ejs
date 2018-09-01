@@ -7,7 +7,18 @@
         <div class="d-flex align-items-center mb-0">
           <!-- Language -->
           <div class="position-relative">
-            <a id="languageDropdownInvoker" class="d-flex align-items-center u-unfold-wrapper" href="javascript:;" role="button" aria-controls="languageDropdown" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+            <a id="languageDropdownInvoker" class="d-flex align-items-center u-unfold-wrapper" href="javascript:;" role="button" 
+            aria-controls="languageDropdown" 
+            aria-haspopup="true" 
+            aria-expanded="false" 
+            data-unfold-event="hover" 
+            data-unfold-target="#languageDropdown" 
+            data-unfold-type="css-animation" 
+            data-unfold-duration="300" 
+            data-unfold-delay="300" 
+            data-unfold-hide-on-scroll="true" 
+            data-unfold-animation-in="slideInUp" 
+            data-unfold-animation-out="fadeOut">
                <img class="u-unfold__icon" src="/images/flags/united-kingdom.png" alt="SVG">
               <span class="d-inline-block d-sm-none">EN</span>
               <span class="d-none d-sm-inline-block">English</span>
@@ -28,6 +39,14 @@
               </a>
 
               <div id="jumpToDropdown" class="u-unfold mt-2 u-unfold--css-animation u-unfold--hidden fadeOut" aria-labelledby="jumpToDropdownInvoker" style="animation-duration: 300ms;">
+
+                <% if(req.session.authenticated && req.session.user) { %>
+                <a class="u-list__link" href="/contributor">Your Dashboard</a>
+                <% }else{ %>
+                  <a class="u-list__link" href="/contributor-login">User Login</a>
+                <% } %>
+
+                <a class="u-list__link" href="/faq">FAQ</a>
                 <a class="u-list__link" href="/contact">Contact Us</a>
               </div>
             </div>
@@ -51,22 +70,32 @@
                   <li class="list-inline-item mr-0">
                      <a class="u-header__topbar-nav-link" href="https://medium.com/@triforcetokens"><i class="fab fa-medium"></i></a>
                   </li>
-                  <li class="list-inline-item mr-0">
-                     <a class="u-header__topbar-nav-link" href="/faq">FAQ</a>
+                  <li class="list-inline-item position-relative">
+                     <a class="u-header__topbar-nav-link" aria-expanded="false" href="/faq">FAQ</a>
                   </li>
-                  <li class="list-inline-item mr-0">
-                     <a class="u-header__topbar-nav-link" href="/contact">Contact Us</a>
+                  <li class="list-inline-item position-relative">
+                     <a class="u-header__topbar-nav-link" aria-expanded="false" href="/contact">Contact Us</a>
                   </li>
-                  <li class="list-inline-item mr-0">
+                  <li class="list-inline-item position-relative">
                      <% if(req.session.authenticated && req.session.user) { %>
 
-                      <a id="sidebarNavToggler" class="btn btn-xs u-btn-text-secondary u-sidebar--account__toggle-bg ml-1 target-of-invoker-has-unfolds" href="javascript:;" role="button" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                      <a id="sidebarNavToggler" class="btn btn-xs u-btn-text-secondary u-sidebar--account__toggle-bg ml-1" href="javascript:;" role="button" 
+                      aria-controls="sidebarContent" 
+                      aria-haspopup="true" 
+                      aria-expanded="false" 
+                      data-unfold-event="click" 
+                      data-unfold-hide-on-scroll="false" 
+                      data-unfold-target="#sidebarContent"
+                      data-unfold-type="css-animation" 
+                      data-unfold-animation-in="fadeInRight" 
+                      data-unfold-animation-out="fadeOutRight" 
+                      data-unfold-duration="500">
                         <span class="position-relative">
-                          <span class="u-sidebar--account__toggle-text"><%- (req.session.user.firstName + " " + req.session.user.lastName).toLowerCase()
+                          <span class="u-sidebar--account__toggle-text"><strong><%- (req.session.user.firstName + " " + req.session.user.lastName).toLowerCase()
     .split(' ')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ') %></span>
-                          <i class="fas fa-users-cog"></i>
+    .join(' ') %></strong></span>
+                          <i class="fas fa-users-cog mr-2"></i>
                         </span>
                       </a>
                       <% }else{ %>
@@ -105,7 +134,7 @@
           <div id="navBar" class="collapse navbar-collapse py-0">
             <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
               <!-- Home -->
-              <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened" 
+              <li class="nav-item hs-has-mega-menu u-header__nav-item" 
                data-event="hover" 
                data-animation-in="slideInUp" data-animation-out="fadeOut" 
                data-position="left">
@@ -172,7 +201,7 @@
 
 
               <!-- Videos -->
-              <li class="nav-item hs-has-mega-menu u-header__nav-item hs-mega-menu-opened" data-event="hover" 
+              <li class="nav-item hs-has-mega-menu u-header__nav-item" data-event="hover" 
               data-animation-in="slideInUp" data-animation-out="fadeOut"
               data-position="right">
                 <a id="videosMegaMenu" class="nav-link u-header__nav-link" href="javascript:;" aria-haspopup="true" aria-expanded="false">
