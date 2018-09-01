@@ -117,3 +117,150 @@
     <span class="fa fa-arrow-up u-go-to__inner"></span>
   </a>
   <!-- End Go to Top -->
+
+
+<% if(req.session.user){ %>
+  <aside id="sidebarContent" class="u-sidebar u-unfold--css-animation u-unfold--hidden" aria-labelledby="sidebarNavToggler" style="animation-duration: 500ms; right: 0px;">
+    <div class="u-sidebar__scroller">
+      <div class="u-sidebar__container">
+        <div class="u-sidebar--account__footer-offset">
+          <!-- Toggle Button -->
+          <div class="d-flex justify-content-between align-items-center pt-4 px-7">
+            <h3 class="h6 mb-0">My Account</h3>
+
+            <button type="button" class="close ml-auto target-of-invoker-has-unfolds" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <!-- End Toggle Button -->
+
+          <!-- Content -->
+          <div class="js-scrollbar u-sidebar__body mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible;"><div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+            <!-- Holder Info -->
+            <header class="d-flex align-items-center u-sidebar--account__holder mt-3">
+
+                <div class="position-relative">
+                </div>
+                <div class="ml-3">
+                  <strong><%- (req.session.user.firstName + " " + req.session.user.lastName).toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ') %>
+                </div>
+
+                <!-- Settings -->
+                <div class="btn-group position-relative ml-auto mb-auto">
+                  <a id="sidebar-account-settings-invoker" class="btn btn-xs u-btn--icon u-btn-text-secondary rounded" href="javascript:;" role="button" aria-controls="sidebar-account-settings" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-unfold-event="click" data-unfold-target="#sidebar-account-settings" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                    <span class="fa fa-ellipsis-v u-btn--icon__inner"></span>
+                  </a>
+
+                  <div id="sidebar-account-settings" class="u-unfold right-0 mt-4 u-unfold--css-animation u-unfold--hidden fadeOut" aria-labelledby="sidebar-account-settings-invoker" style="min-width: 200px; animation-duration: 300ms;">
+                    <a class="u-list__link" href="/contributor/change-password">Change password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="u-list__link" href="/logout">Logout</a>
+                  </div>
+                </div>
+                <!-- End Settings -->
+
+            </header>
+            <!-- End Holder Info -->
+
+            <div class="u-sidebar__content--account">
+                <!-- List Links -->
+                <ul class="list-unstyled u-sidebar--account__list">
+                  <li class="u-sidebar--account__list-item">
+                    <a class="u-sidebar--account__list-link" href="/contributor/change-password">
+                      <i class="fas fa-key mr-2"></i>
+                      Change Password
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            <div class="u-sidebar__content--account">
+              <!-- List Links -->
+              <ul class="list-unstyled u-sidebar--account__list">
+                <li class="u-sidebar--account__list-item">
+                  <a class="u-sidebar--account__list-link" href="/contributor">
+                    <span class="fa fa-home u-sidebar--account__list-icon mr-2"></span>
+                    Dashboard
+                  </a>
+                </li>
+                <li class="u-sidebar--account__list-item">
+                  <a class="u-sidebar--account__list-link" href="/contributor/kyc-application">
+                    <span class="fa fa-user-circle u-sidebar--account__list-icon mr-2"></span>
+                    KYC Application
+                  </a>
+                </li>
+                <li class="u-sidebar--account__list-item">
+                  <a class="u-sidebar--account__list-link" href="/contributor/transactions">
+                    <span class="fa fa-tasks u-sidebar--account__list-icon mr-2"></span>
+                    Transactions
+                  </a>
+                </li>
+                <li class="u-sidebar--account__list-item">
+                  <a class="u-sidebar--account__list-link" href="/documents">
+                    <span class="fa fa-layer-group u-sidebar--account__list-icon mr-2"></span>
+                    Documentation
+                  </a>
+                </li>
+                <li class="u-sidebar--account__list-item">
+                  <a class="u-sidebar--account__list-link" href="/contact">
+                    <span class="fa fa-users u-sidebar--account__list-icon mr-2"></span>
+                    Support
+                  </a>
+                </li>
+                <li class="u-sidebar--account__list-item">
+                  <a class="u-sidebar--account__list-link" href="/contributor/buy-force">
+                    <span class="fa fa-exchange-alt u-sidebar--account__list-icon mr-2"></span>
+                    Buy FORCE
+                  </a>
+                </li>
+              </ul>
+              <!-- End List Links -->
+
+              <div class="u-sidebar--account__list-divider"></div>
+
+            </div>
+          </div></div>
+
+          <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px; display: block; height: 187px; max-height: 336px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="u-sidebar__footer u-sidebar__footer--account">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item pr-3">
+              <a class="u-sidebar__footer--account__text" href="/privacy">Privacy</a>
+            </li>
+            <li class="list-inline-item pr-3">
+              <a class="u-sidebar__footer--account__text" href="/token-sale-legal">Terms</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="u-sidebar__footer--account__text" href="/documents">
+                <i class="fa fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+
+          <!-- SVG Background Shape -->
+          <div class="position-absolute-bottom-0">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 300 126.5" style="margin-bottom: -5px; enable-background:new 0 0 300 126.5;" xml:space="preserve">
+              <path class="u-fill-primary" opacity=".6" d="M0,58.9c0-0.9,5.1-2,5.8-2.2c6-0.8,11.8,2.2,17.2,4.6c4.5,2.1,8.6,5.3,13.3,7.1C48.2,73.3,61,73.8,73,69
+                c43-16.9,40-7.9,84-2.2c44,5.7,83-31.5,143-10.1v69.8H0C0,126.5,0,59,0,58.9z"></path>
+              <path class="u-fill-primary" d="M300,68.5v58H0v-58c0,0,43-16.7,82,5.6c12.4,7.1,26.5,9.6,40.2,5.9c7.5-2.1,14.5-6.1,20.9-11
+                c6.2-4.7,12-10.4,18.8-13.8c7.3-3.8,15.6-5.2,23.6-5.2c16.1,0.1,30.7,8.2,45,16.1c13.4,7.4,28.1,12.2,43.3,11.2
+                C282.5,76.7,292.7,74.4,300,68.5z"></path>
+              <circle class="u-fill-danger" cx="259.5" cy="17" r="13"></circle>
+              <circle class="u-fill-primary" cx="290" cy="35.5" r="8.5"></circle>
+              <circle class="u-fill-success" cx="288" cy="5.5" r="5.5"></circle>
+              <circle class="u-fill-warning" cx="232.5" cy="34" r="2"></circle>
+            </svg>
+          </div>
+          <!-- End SVG Background Shape -->
+        </footer>
+        <!-- End Footer -->
+      </div>
+    </div>
+  </aside>
+  <% } %>

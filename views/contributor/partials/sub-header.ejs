@@ -1,0 +1,83 @@
+<div class="bg-primary">
+      <div class="container u-space-3-top pb-3">
+        <div class="row">
+          <div class="col-lg-5 order-lg-2 text-lg-right mb-4 mb-lg-0">
+            <div class="d-flex text-white d-lg-inline-block justify-content-between justify-content-lg-end align-items-center align-items-lg-start">
+                <div class="force-balance"><img src="/images/tri-icon.png" alt="Balance: " />
+                <%- parseFloat(txns.totalTFTs).toLocaleString() %></div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 order-lg-1">
+            <!-- User Info -->
+            <div class="media d-block d-sm-flex align-items-sm-center">
+              <div class="media-body">
+                <h1 class="h3 text-white font-weight-medium mb-1">Howdy, <%- user.firstName.replace(/^\w/, c => c.toUpperCase()) %>!</h1>
+                <span class="d-block text-white"><%- user.email %></span>
+              </div>
+            </div>
+            <!-- End User Info -->
+          </div>
+        </div>
+      </div>
+
+      <div class="container u-space-1-bottom u-space-bottom-0--lg">
+        <div class="d-lg-flex justify-content-lg-between align-items-lg-center">
+          <!-- Navbar -->
+          <div class="u-header u-header--bg-transparent-lg z-index-4">
+            <div class="u-header__section bg-transparent u-header--white-nav-links">
+              <nav class="js-breadcrumb-menu navbar navbar-expand-lg u-header__navbar hs-menu-initialized hs-menu-horizontal">
+                <div id="breadcrumbNavBar" class="collapse navbar-collapse py-0">
+                  <ul class="navbar-nav w-100 u-header__navbar-nav">
+                    <!-- General -->
+                    <li class="nav-item u-header__nav-item" >
+                      <a class="nav-link u-header__nav-link" href="/contributor"><i class="fas fa-home"></i> &nbsp; Dashboard</a>
+                    </li>
+                    <!-- General -->
+
+                    <!-- Account Settings -->
+                    <li class="nav-item u-header__nav-item">
+                      <a class="nav-link u-header__nav-link <%- req.path == '/contributor' ? 'active' : '' %>" href="/contributor/kyc"><i class="fas fa-passport"></i> &nbsp; KYC Application</a>
+                    </li>
+                    <!-- Account Settings -->
+
+
+                    <!-- Others -->
+                    <li class="nav-item u-header__nav-item">
+                      <a class="nav-link u-header__nav-link" href="/contributor/transactions"><i class="fas fa-credit-card"></i>&nbsp; Transactions</a>
+                    </li>
+                    <!-- Others -->
+
+
+                    <!-- Others -->
+                    <li class="nav-item u-header__nav-item">
+                      <a class="nav-link u-header__nav-link" href="/documents"><i class="fa fa-layer-group"></i> &nbsp; Documentation</a>
+                    </li>
+                    <!-- Others -->
+
+
+                    <!-- Others -->
+                    <li class="nav-item u-header__nav-item">
+                      <a class="nav-link u-header__nav-link" href="/contact"><i class="fas fa-concierge-bell"></i> &nbsp; Support</a>
+                    </li>
+                    <!-- Others -->
+
+                    
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <!-- End Navbar -->
+
+          <div class="ml-lg-auto">
+            <!-- Button -->
+            <a class="btn btn-sm u-btn-white--air transition-3d-hover" href="#addTaskModal" data-modal-target="#addTaskModal" data-overlay-color="#111722">
+              <span class="fa fa-plus font-size-13 mr-2"></span>
+              Buy FORCE
+            </a>
+            <!-- End Button -->
+          </div>
+        </div>
+      </div>
+    </div>

@@ -22,22 +22,22 @@
               <!-- End Title -->
 
               <% if(flash.has('errors')){ %>
-				<br /><br />
-				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
-					<% flash.get('errors').forEach(function (message) { %>
-					<p class="error"><%- message %></p>
-					<% }) %>
-				</div>
-				<% } %>
+        				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+        					<% flash.get('errors').forEach(function (message) { %>
+        					<p class="error"><%- message %></p>
+        					<% }) %>
+        				</div>
+                <br />
+        				<% } %>
 
-				<% if(flash.has('success')){ %>
-				<br /><br />
-				<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
-					<% flash.get('success').forEach(function (message) { %>
-					<p class="success"><%- message %></p>
-					<% }) %>
-				</div>
-				<% } %>
+        				<% if(flash.has('success')){ %>
+        				<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+        					<% flash.get('success').forEach(function (message) { %>
+        					<p class="success"><%- message %></p>
+        					<% }) %>
+        				</div>
+                <br />
+        				<% } %>
 
               <!-- Input -->
 

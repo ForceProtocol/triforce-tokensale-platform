@@ -188,31 +188,19 @@ module.exports = {
         });
       });
     }else cb(null, user);
-  }/*,
+  },
 
-  afterUpdate: function (users, cb) {
-    if (!_.isArray(users)) users = [users];
-    for (let user of users) {
-      try {
-        if ('approvalStatus' in user && _.isString(user.approvalStatus) && ['CLEARED', 'ACCEPTED', 'APPROVED'].indexOf(user.approvalStatus.toUpperCase()) !== -1) {
-          user.whitelistEthAddress && BlockchainService.contracts.WhiteList.addWhiteListed(user.whitelistEthAddress)
-            .catch((er) => {
-              EmailService.sendEmail({
-                fromEmail: 'support',
-                fromName: 'Support',
-                toEmail: sails.config.contacts.team,
-                toName: `FORCE Team`,
-                subject: 'WHITELIST:: failed to add user to whitelist',
-                body:
-                  `System failed to add user to whitelist. Please review and add manually:<br>
-          USER DATA: <pre>${JSON.stringify(user)}</pre><br>and error message is: <pre>${er ? er.message : 'na'}</pre>`
-              });
-            });
-        }
-      }catch(e){
-        sails.log.error('error while processing afterUpdate event on User model: ', e.message);
+  isInvalidPassword: function (str) {
+      if (str.length < 6) {
+          return "Your password must be greater than 6 characters in length.";
+      } else if (str.search(/\d/) == -1) {
+          return "Your password must contain at least one digit.";
+      } else if (str.search(/[A-Z]/) < 0) {
+          return "Your password must contain at least one capital letter.";
+      } else if (!_.isString(str)) {
+          return "Your password is not a valid string.";
       }
-    }
-    _.isFunction(cb) && cb();
-  }*/
+      return false;
+  },
+
 };

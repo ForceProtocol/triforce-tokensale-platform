@@ -20,15 +20,6 @@ module.exports = {
   getDashboard: function (req, res) {
 
     let processReq = async () => {
-      // const cryptos = await request({
-      //   method: 'GET',
-      //   uri: sails.config.API_URL + 'user-cryptos',
-      //   json: true,
-      //   headers: {
-      //     'Authorization': 'Bearer ' + req.session.token
-      //   },
-      // });
-
 
       // check if added to whitelist contract
       const isWlAdded = await request({
@@ -40,7 +31,6 @@ module.exports = {
         },
       });
 
-
       const user = await request({
         method: 'GET',
         uri: sails.config.API_URL + 'user',
@@ -50,14 +40,6 @@ module.exports = {
         },
       });
 
-
-      // let cryptObj = {};
-      // if (_.isArray(cryptos)){
-      //   cryptos.forEach(_crypto=>{
-      //     cryptObj[_crypto.currency] = _crypto;
-      //   })
-      // }
-
       const txns = await request({
         method: 'GET',
         uri: sails.config.API_URL + 'ico/user/txns',
@@ -66,16 +48,8 @@ module.exports = {
           'Authorization': 'Bearer ' + req.session.token
         },
       });
-      // const balance =  await request({
-      //   method: 'GET',
-      //   uri: sails.config.API_URL + 'balance',
-      //   json: true,
-      //   headers: {
-      //     'Authorization': 'Bearer ' + req.session.token
-      //   },
-      // });
 
-      return { /*cryptObj,*/ txns, user, isWlAdded };
+      return { txns, user, isWlAdded };
     };
 
     processReq()
@@ -85,11 +59,8 @@ module.exports = {
           layout: 'contributor/layout',
           title: 'Contributor Dashboard | TriForce Tokens Ltd',
           metaDescription: 'Contributor Dashboard.',
-          // cryptos: rsp.cryptos,
-          // cryptObj: rsp.cryptObj,
           txns: rsp.txns,
           isWlAdded: rsp.isWlAdded,
-          // balance: rsp.balance,
           user: rsp.user,
           moment: require('moment')
         });
@@ -102,65 +73,6 @@ module.exports = {
   },
 
 
-
-  signup: function (req, res) {
-
-    /** Add to subscribers list */
-    var email = req.param("email"),
-      firstName = req.param("firstName"),
-      lastName = req.param("lastName");
-
-    if (sails.config.environment === 'production') {
-      Subscribers.findOrCreate({ email: email, active: true }).exec(function (err, created) {
-        if (err || typeof created == 'undefined') {
-          sails.log.error("failed to subscribe: ", err, email);
-        } else {
-          // Submit post request to LTF subscribe list
-          var ltfFormVars = {
-            'cm-f-dytkwut': firstName,
-            'cm-f-dytkwui': lastName,
-            'cm-udlhydk-udlhydk': email
-          };
-
-          request({
-            method: 'POST',
-            uri: 'http://login.yourcampaignmanager.co.uk/t/r/s/udlhydk/',
-            formData: ltfFormVars,
-            headers: {
-              'content-type': 'application/x-www-form-urlencoded'
-            }
-          }).then((rsp) => {
-          }).catch(err => {
-          });
-        }
-      });
-    }
-
-
-    // Submit signup request to API server
-    request({
-      method: 'POST',
-      json: true,
-      body: req.allParams(),
-      uri: sails.config.API_URL + 'register'
-    }).then((rsp) => {
-      req.addFlash('success', 'Thank you for signing up.');
-      req.session.user = rsp.user;
-      req.session.token = rsp.token;
-      req.session.etherAddress = rsp.etherAddress;
-      return res.redirect('/contributor');
-    }).catch(err => {
-      let msg = err.error ? err.error.err : err.message;
-
-      if (typeof msg == 'undefined' || msg.length == 0) {
-        req.addFlash('errors', "There was a problem creating your account. Please contact us at pete@triforcetokens.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
-        return res.redirect("/");
-      }
-
-      rUtil.errorResponseRedirect(err, req, res, '/');
-    });
-
-  },
 
   setEthereumAddress: function (req, res) {
 
@@ -211,9 +123,147 @@ module.exports = {
   logout: function (req, res) {
     delete req.session.token;
     delete req.session.user;
+    delete req.session.authenticated;
     res.clearCookie('token');
-    res.redirect('/?logout=true');
+    res.redirect('/');
   },
+
+
+
+
+  /**
+  * Return the buy force
+  */
+  getBuyForce: async (req, res) => {
+    const txns = await request({
+      method: 'GET',
+      uri: sails.config.API_URL + 'ico/user/txns',
+      json: true,
+      headers: {
+        'Authorization': 'Bearer ' + req.session.token
+      },
+    });
+    
+    return res.view('contributor/buy-force', {
+      layout: 'contributor/layout',
+      title: 'Buy FORCE',
+      metaDescription: '',
+      user: req.session.user,
+      txns: txns
+    });
+  },
+
+
+  /**
+  * Return the buy force
+  */
+  getTransactions: async (req, res) => {
+
+    const txns = await request({
+      method: 'GET',
+      uri: sails.config.API_URL + 'ico/user/txns',
+      json: true,
+      headers: {
+        'Authorization': 'Bearer ' + req.session.token
+      },
+    });
+    
+    return res.view('contributor/transactions', {
+      layout: 'contributor/layout',
+      title: 'Transactions',
+      metaDescription: '',
+      user: req.session.user,
+      txns: txns
+    });
+  },
+
+
+  /**
+  * Return the change password
+  */
+  getChangePassword: async (req, res) => {
+
+    const txns = await request({
+      method: 'GET',
+      uri: sails.config.API_URL + 'ico/user/txns',
+      json: true,
+      headers: {
+        'Authorization': 'Bearer ' + req.session.token
+      },
+    });
+
+    return res.view('contributor/change-password', {
+      layout: 'contributor/layout',
+      title: 'Change Password',
+      metaDescription: '',
+      user: req.session.user,
+      txns: txns
+    });
+  },
+
+
+   postChangePassword: async (req, res) => {
+
+    try{
+      let currentPassword = req.param('currentPassword'),
+        newPassword = req.param('newPassword'),
+        confirmNewPassword = req.param('confirmNewPassword');
+
+        let user = await User.findOne({id:req.session.user.id});
+
+        if(!user){
+          throw new Error("Failed to retrieve user");
+        }
+
+        // Validate password
+        let validPassword = await user.validatePassword(currentPassword);
+
+        if(!validPassword){
+          req.addFlash('errors',"You entered an invalid current password.");
+          return res.redirect("/contributor/change-password");
+        }
+
+        // Make sure new password contains one number and capital letter
+        let passwordError = User.isInvalidPassword(newPassword);
+        if(passwordError){
+          req.addFlash('errors',passwordError);
+          return res.redirect("/contributor/change-password");
+        }
+
+        if(newPassword != confirmNewPassword){
+          req.addFlash('errors',"Your new passwords do not match.");
+          return res.redirect("/contributor/change-password");
+        }
+
+        // Everything ok, update users password
+        let updatedPassword = User.update({id:req.session.user.id},{password:newPassword});
+
+        if(!updatedPassword){
+          throw new Error("Failed to update your password due to a server error.");
+        }
+
+        req.addFlash("success","Your new password has been updated.")
+        return res.redirect("/contributor/change-password");
+      }catch(err){
+        sails.log.error("DashboardController.postChangePassword err: ",err);
+        return res.redirect("/contributor/change-password");
+      }
+  },
+
+
+
+  /**
+  * Return the KYC
+  */
+  getKyc: function (req, res) {
+    return res.view('contributor/kyc', {
+      layout: 'contributor/layout',
+      title: 'KYC Process',
+      metaDescription: '',
+    });
+  },
+
+
 
 };
 

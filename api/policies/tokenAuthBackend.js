@@ -8,13 +8,13 @@
 module.exports = function (req, res, next) {
   let token;
 
+  if (req.session.authenticated) {
+    return next();
+  }
+
   if (req.param('token')) {
     token = req.param('token');
-
-    // We delete the token from param to not mess with blueprints
-    //delete req.query.token; Enabled for demo purposes
-  }
-  else if (req.headers && req.headers['authorization']) {
+  }else if (req.headers && req.headers['authorization']) {
     let parts = req.headers['authorization'].split(' ');
     if (parts.length === 2) {
       let scheme = parts[0],
@@ -24,15 +24,18 @@ module.exports = function (req, res, next) {
         token = credentials;
       }
     } else {
-      return res.json(401, {err: 'Format is Authorization: Bearer [token]'});
+      req.addFlash("errors","You have been logged out for security, please login again.");
+      return res.redirect("/logout");
     }
   } else {
-    return res.json(401, {err: 'No Authorization header was found'});
+    req.addFlash("errors","You have been logged out for security, please login again.");
+    return res.redirect("/logout");
   }
 
   jwToken.verify(token, function (err, token) {
     if (err) {
-      return res.json(401, {err: 'Invalid Token'});
+      req.addFlash("errors","You have been logged out for security, please login again.");
+      return res.redirect("/logout");
     }
 
     const processReq = async ()=>{

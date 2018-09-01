@@ -29,14 +29,15 @@ module.exports.policies = {
 	'*': 'localize',
 
 	'PagesController': {
-		'getLogin': ['isGuest', 'localize'],
-		'getSignUp': ['isGuest', 'localize'],
-		'postKycStep2': ['tokenAuth', 'localize'],
-		'resubmitKYC': ['tokenAuth', 'localize']
+		'getContributorLogin': ['isGuest', 'localize'],
+		'getContributorSignup': ['isGuest', 'localize'],
+		'postKycStep2': ['tokenAuthBackend', 'localize'],
+		'resubmitKYC': ['tokenAuthBackend', 'localize']
 	},
 
 	'DashboardController': {
-		'*': ['tokenAuth', 'localize'],
+		'*': ['tokenAuthBackend', 'localize'],
+		'logout': true
 	},
 
 	/* TF-API Backend Policies */
@@ -61,9 +62,6 @@ module.exports.policies = {
 		totalUsers: true,
 		getTriforceTableData: true,
 		getPartnerResults: true,
-		resetPassword: 'isAuthenticated',
-		activateAccount: 'isAuthenticated',
-		setupEtherAddress: 'isAuthenticated'
 	},
 
 	CryptoController: {
@@ -77,7 +75,7 @@ module.exports.policies = {
 	},
 
 	BlockchainController: {
-		'*': 'tokenAuth',
+		'*': 'tokenAuthBackend',
 		'getIcoSummary': true,
 		'getUserTransactions': ['tokenAuthBackend'],
 		'addWhiteListed': ['tokenAuthBackend', 'isAdmin'],

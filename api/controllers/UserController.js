@@ -192,24 +192,6 @@ module.exports = {
 	},
 
 
-
-	// Update Step 1 of KYC process data
-	confirmRuncpaLead: function (req, res) {
-		var userId = req.param('userId');
-
-		User.findOne({id:userId}).exec(function(err,user){
-
-			if(err || typeof user === 'undefined'){
-			}else{
-				RunCpaService.signupCallback(user.runCpaId,user.whitelistEthAddress);
-			}
-
-			return res.ok();
-
-		});
-	},
-
-
   sendActivationEmail: function (req, res) {
     UserService.sendActivationEmail(req.param('email'))
       .then(()=>{
