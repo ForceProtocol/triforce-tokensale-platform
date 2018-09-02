@@ -9,46 +9,6 @@ const validator = require('validator');
 
 module.exports = {
 
-  signup: function (req, res) {
-    let {firstName, lastName, email, password} = req.allParams();
-
-    if(!_.isString(firstName))
-      return res.badRequest('Please provide a valid first name');
-    if(!_.isString(lastName))
-      return res.badRequest('Please provide a valid last name');
-    if(!validator.isEmail(email))
-      return res.badRequest('Please provide a valid email address');
-    if(!_.isString(password) || password.length < 7)
-      return res.badRequest('Password length must be greater than 6 characters.');
-
-
-    const processRequest = async ()=>{
-
-      const userExists = await User.count({email});
-
-      if(userExists) throw new CustomError('An account already exists with this email address. Please login with ' + email + ' or sign up with a different one.', {status: 403});
-
-      const user = await User.create({
-        firstName,
-        lastName,
-        email,
-        password
-      });
-
-      //await UserService.sendActivationEmail(user.email);
-      let etherAddress = await CpService.generateAddress('ETH', user.id);
-
-      let loggedIn = await UserService.login(email, password);
-      if(_.isObject(etherAddress)) loggedIn.etherAddress =  etherAddress.address;
-
-      return loggedIn;
-    };
-
-    processRequest()
-      .then(res.ok)
-      .catch(err=> rUtil.errorResponse(err, res));
-  },
-
 
   signupKyc: function (req, res) {
     let {firstName,lastName,email,password,nationality,country,gender,dateOfBirth,referrerId,referrerWebId,runCpaId/*,faceMatchResult,approvalStatus*/} = req.allParams();

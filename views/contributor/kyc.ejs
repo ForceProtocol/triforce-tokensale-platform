@@ -10,6 +10,25 @@
 
       	<div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
 
+
+      		<% if(flash.has('errors')){ %>
+				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+					<% flash.get('errors').forEach(function (message) { %>
+					<%- message %>
+					<% }) %>
+				</div>
+	        	<br />
+			<% } %>
+
+			<% if(flash.has('success')){ %>
+			<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+				<% flash.get('success').forEach(function (message) { %>
+				<%- message %>
+				<% }) %>
+			</div>
+	        <br />
+			<% } %>
+
 	        
 	        <% if (user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') { %>
 

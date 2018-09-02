@@ -7,7 +7,8 @@
 
 const request = require('request-promise'),
 	Recaptcha = require('recaptcha-v2').Recaptcha,
-	fs = require('fs');
+	fs = require('fs'),
+	validator = require('validator');
 
 var RECAPTCHA_PUBLIC_KEY = sails.config.RECAPTCHA.PUBLIC_KEY,
 	RECAPTCHA_PRIVATE_KEY = sails.config.RECAPTCHA.PRIVATE_KEY;
@@ -173,7 +174,7 @@ module.exports = {
 	      				req.session.user = userData.user;
 	      				req.session.token = userData.token;
 			       		return res.redirect("/contributor");
-			       }).catch((err)=>rUtil.errorResponse(err, res));
+			       }).catch((err)=>rUtil.errorResponseRedirect(err, req, res, "/contributor-login?email=" + email));
 
 	      		}else{
 	      			req.addFlash('errors', "You did not tick the recaptcha verification box.");
@@ -202,6 +203,102 @@ module.exports = {
 			recaptchaForm: recaptcha.toHTML()
 		});
 	},
+
+
+	/**
+	* User Sign up
+	*/
+	postContributorSignUp: function(req,res){
+
+		let {firstName, lastName, email, password,termsCheckbox} = req.allParams();
+		let signupError = false;
+
+		// Confirm recapture success
+	    var data = {
+	      remoteip: req.connection.remoteAddress,
+	      response: req.param("g-recaptcha-response"),
+	      secret: RECAPTCHA_PRIVATE_KEY
+	    };
+
+	    var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
+
+
+	    recaptcha.verify(function (success, error_code) {
+	      	if (success) {
+
+	      		// Make sure user agrees to terms
+	      		if(!termsCheckbox){
+	      			signupError = true;
+			    	req.addFlash("errors","You must confirm you agree to the Token Sale Agreement and have understood all legal disclosures.");
+	      		}
+
+			    if(!_.isString(firstName)){
+			    	signupError = true;
+			    	req.addFlash("errors","You did not enter a valid first name");
+			    }
+
+			    if(!_.isString(lastName)){
+			      	signupError = true;
+			    	req.addFlash("errors","You did not enter a valid last name");
+			    }
+
+			    if(!validator.isEmail(email)){
+			      	signupError = true;
+			    	req.addFlash("errors","You did not enter a valid first name");
+			    }
+
+			    let passwordError = User.isInvalidPassword(password);
+			    if(passwordError){
+			      	signupError = true;
+			    	req.addFlash("errors",passwordError);
+			    }
+
+			    if(signupError){
+			    	return res.redirect("/contributor-signup?email=" + email + "&firstName=" + firstName + "&lastName=" + lastName);
+			    }
+
+
+			    const processRequest = async ()=>{
+
+			      	const userExists = await User.count({email});
+
+			      	if(userExists){
+			      		throw new CustomError('An account already exists with this email address. Please login with ' + email + ' or sign up with a different one.', {status: 403});
+			      	}
+
+			      	const user = await User.create({
+				        firstName,
+				        lastName,
+				        email,
+				        password
+			      	});
+
+			      	await UserService.sendActivationEmail(user.email);
+
+			      	let loggedIn = await UserService.login(email, password);
+
+			      	req.session.authenticated = true;
+			    	req.session.user = loggedIn.user;
+			    	req.session.token = loggedIn.token;
+
+			      	return loggedIn;
+			    };
+
+			    processRequest().then(function(){
+			    	// TODO: Make user complete KYC
+			      	req.addFlash("success","Your account has been created. You will need to click the activation link in the email sent to be able to login next time.");
+			      	return res.redirect("/contributor/kyc");
+		      	}).catch(err=> rUtil.errorResponseRedirect(err, req, res, "/contributor-signup?email=" + email + "&firstName=" + firstName + "&lastName=" + lastName));
+
+			}else{
+				req.addFlash("errors","You did not complete the captcha check.");
+				return res.redirect("/contributor-signup?email=" + email + "&firstName=" + firstName + "&lastName=" + lastName);
+			};
+
+		});
+	},
+
+
 
 	/**
 	* Game Publishing
@@ -655,7 +752,7 @@ module.exports = {
 				}
 			} catch (er) {
 			}
-			res.redirect('/');
+			res.redirect('/contributor-login');
 		}).catch(err => {
 			let msg = err.error ? err.error.err : err.message;
 

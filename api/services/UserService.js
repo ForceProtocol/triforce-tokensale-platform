@@ -6,21 +6,26 @@ module.exports = {
 	login: async (email, password, withoutPassword)=>{
 	
 		let user = await User.findOne({email, isDeleted: false});
-		if(!user) throw new CustomError('Invalid email or password', {status: 401});
+
+		if(!user){
+      throw new CustomError('Invalid email or password', {status: 401});
+    }
 
 		const isValidPassword = withoutPassword ? true : await user.validatePassword(password);
 
-		if(!isValidPassword)
-		throw new CustomError('Invalid email or password', {status: 401});
+		if(!isValidPassword){
+      throw new CustomError('Invalid email or password', {status: 401});
+    }
 
-		if([Status.PENDING, Status.ACTIVE].indexOf( user.statusId) === -1)
-		throw new CustomError('This account is not active. Please contact support for help', {status: 401});
+		if([Status.PENDING, Status.ACTIVE].indexOf(user.statusId) === -1){
+		  throw new CustomError('This account is not active. Please contact support for help', {status: 401});
+    }
 
 		const rsp = {
-		user: user,
-		token: jwToken.issue({
-		  user: user.toJSON()
-		}, sails.config.LOGIN_TOKEN_EXPIRY)
+		  user: user,
+  		token: jwToken.issue({
+  		  user: user.toJSON()
+		  }, sails.config.LOGIN_TOKEN_EXPIRY)
 		};
 
 		user.lastLogin = new Date();

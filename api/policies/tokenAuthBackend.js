@@ -46,7 +46,7 @@ module.exports = function (req, res, next) {
       });
 
       if(!user){
-        throw new CustomError('',{status: 401});
+        throw new Error("Failed to load user account");
       }
 
       req.token = {user};
@@ -63,7 +63,7 @@ module.exports = function (req, res, next) {
 
     processReq()
       .then(()=> next())
-      .catch(err=>rUtil.errorResponse(err, res));
+      .catch(err=>rUtil.errorResponseRedirect(err, req, res, "/"));
 
   });
 };

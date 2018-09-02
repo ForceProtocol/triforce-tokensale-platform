@@ -39,7 +39,7 @@ module.exports = {
       'type': 'DATETIME',
       defaultsTo: new Date()
     },
-//ALTER TABLE `users` ADD `wlStatus` INT NOT NULL DEFAULT '0' AFTER `socketId`;
+
     wlStatus: {
       type: 'INTEGER',
       defaultsTo: 0 // 3 = approved, 2=submitted/pending, 1/0/default = didnt try yet
@@ -58,14 +58,14 @@ module.exports = {
       'type': 'string'
     },
 
-	releaseFundingConfirmed: {
+    releaseFundingConfirmed: {
       'type': 'DATETIME'
     },
 
-	whitelistEthAddress: {
-		'type': 'string',
-		defaultsTo: ''
-	},
+    whitelistEthAddress: {
+    	'type': 'string',
+    	defaultsTo: ''
+    },
 
 	gender: {
 		'type': 'string',
