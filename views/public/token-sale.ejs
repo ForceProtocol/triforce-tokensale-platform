@@ -1,0 +1,97 @@
+<%- partial('./partials/header.ejs') %>
+
+
+<main id="content" role="main">
+
+
+   <div class="d-flex align-items-center position-relative u-bg-gradient-v1 u-space-4-top u-space-5-top--md u-space-0--lg min-height-90vh--lg">
+       <!-- Content -->
+       <div class="container">
+         <div class="row">
+           <div class="col-lg-5">
+
+            <% if(flash.has('errors')){ %>
+              <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+                <% flash.get('errors').forEach(function (message) { %>
+                <%- message %>
+                <% }) %>
+              </div>
+              <br />
+            <% } %>
+            <% if(flash.has('success')){ %>
+              <div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+                <% flash.get('success').forEach(function (message) { %>
+                <%- message %>
+                <% }) %>
+              </div>
+              <br />
+            <% } %>
+           
+             <div class="g-mb-32">
+               <h1 class="display-4 font-size-48--md-down mb-3">Join the token sale</h1>
+               <p>Join us on a journey to transform the games industry with <strong>pioneering blockchain technology</strong></p>
+             </div>
+
+             <div class="d-flex align-items-center">
+               <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="/contributor-signup">Get Started</a>
+
+               <!-- Fancybox -->
+               <a class="js-fancybox media align-items-center u-media-player ml-3" href="javascript:;" 
+               data-src="https://youtu.be/gpAz4SEjfoo" 
+               data-speed="200" 
+               data-animate-in="zoomIn" 
+               data-animate-out="zoomOut"
+               data-caption="TriForce Tokens Vision">
+                 <span class="d-flex mr-3">
+                   <span class="u-media-player__icon u-media-player__icon--success">
+                     <span class="fa fa-play u-media-player__icon-inner"></span>
+                   </span>
+                 </span>
+                 <span class="media-body">
+                   Play video
+                 </span>
+               </a>
+               <!-- End Fancybox -->
+
+             </div>
+
+             <br />
+
+              <a target="_blank" href="https://www.the-blocks.com/"><img class="img-responsive" src="/images/theblocks-award-2018.png" alt="" /></a>
+
+           </div>
+         </div>
+       </div>
+       <!-- End Content -->
+      </div>
+
+
+      <div class="col-lg-9 col-xl-7 d-none d-lg-block position-absolute-top-right-0 pr-0" style="margin-top: 105.6px;">
+        <figure class="w-100">
+           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1374.7 1083.6" style="enable-background:new 0 0 1374.7 1083.6;" xml:space="preserve">
+             <path class="u-fill-primary" opacity=".05" d="M285.2,170.1c-94.5,8.6-181.2,57.4-235.9,134.8C-34.7,423.6-54.5,621.5,349,879.8
+               c636.5,407.6,600,9.3,591.9-47.4c-0.8-5.5-1.4-11.1-2-16.6l-34.2-374.1C888.4,262,729.2,129.6,549.4,146L285.2,170.1z"></path>
+             <g>
+               <defs>
+                 <path id="heroBlock1" d="M1374.7,0H687.6l-278,279.7c-150,150.9-148.1,395.3,4.4,543.8l0,0C554.1,960,774.9,968.7,925.4,843.6
+                   l449.3-373.4V0z"></path>
+               </defs>
+               <clipPath id="heroBlock2">
+                 <use xlink:href="#heroBlock1" style="overflow:visible;"></use>
+               </clipPath>
+               <g transform="matrix(1 0 0 1 0 0)" style="clip-path:url(#heroBlock2);">
+                 <!-- Apply your (750px width to 750px height) image here -->
+                 <image style="overflow:visible;" width="750" height="750" xlink:href="/images/banner-image-eximius.png" transform="matrix(1.4462 0 0 1.4448 290.09 0)"></image>
+               </g>
+             </g>
+           </svg>
+         </figure>
+      </div>
+
+    </div>
+
+
+
+  </main>
+
+<%- partial('./partials/footer.ejs') %>

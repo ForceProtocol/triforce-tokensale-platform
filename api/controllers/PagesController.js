@@ -574,6 +574,16 @@ module.exports = {
 	},
 
 
+	/**
+	 * Return token sale page
+	 */
+	getTokenSale: function (req, res) {
+		return res.view('public/token-sale', {
+			layout: 'public/layout',
+			title: 'Token Sale',
+			metaDescription: 'Token sale information'
+		});
+	},
 
 
 	/**
