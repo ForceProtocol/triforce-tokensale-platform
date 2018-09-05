@@ -35,7 +35,7 @@ module.exports = {
 		return res.view('public/home', {
 			layout: 'public/layout',
 			title: 'TriForce Tokens Ltd',
-			metaDescription: 'TriForce Tokens will become the industry standard on multiple gaming platforms introducing new revenue models. Join our crypto-currency ICO crowdfund today.',
+			metaDescription: 'TriForce Tokens is building the future of game publishing, with a full-house technology framework to make games launch successfully and continue to grow.',
 			recaptchaForm: recaptcha.toHTML()
 		});
 
@@ -52,7 +52,7 @@ module.exports = {
 		return res.view('public/login', {
 			layout: 'public/layout',
 			title: 'TriForce Tokens User Account Login',
-			metaDescription: 'TriForce Tokens will become the industry standard on multiple gaming platforms introducing new revenue models. Join our crypto-currency ICO crowdfund today.',
+			metaDescription: '',
 			recaptchaForm: recaptcha.toHTML()
 		});
 	},
@@ -68,7 +68,7 @@ module.exports = {
 		return res.view('public/signup', {
 			layout: 'public/layout',
 			title: 'TriForce Tokens - Enter Token Sale',
-			metaDescription: 'TriForce Tokens will become the industry standard on multiple gaming platforms introducing new revenue models. Join the gaming revolution today.',
+			metaDescription: 'Sign up to the greatest technology based game publishing endevour.',
 			recaptchaForm: recaptcha.toHTML()
 		});
 	},
