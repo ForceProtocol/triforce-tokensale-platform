@@ -578,10 +578,13 @@ module.exports = {
 	 * Return token sale page
 	 */
 	getTokenSale: function (req, res) {
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
 		return res.view('public/token-sale', {
 			layout: 'public/layout',
 			title: 'Token Sale',
-			metaDescription: 'Token sale information'
+			metaDescription: 'Token sale information',
+			recaptchaForm: recaptcha.toHTML()
 		});
 	},
 

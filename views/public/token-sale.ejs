@@ -171,11 +171,70 @@
               </div>
             </div>
 
-
-
-
           </div>
+
+           <div class="container text-center u-space-3-top">
+            <h4 class="h6 text-muted mb-3">Follow us</h4>
+
+            <div class="d-flex justify-content-center">
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://discord.gg/Bnfpqrk" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-discord font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Discord</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://twitter.com/triforcetokens" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-twitter font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Twitter</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://www.facebook.com/triforcetokens" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-facebook font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Facebook</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://medium.com/@triforcetokens" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-medium font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Medium</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+          
         </div>
+
         <!-- End Content -->
       </div>
 
@@ -184,7 +243,7 @@
 
 
     <!-- DOCUMENTS -->
-    <div class="container u-space-1 text-center">
+    <div class="container u-space-1-bottom text-center">
 
       <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
         <span class="u-label u-label--sm u-label--primary mb-2">Documents</span>
@@ -224,7 +283,19 @@
             <img class="img-fluid" src="/images/risk-disclosures-cover.png" alt="Risk Disclosures" />
           </a>
         </div>
-        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4">
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4 text-left">
+          <form method="POST" action="">
+            <div class="form-group">
+              <label><strong>Subscribe for updates</strong></label>
+              <input placeholder="Email address" required type="email" name="email" class="form-control" />
+            </div>
+            <div class="form-group form-group-lg">
+              <%- recaptchaForm %>
+            </div>
+            <div class="form-group">
+              <input type="text" value="Subscribe" class="btn btn-primary btn-sm btn-block" />
+            </div>
+          </form>
         </div>
       </div>
     </div>
