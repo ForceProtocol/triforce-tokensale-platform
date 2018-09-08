@@ -187,6 +187,131 @@
         setTimeout(function () {
           $.HSCore.components.HSStickyBlock.init('.js-sticky-block');
         }, 300);
+
+
+
+        /** Set the public token sale open date */
+        var dateNowUnix = Date.now();
+        var tokenSaleOpenDate = new Date(Date.UTC(2018,9,8,12,0,0)).getTime();
+        var tokenSaleCloseDate = new Date(Date.UTC(2018,10,11,12,0,0)).getTime();
+
+        // Find the distance between now and the end date
+        var openDistance = tokenSaleOpenDate - dateNowUnix;
+        var closeDistance = tokenSaleCloseDate - dateNowUnix;
+
+        // Time to token sale open
+        if(openDistance > 0){
+          $('.tokensale-opening').fadeIn();
+          startDiscountTimeLeft(tokenSaleOpenDate);
+        }
+        // Token sale is LIVE
+        else if(closeDistance > 0){
+          $('.tokensale-open').fadeIn();
+          startDiscountTimeLeft(tokenSaleCloseDate);
+        }
+        // Token sale is ENDED
+        else{
+          $('.tokensale-closed').fadeIn();
+        }
+
+        function startDiscountTimeLeft(endDateUnix){
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+
+              dateNowUnix = Date.now();
+
+              // Find the distance between now and the count down date
+              distance = endDateUnix - dateNowUnix;
+
+              setTimeCountdown(distance);
+
+              // If the count down is finished, write some text 
+              if (distance < 2) {
+                  clearInterval(x);
+              }
+            }, 1000);
+          }
+
+          function setTimeCountdown(distance, timeClass){
+
+              if(typeof timeClass === 'undefined'){
+                timeClass = '';
+              }
+
+              // Time calculations for days, hours, minutes and seconds
+              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+              if(days < 1){
+                days = 0;
+              }
+              if(hours < 1){
+                hours = 0;
+              }
+              if(minutes < 1){
+                minutes = 0;
+              }
+              if(seconds < 1){
+                seconds = 0;
+              }
+
+              $('.js-days' + timeClass).text(days);
+              $('.js-hours' + timeClass).text(hours);
+              $('.js-minutes' + timeClass).text(minutes);
+              $('.js-seconds' + timeClass).text(seconds);
+          }
+
+          // Work out current bonus
+          var discountRound1End = new Date(Date.UTC(2018,8,14,0,0,0)).getTime();
+          var discountRound2End = new Date(Date.UTC(2018,8,21,0,0,0)).getTime();
+          var discountRound3End = new Date(Date.UTC(2018,8,28,0,0,0)).getTime();
+
+          var discountRound1Distance = discountRound1End - Date.now();
+          var discountRound2Distance = discountRound2End - Date.now();
+          var discountRound3Distance = discountRound3End - Date.now();
+
+          // Round 1 Live
+          if(discountRound1Distance > 0){
+            $('.current-bonus').text("15");
+            startBonusTimeLeft(discountRound1End);
+          }
+          // Round 2 Live
+          else if(discountRound2Distance > 0){
+            $('.current-bonus').text("10");
+            startBonusTimeLeft(discountRound2End);
+          }
+          // Round 3 Live
+          else if(discountRound3Distance > 0){
+            $('.current-bonus').text("10");
+            startBonusTimeLeft(discountRound3End);
+          }
+          // Final round LIVE
+          else {
+            $('.current-bonus').text("0");
+            $('.bonus-info').hide();
+          }
+
+          function startBonusTimeLeft(endDateUnix){
+            // Update the count down every 1 second
+            var z = setInterval(function() {
+
+              dateNowUnix = Date.now();
+
+              // Find the distance between now and the count down date
+              distanceD = endDateUnix - dateNowUnix;
+
+              setTimeCountdown(distanceD,"-bonus");
+
+              // If the count down is finished, write some text 
+              if (distanceD< 2) {
+                  clearInterval(z);
+              }
+            }, 1000);
+          }
+
+
       });
     </script>
 
