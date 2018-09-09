@@ -30,7 +30,6 @@ module.exports.routes = {
 
   /** Email Subscribe */
   'POST /subscribe': 'PagesController.subscribeUser',
-  'POST /subscribe-presale': 'PagesController.preSaleSubscribeUser',
 
   /** Help and Support */
   'GET /faq': 'PagesController.getFaq',

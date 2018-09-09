@@ -397,7 +397,7 @@ module.exports = {
 		});
 	},
 
-
+ 
 	/**
 	* Subscribe User
 	*/
@@ -408,67 +408,6 @@ module.exports = {
 			runCpaId = '',
 			referrerWebId = '';
 
-		// Check if this is referral ID by cookie
-		if (typeof req.cookies !== 'undefined' && typeof req.cookies.track_id !== 'undefined') {
-			referrerId = req.cookies.track_id;
-
-			if (typeof req.cookies.track_id_web_id !== 'undefined') {
-				referrerWebId = req.cookies.track_id_web_id;
-			}
-		} else if (typeof req.cookies.run_cpa_track_id !== 'undefined') {
-			runCpaId = req.cookies.run_cpa_track_id;
-		}
-
-		Subscribers.findOrCreate({ email: email, referrerId: referrerId, referrerWebId: referrerWebId, runCpaId: runCpaId, runCpaTrackedOn: new Date(), active: true }).exec(function (err, created) {
-			if (err || typeof created == 'undefined') {
-				sails.log.error("failed to subscribe: ", err, email);
-				return res.ok({ status: "error", msg: "Failed to subscribe you, please try again." });
-			}
-
-			/** Add to normal subscriber list **/
-			MailchimpService.addSubscriber("4cd285b73f", email, "", "", "pending").then(function (addResponse) {
-			}).catch(function (err) {
-				sails.log.debug("new subscriber not added due to error: ", err);
-			});
-
-			req.addFlash('success', 'Thank you for subscribing to future updates. Please check your email inbox and possibly junk inbox for your confirmation email.');
-
-			return res.ok({ status: "success", msg: "You have been successfully subscribed and will be kept updated about the ICO. Please check your email inbox and possibly junk inbox for your confirmation email." });
-		});
-	},
-
-
-
-	/**
-	* Pre-Sale Subscribe User
-	*/
-	preSaleSubscribeUser: function (req, res) {
-
-		var email = req.param("email"),
-			firstName = req.param("firstName"),
-			lastName = req.param("lastName"),
-			referrerId = '',
-			referrerWebId = '',
-			runCpaId = '';
-
-		// Check if this is referral ID by cookie
-		if (typeof req.cookies !== 'undefined' && typeof req.cookies.track_id !== 'undefined') {
-			referrerId = req.cookies.track_id;
-
-			if (typeof req.cookies.track_id_web_id !== 'undefined') {
-				referrerWebId = req.cookies.track_id_web_id;
-			}
-		} else if (typeof req.cookies.run_cpa_track_id !== 'undefined') {
-			runCpaId = req.cookies.run_cpa_track_id;
-		}
-
-		// Submit post request to LTF subscribe list
-		var ltfFormVars = {
-			'cm-f-dytkwut': firstName,
-			'cm-f-dytkwui': lastName,
-			'cm-udlhydk-udlhydk': email
-		};
-
 		// Confirm recapture success
 		var data = {
 			remoteip: req.connection.remoteAddress,
@@ -476,37 +415,31 @@ module.exports = {
 			secret: RECAPTCHA_PRIVATE_KEY
 		};
 
-
 		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
 
 		recaptcha.verify(function (success, error_code) {
 
 			if (success) {
-				request({
-					method: 'POST',
-					uri: 'http://login.yourcampaignmanager.co.uk/t/r/s/udlhydk/',
-					formData: ltfFormVars,
-					headers: {
-						'content-type': 'application/x-www-form-urlencoded'
+
+				Subscribers.findOrCreate({ email: email, active: true }).exec(function (err, created) {
+					if (err || typeof created == 'undefined') {
+						req.addFlash('errors', 'There as a problem trying to subscribe you. You may already be subscribed.');
+						return res.redirect("/");
 					}
-				}).then((rsp) => {
-				}).catch(err => {
+
+					/** Add to normal subscriber list **/
+					MailchimpService.addSubscriber("4cd285b73f", email, "", "", "pending").then(function (addResponse) {
+					}).catch(function (err) {
+					});
+
+					req.addFlash('success', 'Thank you for subscribing to future updates. Please check your email inbox and possibly junk inbox for your confirmation email.');
+					return res.redirect("/");
 				});
-
-
-				Subscribers.findOrCreate({ email: email, firstName: firstName, lastName: lastName, referrerId: referrerId, referrerWebId: referrerWebId, runCpaId: runCpaId, runCpaTrackedOn: new Date(), active: true }).exec(function (err, created) {
-				});
-
-				req.addFlash('success', 'Thank you for registering your interest in joining the pre-sale. Please check your email inbox and possibly junk inbox for your confirmation email.');
-
-				return res.ok({ status: "success", msg: "You have been successfully subscribed and will be kept updated about the ICO. Please check your email inbox and possibly junk inbox for your confirmation email." });
-			} else {
-				console.log("error code:", error_code);
-				req.addFlash('errors', 'There was a problem confirming your request. Please make sure you complete the captcha request.');
-				return res.ok({ status: "error", msg: "Your join request could not be sent, due to an invalid captcha. Please complete the captcha question." });
+			}else{
+				req.addFlash('errors', 'You did not complete the recaptcha checkbox.');
+				return res.redirect("/");
 			}
 		});
-
 	},
 
 
