@@ -175,7 +175,7 @@
 
 
     			<!-- Request Payment Form -->
-			    <form id="kycForm" class="js-validate js-step-form"
+			    <form enctype="multipart/form-data" id="kycForm" class="js-validate js-step-form"
 			          data-progress-id="#progressStepForm"
 			          data-steps-id="#contentStepForm"
 			          novalidate="novalidate">
@@ -965,10 +965,14 @@
 			        <div id="attachDocumentsStep" class="text-left" style="display: none;">
 			          
 			          <div class="row">
-			          	<label>Please upload a scanned image of your chosen ID by itself.</label>
-			          	<p>You can upload your passport, National ID card or Drivers Licence.</p>
 
-			          	<br />
+			          	<div class="col-sm-12">
+				          	<h4>Upload ID Document</h4>
+
+				          	<div>
+				          		<p>You can upload your passport, National ID card or Drivers Licence.</p>
+				          	</div>
+		          		</div>
 
 			          	<div class="col-sm-5">
 				          <!-- File Attachment Input -->
@@ -976,7 +980,7 @@
 				          	<img class="img-fluid text-center mb-3" src="/images/upload-passport-icon.png" alt="" />
 				            <p>Browse your device and upload chosen ID</p>
 				            <small class="d-block text-muted">Maximum file size 10MB</small>
-				            <input id="fileAttachmentInput" name="file-attachment" type="file" class="u-file-attachment-input__label">
+				            <input id="fileAttachmentInput" name="documentIdFile" type="file" class="u-file-attachment-input__label document-image-upload-input">
 				          </label>
 				          <!-- End File Attachment Input -->
 			          	</div>
@@ -991,7 +995,7 @@
 				            <img class="img-fluid text-center mb-3" src="/images/upload-webcam-icon.png" alt="" />
 				            <p>Take picture of document via your webcam</p>
 				            <small class="d-block text-muted">Maximum file size 10MB</small>
-				            <input id="fileAttachmentInput" name="file-attachment" type="file" class="u-file-attachment-input__label">
+				            <input id="fileAttachmentInput" name="documentIdWebcam" type="file" class="u-file-attachment-input__label document-image-webcam-input">
 				          </label>
 				          <!-- End File Attachment Input -->
 			          	</div>
@@ -1001,18 +1005,21 @@
 
 			          <div class="row">
 
-			          	<label>Please upload a selfie.</label><br /><br />
-			          	<p>The image must be clear and just of your face similar to a passport photo.</p>
-			          	<p>The closer your uploaded image matches the photo on your ID document in step 1, the more likely your verification
-			          	will be approved automatically.</p>
+			          	<div class="col-sm-12">
+			          		<h4>Upload Selfie</h4>
 
-			          	<br />
+				          	<div>
+					          	<p>The image must be clear and of your <strong>face only</strong>.</p>
+					          	<p>The closer your uploaded image matches the photo on your ID document, the more likely your verification
+					          	will be approved automatically.</p>
+				          	</div>
+			          	</div>	
 
 			          	<div class="col-sm-5">
 				          <!-- File Attachment Input -->
 				          <label class="u-file-attachment-input mb-4" for="fileAttachmentInput">
-				          	<img class="img-fluid text-center mb-1" src="/images/upload-passport-icon.png" alt="" /><br /><br />
-				            Browse your device and upload chosen ID
+				          	<img class="img-fluid text-center mb-1" src="/images/upload-selfie-icon.png" alt="" /><br /><br />
+				            Browse your device and upload a selfie photo
 				            <small class="d-block text-muted">Maximum file size 10MB</small>
 				            <input id="fileAttachmentInput" name="file-attachment" type="file" class="u-file-attachment-input__label">
 				          </label>
@@ -1027,7 +1034,7 @@
 				          <!-- File Attachment Input -->
 				          <label class="u-file-attachment-input mb-4" for="fileAttachmentInput">
 				            <img class="img-fluid text-center mb-1" src="/images/upload-webcam-icon.png" alt="" /><br /><br />
-				            Take picture of document via your webcam
+				            Take a selfie via your webcam
 				            <small class="d-block text-muted">Maximum file size 10MB</small>
 				            <input id="fileAttachmentInput" name="file-attachment" type="file" class="u-file-attachment-input__label">
 				          </label>

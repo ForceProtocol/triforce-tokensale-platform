@@ -173,6 +173,11 @@ module.exports = {
 	      				req.session.authenticated = true;
 	      				req.session.user = userData.user;
 	      				req.session.token = userData.token;
+
+	      				if(!userData.user.approvalStatus){
+				          return res.redirect("/contributor/kyc");
+				        }
+				        
 			       		return res.redirect("/contributor");
 			       }).catch((err)=>rUtil.errorResponseRedirect(err, req, res, "/contributor-login?email=" + email));
 

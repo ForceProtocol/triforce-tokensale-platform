@@ -88,6 +88,7 @@
     <script src="/js/hs.core.js"></script>
     <script src="/js/custom.js"></script>
     <script src="/js/dzsparallaxer.js"></script>
+    <script src="/js/files.js"></script>
     <script src="/js/hs.cubeportfolio.js"></script>
     <script src="/js/hs.datatables.js"></script>
     <script src="/js/hs.fancybox.js"></script>
@@ -162,7 +163,7 @@
           rules: {
             confirmPassword: {
               equalTo: '#password'
-            }
+            },
           }
         });
 
@@ -282,6 +283,28 @@
                     $(".btn-back-to-eth-address" ).trigger("click");
                 });
             });
+
+
+
+            // Process document image uploaded
+
+            $(".document-image-upload-input").change(function (e){
+                var fileName = $(this).val(),
+                allowedExtensions = ["jpg","jpeg","gif","png"];
+
+                var file = fileName.toLowerCase(),
+                extension = file.substring(file.lastIndexOf('.') + 1);
+
+                if ($.inArray(extension,allowedExtensions) == -1) {
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                } else {
+                  // File is valid - upload image and show
+                  // Send image to backend to verify
+                  // If valid, update passport image with this image and green tick
+                }
+
+             });
 
           <% } %>
       });

@@ -56,6 +56,7 @@ module.exports = {
     processReq()
       .then((rsp) => {
         res.cookie('token', req.session.token, { expires: moment().add(1, 'day').toDate(), httpOnly: true });
+
         return res.view('contributor/dashboard', {
           layout: 'contributor/layout',
           title: 'Contributor Dashboard | TriForce Tokens Ltd',
@@ -321,11 +322,15 @@ module.exports = {
           && user.country == country && dateOfBirth == user.dateOfBirth){
 
           // Make sure information exists
-          if(!firstName || !lastName || !nationality || !country || !dateOfBirth || !gender){
-            return res.ok({success:false,updated:false,msg:'You have provided some missing information that is required. Please check the information submitted.'})
+          if(!firstName || !lastName || !nationality || !country || !dateOfBirth || !dobYear || !dobMonth || !dobDay || !gender){
+            return res.ok({success:false,updated:false,msg:'You have not provided all required information. Please check the form.'})
           }else{
             return res.ok({success:true,updated:false,msg:'Your information has been saved'});
           }
+        }
+
+        if(!firstName || !lastName || !nationality || !country || !dateOfBirth || !dobYear || !dobMonth || !dobDay || !gender){
+          return res.ok({success:false,updated:false,msg:'You have not provided all required information. Please check the form.'})
         }
 
 
