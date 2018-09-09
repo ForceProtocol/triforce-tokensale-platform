@@ -30,9 +30,8 @@ module.exports = {
 			request({
 				uri: sails.ARTEMIS_API_URL + '/default/individual_risk',
 				method: 'POST',
-				json: true,
-				headers: {"Content-Type":"application/json","WEB2PY-USER-TOKEN":sails.ARTEMIS_API_TOKEN},
-				body: {
+				headers: {"WEB2PY-USER-TOKEN":sails.ARTEMIS_API_TOKEN},
+				form: {
 					domain_name:sails.ARTEMIS_TFT_DOMAIN,
 					rfrID: userId,
 					ssic_code: ssic,
@@ -48,7 +47,7 @@ module.exports = {
 					date_of_birth:dateOfBirth
 				},
 			}).then((rsp)=> {
-				return resolve(rsp);
+				return resolve(JSON.parse(rsp));
 			}).catch(err=> {
 				return reject(err);
 			});

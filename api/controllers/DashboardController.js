@@ -7,7 +7,8 @@
 
 const request = require('request-promise'),
   moment = require('moment'),
-  Recaptcha = require('recaptcha-v2').Recaptcha;
+  Recaptcha = require('recaptcha-v2').Recaptcha,
+  web3Utils = require('web3-utils');
 
 var RECAPTCHA_PUBLIC_KEY = sails.config.RECAPTCHA.PUBLIC_KEY,
   RECAPTCHA_PRIVATE_KEY = sails.config.RECAPTCHA.PRIVATE_KEY;
@@ -274,8 +275,101 @@ module.exports = {
       title: 'Review and update your KYC/AML',
       metaDescription: '',
       user: userData,
-      txns: txns
+      txns: txns,
+      moment: require('moment')
     });
+  },
+
+
+
+  postKycBio: async (req,res) => {
+
+    try{
+      let ssic = 'UNKNOWN',
+        ssoc = 'UNKNOWN',
+        onboardingMode = 'NON FACE-TO-FACE',
+        paymentMode = 'VIRTUAL CURRENCY',
+        productServiceComplexity = 'SIMPLE',
+        firstName = req.param('firstName'),
+        lastName = req.param('lastName'),
+        nationality = req.param('nationality'),
+        country = req.param('country'),
+        gender = req.param('gender'),
+        dobYear = req.param("dobYear"),
+        dobMonth = req.param("dobMonth"),
+        dobDay = req.param("dobDay"),
+        userYearDob = '',
+        userMonthDob = '',
+        userDayDob = '',
+        dateOfBirth = dobDay + '/' + dobMonth + '/' + dobYear;
+
+        // Check if any information has actually changed
+        let user = await User.findOne({id:req.session.user.id});
+
+        if(!user){
+          return res.ok({success:true,updated:false,msg:'No information to change'});
+        }
+
+        if(user.dateOfBirth){
+          userYearDob = moment(user.dateOfBirth,"DD/MM/YYYY").year(),
+          userMonthDob = moment(user.dateOfBirth,"DD/MM/YYYY").month(),
+          userDayDob = moment(user.dateOfBirth,"DD/MM/YYYY").format('D');
+        }
+
+        // Update is not required - make sure user info is actually provided otherwise error
+        if(user.firstName == firstName && user.lastName == lastName && user.nationality == nationality && user.gender == gender
+          && user.country == country && dateOfBirth == user.dateOfBirth){
+
+          // Make sure information exists
+          if(!firstName || !lastName || !nationality || !country || !dateOfBirth || !gender){
+            return res.ok({success:false,updated:false,msg:'You have provided some missing information that is required. Please check the information submitted.'})
+          }else{
+            return res.ok({success:true,updated:false,msg:'Your information has been saved'});
+          }
+        }
+
+
+        // Update is required
+        let updateUser = await User.update({id:user.id},{firstName,lastName,nationality,country,dateOfBirth,gender});
+
+        // Submit profile to artimes
+        let artemisResponse = await ArtemisApiService.submitIndividual(ssic, ssoc, onboardingMode, paymentMode, productServiceComplexity,
+            firstName, lastName, user.email, nationality, country, gender, dateOfBirth, user.id);
+
+        await User.update({id:user.id},{checkStatusUrl:artemisResponse.check_status_url});
+
+        return res.ok({success:true,updated:true,msg:'Your bio information has been saved.'});
+      }catch(err){
+        sails.log.error("DashboardController.postUserBio err: ",err);
+        return res.serverError({success:false,updated:false,msg: "There was an error on the server. Your bio information could not be saved."});
+      }
+  },
+
+
+
+  /**
+  * Save Users ETH address for whitelisting 
+  */
+  postKycWhitelistEthAddress: async (req,res) => {
+
+    try{
+      let whitelistEthAddress = req.param("whitelistEthAddress");
+
+      // Validate eth address
+      if(!web3Utils.isAddress(whitelistEthAddress)){
+        sails.log.debug("invalid eth address",whitelistEthAddress);
+        return res.ok({success:false,updated:false,msg:"You provided an invalid Ethereum wallet address"});
+      }
+
+      // Check if any information has actually changed
+      let updatedUser = await User.update({id:req.session.user.id},{whitelistEthAddress:whitelistEthAddress});
+
+      return res.ok({success:true,updated:true,msg:'Your ether address has been saved.'});
+    }catch(err){
+      sails.log.error("DashboardController.postKycWhitelistEthAddress err: ",err);
+      return res.serverError({success:false,updated:false,msg: "Could not save your Ether address."});
+    }
+
   },
 
 

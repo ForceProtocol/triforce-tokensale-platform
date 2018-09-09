@@ -45,11 +45,6 @@ module.exports.routes = {
   'GET /reset-password/:token': 'PagesController.getResetPassword',
   'POST /reset-password/:token': 'PagesController.postResetPassword',
 	
-	// KYC Process
-	'GET /join-whitelist': 'PagesController.getJoinWhitelist',
-	'POST /join-whitelist': 'PagesController.postJoinWhitelist',
-	'POST /join-whitelist-step-1': 'PagesController.postKycStep1',
-	'POST /join-whitelist-step-2': 'PagesController.postKycStep2',
   /** Resubmit KYC Application */
   'POST /resubmit-kyc': 'PagesController.resubmitKYC',
 
@@ -69,6 +64,9 @@ module.exports.routes = {
   'GET /user/activate': 'UserController.activateAccount',
   'GET /user/resend-activation-link': 'UserController.sendActivationEmail',
   '/contributor/set-ethereum-address': 'DashboardController.setEthereumAddress',
+
+  'POST /contributor/kyc-bio': 'DashboardController.postKycBio',
+  'POST /contributor/kyc-whitelist-eth-address': 'DashboardController.postKycWhitelistEthAddress',
 
 	// Get pending whitelist users for artemis front end server
 	'POST /get-pending-whitelist-users': 'UserController.getPendingWhitelistUsers',

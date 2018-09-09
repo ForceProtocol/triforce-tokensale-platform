@@ -33,10 +33,6 @@ module.exports.bootstrap = function(cb) {
     sails.ARTEMIS_API_TOKEN = "2610db88-301e-46af-a5ae-57d23a31eb65";
   }
 
-
-	
-	/**TwitterApiService.connectStream().then(function(connected){}).catch(function(err){
-	});*/
 	
 	cb();
 };

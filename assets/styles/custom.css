@@ -112,3 +112,11 @@
 .promo-timer-view .time-digit .digit-type {
     font-size: 1em;
 }
+
+.flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg {
+  margin-bottom: -1.5rem;
+}
+
+.u-file-attachment-input img {
+  max-width: 180px;
+}
