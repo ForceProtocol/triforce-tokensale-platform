@@ -27,7 +27,7 @@
             <!-- User Info -->
             <div class="media d-block d-sm-flex align-items-sm-center">
               <div class="media-body">
-                <h1 class="h3 text-white font-weight-medium mb-1">Howdy, <%- user.firstName.replace(/^\w/, c => c.toUpperCase()) %>!</h1>
+                <h1 class="h3 text-white font-weight-medium mb-1">Howdy, <%- user.firstName ? user.firstName.replace(/^\w/, c => c.toUpperCase()) : '' %>!</h1>
                 <span class="d-block text-white"><%- user.email %></span>
               </div>
             </div>

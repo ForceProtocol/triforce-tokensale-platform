@@ -10,30 +10,14 @@
          <div class="row">
            <div class="col-lg-5">
 
-            <% if(flash.has('errors')){ %>
-              <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
-                <% flash.get('errors').forEach(function (message) { %>
-                <%- message %>
-                <% }) %>
-              </div>
-              <br />
-            <% } %>
-            <% if(flash.has('success')){ %>
-              <div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
-                <% flash.get('success').forEach(function (message) { %>
-                <%- message %>
-                <% }) %>
-              </div>
-              <br />
-            <% } %>
            
              <div class="g-mb-32">
-               <h1 class="display-4 font-size-48--md-down mb-3">Join the token sale</h1>
-               <p>Join us on a journey to transform the games industry with <strong>pioneering blockchain technology</strong></p>
+               <h1 class="display-4 font-size-48--md-down mb-3">Look to the future</h1>
+               <p>Join us on a journey to transform the games industry with a unique <strong>games dedicated blockchain</strong>.</p>
              </div>
 
              <div class="d-flex align-items-center">
-               <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="/contributor-signup">Get Started</a>
+               <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="/contributor-signup">Join Token Sale</a>
 
                <!-- Fancybox -->
                <a class="js-fancybox media align-items-center u-media-player ml-3" href="javascript:;" 
@@ -57,37 +41,323 @@
 
              <br />
 
-              <a target="_blank" href="https://www.the-blocks.com/"><img class="img-responsive" src="/images/theblocks-award-2018.png" alt="" /></a>
+             <a target="_blank" href="https://www.the-blocks.com/"><img class="img-responsive" src="/images/theblocks-award-2018.png" alt="" /></a>
 
            </div>
-         </div>
-       </div>
-       <!-- End Content -->
+
+
+           <div class="col-lg-6 offset-1 text-center tokensale-opening" style="display:none;">
+
+              <div class="g-mb-32 mt-4">
+               <h2 class="mb-5">Final token sale opens soon</h2>
+               <p>If you wish to take part in the private round that is <strong>open now</strong>, <a href="/contact">get in touch</a>.</p>
+              </div>
+
+              
+                <div class="promo-timer-view">
+                  <div class="timer">
+                    <div class="row text-center mt-4">
+                      <div class="col-md-3">
+                        <div class="time-digit">
+                          <span class="js-days digit"></span><br />
+                          <span class="digit-type text-center">days</span>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                      <div class="time-digit">
+                        <span class="js-hours digit"></span><br />
+                        <span class="digit-type">hours</span>
+                      </div>
+                      </div>
+                      <div class="col-md-3">
+                      <div class="time-digit">
+                        <span class="js-minutes digit"></span><br />
+                        <span class="digit-type">mins</span>
+                      </div>
+                      </div>
+                      <div class="col-md-3">
+                      <div class="time-digit">
+                        <span class="js-seconds digit"></span><br />
+                        <span class="digit-type">secs</span>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-6 text-center">
+                    <div class="col-lg-12 text-center">
+                      <a class="btn btn-success" href="/contributor-signup">Complete KYC Now &raquo;</a>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-6 offset-1 text-center tokensale-open" style="display:none;">
+
+              <div class="g-mb-32 mt-2">
+               <h2 class="mb-5">Final token sale now live!</h2>
+               <p>There is a limited supply of FORCE available. Join now to get the best bonus.</p>
+              </div>
+
+              
+                <div class="promo-timer-view">
+                  <div class="timer">
+                    <div class="row text-center mt-4">
+                      <div class="col-md-3">
+                        <div class="time-digit">
+                          <span class="js-days digit"></span><br />
+                          <span class="digit-type text-center">days</span>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                      <div class="time-digit">
+                        <span class="js-hours digit"></span><br />
+                        <span class="digit-type">hours</span>
+                      </div>
+                      </div>
+                      <div class="col-md-3">
+                      <div class="time-digit">
+                        <span class="js-minutes digit"></span><br />
+                        <span class="digit-type">mins</span>
+                      </div>
+                      </div>
+                      <div class="col-md-3">
+                      <div class="time-digit">
+                        <span class="js-seconds digit"></span><br />
+                        <span class="digit-type">secs</span>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-5">
+                    <div class="col-lg-12 text-center bonus-info">
+                    <p><strong>Current Bonus: <span class="current-bonus">15</span>&percnt;</strong></p>
+                    <p><strong>Bonus ends in 
+                    <span class="js-days-bonus digit"></span> <span class="digit-type text-center">days</span>,
+                    <span class="js-hours-bonus digit"></span> <span class="digit-type text-center">hours</span>,
+                    <span class="js-minutes-bonus digit"></span> <span class="digit-type text-center">mins</span>,
+                    <span class="js-seconds-bonus digit"></span> <span class="digit-type text-center">seconds</span>
+                    </strong></p>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3 text-center">
+                    <div class="col-lg-12 text-center">
+                      <a class="btn btn-success" href="/contributor-signup">Get your FORCE &raquo;</a>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-6 offset-1 text-center tokensale-closed" style="display:none;">
+
+              <div class="g-mb-32 mt-4">
+               <h2 class="mb-5">Final token sale has ended</h2>
+               <p>If you missed your opportunity to buy FORCE but would like to, <a href="/contact">get in touch</a>.</p>
+              </div>
+
+              
+              <div class="row mt-6 text-center">
+                <div class="col-lg-12 text-center">
+                  <a class="btn btn-success" href="/contributor-login">Contributor Login &raquo;</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+           <div class="container text-center u-space-3-top">
+            <h4 class="h6 text-muted mb-3">Follow us</h4>
+
+            <div class="d-flex justify-content-center">
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://discord.gg/Bnfpqrk" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-discord font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Discord</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://twitter.com/triforcetokens" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-twitter font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Twitter</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://www.facebook.com/triforcetokens" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-facebook font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Facebook</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <div class="mx-3">
+                <a target="_BLANK" href="https://medium.com/@triforcetokens" type="button" class="btn btn-xs btn-dark u-btn-dark transition-3d-hover text-left mb-2">
+                  <span class="media align-items-center">
+                    <span class="d-flex mr-3">
+                      <span class="fab fa-medium font-size-26"></span>
+                    </span>
+                    <span class="media-body">
+                      <strong class="font-size-14">Medium</strong>
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- End Content -->
       </div>
 
 
-      <div class="col-lg-9 col-xl-7 d-none d-lg-block position-absolute-top-right-0 pr-0" style="margin-top: 105.6px;">
-        <figure class="w-100">
-           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1374.7 1083.6" style="enable-background:new 0 0 1374.7 1083.6;" xml:space="preserve">
-             <path class="u-fill-primary" opacity=".05" d="M285.2,170.1c-94.5,8.6-181.2,57.4-235.9,134.8C-34.7,423.6-54.5,621.5,349,879.8
-               c636.5,407.6,600,9.3,591.9-47.4c-0.8-5.5-1.4-11.1-2-16.6l-34.2-374.1C888.4,262,729.2,129.6,549.4,146L285.2,170.1z"></path>
-             <g>
-               <defs>
-                 <path id="heroBlock1" d="M1374.7,0H687.6l-278,279.7c-150,150.9-148.1,395.3,4.4,543.8l0,0C554.1,960,774.9,968.7,925.4,843.6
-                   l449.3-373.4V0z"></path>
-               </defs>
-               <clipPath id="heroBlock2">
-                 <use xlink:href="#heroBlock1" style="overflow:visible;"></use>
-               </clipPath>
-               <g transform="matrix(1 0 0 1 0 0)" style="clip-path:url(#heroBlock2);">
-                 <!-- Apply your (750px width to 750px height) image here -->
-                 <image style="overflow:visible;" width="750" height="750" xlink:href="/images/banner-image-eximius.png" transform="matrix(1.4462 0 0 1.4448 290.09 0)"></image>
-               </g>
-             </g>
-           </svg>
-         </figure>
+    </div>
+
+
+    <!-- DOCUMENTS -->
+    <div class="container u-space-1-bottom text-center">
+
+      <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
+        <span class="u-label u-label--sm u-label--primary mb-2">Documents</span>
+        <h2 class="h3 font-weight-normal">Discover how we are moving toward a decentralised utopia for gaming</h2>
       </div>
 
+      <div class="row mb-4">
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4">
+          <a href="">
+            <h6>General White Paper</h6>
+            <img class="img-fluid" src="/images/general-whitepaper-cover.png" alt="General White Paper" />
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4">
+          <a href="">
+            <h6>Tokenomic White Paper</h6>
+            <img class="img-fluid" src="/images/tokenomic-whitepaper-cover.png" alt="Tokenomic White Paper" />
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4">
+          <a href="">
+            <h6>Technical White Paper</h6>
+            <img class="img-fluid" src="/images/tech-whitepaper-cover.png" alt="Technical White Paper" />
+          </a>
+        </div>
+      </div>
+      <div class="row mb-9">
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4">
+          <a href="">
+            <h6>Token Sale Agreement</h6>
+            <img class="img-fluid" src="/images/tokensale-agreement-cover.png" alt="Token Sale Agreement" />
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4">
+          <a href="">
+            <h6>Risk Disclosures</h6>
+            <img class="img-fluid" src="/images/risk-disclosures-cover.png" alt="Risk Disclosures" />
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4 mb-7 mb-lg-4 text-left">
+          <form method="POST" action="/subscribe">
+            <div class="form-group">
+              <label><strong>Subscribe for updates</strong></label>
+              <input placeholder="Email address" required type="email" name="email" class="form-control" />
+            </div>
+            <div class="form-group form-group-lg">
+              <%- recaptchaForm %>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Subscribe" class="btn btn-primary btn-sm btn-block" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- TOKEN SALE SUMMARY INFO -->
+    <div class="container u-space-1-bottom text-center">
+
+      <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
+        <span class="u-label u-label--sm u-label--primary mb-2">GitHub</span>
+        <h2 class="h3 font-weight-normal">Our GitHub Activity</h2>
+        <p>The majority of our GitHub activity is in private mode, as such you will not see everything the team is working on.</p>
+      </div>
+
+      <img class="img-fluid" src="/images/github-activity.png" alt="GitHub Activity" />
+    </div>
+
+    <!-- THE PROBLEM -->
+    <div>
+    </div>
+
+    <!-- OUR SOLUTIONS -->
+    <div>
+    </div>
+
+    <!-- THE OPPORTUNITY - WHY NOW WHEN BEAR MARKET? -->
+    <div>
+    </div>
+
+
+    <!-- MVPS & ROADMAP -->
+    <div>
+    </div>
+
+
+    <!-- TEAM -->
+    <div>
+    </div>
+
+
+    <!-- PARTNERS -->
+    <div>
+    </div>
+
+
+    <!-- TOKENOMICS & BUSINESS MODEL -->
+    <div>
+    </div>
+
+
+    <!-- USE OF PROCEEDS & MANAGEMENT -->
+    <div>
+    </div>
+
+
+    <!-- CALL TO ACTION - SIGN UP, JOIN SOCIAL MEDIA -->
+    <div>
+    </div>
+
+
+    <!-- READY TO BUY NOW? -->
+    <div>
     </div>
 
 

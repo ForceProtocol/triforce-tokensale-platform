@@ -173,6 +173,11 @@ module.exports = {
 	      				req.session.authenticated = true;
 	      				req.session.user = userData.user;
 	      				req.session.token = userData.token;
+
+	      				if(!userData.user.approvalStatus){
+				          return res.redirect("/contributor/kyc");
+				        }
+				        
 			       		return res.redirect("/contributor");
 			       }).catch((err)=>rUtil.errorResponseRedirect(err, req, res, "/contributor-login?email=" + email));
 
@@ -397,7 +402,7 @@ module.exports = {
 		});
 	},
 
-
+ 
 	/**
 	* Subscribe User
 	*/
@@ -408,67 +413,6 @@ module.exports = {
 			runCpaId = '',
 			referrerWebId = '';
 
-		// Check if this is referral ID by cookie
-		if (typeof req.cookies !== 'undefined' && typeof req.cookies.track_id !== 'undefined') {
-			referrerId = req.cookies.track_id;
-
-			if (typeof req.cookies.track_id_web_id !== 'undefined') {
-				referrerWebId = req.cookies.track_id_web_id;
-			}
-		} else if (typeof req.cookies.run_cpa_track_id !== 'undefined') {
-			runCpaId = req.cookies.run_cpa_track_id;
-		}
-
-		Subscribers.findOrCreate({ email: email, referrerId: referrerId, referrerWebId: referrerWebId, runCpaId: runCpaId, runCpaTrackedOn: new Date(), active: true }).exec(function (err, created) {
-			if (err || typeof created == 'undefined') {
-				sails.log.error("failed to subscribe: ", err, email);
-				return res.ok({ status: "error", msg: "Failed to subscribe you, please try again." });
-			}
-
-			/** Add to normal subscriber list **/
-			MailchimpService.addSubscriber("4cd285b73f", email, "", "", "pending").then(function (addResponse) {
-			}).catch(function (err) {
-				sails.log.debug("new subscriber not added due to error: ", err);
-			});
-
-			req.addFlash('success', 'Thank you for subscribing to future updates. Please check your email inbox and possibly junk inbox for your confirmation email.');
-
-			return res.ok({ status: "success", msg: "You have been successfully subscribed and will be kept updated about the ICO. Please check your email inbox and possibly junk inbox for your confirmation email." });
-		});
-	},
-
-
-
-	/**
-	* Pre-Sale Subscribe User
-	*/
-	preSaleSubscribeUser: function (req, res) {
-
-		var email = req.param("email"),
-			firstName = req.param("firstName"),
-			lastName = req.param("lastName"),
-			referrerId = '',
-			referrerWebId = '',
-			runCpaId = '';
-
-		// Check if this is referral ID by cookie
-		if (typeof req.cookies !== 'undefined' && typeof req.cookies.track_id !== 'undefined') {
-			referrerId = req.cookies.track_id;
-
-			if (typeof req.cookies.track_id_web_id !== 'undefined') {
-				referrerWebId = req.cookies.track_id_web_id;
-			}
-		} else if (typeof req.cookies.run_cpa_track_id !== 'undefined') {
-			runCpaId = req.cookies.run_cpa_track_id;
-		}
-
-		// Submit post request to LTF subscribe list
-		var ltfFormVars = {
-			'cm-f-dytkwut': firstName,
-			'cm-f-dytkwui': lastName,
-			'cm-udlhydk-udlhydk': email
-		};
-
 		// Confirm recapture success
 		var data = {
 			remoteip: req.connection.remoteAddress,
@@ -476,37 +420,31 @@ module.exports = {
 			secret: RECAPTCHA_PRIVATE_KEY
 		};
 
-
 		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY, data);
 
 		recaptcha.verify(function (success, error_code) {
 
 			if (success) {
-				request({
-					method: 'POST',
-					uri: 'http://login.yourcampaignmanager.co.uk/t/r/s/udlhydk/',
-					formData: ltfFormVars,
-					headers: {
-						'content-type': 'application/x-www-form-urlencoded'
+
+				Subscribers.findOrCreate({ email: email, active: true }).exec(function (err, created) {
+					if (err || typeof created == 'undefined') {
+						req.addFlash('errors', 'There as a problem trying to subscribe you. You may already be subscribed.');
+						return res.redirect("/");
 					}
-				}).then((rsp) => {
-				}).catch(err => {
+
+					/** Add to normal subscriber list **/
+					MailchimpService.addSubscriber("4cd285b73f", email, "", "", "pending").then(function (addResponse) {
+					}).catch(function (err) {
+					});
+
+					req.addFlash('success', 'Thank you for subscribing to future updates. Please check your email inbox and possibly junk inbox for your confirmation email.');
+					return res.redirect("/");
 				});
-
-
-				Subscribers.findOrCreate({ email: email, firstName: firstName, lastName: lastName, referrerId: referrerId, referrerWebId: referrerWebId, runCpaId: runCpaId, runCpaTrackedOn: new Date(), active: true }).exec(function (err, created) {
-				});
-
-				req.addFlash('success', 'Thank you for registering your interest in joining the pre-sale. Please check your email inbox and possibly junk inbox for your confirmation email.');
-
-				return res.ok({ status: "success", msg: "You have been successfully subscribed and will be kept updated about the ICO. Please check your email inbox and possibly junk inbox for your confirmation email." });
-			} else {
-				console.log("error code:", error_code);
-				req.addFlash('errors', 'There was a problem confirming your request. Please make sure you complete the captcha request.');
-				return res.ok({ status: "error", msg: "Your join request could not be sent, due to an invalid captcha. Please complete the captcha question." });
+			}else{
+				req.addFlash('errors', 'You did not complete the recaptcha checkbox.');
+				return res.redirect("/");
 			}
 		});
-
 	},
 
 
@@ -578,10 +516,13 @@ module.exports = {
 	 * Return token sale page
 	 */
 	getTokenSale: function (req, res) {
+		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
+
 		return res.view('public/token-sale', {
 			layout: 'public/layout',
 			title: 'Token Sale',
-			metaDescription: 'Token sale information'
+			metaDescription: 'Token sale information',
+			recaptchaForm: recaptcha.toHTML()
 		});
 	},
 
@@ -1034,187 +975,6 @@ module.exports = {
 	},
 
 
-
-	/**
-	* Return the KYC sign up form
-	*/
-	getJoinWhitelist: function (req, res) {
-		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
-		var whitelistSpacesTotal = 2001;
-		var whitelistSpacesUsed = 1;
-
-		System.findOne({ key: 'whitelist-spaces-available' }).exec(function (err, val) {
-			if (typeof val !== 'undefined') {
-				whitelistSpacesTotal = val['value'];
-			}
-
-			System.findOne({ key: 'whitelist-spaces-taken' }).exec(function (err, val) {
-
-				if (typeof val !== 'undefined') {
-					whitelistSpacesUsed = val['value'];
-				}
-
-				availableSeats = whitelistSpacesTotal - whitelistSpacesUsed;
-
-				if (availableSeats < 1) {
-					availableSeats = 0;
-				}
-
-				return res.view('public/join-whitelist', {
-					layout: 'public/layout',
-					title: 'Claim Your Space: Become an approved contributor today and enter the evolution in gaming.',
-					metaDescription: '',
-					availableSeats: availableSeats,
-					recaptchaForm: recaptcha.toHTML("recaptchaCallback")
-				});
-
-			});
-		});
-	},
-
-
-	/**
-	* POST the KYC sign up form
-	*/
-	postJoinWhitelist: function (req, res) {
-		return res.view('public/join-whitelist', {
-			layout: 'public/layout',
-			title: 'Reserve Your Seat: Become an approved contributor today and enter the revolution in gaming.',
-			metaDescription: ''
-		});
-	},
-
-
-
-
-	/** Step 1 KYC
-	*/
-	postKycStep1: function (req, res) {
-		
-		return res.json({status:'error',errMsgs:["<p>Token sale is currently closed.</p>"]});
-		var ssic = 'UNKNOWN',
-			ssoc = 'UNKNOWN',
-			onboardingMode = 'NON FACE-TO-FACE',
-			paymentMode = 'VIRTUAL CURRENCY',
-			productServiceComplexity = 'SIMPLE',
-			firstName = req.param('firstName'),
-			lastName = req.param('lastName'),
-			email = req.param('email'),
-			password = req.param('password'),
-			nationality = req.param('nationality'),
-			country = req.param('country'),
-			gender = req.param('gender'),
-			dateOfBirth = req.param('dateOfBirth'),
-			referrerId = '',
-			runCpaId = '',
-			referrerWebId = '';
-
-		var errMsgs = [];
-
-		// Check if this is referral ID by cookie
-		if (typeof req.cookies !== 'undefined' && typeof req.cookies.track_id !== 'undefined') {
-			referrerId = req.cookies.track_id;
-
-			if (typeof req.cookies.track_id_web_id !== 'undefined') {
-				referrerWebId = req.cookies.track_id_web_id;
-			}
-		} else if (typeof req.cookies.run_cpa_track_id !== 'undefined') {
-			runCpaId = req.cookies.run_cpa_track_id;
-		}
-
-		// Submit post request to LTF subscribe list
-		var ltfFormVars = {
-			'cm-f-dytkwut': firstName,
-			'cm-f-dytkwui': lastName,
-			'cm-udlhydk-udlhydk': email
-		};
-
-		// Subscribe user to email sequence
-		request({
-			method: 'POST',
-			uri: 'http://login.yourcampaignmanager.co.uk/t/r/s/udlhydk/',
-			formData: ltfFormVars,
-			headers: {
-				'content-type': 'application/x-www-form-urlencoded'
-			}
-		}).then((rsp) => {
-		}).catch(err => {
-		});
-
-
-		// Submit signup request to API server
-		request({
-			method: 'POST',
-			json: true,
-			body: {
-				firstName: firstName,
-				lastName: lastName,
-				email: email,
-				password: password,
-				nationality: nationality,
-				country: country,
-				gender: gender,
-				dateOfBirth: dateOfBirth,
-				referrerId: referrerId,
-				referrerWebId: referrerWebId,
-				runCpaId: runCpaId,
-				faceMatchResult: "MATCH",
-				approvalStatus: "CLEARED"
-			},
-			uri: sails.config.API_URL + 'register-kyc'
-		})
-			.then((rsp) => {
-
-				// User is already cleared for KYC
-				if (rsp.status == 'cleared' || rsp.status == 'rejected') {
-					req.addFlash('success', 'You have already completed the KYC process. Please login to your account.');
-					return res.json(rsp);
-				}
-
-				req.session.user = rsp.user;
-				req.session.token = rsp.token;
-				// req.session.etherAddress = rsp.etherAddress;
-				req.session.kyc = true;
-
-				// Submit signup request to API server
-				ArtemisApiService.submitIndividual(ssic, ssoc, onboardingMode, paymentMode, productServiceComplexity,
-					firstName, lastName, email, nationality, country, gender, dateOfBirth, rsp.user.id).then(function (response) {
-
-						// Submit Atremis response to update user in API server
-						request({
-							method: 'POST',
-							json: true,
-							body: {
-								userId: rsp.user.id,
-								approvalStatus: response.approval_status,
-								checkStatusUrl: response.check_status_url
-							},
-							uri: sails.config.API_URL + 'update-user-kyc'
-						}).then((rsp) => {
-							return res.json({ status: 'success', rfrId: rsp[0].id, validateToken: rsp[0].validateToken });
-						}).catch(err => {
-							let msg = err.error ? err.error.err : err.message;
-							sails.log.error("Failed to update the users step 1 KYC information:", err);
-							errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
-							return res.json({ status: 'error', errMsgs: errMsgs });
-						});
-
-
-					}).catch(function (err) {
-						let msg = err.error ? err.error.err : err.message;
-						sails.log.error("Failed to get a good response from Artemis API for KYC step 1:", err);
-						errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
-						return res.json({ status: 'error', errMsgs: errMsgs });
-					});
-
-			})
-			.catch(err => {
-				let msg = err.error ? err.error.err : err.message;
-				sails.log.error("Failed to submit step 1 KYC data to API server:", err);
-				errMsgs.push("<p>The KYC process checks have stalled. Please try to enter your information again. If the problem persist please contact us in our <a href=\"https://t.me/triforcetokens\">telegram channel</a>.</p>");
-				return res.json({ status: 'error', errMsgs: errMsgs });
-			});
-	},
 
 
 	resubmitKYC: function (req, res) {

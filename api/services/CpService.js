@@ -16,11 +16,13 @@ module.exports = {
   isAddress : function (address) {
     if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
       // check if it has the basic requirements of an address
+      sails.log.debug("return false 1");
       return false;
     } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
       // If it's all small caps or all all caps, return true
       return true;
     }
+    sails.log.debug("return false 2");
     return false;
   },
 

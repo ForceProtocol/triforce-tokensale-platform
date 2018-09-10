@@ -40,10 +40,12 @@
       <link rel="stylesheet" href="/styles/cubeportfolio.min.css">
       <link rel="stylesheet" href="/styles/custom.css">
       <link rel="stylesheet" href="/styles/dzsparallaxer.css">
+      <link rel="stylesheet" href="/styles/flatpickr.min.css">
       <link rel="stylesheet" href="/styles/hs.megamenu.css">
       <link rel="stylesheet" href="/styles/jquery.fancybox.css">
       <link rel="stylesheet" href="/styles/jquery.mCustomScrollbar.css">
       <link rel="stylesheet" href="/styles/slick.css">
+      <link rel="stylesheet" href="/styles/toastr.min.css">
       <!--STYLES END-->
 
     </head>
@@ -98,6 +100,7 @@
     <script src="/js/hs.scroll-nav.js"></script>
     <script src="/js/hs.show-animation.js"></script>
     <script src="/js/hs.slick-carousel.js"></script>
+    <script src="/js/hs.step-form.js"></script>
     <script src="/js/hs.sticky-block.js"></script>
     <script src="/js/hs.unfold.js"></script>
     <script src="/js/hs.validation.js"></script>
@@ -108,6 +111,7 @@
     <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/slick.js"></script>
+    <script src="/js/toastr.min.js"></script>
     <!--SCRIPTS END-->
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -158,7 +162,7 @@
           rules: {
             confirmPassword: {
               equalTo: '#password'
-            }
+            },
           }
         });
 
@@ -218,6 +222,226 @@
               }
             });
           });
+          <% } %>
+
+          <% if(req.path == "/contributor/kyc"){ %>
+            // initialization of step form
+            $.HSCore.components.HSStepForm.init('.js-step-form');
+
+            // initialization of show animations
+            $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+            toastr.options = {
+                      "closeButton": false,
+                      "debug": false,
+                      "newestOnTop": false,
+                      "progressBar": false,
+                      "positionClass": "toast-top-center",
+                      "preventDuplicates": false,
+                      "onclick": null,
+                      "showDuration": "300",
+                      "hideDuration": "1000",
+                      "timeOut": "5000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
+
+            // Validate and submit form data step 1
+            $('.save-bio-data').click(function(){
+                $.post("/contributor/kyc-bio",$("#kycForm").serialize()).done(function(data) {
+                  if(!data.success){
+                    // Take user back to step 1 and display error msg
+                    toastr["error"](data.msg, "Error");
+                    $(".btn-back-to-bio" ).trigger("click");
+                  }else{
+                    toastr["success"](data.msg, "Success");
+                  }
+                }).fail(function(data) {
+                  // Take user back to step 1 and display error msg
+                    toastr["error"](data.responseJSON.msg, "Error");
+                    $(".btn-back-to-bio" ).trigger("click");
+                });
+            });
+
+            // Validate and submit form data step 1
+            $('.save-eth-address').click(function(){
+                $.post("/contributor/kyc-whitelist-eth-address",$("#kycForm").serialize()).done(function(data) {
+                  if(!data.success){
+                    // Take user back to step 1 and display error msg
+                    toastr["error"](data.msg, "Error");
+                    $(".btn-back-to-eth-address" ).trigger("click");
+                  }else{
+                    toastr["success"](data.msg, "Success");
+                  }
+                }).fail(function(data) {
+                  // Take user back to step 1 and display error msg
+                    toastr["error"](data.responseJSON.msg, "Error");
+                    $(".btn-back-to-eth-address" ).trigger("click");
+                });
+            });
+
+
+
+            // Process document image uploaded
+            $(".document-image-upload-input").change(function (e){
+
+                var fileName = $(this).val(),
+                allowedExtensions = ["jpg","jpeg","gif","png"];
+
+                var file = fileName.toLowerCase(),
+                extension = file.substring(file.lastIndexOf('.') + 1);
+
+                $('.documentIdLoadingGif').show();
+                $("#documentIdFileImg").hide();
+
+
+                // Make sure file not greater than 1MB
+                if (window.FileReader && window.File && window.FileList && window.Blob ){
+                  var fileSize = this.files[0].size;
+                  if(fileSize > 1048576){
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                    toastr["error"]("The file size uploaded was greater than 1 MB. Please reduce the file size", "Error");
+                    $('.documentIdLoadingGif').hide();
+                    $("#documentIdFileImg").show();
+                    return false;
+                  }
+                }
+
+                if ($.inArray(extension,allowedExtensions) == -1) {
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                    toastr["error"]("You uploaded an invalid file type. Only images of type .jpg, .jpeg, .png or .gif are allowed.", "Error");
+                    $('.documentIdLoadingGif').hide();
+                    $("#documentIdFileImg").show();
+                } else {
+                  // File is valid - upload image and show
+                  // Send image to backend to verify
+                  // If valid, update passport image with this image and green tick
+                  var data = new FormData();
+
+                  $.each(e.target.files, function(key, value)
+                  {
+                      data.append("documentIdFile", value);
+                  });
+
+                  $.ajax({
+                      url: '/contributor/upload-id-document',
+                      type: 'POST',
+                      method: 'POST',
+                      data: data,
+                      processData: false,
+                      contentType: false,
+                      cache: false
+                  }).done(function(data) {
+                    toastr["success"](data.msg, "Success");
+                    $("#documentIdFileImg"). attr("src","/" + data.renderPublicLocation);
+                    $('.documentIdLoadingGif').hide();
+                    $("#documentIdFileImg").show();
+                    $(".idDocumentSuccess").show();
+                  }).fail(function(data) {
+                      toastr["error"]("Failed to upload your file", "Error");
+                      $('.documentIdLoadingGif').hide();
+                      $("#documentIdFileImg").show();
+                      $(".idDocumentSuccess").hide();
+                  });
+                }
+             });
+
+
+            // Process document image uploaded
+            $(".selfie-image-upload-input").change(function (e){
+
+                var fileName = $(this).val(),
+                allowedExtensions = ["jpg","jpeg","gif","png"];
+
+                var file = fileName.toLowerCase(),
+                extension = file.substring(file.lastIndexOf('.') + 1);
+
+                $('.selfieLoadingGif').show();
+                $("#selfieFileImg").hide();
+
+
+                // Make sure file not greater than 1MB
+                if (window.FileReader && window.File && window.FileList && window.Blob ){
+                  var fileSize = this.files[0].size;
+                  if(fileSize > 1048576){
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                    toastr["error"]("The file size uploaded was greater than 1 MB. Please reduce the file size", "Error");
+                    $('.selfieLoadingGif').hide();
+                    $("#selfieFileImg").show();
+                    return false;
+                  }
+                }
+
+                if ($.inArray(extension,allowedExtensions) == -1) {
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                    toastr["error"]("You uploaded an invalid file type. Only images of type .jpg, .jpeg, .png or .gif are allowed.", "Error");
+                    $('.selfieLoadingGif').hide();
+                    $("#selfieFileImg").show();
+                } else {
+                  // File is valid - upload image and show
+                  // Send image to backend to verify
+                  // If valid, update passport image with this image and green tick
+                  var data = new FormData();
+
+                  $.each(e.target.files, function(key, value)
+                  {
+                      data.append("selfieFile", value);
+                  });
+
+                  $.ajax({
+                      url: '/contributor/upload-selfie',
+                      type: 'POST',
+                      method: 'POST',
+                      data: data,
+                      processData: false,
+                      contentType: false,
+                      cache: false
+                  }).done(function(data) {
+                    toastr["success"](data.msg, "Success");
+                    $("#selfieFileImg"). attr("src","/" + data.renderPublicLocation);
+                    $('.selfieLoadingGif').hide();
+                    $("#selfieFileImg").show();
+                    $(".selfieSuccess").show();
+                    letCompleteKyc();
+                  }).fail(function(data) {
+                      toastr["error"]("Failed to upload your file", "Error");
+                      $('.selfieLoadingGif').hide();
+                      $("#selfieFileImg").show();
+                      $(".selfieSuccess").hide();
+                  });
+                }
+             });
+
+
+            $('.btn-complete-kyc').click(function(){
+              if(letCompleteKyc()){
+                $('#kycForm').hide();
+                $('.formLoadingImg').show();
+              }
+            });
+
+            function letCompleteKyc(){
+              var documentFile = $("#documentIdInput").val(),
+                selfieFile = $("#selfieInput").val(),
+                documentIdFile = $(".documentIdFile").val(),
+                selfieIdFile = $(".selfieIdFile").val();
+
+                if((documentFile && selfieFile) || (documentIdFile && selfieIdFile)
+                  || (documentFile && selfieIdFile) || (documentIdFile && selfieFile)){
+                  $('.btn-complete-kyc').prop('disabled', false);
+                  return true;
+                }
+                return false;
+            }
+
+
           <% } %>
       });
 

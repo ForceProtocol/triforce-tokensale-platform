@@ -30,9 +30,8 @@ module.exports = {
 			request({
 				uri: sails.ARTEMIS_API_URL + '/default/individual_risk',
 				method: 'POST',
-				json: true,
-				headers: {"Content-Type":"application/json","WEB2PY-USER-TOKEN":sails.ARTEMIS_API_TOKEN},
-				body: {
+				headers: {"WEB2PY-USER-TOKEN":sails.ARTEMIS_API_TOKEN},
+				form: {
 					domain_name:sails.ARTEMIS_TFT_DOMAIN,
 					rfrID: userId,
 					ssic_code: ssic,
@@ -48,7 +47,7 @@ module.exports = {
 					date_of_birth:dateOfBirth
 				},
 			}).then((rsp)=> {
-				return resolve(rsp);
+				return resolve(JSON.parse(rsp));
 			}).catch(err=> {
 				return reject(err);
 			});
@@ -106,7 +105,7 @@ module.exports = {
 	facePostApi: function (userId,docId,selfieId) {
 		
 		return new sails.bluebird(function(resolve, reject) {
-
+			
 			// Submit signup request to API server
 			var req = request({
 				uri: sails.ARTEMIS_API_URL + '/api/individual_face',
@@ -125,13 +124,9 @@ module.exports = {
 					return resolve(rsp);
 				}
 				
-				sails.log.error("rejected errors:",rsp);
-				
 				return reject(rsp.errors);
 			}).catch(err=> {
-			
-				sails.log.error("rejected errors 2:",err);
-					
+								
 				// It tried to match - but failed
 				if(typeof err.error !== 'undefined' && typeof err.error.errors !== 'undefined' && typeof err.error.errors.comparison !== 'undefined'){
 					if(err.error.errors.comparison.indexOf("undetected") != -1){
