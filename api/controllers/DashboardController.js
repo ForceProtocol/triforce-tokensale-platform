@@ -560,12 +560,12 @@ module.exports = {
       if (finalKycCheck.approval_status == 'ACCEPTED' || finalKycCheck.approval_status == 'CLEARED') {
         req.addFlash('success', 'Congratulations! You are now a fully approved contributor and may purchase FORCE tokens.');
         emailOptions.subject = "Your KYC application was accepted";
-        emailOptions.body = `Hi ${user.firstName}
-        Your KYC application was processed successfully and we are pleased to inform you, you have been approved as a contributor.
-        You may now purchase FORCE tokens and expect to receive them back to the Ether address you provided.
-        Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.
+        emailOptions.body = `Hi ${user.firstName}<br />
+        Your KYC application was processed successfully and we are pleased to inform you, you have been approved as a contributor.<br />
+        You may now purchase FORCE tokens and expect to receive them back to the Ether address you provided.<br />
+        Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.<br /><br />
 
-        Kind Regards
+        Kind Regards<br />
         The TriForce Tokens Team`;
 
         EmailService.sendEmail(emailOptions);
@@ -574,25 +574,25 @@ module.exports = {
         req.addFlash('success', 'Great, we received your KYC information. Please allow a few minutes for us to verify the details provided.');
 
         emailOptions.subject = "Your KYC application is being processed";
-        emailOptions.body = `Hi ${user.firstName}
-        Your KYC application is currently being processed. Our team will ensure you receive an email when it has been completed with the result.
-        Once approved you will be able to purchase the remaining FORCE from our final token sale that ends soon.
-        Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.
+        emailOptions.body = `Hi ${user.firstName}<br />
+        Your KYC application is currently being processed. Our team will ensure you receive an email when it has been completed with the result.<br />
+        Once approved you will be able to purchase the remaining FORCE from our final token sale that ends soon.<br />
+        Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.<br /><br />
 
-        Kind Regards
+        Kind Regards<br />
         The TriForce Tokens Team`;
 
         EmailService.sendEmail(emailOptions);
 
         // Send email to team about pending KYC application
-        emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:sails.config.contacts.team,toName:"Team",subject:'User has KYC Pending',body:''};
-        emailOptions.body = `A user tried to complete KYC. A manual review is required. The user info is:
-        Email: ${user.email}
-        First Name: ${user.firstName}
-        Last Name: ${user.lastName}
-        Document ID: ${user.documentId}
-        Selfie ID: ${user.selfieId}
-        Nationality: ${user.nationality}
+        emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:"pete@triforcetokens.io",toName:"Team",subject:'User has KYC Pending',body:''};
+        emailOptions.body = `A user tried to complete KYC. A manual review is required. The user info is:<br /><br />
+        Email: ${user.email}<br />
+        First Name: ${user.firstName}<br />
+        Last Name: ${user.lastName}<br />
+        Document ID: ${user.documentId}<br />
+        Selfie ID: ${user.selfieId}<br />
+        Nationality: ${user.nationality}<br />
         Country: ${user.country}
         `;
 
@@ -603,11 +603,11 @@ module.exports = {
         req.addFlash('error', 'Sorry, it seems that our KYC provider has indicated your KYC application should be declined. If you feel this is in error, please contact us.');
 
         emailOptions.subject = "Your KYC application was rejected";
-        emailOptions.body = `Hi ${user.firstName}
-        Unfortunately your KYC application has been rejected. This is due to information based from our KYC provider, Cynopsis Solutions PTE.
-        If you feel that an error has been made please <a href="${sails.config.BASE_URL}/contact">contact us here</a>.
+        emailOptions.body = `Hi ${user.firstName}<br />
+        Unfortunately your KYC application has been rejected. This is due to information based from our KYC provider, Cynopsis Solutions PTE.<br />
+        If you feel that an error has been made please <a href="${sails.config.BASE_URL}/contact">contact us here</a>.<br /><br />
 
-        Kind Regards
+        Kind Regards<br />
         The TriForce Tokens Team`;
 
         EmailService.sendEmail(emailOptions);
