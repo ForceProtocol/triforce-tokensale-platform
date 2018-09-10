@@ -105,7 +105,7 @@ module.exports = {
 	facePostApi: function (userId,docId,selfieId) {
 		
 		return new sails.bluebird(function(resolve, reject) {
-
+			
 			// Submit signup request to API server
 			var req = request({
 				uri: sails.ARTEMIS_API_URL + '/api/individual_face',
@@ -124,13 +124,9 @@ module.exports = {
 					return resolve(rsp);
 				}
 				
-				sails.log.error("rejected errors:",rsp);
-				
 				return reject(rsp.errors);
 			}).catch(err=> {
-			
-				sails.log.error("rejected errors 2:",err);
-					
+								
 				// It tried to match - but failed
 				if(typeof err.error !== 'undefined' && typeof err.error.errors !== 'undefined' && typeof err.error.errors.comparison !== 'undefined'){
 					if(err.error.errors.comparison.indexOf("undetected") != -1){

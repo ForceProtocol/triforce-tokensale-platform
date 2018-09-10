@@ -67,6 +67,9 @@ module.exports.routes = {
 
   'POST /contributor/kyc-bio': 'DashboardController.postKycBio',
   'POST /contributor/kyc-whitelist-eth-address': 'DashboardController.postKycWhitelistEthAddress',
+  'POST /contributor/upload-id-document': 'DashboardController.postUploadIdDocument',
+  'POST /contributor/upload-selfie': 'DashboardController.postUploadSelfie',
+  'POST /contributor/complete-kyc': 'DashboardController.postCompleteKyc',
 
 	// Get pending whitelist users for artemis front end server
 	'POST /get-pending-whitelist-users': 'UserController.getPendingWhitelistUsers',

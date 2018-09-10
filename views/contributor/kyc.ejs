@@ -173,9 +173,10 @@
 
     			<p>Please ensure details entered match your legal documentation.</p>
 
+    			<img class="img-fluid text-center mb-3 formLoadingImg" style="display:none;" src="/images/loading-gif.gif" alt="" />
 
     			<!-- Request Payment Form -->
-			    <form enctype="multipart/form-data" id="kycForm" class="js-validate js-step-form"
+			    <form method="POST" action="/contributor/complete-kyc" id="kycForm" class="js-validate js-step-form"
 			          data-progress-id="#progressStepForm"
 			          data-steps-id="#contentStepForm"
 			          novalidate="novalidate">
@@ -967,38 +968,45 @@
 			          <div class="row">
 
 			          	<div class="col-sm-12">
-				          	<h4>Upload ID Document</h4>
+				          	<h4>Upload ID Document <i <%- user.documentId ? '' : 'style="display:none;"' %> class="fas fa-check alert-success idDocumentSuccess"></i></h4>
 
 				          	<div>
 				          		<p>You can upload your passport, National ID card or Drivers Licence.</p>
 				          	</div>
 		          		</div>
 
-			          	<div class="col-sm-5">
+			          	<div class="col-sm-12">
 				          <!-- File Attachment Input -->
-				          <label class="u-file-attachment-input mb-4" for="fileAttachmentInput">
-				          	<img class="img-fluid text-center mb-3" src="/images/upload-passport-icon.png" alt="" />
+				          <label class="u-file-attachment-input mb-4" for="documentIdInput">
+				          	<img class="img-fluid text-center mb-3 documentIdLoadingGif" style="display:none;" src="/images/loading-gif.gif" alt="" />
+
+				          	<% if(user.documentId){ %>
+				          		<input class="documentIdFile" value="<%- user.documentId %>" type="hidden" name="documentId" />
+				          		<img id="documentIdFileImg" class="img-fluid text-center mb-3" src="/images/upload-passport-completed-icon.png" alt="" />
+				          	<% }else{ %>
+				          		<img id="documentIdFileImg" class="img-fluid text-center mb-3" src="/images/upload-passport-icon.png" alt="" />
+				          	<% } %>
+
 				            <p>Browse your device and upload chosen ID</p>
-				            <small class="d-block text-muted">Maximum file size 10MB</small>
-				            <input id="fileAttachmentInput" name="documentIdFile" type="file" class="u-file-attachment-input__label document-image-upload-input">
+				            <small class="d-block text-muted">Maximum file size 1MB</small>
+				            <input id="documentIdInput" name="documentIdFile" type="file" class="u-file-attachment-input__label document-image-upload-input">
 				          </label>
 				          <!-- End File Attachment Input -->
 			          	</div>
 
-			          	<div class="col-sm-2">
+			          	<!--<div class="col-sm-2">
 			          		<p class="u-content-centered"><strong>OR</strong></p>
 			          	</div>
 
 			          	<div class="col-sm-5">
-				          <!-- File Attachment Input -->
-				          <label class="u-file-attachment-input mb-4" for="fileAttachmentInput">
+				          <label class="u-file-attachment-input mb-4" for="">
+				          	<img class="img-fluid text-center mb-3 documentIdWebcamLoadingGif" style="display:none;" src="/images/loading-gif.gif" alt="" />
 				            <img class="img-fluid text-center mb-3" src="/images/upload-webcam-icon.png" alt="" />
 				            <p>Take picture of document via your webcam</p>
-				            <small class="d-block text-muted">Maximum file size 10MB</small>
-				            <input id="fileAttachmentInput" name="documentIdWebcam" type="file" class="u-file-attachment-input__label document-image-webcam-input">
+				            <small class="d-block text-muted">Maximum file size 1MB</small>
+				            <input id="" name="documentIdWebcam" type="file" class="u-file-attachment-input__label document-image-webcam-input">
 				          </label>
-				          <!-- End File Attachment Input -->
-			          	</div>
+			          	</div>-->
 			          </div>
 
 			          <hr />
@@ -1006,7 +1014,7 @@
 			          <div class="row">
 
 			          	<div class="col-sm-12">
-			          		<h4>Upload Selfie</h4>
+			          		<h4>Upload Selfie <i <%- user.selfieId ? '' : 'style="display:none;"' %> class="fas fa-check alert-success selfieSuccess"></i></h4>
 
 				          	<div>
 					          	<p>The image must be clear and of your <strong>face only</strong>.</p>
@@ -1015,37 +1023,44 @@
 				          	</div>
 			          	</div>	
 
-			          	<div class="col-sm-5">
+			          	<div class="col-sm-12">
 				          <!-- File Attachment Input -->
-				          <label class="u-file-attachment-input mb-4" for="fileAttachmentInput">
-				          	<img class="img-fluid text-center mb-1" src="/images/upload-selfie-icon.png" alt="" /><br /><br />
-				            Browse your device and upload a selfie photo
-				            <small class="d-block text-muted">Maximum file size 10MB</small>
-				            <input id="fileAttachmentInput" name="file-attachment" type="file" class="u-file-attachment-input__label">
+				          <label class="u-file-attachment-input mb-4" for="selfieInput">
+				          	<img class="img-fluid text-center mb-3 selfieLoadingGif" style="display:none;" src="/images/loading-gif.gif" alt="" />
+
+				          	<% if(user.selfieId){ %>
+				          		<input class="selfieIdFile" value="<%- user.selfieId %>" type="hidden" name="selfieId" />
+				          		<img id="selfieFileImg" class="img-fluid text-center mb-1" src="/images/upload-selfie-completed-icon.png" alt="" /><br />
+				          	<% }else{ %>
+				          		<img id="selfieFileImg" class="img-fluid text-center mb-1" src="/images/upload-selfie-icon.png" alt="" /><br />
+				          	<% } %>
+
+				            <p>Browse your device and upload a selfie photo</p>
+				            <small class="d-block text-muted">Maximum file size 1MB</small>
+				            <input id="selfieInput" name="selfieFile" type="file" class="u-file-attachment-input__label selfie-image-upload-input">
 				          </label>
 				          <!-- End File Attachment Input -->
 			          	</div>
 
-			          	<div class="col-sm-2 text-center">
+			          	<!--<div class="col-sm-2 text-center">
 			          		<p class="u-content-centered"><strong>OR</strong></p>
 			          	</div>
 
 			          	<div class="col-sm-5">
-				          <!-- File Attachment Input -->
 				          <label class="u-file-attachment-input mb-4" for="fileAttachmentInput">
-				            <img class="img-fluid text-center mb-1" src="/images/upload-webcam-icon.png" alt="" /><br /><br />
+				          	<img class="img-fluid text-center mb-3 selfieWebcamLoadingGif" style="display:none;" src="/images/loading-gif.gif" alt="" />
+				            <img id="selfieWebcamImg" class="img-fluid text-center mb-1" src="/images/upload-webcam-icon.png" alt="" /><br /><br />
 				            Take a selfie via your webcam
-				            <small class="d-block text-muted">Maximum file size 10MB</small>
-				            <input id="fileAttachmentInput" name="file-attachment" type="file" class="u-file-attachment-input__label">
+				            <small class="d-block text-muted">Maximum file size 1MB</small>
+				            <input id="fileAttachmentInput" name="selfieWebcam" type="file" class="u-file-attachment-input__label">
 				          </label>
-				          <!-- End File Attachment Input -->
-			          	</div>
+			          	</div>-->
 			          </div>
 
 			          <!-- Buttons -->
 			          <div class="d-flex justify-content-end">
 			          	<a class="btn btn-sm u-btn-secondary--air transition-3d-hover mr-1 btn-back-to-eth-address" href="javascript:;" data-previous-step="#paymentDetailsStep">Back</a>
-			            <button type="submit" class="btn btn-sm btn-primary u-btn-primary transition-3d-hover mr-1">Complete KYC &raquo;</button>
+			            <button type="submit" <%- user.documentId && user.selfieId ? '' : 'disabled' %> class="btn btn-sm btn-primary u-btn-primary transition-3d-hover mr-1 btn-complete-kyc">Complete KYC &raquo;</button>
 			          </div>
 			          <!-- End Buttons -->
 			        </div>

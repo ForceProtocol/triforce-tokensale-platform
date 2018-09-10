@@ -976,56 +976,6 @@ module.exports = {
 
 
 
-	/**
-	* Return the KYC sign up form
-	*/
-	getJoinWhitelist: function (req, res) {
-		var recaptcha = new Recaptcha(RECAPTCHA_PUBLIC_KEY, RECAPTCHA_PRIVATE_KEY);
-		var whitelistSpacesTotal = 2001;
-		var whitelistSpacesUsed = 1;
-
-		System.findOne({ key: 'whitelist-spaces-available' }).exec(function (err, val) {
-			if (typeof val !== 'undefined') {
-				whitelistSpacesTotal = val['value'];
-			}
-
-			System.findOne({ key: 'whitelist-spaces-taken' }).exec(function (err, val) {
-
-				if (typeof val !== 'undefined') {
-					whitelistSpacesUsed = val['value'];
-				}
-
-				availableSeats = whitelistSpacesTotal - whitelistSpacesUsed;
-
-				if (availableSeats < 1) {
-					availableSeats = 0;
-				}
-
-				return res.view('public/join-whitelist', {
-					layout: 'public/layout',
-					title: 'Claim Your Space: Become an approved contributor today and enter the evolution in gaming.',
-					metaDescription: '',
-					availableSeats: availableSeats,
-					recaptchaForm: recaptcha.toHTML("recaptchaCallback")
-				});
-
-			});
-		});
-	},
-
-
-	/**
-	* POST the KYC sign up form
-	*/
-	postJoinWhitelist: function (req, res) {
-		return res.view('public/join-whitelist', {
-			layout: 'public/layout',
-			title: 'Reserve Your Seat: Become an approved contributor today and enter the revolution in gaming.',
-			metaDescription: ''
-		});
-	},
-
-
 
 	resubmitKYC: function (req, res) {
 		const userId = req.session.user.id;

@@ -8,7 +8,8 @@
 const request = require('request-promise'),
   moment = require('moment'),
   Recaptcha = require('recaptcha-v2').Recaptcha,
-  web3Utils = require('web3-utils');
+  web3Utils = require('web3-utils'),
+  fs = require("fs");
 
 var RECAPTCHA_PUBLIC_KEY = sails.config.RECAPTCHA.PUBLIC_KEY,
   RECAPTCHA_PRIVATE_KEY = sails.config.RECAPTCHA.PRIVATE_KEY;
@@ -378,6 +379,246 @@ module.exports = {
   },
 
 
+
+
+  /**
+  * Upload ID document
+  */
+  postUploadIdDocument: async (req,res) => {
+    try {
+      let uploadPath = '.tmp/public/users/id',
+      displayPath = 'users/id',
+      validFileTypes = ["image/jpg","image/jpeg","image/png","image/gif"];
+
+      // Process the SELFIE document upload
+      let uploadIdDocument = await new sails.bluebird(function (resolve, reject) {
+
+        try{
+          req.file('documentIdFile').upload({
+              dirname: require('path').resolve(sails.config.appPath, uploadPath),
+              maxBytes: 1 * 1024 * 1024 //1 MB
+            }, function (err, uploadedFiles) {
+
+            if (err || !uploadedFiles || uploadedFiles.length < 1) {
+              return reject(err);
+            }
+
+            var fdExtId = uploadedFiles[0].fd.substr((uploadedFiles[0].fd.lastIndexOf('.') + 1));
+            var fileName = req.session.user.id + "-" + new Date().getTime() + '-ID.' + fdExtId;
+            var newFileFd = require('path').resolve(sails.config.appPath, uploadPath) + '\\' + fileName;
+            var docPath = _.clone(newFileFd);
+
+            fs.rename(uploadedFiles[0].fd, newFileFd, function (err) { 
+
+              if(err){
+                return reject(err);
+              }
+
+              // Make sure filetype is acceptable
+              if (validFileTypes.indexOf(uploadedFiles[0].type) < 0) {
+                return resolve({ status: 'error', err: "The file type uploaded was not valid."});
+              }
+
+              return resolve({ status: 'success', fileFd: newFileFd, fileName: fileName, renderPublicLocation: displayPath + '/' + fileName, mimeType: uploadedFiles[0].type });
+            });
+          });
+        }catch(err){
+          return reject(err);
+        }
+
+      });
+
+      if (uploadIdDocument.status == 'success') {
+        postUploadDocToArtemisRsp = await ArtemisApiService.docPostApi(req.session.user.id, uploadIdDocument.fileFd, uploadIdDocument.fileName, uploadIdDocument.mimeType);
+
+        // Update users document ID
+        let updateUser = await User.update({id:req.session.user.id},{documentId:postUploadDocToArtemisRsp.id});
+
+        return res.ok({
+          success: true,
+          fileName: uploadIdDocument.fileName,
+          renderPublicLocation: uploadIdDocument.renderPublicLocation,
+          msg: "Your ID document file was stored successfully"
+        });
+
+      }
+      // ID document upload failed
+      else {
+        throw new Error("Failed to process the uploaded document.");
+      }
+
+    } catch (err) {
+      sails.log.error("DashboardController.postUploadIdDocument err: ",err);
+      return res.serverError({success:false,msg: err});
+    }
+  },
+
+
+
+  /**
+  * Upload Selfie
+  */
+  postUploadSelfie: async (req,res) => {
+    try {
+      let uploadPath = '.tmp/public/users/selfie',
+      displayPath = 'users/selfie',
+      validFileTypes = ["image/jpg","image/jpeg","image/png","image/gif"];
+
+      // Process the SELFIE document upload
+      let uploadIdDocument = await new sails.bluebird(function (resolve, reject) {
+
+        try{
+          req.file('selfieFile').upload({
+              dirname: require('path').resolve(sails.config.appPath, uploadPath),
+              maxBytes: 1 * 1024 * 1024 //1 MB
+            }, function (err, uploadedFiles) {
+
+            if (err || !uploadedFiles || uploadedFiles.length < 1) {
+              return reject(err);
+            }
+
+            var fdExtId = uploadedFiles[0].fd.substr((uploadedFiles[0].fd.lastIndexOf('.') + 1));
+            var fileName = req.session.user.id + "-" + new Date().getTime() + '-SELFIE.' + fdExtId;
+            var newFileFd = require('path').resolve(sails.config.appPath, uploadPath) + '/' + fileName;
+            var docPath = _.clone(newFileFd);
+
+
+            fs.rename(uploadedFiles[0].fd, newFileFd, function (err) { 
+
+              if(err){
+                return reject(err);
+              }
+            
+              // Make sure filetype is acceptable
+              if (validFileTypes.indexOf(uploadedFiles[0].type) < 0) {
+                return resolve({ status: 'error', err: "The file type uploaded was not valid."});
+              }
+
+              return resolve({ status: 'success', fileFd: newFileFd, fileName: fileName, renderPublicLocation: displayPath + '/' + fileName, mimeType: uploadedFiles[0].type });
+            });
+
+          });
+        }catch(err){
+          return reject(err);
+        }
+
+      });
+
+      if (uploadIdDocument.status == 'success') {
+        postUploadDocToArtemisRsp = await ArtemisApiService.docPostApi(req.session.user.id, uploadIdDocument.fileFd, uploadIdDocument.fileName, uploadIdDocument.mimeType);
+
+        // Update users document ID
+        let updateUser = await User.update({id:req.session.user.id},{selfieId:postUploadDocToArtemisRsp.id});
+
+        return res.ok({
+          success: true,
+          fileName: uploadIdDocument.fileName,
+          renderPublicLocation: uploadIdDocument.renderPublicLocation,
+          msg: "Your ID document file was stored successfully"
+        });
+
+      }
+      // ID document upload failed
+      else {
+        throw new Error("Failed to process the uploaded document.");
+      }
+
+    } catch (err) {
+      sails.log.error("DashboardController.postUploadIdDocument err: ",err);
+      return res.serverError({success:false,msg: err});
+    }
+  },
+
+
+
+  /**
+  * Perform final KYC validation
+  */
+  postCompleteKyc: async (req,res) => {
+    try{
+
+      // Get user info to process
+      let user = await User.findOne({id:req.session.user.id});
+
+      if(!user){
+        throw new Error("There was a problem with the server, please try completing the form again.");
+      }
+
+      // Now need to do document comparison
+      let artemisFaceCheckRsp = await ArtemisApiService.facePostApi(user.id, user.documentId, user.selfieId);
+
+      // If no match - we need user to re-upload documents
+      var faceMatchResult = artemisFaceCheckRsp.compare_result;
+
+      // Perform final check if we can auto approve this person with Artemis
+      finalKycCheck = await ArtemisApiService.finalReportCheckApi(user.id);
+
+      let updatedUser = await User.update({id:user.id},{riskRating:finalKycCheck.risk_rating,approvalStatus:finalKycCheck.approval_status,faceMatchResult:faceMatchResult});
+
+      let emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:user.email,toName:user.firstName,subject:'',body:''};
+
+      if (finalKycCheck.approval_status == 'ACCEPTED' || finalKycCheck.approval_status == 'CLEARED') {
+        req.addFlash('success', 'Congratulations! You are now a fully approved contributor and may purchase FORCE tokens.');
+        emailOptions.subject = "Your KYC application was accepted";
+        emailOptions.body = `Hi ${user.firstName}
+        Your KYC application was processed successfully and we are pleased to inform you, you have been approved as a contributor.
+        You may now purchase FORCE tokens and expect to receive them back to the Ether address you provided.
+        Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.
+
+        Kind Regards
+        The TriForce Tokens Team`;
+
+        EmailService.sendEmail(emailOptions);
+        return res.redirect("/contributor/kyc");
+      } else if (finalKycCheck.approval_status == 'PENDING') {
+        req.addFlash('success', 'Great, we received your KYC information. Please allow a few minutes for us to verify the details provided.');
+
+        emailOptions.subject = "Your KYC application is being processed";
+        emailOptions.body = `Hi ${user.firstName}
+        Your KYC application is currently being processed. Our team will ensure you receive an email when it has been completed with the result.
+        Once approved you will be able to purchase the remaining FORCE from our final token sale that ends soon.
+        Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.
+
+        Kind Regards
+        The TriForce Tokens Team`;
+
+        EmailService.sendEmail(emailOptions);
+
+        // Send email to team about pending KYC application
+        emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:sails.config.contacts.team,toName:"Team",subject:'User has KYC Pending',body:''};
+        emailOptions.body = `A user tried to complete KYC. A manual review is required. The user info is:
+        Email: ${user.email}
+        First Name: ${user.firstName}
+        Last Name: ${user.lastName}
+        Document ID: ${user.documentId}
+        Selfie ID: ${user.selfieId}
+        Nationality: ${user.nationality}
+        Country: ${user.country}
+        `;
+
+        EmailService.sendEmail(emailOptions);
+
+        return res.redirect("/contributor/kyc");
+      } else {
+        req.addFlash('error', 'Sorry, it seems that our KYC provider has indicated your KYC application should be declined. If you feel this is in error, please contact us.');
+
+        emailOptions.subject = "Your KYC application was rejected";
+        emailOptions.body = `Hi ${user.firstName}
+        Unfortunately your KYC application has been rejected. This is due to information based from our KYC provider, Cynopsis Solutions PTE.
+        If you feel that an error has been made please <a href="${sails.config.BASE_URL}/contact">contact us here</a>.
+
+        Kind Regards
+        The TriForce Tokens Team`;
+
+        EmailService.sendEmail(emailOptions);
+        return res.redirect("/contributor/kyc");
+      }
+    }catch(err){
+      req.addFlash("errors","Your KYC process could not be completed. Please check all details are correct in the form below.")
+      sails.log.error("DashboardController.postCompleteKyc err: ",err);
+      return res.redirect("/contributor/kyc");
+    }
+  }
 
 };
 

@@ -88,7 +88,6 @@
     <script src="/js/hs.core.js"></script>
     <script src="/js/custom.js"></script>
     <script src="/js/dzsparallaxer.js"></script>
-    <script src="/js/files.js"></script>
     <script src="/js/hs.cubeportfolio.js"></script>
     <script src="/js/hs.datatables.js"></script>
     <script src="/js/hs.fancybox.js"></script>
@@ -287,24 +286,161 @@
 
 
             // Process document image uploaded
-
             $(".document-image-upload-input").change(function (e){
+
                 var fileName = $(this).val(),
                 allowedExtensions = ["jpg","jpeg","gif","png"];
 
                 var file = fileName.toLowerCase(),
                 extension = file.substring(file.lastIndexOf('.') + 1);
 
+                $('.documentIdLoadingGif').show();
+                $("#documentIdFileImg").hide();
+
+
+                // Make sure file not greater than 1MB
+                if (window.FileReader && window.File && window.FileList && window.Blob ){
+                  var fileSize = this.files[0].size;
+                  if(fileSize > 1048576){
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                    toastr["error"]("The file size uploaded was greater than 1 MB. Please reduce the file size", "Error");
+                    $('.documentIdLoadingGif').hide();
+                    $("#documentIdFileImg").show();
+                    return false;
+                  }
+                }
+
                 if ($.inArray(extension,allowedExtensions) == -1) {
                     $(this).wrap('<form>').closest('form').get(0).reset();
                     $(this).unwrap();
+                    toastr["error"]("You uploaded an invalid file type. Only images of type .jpg, .jpeg, .png or .gif are allowed.", "Error");
+                    $('.documentIdLoadingGif').hide();
+                    $("#documentIdFileImg").show();
                 } else {
                   // File is valid - upload image and show
                   // Send image to backend to verify
                   // If valid, update passport image with this image and green tick
+                  var data = new FormData();
+
+                  $.each(e.target.files, function(key, value)
+                  {
+                      data.append("documentIdFile", value);
+                  });
+
+                  $.ajax({
+                      url: '/contributor/upload-id-document',
+                      type: 'POST',
+                      method: 'POST',
+                      data: data,
+                      processData: false,
+                      contentType: false,
+                      cache: false
+                  }).done(function(data) {
+                    toastr["success"](data.msg, "Success");
+                    $("#documentIdFileImg"). attr("src","/" + data.renderPublicLocation);
+                    $('.documentIdLoadingGif').hide();
+                    $("#documentIdFileImg").show();
+                    $(".idDocumentSuccess").show();
+                  }).fail(function(data) {
+                      toastr["error"]("Failed to upload your file", "Error");
+                      $('.documentIdLoadingGif').hide();
+                      $("#documentIdFileImg").show();
+                      $(".idDocumentSuccess").hide();
+                  });
+                }
+             });
+
+
+            // Process document image uploaded
+            $(".selfie-image-upload-input").change(function (e){
+
+                var fileName = $(this).val(),
+                allowedExtensions = ["jpg","jpeg","gif","png"];
+
+                var file = fileName.toLowerCase(),
+                extension = file.substring(file.lastIndexOf('.') + 1);
+
+                $('.selfieLoadingGif').show();
+                $("#selfieFileImg").hide();
+
+
+                // Make sure file not greater than 1MB
+                if (window.FileReader && window.File && window.FileList && window.Blob ){
+                  var fileSize = this.files[0].size;
+                  if(fileSize > 1048576){
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                    toastr["error"]("The file size uploaded was greater than 1 MB. Please reduce the file size", "Error");
+                    $('.selfieLoadingGif').hide();
+                    $("#selfieFileImg").show();
+                    return false;
+                  }
                 }
 
+                if ($.inArray(extension,allowedExtensions) == -1) {
+                    $(this).wrap('<form>').closest('form').get(0).reset();
+                    $(this).unwrap();
+                    toastr["error"]("You uploaded an invalid file type. Only images of type .jpg, .jpeg, .png or .gif are allowed.", "Error");
+                    $('.selfieLoadingGif').hide();
+                    $("#selfieFileImg").show();
+                } else {
+                  // File is valid - upload image and show
+                  // Send image to backend to verify
+                  // If valid, update passport image with this image and green tick
+                  var data = new FormData();
+
+                  $.each(e.target.files, function(key, value)
+                  {
+                      data.append("selfieFile", value);
+                  });
+
+                  $.ajax({
+                      url: '/contributor/upload-selfie',
+                      type: 'POST',
+                      method: 'POST',
+                      data: data,
+                      processData: false,
+                      contentType: false,
+                      cache: false
+                  }).done(function(data) {
+                    toastr["success"](data.msg, "Success");
+                    $("#selfieFileImg"). attr("src","/" + data.renderPublicLocation);
+                    $('.selfieLoadingGif').hide();
+                    $("#selfieFileImg").show();
+                    $(".selfieSuccess").show();
+                    letCompleteKyc();
+                  }).fail(function(data) {
+                      toastr["error"]("Failed to upload your file", "Error");
+                      $('.selfieLoadingGif').hide();
+                      $("#selfieFileImg").show();
+                      $(".selfieSuccess").hide();
+                  });
+                }
              });
+
+
+            $('.btn-complete-kyc').click(function(){
+              if(letCompleteKyc()){
+                $('#kycForm').hide();
+                $('.formLoadingImg').show();
+              }
+            });
+
+            function letCompleteKyc(){
+              var documentFile = $("#documentIdInput").val(),
+                selfieFile = $("#selfieInput").val(),
+                documentIdFile = $(".documentIdFile").val(),
+                selfieIdFile = $(".selfieIdFile").val();
+
+                if((documentFile && selfieFile) || (documentIdFile && selfieIdFile)
+                  || (documentFile && selfieIdFile) || (documentIdFile && selfieFile)){
+                  $('.btn-complete-kyc').prop('disabled', false);
+                  return true;
+                }
+                return false;
+            }
+
 
           <% } %>
       });
