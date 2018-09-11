@@ -8,19 +8,282 @@
 	<div class="u-bg-light-blue-50">
       <div class="container u-space-2">
 
+
+      <% if(moment().isBefore("2018-10-08 12:00:00")){ %>
+
       	<div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
 	        <span class="u-label u-label--sm u-label--primary mb-2">Token Sale</span>
 	        <h2 class="h3 font-weight-normal">Our public token sale is currently closed</h2>
 
-	        <p>We will be opening our final public token sale on <strong>8th October 2018 at 12:00pm UTC</strong>.</p>
-	        <p>Check back on that date to purchase FORCE with a bonus.</p>
 
-	        <br />
+	        <h5>Token Sale Opens Soon</h5>
+	        <div class="promo-timer-view mb-4">
+	          	<div class="timer">
+	            	<div class="row text-center mt-4">
+		              <div class="col-md-3">
+		                <div class="time-digit">
+		                  <span class="js-days digit"></span><br />
+		                  <span class="digit-type text-center">days</span>
+		                </div>
+		              </div>
+		              <div class="col-md-3">
+		              <div class="time-digit">
+		                <span class="js-hours digit"></span><br />
+		                <span class="digit-type">hours</span>
+		              </div>
+		              </div>
+		              <div class="col-md-3">
+		              <div class="time-digit">
+		                <span class="js-minutes digit"></span><br />
+		                <span class="digit-type">mins</span>
+		              </div>
+		              </div>
+		              <div class="col-md-3">
+		              <div class="time-digit">
+		                <span class="js-seconds digit"></span><br />
+		                <span class="digit-type">secs</span>
+		              </div>
+	              </div>
+	            </div>
+          	</div>
 
-	        <h4>Want to enter the private sale?</h4>
-	        <p>Our private sale is now open to accredited investors.</p>
-	        <p>Please contact the company CEO Pete Mardell at <a href="mailto:pete@triforcetokens.io">pete@triforcetokens.io</a></p>
+          	<div class="row">
+          		<div class="col-sm-12 mt-6">
+			        <p>We will be opening our final public token sale on <strong>8th October 2018 at 12:00pm UTC</strong>.</p>
+			        <p>Check back on that date to purchase FORCE with a bonus.</p>
+
+			        <br />
+
+			        <h4>Want to enter the private sale?</h4>
+			        <p>Our private sale is now open to accredited investors.</p>
+			        <p>Please contact the company CEO Pete Mardell at <a href="mailto:pete@triforcetokens.io">pete@triforcetokens.io</a></p>
+		        </div>
+	        </div>
       	</div>
+
+
+      	<% }else{ %>
+
+
+  		<div class="w-md-80 w-lg-80 text-center mx-auto mb-9">
+	        <h2 class="h3 font-weight-normal">Buy FORCE <br /><small>Active Bonus: <span class="current-bonus">15</span>&percnt;</small></h2>
+
+	        	<p><strong>Bonus ends in 
+              <span class="js-days-bonus digit"></span> <span class="digit-type text-center">days</span>,
+              <span class="js-hours-bonus digit"></span> <span class="digit-type text-center">hours</span>,
+              <span class="js-minutes-bonus digit"></span> <span class="digit-type text-center">mins</span>,
+              <span class="js-seconds-bonus digit"></span> <span class="digit-type text-center">seconds</span>
+              </strong></p>
+
+	        <% if(flash.has('errors')){ %>
+				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+					<% flash.get('errors').forEach(function (message) { %>
+					<%- message %>
+					<% }) %>
+				</div>
+	        	<br />
+			<% } %>
+
+			<% if(flash.has('success')){ %>
+			<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+				<% flash.get('success').forEach(function (message) { %>
+				<%- message %>
+				<% }) %>
+			</div>
+	        <br />
+			<% } %>
+
+			<% if (user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') { %>
+
+				<p>You agreed to the <a target="_BLANK" href="/resources/token-sale-agreement-v1.1.pdf">token sale agreement</a> 
+				and declared that you read and understood the <a target="_BLANK" href="/resources/risk-disclosures-v1.0.pdf">risk disclosures</a>
+				on <strong><%- moment(user.createdOn).format("LLL") %></strong></p>
+				<p>If you no longer agree to these terms do not purchase FORCE in the form below.</p>
+
+
+    			<!-- Request Payment Form -->
+			    <form method="POST" action="/contributor/buy-force" id="kycForm" class="js-validate js-step-form"
+			          data-progress-id="#progressStepForm"
+			          data-steps-id="#contentStepForm"
+			          novalidate="novalidate">
+			      <!-- Progress Step Form -->
+			      <div id="progressStepForm" class="js-step-progress row text-center u-form-steps p-5">
+			        <div class="col-sm-4 mb-3 mb-sm-0">
+			          <span class="d-block u-icon u-icon-secondary--air u-icon--lg rounded-circle u-form-steps__icon mx-auto mb-2">
+			            <span class="fab fa-ethereum u-icon__inner"></span>
+			          </span>
+			          Verify Ether Address
+			        </div>
+
+			        <div class="col-sm-4 mb-3 mb-sm-0">
+			          <span class="d-block u-icon u-icon-secondary--air u-icon--lg rounded-circle u-form-steps__icon mx-auto mb-2">
+			            <span class="fas fa-shopping-cart u-icon__inner"></span>
+			          </span>
+			          FORCE Quantity
+			        </div>
+
+			        <div class="col-sm-4 mb-3 mb-sm-0">
+			          <span class="d-block u-icon u-icon-secondary--air u-icon--lg rounded-circle u-form-steps__icon mx-auto mb-2">
+			            <span class="fas fa-credit-card u-icon__inner"></span>
+			          </span>
+			          Make Payment
+			        </div>
+			      </div>
+			      <!-- End Progress Step Form -->
+
+			      <hr class="my-0">
+
+			      	<!-- Content Step Form -->
+			      	<div id="contentStepForm" class="p-5 mb-5">
+
+
+				        <div id="selectBioStep" class="active text-left">
+
+				        	<div class="row">
+	                            <p>Check and verify your Ether wallet address is correct below.</p>
+		                		<p><strong>Do not use an exchange wallet. Please use a wallet address that is ERC-20 token compatible. You can see <a target="_BLANK" href="https://tokenmarket.net/what-is/ethereum-token-wallets/">examples here</a>.</strong></p>
+
+		                        <!-- Input Group -->
+		                        <div class="col-sm-12 mt-4 mb-4">
+
+		                          <label class="h6 small d-block text-uppercase">Ether Address</label>
+		                          <div class="js-form-message">
+		                            <div class="js-focus-state input-group u-form">
+		                              <input value="<%- user.whitelistEthAddress %>" placeholder="0x42F5856Ba4510F1de9c728cf502C7dB2551C5045" class="form-control u-form__input" type="text" name="whitelistEthAddress" required="" data-msg="Please enter a valid ERC-20 wallet address you will be sending funds from" data-error-class="u-has-error" data-success-class="u-has-success">
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <!-- End Input Group -->
+
+	                        </div>
+
+	                        <!-- Buttons -->
+							<div class="d-flex justify-content-end">
+								<button type="button" class="btn btn-sm btn-primary u-btn-primary transition-3d-hover mr-1 save-eth-address" data-next-step="#paymentDetailsStep">Next</button>
+							</div>
+							<!-- End Buttons -->
+
+	                    </div>
+
+
+	                    <div id="paymentDetailsStep" class="text-left" style="display: none;">
+				        	<div class="row">
+					        	<p>Decide how much FORCE you wish to own.</p>
+
+
+					        	<!-- Input Group -->
+		                        <div class="col-sm-12 mt-4 mb-4">
+
+		                          <label class="h6 small d-block text-uppercase">What currency do you want to buy with?</label>
+		                          <div class="js-form-message">
+		                            <div class="js-focus-state input-group u-form">
+		                              <select class="form-control u-form__input purchase-currency" name="purchaseCurrency">
+		                              	<option value="eth">Ether (ETH)</option>
+		                              	<option value="btc">Bitcoin (BTC)</option>
+		                              </select>
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <!-- End Input Group -->
+
+		                        <!-- Input Group -->
+		                        <div class="col-sm-6 mt-4 mb-4">
+
+		                          <label class="h6 small d-block text-uppercase">How much FORCE do you want?</label>
+		                          <div class="js-form-message">
+		                            <div class="js-focus-state input-group u-form">
+		                              <input placeholder="1000" class="form-control u-form__input force-qty" type="number" name="" required="" data-msg="" data-error-class="u-has-error" data-success-class="u-has-success">
+		                            </div>
+		                          </div>
+
+		                          <div class="mt-1 mb-2">
+		                          	<p>You will receive a bonus of <span class="selectedBonusForce"></span> FORCE, giving you a total of <span class="selectedTotalForce"></span> FORCE</p>
+		                          </div>
+
+		                          <div class="">
+		                          	<button type="button" class="btn btn-success btn-block calculate-force">Calculate Order</button>
+		                          </div>
+		                        </div>
+		                        <!-- End Input Group -->
+
+		                        <!-- Input Group -->
+		                        <div class="col-sm-6 mt-2 mb-4">
+
+		                          <h6 class="d-block text-uppercase text-center mb-4">Order Summary</h6>
+
+		                          <table class="table table-hover">
+		                          	<tbody>
+		                          		<tr>
+			                          		<td>Payment Currency:</td>
+			                          		<td><span class="selectedPaymentCurrency">ETH</span></td>
+		                          		</tr>
+		                          		<tr>
+			                          		<td>FORCE Qty</td>
+			                          		<td><span class="selectedForce"></span></td>
+		                          		</tr>
+		                          		<tr>
+			                          		<td>Bonus</td>
+			                          		<td><span class="selectedBonusForce"></span> <small>(<span class="current-bonus">15</span>&percnt;)</small></td>
+		                          		</tr>
+		                          	</tbody>
+		                          	<tfooter>
+		                          		<tr>
+			                          		<th>Total FORCE</th>
+			                          		<th><span class="selectedTotalForce"></span></th>
+		                          		</tr>
+		                          		<tr>
+			                          		<th>Total Cost</th>
+			                          		<th><span class="selectedTotalDue"></span> <span class="selectedPaymentCurrency">ETH</span></th>
+		                          		</tr>
+		                          	</tfooter>
+		                          </table>
+		                          
+		                        </div>
+		                        <!-- End Input Group -->
+		                    </div>
+
+							<!-- Buttons -->
+							<div class="d-flex justify-content-end">
+							<a class="btn btn-sm u-btn-secondary--air transition-3d-hover mr-1 btn-back-to-eth-address" href="javascript:;" data-previous-step="#selectBioStep">Back</a>
+								<button disabled type="button" class="btn btn-sm btn-primary u-btn-primary transition-3d-hover mr-1 btn-create-order" data-next-step="#completeOrder">Complete Order &raquo;</button>
+							</div>
+							<!-- End Buttons -->
+				        </div>
+
+
+				        <div id="completeOrder" class="text-left" style="display: none;">
+			          
+				          	<div class="row">
+					          	<div class="col-sm-12 text-center">
+					          		<img class="img-fluid text-center mb-3 formLoadingImg" src="/images/loading-gif.gif" alt="" />
+					          		<p>Your order has been prepared with Coinbase. Please now wait to be redirected to complete the purchase.</p>
+					          		<p>Once your order is completed and verified, your tokens will be distributed to the ether address saved.</p>
+				          		</div>
+			          		</div>
+			          	</div>
+	                </div>
+                </form>
+
+
+			<% }else if(user.approvalStatus == 'PENDING'){ %>
+
+				<h4>KYC is Pending</h4>
+		        <p>You are unable to purchase FORCE until your account has been verified via the KYC process.</p>
+		        <a class="btn btn-primary" href="/contributor/kyc">Check Your KYC</a>
+
+			<% }else{ %>
+
+				<h4>KYC is Rejected</h4>
+		        <p>You are unable to purchase FORCE due to a failed KYC verification.</p>
+		        <a class="btn btn-primary" href="/contributor/kyc">Check Your KYC</a>
+
+			<% } %>
+
+
+		</div>
+
+      	<% } %>
+
 
       </div>
     </div>

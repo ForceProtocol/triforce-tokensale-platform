@@ -1530,4 +1530,66 @@ module.exports = {
 		});
 	},
 
+
+
+	postCoinbaseWebhook: async(req,res) => {
+		try{
+			const Webhook = require('coinbase-commerce-node').Webhook;
+			var event;
+
+			event = await Webhook.verifyEventBody(
+				req.rawBody,
+				req.headers['x-cc-webhook-signature'],
+				sails.config.COINBASE_COMMERCE_SHARED_SECRET
+			);
+
+			if(!event.data.metadata.customer_id){
+				throw new Error("No customer ID found.");
+			}
+			
+			// Find user
+			let user = await User.findOne({id:event.data.metadata.customer_id});
+
+			if(!user){
+				throw new Error("No user was found from customer ID: " + event.data.metadata.customer_id);
+			}
+
+			let emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:user.email,toName:user.firstName,subject:'',body:''},
+			emailOptionsStaff = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:"pete@triforcetokens.io",toName:"Pete Mardell",subject:'',body:''};
+
+			if(event.type == "charge:created"){
+				emailOptions.subject = "New pending order for FORCE tokens created";
+				emailOptions.body = `Hi ${user.firstName}<br /><br />
+				A new order has been created for you to purchase FORCE tokens. You can complete your order at the following link if you have not already done so:<br /><br />
+				<a href="${event.data.hosted_url}">Complete Order Here</a><br /><br />
+				If you have any difficulties please don't hesistate to <a href="${sails.config.BASE_URL}/contact">contact us</a>.<br />
+				The TriForce Tokens Team`;
+				EmailService.sendEmail(emailOptions);
+			}else if(event.type == "charge:confirmed"){
+				emailOptions.subject = "Order Completed";
+				emailOptions.body = `Hi ${user.firstName}<br /><br />
+				Thank you for completing your order for FORCE tokens.<br />
+				Please allow our team time to verify the transaction and approve the issuance of your tokens.<br />
+				You will be notified once your tokens have been distributed to the following Ether address: ${user.whitelistEthAddress}<br /><br />
+				If you have any questions in the meantime, please don't hesistate to <a href="${sails.config.BASE_URL}/contact">contact us</a>.<br /><br />
+				The TriForce Tokens Team`;
+				EmailService.sendEmail(emailOptions);
+
+				emailOptionsStaff.subject = "New FORCE Token Order Completed";
+				emailOptionsStaff.body = `New customer completed order:<br /><br />
+				User ID: ${user.id}<br />
+				Email: ${user.email}<br />
+				Charge ID: ${event.data.id}<br />
+				Whitelisted ETH Address: ${user.whitelistEthAddress}<br />
+				Description: ${event.data.description}<br />
+				Price: ${event.data.pricing.local.amount} ${event.data.pricing.local.currency}<br />`;
+				EmailService.sendEmail(emailOptionsStaff);
+			}
+
+			return res.ok({received:true});
+		}catch(err){
+			return res.serverError({failed:err});
+		}
+	}
+
 };

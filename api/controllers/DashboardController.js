@@ -9,7 +9,9 @@ const request = require('request-promise'),
   moment = require('moment'),
   Recaptcha = require('recaptcha-v2').Recaptcha,
   web3Utils = require('web3-utils'),
-  fs = require("fs");
+  fs = require("fs"),
+  {getEthPriceNow,getEthPriceHistorical} = require('get-eth-price'),
+  getBtcPrice = require('btc-value');
 
 var RECAPTCHA_PUBLIC_KEY = sails.config.RECAPTCHA.PUBLIC_KEY,
   RECAPTCHA_PRIVATE_KEY = sails.config.RECAPTCHA.PRIVATE_KEY;
@@ -152,7 +154,8 @@ module.exports = {
       title: 'Buy FORCE',
       metaDescription: '',
       user: req.session.user,
-      txns: txns
+      txns: txns,
+      moment: require('moment')
     });
   },
 
@@ -318,6 +321,11 @@ module.exports = {
           userDayDob = moment(user.dateOfBirth,"DD/MM/YYYY").format('D');
         }
 
+        // block Americans
+        if(nationality == "AMERICAN" || country.indexOf("AMERICA") !== -1){
+          return res.ok({success:true,updated:false,msg:'We are unable to accept American Citizens or Residents at this time.'});
+        }
+
         // Update is not required - make sure user info is actually provided otherwise error
         if(user.firstName == firstName && user.lastName == lastName && user.nationality == nationality && user.gender == gender
           && user.country == country && dateOfBirth == user.dateOfBirth){
@@ -363,7 +371,6 @@ module.exports = {
 
       // Validate eth address
       if(!web3Utils.isAddress(whitelistEthAddress)){
-        sails.log.debug("invalid eth address",whitelistEthAddress);
         return res.ok({success:false,updated:false,msg:"You provided an invalid Ethereum wallet address"});
       }
 
@@ -377,7 +384,6 @@ module.exports = {
     }
 
   },
-
 
 
 
@@ -618,7 +624,115 @@ module.exports = {
       sails.log.error("DashboardController.postCompleteKyc err: ",err);
       return res.redirect("/contributor/kyc");
     }
-  }
+  },
+
+
+
+  /**
+  * Save Users ETH address for whitelisting 
+  */
+  postCalculator: async (req,res) => {
+
+    try{
+      let forceQty = parseFloat(req.param("forceQty")),
+        selectedCurrency = req.param("selectedCurrency"),
+        totalForce = forceQty,
+        currentCryptoPrice = 1;
+
+
+      // Calculate bonus
+      let currentBonus = await CpService.getCurrentBonus();
+
+      // Ensure forceQty is a valid number
+      if(!forceQty || isNaN(forceQty)){
+        return res.ok({success:false,msg:"You did not provide a valid FORCE quantity value."});
+      }
+
+      if(!selectedCurrency || (selectedCurrency != 'btc' && selectedCurrency != 'eth')){
+        return res.ok({success:false,msg:"You did not select a valid payment currency."});
+      }
+
+      if(currentBonus > 0){
+        totalForce = forceQty + ((forceQty / 100) * currentBonus);
+      }
+
+      let totalForceUsd = (forceQty * 0.15).toFixed(2);
+
+      switch(selectedCurrency){
+        case 'eth':
+          currentCryptoPrice = await getEthPriceNow();
+          currentCryptoPrice = currentCryptoPrice[Object.keys(currentCryptoPrice)[0]].ETH.USD;
+        break;
+        case 'btc':
+          currentCryptoPrice = await getBtcPrice();
+        break;
+      }
+
+      let totalCurrencyRequired = CpService.roundToCleanDecimal(totalForceUsd / currentCryptoPrice,"8");
+
+      return res.ok({success:true,currentBonus:currentBonus,forceQty:forceQty,selectedCurrency:selectedCurrency,totalForce:totalForce,totalForceUsd:totalForceUsd,currentCryptoPrice:currentCryptoPrice,totalCurrencyRequired:totalCurrencyRequired});
+    }catch(err){
+      sails.log.error("DashboardController.postKycWhitelistEthAddress err: ",err);
+      return res.serverError({success:false,updated:false,msg: "Could not calculate your order due to a server issue."});
+    }
+
+  },
+
+
+  postCreateCharge: async(req,res) => {
+    try{
+      let forceQty = parseFloat(req.param("forceQty")),
+        selectedCurrency = req.param("selectedCurrency"),
+        totalForce = forceQty,
+        currentCryptoPrice = 1;
+
+
+      // Calculate bonus
+      let currentBonus = await CpService.getCurrentBonus();
+
+      // Ensure forceQty is a valid number
+      if(!forceQty || isNaN(forceQty)){
+        return res.ok({success:false,msg:"You did not provide a valid FORCE quantity value."});
+      }
+
+      if(!selectedCurrency || (selectedCurrency != 'btc' && selectedCurrency != 'eth')){
+        return res.ok({success:false,msg:"You did not select a valid payment currency."});
+      }
+
+      if(currentBonus > 0){
+        totalForce = forceQty + ((forceQty / 100) * currentBonus);
+      }
+
+      let totalForceUsd = (forceQty * 0.15).toFixed(2);
+
+      switch(selectedCurrency){
+        case 'eth':
+          currentCryptoPrice = await getEthPriceNow();
+          currentCryptoPrice = currentCryptoPrice[Object.keys(currentCryptoPrice)[0]].ETH.USD;
+        break;
+        case 'btc':
+          currentCryptoPrice = await getBtcPrice();
+        break;
+      }
+
+      let totalCurrencyRequired = CpService.roundToCleanDecimal(totalForceUsd / currentCryptoPrice,"8");
+
+      // Create charge
+      let description = "Authenticated purchase of " + totalForce + " FORCE tokens.";
+      let coinbaseCharge = await CoinbaseService.createCharge(req.session.user.id,req.session.user.email,totalCurrencyRequired,selectedCurrency,description);
+
+      if(!coinbaseCharge){
+        throw new Error("Failed to create an order to complete.");
+      }
+
+      sails.log.debug("coinbaseCharge ",coinbaseCharge);
+
+      return res.ok({success:true,hostedUrl:coinbaseCharge.hosted_url,currentBonus:currentBonus,forceQty:forceQty,selectedCurrency:selectedCurrency,totalForce:totalForce,totalForceUsd:totalForceUsd,currentCryptoPrice:currentCryptoPrice,totalCurrencyRequired:totalCurrencyRequired});
+    }catch(err){
+      sails.log.error("DashboardController.postKycWhitelistEthAddress err: ",err);
+      return res.serverError({success:false,updated:false,msg: "Could not calculate your order due to a server issue."});
+    }
+  },
 
 };
 

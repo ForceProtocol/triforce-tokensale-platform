@@ -71,6 +71,12 @@ module.exports.routes = {
   'POST /contributor/upload-selfie': 'DashboardController.postUploadSelfie',
   'POST /contributor/complete-kyc': 'DashboardController.postCompleteKyc',
 
+  // Calculate FORCE purchase information
+  'POST /contributor/calculator': 'DashboardController.postCalculator',
+  'POST /contributor/create-charge': 'DashboardController.postCreateCharge',
+  'POST /coinbase/webhook': 'PagesController.postCoinbaseWebhook',
+
+
 	// Get pending whitelist users for artemis front end server
 	'POST /get-pending-whitelist-users': 'UserController.getPendingWhitelistUsers',
 

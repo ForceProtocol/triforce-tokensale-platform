@@ -1,6 +1,7 @@
 let bigNumber = require('bignumber.js');
 bigNumber.config({ EXPONENTIAL_AT: [-7, 2000] });
-const Coinpayments = require('coinpayments');
+const Coinpayments = require('coinpayments'),
+moment = require('moment');
 
 let btcToUsd, usdToBtc, ethToBtc, ltcToBtc, wavesToBtc, ltctToBtc;
 
@@ -442,5 +443,38 @@ module.exports = {
       estimatedTFTs
     };
 
+  },
+
+
+  getCurrentBonus: async function (){
+    // Work out current bonus
+    var discountRound1End = new Date(Date.UTC(2018,8,14,0,0,0)).getTime();
+    var discountRound2End = new Date(Date.UTC(2018,8,21,0,0,0)).getTime();
+    var discountRound3End = new Date(Date.UTC(2018,8,28,0,0,0)).getTime();
+
+    var discountRound1Distance = discountRound1End - Date.now();
+    var discountRound2Distance = discountRound2End - Date.now();
+    var discountRound3Distance = discountRound3End - Date.now();
+
+    // Round 1 Live
+    if(discountRound1Distance > 0){
+      return 15;
+    }
+    // Round 2 Live
+    else if(discountRound2Distance > 0){
+      return 10;
+    }
+    // Round 3 Live
+    else if(discountRound3Distance > 0){
+      return 5;
+    }
+    
+    return 0;
+  },
+
+  roundToCleanDecimal: (num,factor)=>{    
+    return +(Math.round(num + "e+" + factor)  + "e-" + factor);
   }
+
+
 };

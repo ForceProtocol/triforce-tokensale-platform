@@ -45,6 +45,7 @@ module.exports.http = {
        'partnerTrackingCookie',
        'bodyParser',
        'handleBodyParserError',
+       'rawBody',
        'compress',
        'methodOverride',
        'poweredBy',
@@ -56,6 +57,25 @@ module.exports.http = {
        '500'
      ],
 
+     rawBody: function(req, res, next) {
+      if (req.url !== '/coinbase/webhook') {
+        return next();
+      }
+
+      req.setEncoding('utf8');
+
+      var data = '';
+
+      req.on('data', function (chunk) {
+        data += chunk;
+      });
+
+      req.on('end', function () {
+        req.rawBody = data;
+
+        next();
+      });
+    },
 	
 	partnerTrackingCookie: function (req, res, next) {
 		// Check if this is a file request
@@ -126,6 +146,19 @@ module.exports.http = {
   ***************************************************************************/
 
     // bodyParser: require('skipper')({strict: true})
+    bodyParser: (function() {
+      // Initialize a skipper instance with the default options.
+      var skipper = require('skipper')();
+      // Create and return the middleware function.
+      return function(req, res, next) {
+        // If we see the route we want skipped, just continue.
+        if (req.url === '/coinbase/webhook') {
+          return next();
+        }
+        // Otherwise use Skipper to parse the body.
+        return skipper(req, res, next);
+      };
+    })()
 
   },
 

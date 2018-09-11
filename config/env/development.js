@@ -41,6 +41,8 @@ module.exports = {
 
   mandrillApiKey: 'pScbI1GG5IjISeRbQIvzXg',		// PRODUCTION KEY
   mandrillTestApiKey: '57Ev-Hbw1O4KoVnCT3UfnQ', 	// TEST KEY
+  COINBASE_COMMERCE_API_KEY: 'bd19cdda-046a-47dc-b76b-94224ea1a3ac',
+  COINBASE_COMMERCE_SHARED_SECRET: '4e5660f6-28d3-47a2-9f77-6b494841d725',
 
   hookTimeout: 120000,
 
