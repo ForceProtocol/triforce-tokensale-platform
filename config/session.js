@@ -44,7 +44,7 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'redis',
+  adapter: 'redis',
 
   /***************************************************************************
   *                                                                          *
@@ -55,46 +55,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // host: 'localhost',
-  // port: 6379,
+  host: 'localhost',
+  port: 6379,
   // ttl: <redis session TTL in seconds>,
   // db: 0,
-  // pass: <redis auth password>,
+  pass: "0zgH9C-987c8Dv7d-b8wb8J",
   // prefix: 'sess:',
-
-
-  /***************************************************************************
-  *                                                                          *
-  * Uncomment the following lines to set up a MongoDB session store that can *
-  * be shared across multiple Sails.js servers.                              *
-  *                                                                          *
-  * Requires connect-mongo (https://www.npmjs.com/package/connect-mongo)     *
-  * Use version 0.8.2 with Node version <= 0.12                              *
-  * Use the latest version with Node >= 4.0                                  *
-  *                                                                          *
-  ***************************************************************************/
-
-  // adapter: 'mongo',
-  // url: 'mongodb://user:password@localhost:27017/dbname', // user, password and port optional
-
-  /***************************************************************************
-  *                                                                          *
-  * Optional Values:                                                         *
-  *                                                                          *
-  * See https://github.com/kcbanner/connect-mongo for more                   *
-  * information about connect-mongo options.                                 *
-  *                                                                          *
-  * See http://bit.ly/mongooptions for more information about options        *
-  * available in `mongoOptions`                                              *
-  *                                                                          *
-  ***************************************************************************/
-
-  // collection: 'sessions',
-  // stringify: true,
-  // mongoOptions: {
-  //   server: {
-  //     ssl: true
-  //   }
-  // }
 
 };
