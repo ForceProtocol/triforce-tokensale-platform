@@ -734,5 +734,33 @@ module.exports = {
     }
   },
 
+
+  postAgreeLegal: async(req,res) => {
+    try{
+      let agree = req.param("agree");
+
+      if(!agree){
+        req.addFlash("errors","You will need to agree to the new terms before purchasing FORCE")
+        return res.redirect("/contributor/buy-force");
+      }
+
+      let updatedUser = await User.update({id:req.session.user.id},{createdAt:new Date()});
+
+      if(!updatedUser){
+        throw new Error("Could not update user");
+      }
+
+      req.session.user = updatedUser[0];
+      req.addFlash("success","Thank you for confirming your agreement, you may continue to purchase further FORCE tokens.")
+      return res.redirect("/contributor/buy-force");
+
+    }catch(err){
+      req.addFlash("errors","There was a problem confirming your agreement due to a server error.")
+      sails.log.error("DashboardController.postAgreeLegal err: ",err);
+      return res.redirect("/contributor/buy-force");
+    }
+  }
+
+
 };
 

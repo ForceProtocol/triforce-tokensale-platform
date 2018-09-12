@@ -8,8 +8,75 @@
 	<div class="u-bg-light-blue-50">
       <div class="container u-space-2">
 
+      <% if(flash.has('errors')){ %>
+			<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
+				<% flash.get('errors').forEach(function (message) { %>
+				<%- message %>
+				<% }) %>
+			</div>
+	    	<br />
+		<% } %>
 
-      <% if(moment().isBefore("2018-10-08 12:00:00")){ %>
+		<% if(flash.has('success')){ %>
+		<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
+			<% flash.get('success').forEach(function (message) { %>
+			<%- message %>
+			<% }) %>
+		</div>
+	    <br />
+		<% } %>
+
+      <!-- GET EXISTING USERS TO AGREE TO TERMS PRIOR TO BEING ABLE TO BUY -->
+      <% if(moment("2018-09-03").isAfter(user.createdAt)){ %>
+
+      	<div class="text-center">
+	      	<span class="u-label u-label--sm u-label--primary mb-2">Buy FORCE</span>
+		        
+				<div class="row mt-4">
+					<div class="col-sm-4">
+						<img class="img-fluid" src="/images/team/pete-mardell-large-square.png" alt="Pete Mardell" />
+					</div>
+
+					<div class="col-sm-8 text-left">
+						<h2 class="h3 font-weight-normal">Thank you message from the founder</h2>
+				        <p>Hi <%- user.firstName %>! You must be an existing contributor.</p>
+				        <p>As you can hopefully see our team have been working incredibly hard to advance the project in these tough market conditions.</p>
+				        <p>However what we have acheived in such a short space of time is something to be extremely proud of and we could not have got there
+				        without your support.</p>
+				        <p><strong>I would like to personally thank you for the support you have given</strong> and assure you we are quite different to every other ICO/crypto project, with a solid commercial foundation.</p>
+				        <p>Kind Regards,<br />Pete Mardell (Company Founder &amp; CEO)</p>
+
+				        <br />
+
+				    </div>
+
+			    <div class="row">
+			    	<div class="w-md-80 w-lg-60 text-center mx-auto mt-4">
+				        <h3>Buying FORCE</h3>
+
+				        <p>If you would like to continue to support the project and wish to own more FORCE, first we would need you to agree to
+				        the updated <a target="_BLANK" href="/resources/token-sale-agreement-v1.1.pdf">terms of token sale agreement</a> and the <a target="_BLANK" href="/resources/risk-disclosures-v1.0.pdf">risk disclosures</a> before continuing.</p>
+
+
+				        <form method="POST" action="/contributor/agree" class="js-validate">
+				        	<!-- Input Group -->
+				            <div class="col-sm-12 mt-4 mb-4">
+
+				              <label class="h6 small d-block text-uppercase">Please confirm you agree to the latest <a target="_BLANK" href="/resources/token-sale-agreement-v1.1.pdf">terms of token sale agreement</a> and the <a target="_BLANK" href="/resources/risk-disclosures-v1.0.pdf">risk disclosures</a>.</label>
+
+				              <div class="form-check js-form-message">
+							    <input required name="agree" type="checkbox" class="form-check-input" id="exampleCheck1">
+							    <label class="form-check-label">- Yes I agree</label>
+				              </div>
+				            </div>
+				            <!-- End Input Group -->
+				            <button type="submit" name="confirm" class="btn btn-primary">Confirm Agreement</button>
+				        </form>
+			        </div>
+		        </div>
+	        </div>
+
+      <% }else if(moment().isBefore("2018-10-08 12:00:00")){ %>
 
       	<div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
 	        <span class="u-label u-label--sm u-label--primary mb-2">Token Sale</span>
@@ -75,23 +142,6 @@
               <span class="js-seconds-bonus digit"></span> <span class="digit-type text-center">seconds</span>
               </strong></p>
 
-	        <% if(flash.has('errors')){ %>
-				<div class="alert alert-danger col-lg-12 col-md-12 col-sm-12">
-					<% flash.get('errors').forEach(function (message) { %>
-					<%- message %>
-					<% }) %>
-				</div>
-	        	<br />
-			<% } %>
-
-			<% if(flash.has('success')){ %>
-			<div class="alert alert-success col-lg-12 col-md-12 col-sm-12">
-				<% flash.get('success').forEach(function (message) { %>
-				<%- message %>
-				<% }) %>
-			</div>
-	        <br />
-			<% } %>
 
 			<% if (user.approvalStatus == 'CLEARED' || user.approvalStatus == 'ACCEPTED') { %>
 

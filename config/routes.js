@@ -70,6 +70,7 @@ module.exports.routes = {
   'POST /contributor/upload-id-document': 'DashboardController.postUploadIdDocument',
   'POST /contributor/upload-selfie': 'DashboardController.postUploadSelfie',
   'POST /contributor/complete-kyc': 'DashboardController.postCompleteKyc',
+  'POST /contributor/agree': 'DashboardController.postAgreeLegal',
 
   // Calculate FORCE purchase information
   'POST /contributor/calculator': 'DashboardController.postCalculator',
