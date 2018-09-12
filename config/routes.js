@@ -20,6 +20,7 @@ module.exports.routes = {
   'GET /custom-game-tokens': 'PagesController.getCustomGameTokens',
   'GET /documents': 'PagesController.getDocuments',
   'GET /partners': 'PagesController.getPartners',
+  'GET /completing-kyc': 'PagesController.getCompletingKyc',
   'GET /studio-signup': 'PagesController.getStudioSignup',
   'POST /studio-signup': 'PagesController.postStudioSignup',
 

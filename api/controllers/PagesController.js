@@ -304,6 +304,20 @@ module.exports = {
 	},
 
 
+	/**
+	* Completing KYC
+	*/
+	getCompletingKyc: function (req, res) {
+
+		return res.view('public/completing-kyc', {
+			layout: 'public/layout',
+			title: 'Completing Your KYC',
+			metaDescription: ''
+		});
+
+	},
+
+
 
 	/**
 	* Game Publishing

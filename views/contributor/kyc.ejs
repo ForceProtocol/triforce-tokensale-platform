@@ -300,7 +300,7 @@
 						                     	<% var months = [{id:1,value: '01',month:'January'},{id:2,value: '02',month:'February'},{id:3,value: '03',month:'March'},{id:4,value: '04',month:'April'},{id:5,value: '05',month:'May'},{id:6,value: '06',month:'June'},{id:7,value: '07',month:'July'},{id:8,value: '08',month:'August'},{id:9,value: '09',month:'September'},{id:10,value: '10',month:'October'},{id:11,value: '11',month:'November'},{id:12,value: '12',month:'December'}];
 
 						                    	months.forEach(function(month){
-						                    		%><option <%- month.id - 1 == userMonthDob ? 'selected="selected"' : '' %> value="<%- month.value %>"><%- month.month %></option><%
+						                    		%><option <%- month.id - 1 === userMonthDob ? 'selected="selected"' : '' %> value="<%- month.value %>"><%- month.month %></option><%
 						                    	});
 						                    	%>
 						                      </select>
@@ -338,7 +338,7 @@
                                 <div class="js-focus-state input-group u-form">
                                 	<select class="form-control u-form__input" required="required" name="nationality" data-msg="Please select your nationality according to legal documentation" data-error-class="u-has-error" data-success-class="u-has-success">
                                 		<% if(user.nationality){ %><option value="<%- user.nationality %>"><%- user.nationality %></option><% } %>
-                                		<option value="">--- PLEASE SELECT ---</option>
+                                		<option value="">Select Nationality</option>
                                 		<!--<option value="AMERICAN">AMERICAN</option>-->
 										<option value="BRITISH">BRITISH</option>
 										<option value="CHINESE">CHINESE</option>
@@ -972,6 +972,7 @@
 
 				          	<div>
 				          		<p>You can upload your passport, National ID card or Drivers Licence.</p>
+				          		<p><strong>Images must be less than 1MB in size. <a target="_BLANK" href="https://www.reduceimages.com/">You can use this easy to use image file size reducer</a></strong>.</p>
 				          	</div>
 		          		</div>
 
@@ -1020,6 +1021,7 @@
 					          	<p>The image must be clear and of your <strong>face only</strong>.</p>
 					          	<p>The closer your uploaded image matches the photo on your ID document, the more likely your verification
 					          	will be approved automatically.</p>
+					          	<p><strong>Images must be less than 1MB in size. <a target="_BLANK" href="https://www.reduceimages.com/">You can use this easy to use image file size reducer</a></strong>.</p>
 				          	</div>
 			          	</div>	
 
