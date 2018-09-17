@@ -25,7 +25,7 @@ module.exports = {
 			}else{
 				gender = 'MALE';
 			}
-			
+
 			// Submit signup request to API server
 			request({
 				uri: sails.ARTEMIS_API_URL + '/default/individual_risk',

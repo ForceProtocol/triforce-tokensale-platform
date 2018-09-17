@@ -308,6 +308,12 @@ module.exports = {
         userDayDob = '',
         dateOfBirth = dobDay + '/' + dobMonth + '/' + dobYear;
 
+        // Fix non-ascii characters
+        var combining = /[\u0300-\u036F]/g; 
+        firstName = firstName.normalize('NFKD').replace(combining, '');
+        lastName = lastName.normalize('NFKD').replace(combining, '');
+        
+
         // Check if any information has actually changed
         let user = await User.findOne({id:req.session.user.id});
 
