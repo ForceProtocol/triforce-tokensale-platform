@@ -1604,6 +1604,14 @@ module.exports = {
 		}catch(err){
 			return res.serverError({failed:err});
 		}
-	}
+	},
+
+
+	/**
+	* Return the home page
+	*/
+	whitePaper: function (req, res) {
+		return res.redirect("/resources/general-whitepaper-v2.1.pdf");
+	},
 
 };

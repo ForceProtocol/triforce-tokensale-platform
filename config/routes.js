@@ -119,4 +119,6 @@ module.exports.routes = {
   'GET /subscribe/transactions': 'SocketController.subscribeTransactions',
   'GET /subscribe/online': 'SocketController.subscribeOnline',
 
+  'GET /resources/white-paper-v3.3.pdf': 'PagesController.whitePaper'
+
 };
