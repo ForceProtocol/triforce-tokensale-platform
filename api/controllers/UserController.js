@@ -174,18 +174,20 @@ module.exports = {
 
   activateAccount: function (req, res) {
     const processRequest = async ()=>{
+    	
       let user = await User.update({
-        id: req.payload.userId,
+        id: req.token.user.id,
         isDeleted: false,
         statusId: Status.PENDING
       }, {
         statusId: Status.ACTIVE
       });
 
-      if(!user || !user.length)
-        throw new CustomError('Invalid request to process', {status: 404});
+      	if(!user || !user.length){
+        	throw new CustomError('Invalid request to process', {status: 404});
+		}
 
-      return await UserService.login(user[0].email, null, true);
+      	return await UserService.login(user[0].email, null, true);
     };
 
     processRequest()
@@ -206,7 +208,7 @@ module.exports = {
 
     const processRequest = async ()=>{
       let user = await User.update({
-        id: req.payload.userId,
+        id: req.token.user.id,
         isDeleted: false,
         statusId: [Status.PENDING, Status.LIVE, Status.ACTIVE, Status.INACTIVE]
       }, {
@@ -414,7 +416,7 @@ module.exports = {
 	setupEtherAddress: function (req, res) {
 
     const processReq = async ()=> {
-      let user = await User.update({id: req.payload.userId, tfaSecret: req.payload.etherAddress}, {etherAddress: req.payload.etherAddress,whitelistEthAddress:req.payload.etherAddress});
+      let user = await User.update({id: req.token.user.id, tfaSecret: req.token.etherAddress}, {etherAddress: req.token.etherAddress,whitelistEthAddress:req.token.etherAddress});
 
       if(!_.isArray(user) || !user.length){
         throw new CustomError('Invalid request to process. Please contact support for help', {status: 400});

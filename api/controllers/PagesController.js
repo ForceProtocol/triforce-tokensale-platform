@@ -700,7 +700,6 @@ module.exports = {
 
 
 	verifyEmail: function (req, res) {
-
 		// Submit request to API server to verify
 		request({
 			method: 'GET',
