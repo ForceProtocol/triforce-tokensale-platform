@@ -1563,6 +1563,8 @@ module.exports = {
 				sails.config.COINBASE_COMMERCE_SHARED_SECRET
 			);
 
+			sails.log.debug("event data: ",event.data.payments[0]);
+
 			if(!event.data.metadata.customer_id){
 				throw new Error("No customer ID found.");
 			}
