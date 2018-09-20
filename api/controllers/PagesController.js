@@ -271,11 +271,18 @@ module.exports = {
 			      		throw new CustomError('An account already exists with this email address. Please login with ' + email + ' or sign up with a different one.', {status: 403});
 			      	}
 
+			      	// Check if user has been referred
+			      	let referrerId = '';
+			      	if(req.cookies.track_id){
+			      		referrerId = req.cookies.track_id;
+			      	}
+
 			      	const user = await User.create({
-				        firstName,
-				        lastName,
-				        email,
-				        password
+				        firstName: firstName,
+				        lastName: lastName,
+				        email:email,
+				        password: password,
+				        referrerId: referrerId
 			      	});
 
 			      	await UserService.sendActivationEmail(user.email);

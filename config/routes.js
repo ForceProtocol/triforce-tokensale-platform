@@ -51,7 +51,7 @@ module.exports.routes = {
 
 	/** INVESTOR DASHBOARD */
 	'GET /contributor-signup': 'PagesController.getContributorSignUp',
-	'POST /contributor-signup': 'PagesController.postContributorSignup',
+	'POST /contributor-signup': 'PagesController.postContributorSignUp',
   'GET /contributor-login': 'PagesController.getContributorLogin',
 	'POST /contributor-login': 'PagesController.postContributorLogin',
 	'GET /contributor': 'DashboardController.getDashboard',

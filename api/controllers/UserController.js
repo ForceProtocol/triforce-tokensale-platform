@@ -174,7 +174,7 @@ module.exports = {
 
   activateAccount: function (req, res) {
     const processRequest = async ()=>{
-    	
+
       let user = await User.update({
         id: req.token.user.id,
         isDeleted: false,
@@ -184,7 +184,7 @@ module.exports = {
       });
 
       	if(!user || !user.length){
-        	throw new CustomError('Invalid request to process', {status: 404});
+        	throw new CustomError('Your account is already active. Please login.', {status: 404});
 		}
 
       	return await UserService.login(user[0].email, null, true);
@@ -487,10 +487,14 @@ module.exports = {
 			// Get users transactions
 			const queryPromise = sails.bluebird.promisify(User.query);
 
-			let users = await queryPromise("SELECT a.approvalStatus,a.firstName,a.lastName,a.whitelistEthAddress,a.nationality,a.id AS userId, b.amount AS ethAmount,b.currency,b.createdAt AS transactionCreatedAt FROM users AS a LEFT JOIN transactions AS b ON a.id = b.userId WHERE a.referrerId = \"" + refId + "\"");
+			let users = await queryPromise("SELECT a.approvalStatus,a.firstName,a.whitelistEthAddress,a.id AS userId, b.amount AS ethAmount,b.currency,b.createdAt AS transactionCreatedAt FROM users AS a LEFT JOIN transactions AS b ON a.id = b.userId WHERE a.referrerId = \"" + refId + "\"");
 
 			var rsp = {};
-				rsp.users = users;
+			rsp.users = users;
+
+			for(let i in users){
+				delete users[i].userId;
+			}
 
 			return rsp;
 		};
