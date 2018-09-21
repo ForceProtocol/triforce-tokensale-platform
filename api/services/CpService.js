@@ -448,9 +448,9 @@ module.exports = {
 
   getCurrentBonus: async function (){
     // Work out current bonus
-    var discountRound1End = new Date(Date.UTC(2018,8,14,0,0,0)).getTime();
-    var discountRound2End = new Date(Date.UTC(2018,8,21,0,0,0)).getTime();
-    var discountRound3End = new Date(Date.UTC(2018,8,28,0,0,0)).getTime();
+    var discountRound1End = new Date(Date.UTC(2018,9,14,0,0,0)).getTime();
+    var discountRound2End = new Date(Date.UTC(2018,9,21,0,0,0)).getTime();
+    var discountRound3End = new Date(Date.UTC(2018,9,28,0,0,0)).getTime();
 
     var discountRound1Distance = discountRound1End - Date.now();
     var discountRound2Distance = discountRound2End - Date.now();

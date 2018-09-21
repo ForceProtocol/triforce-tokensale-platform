@@ -133,29 +133,27 @@ module.exports = {
         messageOptions.headers=headers;
       }
 
-      // switch(sails.config.environment){
-      //
-      //   case 'production':
-          mandrillTransport.sendMail(messageOptions, function(err, info){
-            if(err){
-              return reject(err);
-            }
+       switch(sails.config.environment){
+      
+          case 'production':
+            mandrillTransport.sendMail(messageOptions, function(err, info){
+              if(err){
+                return reject(err);
+              }
 
-            return resolve(info);
-          });
-      //
-      //     break;
-      //   default:
-      //     defaultTransport.sendMail(messageOptions, function(err, info){
-      //       if(err){
-      //         return reject(err);
-      //       }
-      //
-      //       return resolve(info);
-      //
-      //     });
-      //     break;
-      // }
+              return resolve(info);
+            });
+            break;
+          default:
+           defaultTransport.sendMail(messageOptions, function(err, info){
+             if(err){
+                 return reject(err);
+               }
+        
+               return resolve(info);
+             });
+           break;
+        }
 
     });
 

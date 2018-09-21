@@ -72,7 +72,6 @@ module.exports.http = {
 
       req.on('end', function () {
         req.rawBody = data;
-
         next();
       });
     },

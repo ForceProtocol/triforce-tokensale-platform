@@ -1,12 +1,14 @@
 const coinbaseApi = require('coinbase-commerce-node'),
 moment = require('moment'),
 coinbaseClient = coinbaseApi.Client,
-coinbaseCharge = coinbaseApi.resources.Charge;
+coinbaseCharge = coinbaseApi.resources.Charge,
+getBtcPrice = require('btc-value'),
+{getEthPriceNow,getEthPriceHistorical} = require('get-eth-price');
 
 
 module.exports = {
 
-  createCharge: async(userId,email,amount,currency,description) => {
+  createCharge: async(userId,email,amount,currency,description,forceExBonus,forceBonus,totalCurrencyRequired) => {
 
     try{
       var clientObj = coinbaseClient.init(sails.config.COINBASE_COMMERCE_API_KEY);
@@ -17,7 +19,10 @@ module.exports = {
         description: description,
         metadata: {
           customer_id: userId,
-          customer_email: email
+          customer_email: email,
+          forceExBonus: forceExBonus,
+          forceBonus: forceBonus,
+          totalCurrencyRequired:totalCurrencyRequired
         },
         pricing_type: "fixed_price",
         local_price: {
@@ -32,6 +37,16 @@ module.exports = {
       sails.log.error("CoinbaseService.createCharge err: ",err);
       return false;
     }
+  },
+
+
+  btcToEth: async(btcAmount) => {
+    let btcPrice = await getBtcPrice();
+    let ethPrice = await getEthPriceNow();
+    ethPrice = ethPrice[Object.keys(ethPrice)[0]].ETH.USD;
+    let ethToBtc = btcPrice / ethPrice;
+
+    return btcAmount * ethToBtc;
   },
 
 

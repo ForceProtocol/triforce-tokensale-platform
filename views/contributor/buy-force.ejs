@@ -315,7 +315,7 @@
                 </form>
 
 
-			<% }else if(user.approvalStatus == 'PENDING'){ %>
+			<% }else if(user.approvalStatus == 'PENDING' || !user.approvalStatus){ %>
 
 				<h4>KYC is Pending</h4>
 		        <p>You are unable to purchase FORCE until your account has been verified via the KYC process.</p>

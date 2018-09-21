@@ -4,6 +4,7 @@
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
+ const bigNumber = require('bignumber.js');
 
 module.exports = {
   tableName: 'ico_transactions',
@@ -71,24 +72,19 @@ module.exports = {
     }
   },
 
-  afterCreate: function (record, cb) {
-    const processReq = async ()=> {
-      const summary = await BlockchainService.contracts.TriForceNetworkCrowdsale.getContractSummary();
+  afterCreate: async (record, cb) => {
+    try{
+      let forceEarned = new bigNumber(record.forceEarned);
+      let forceBonus = new bigNumber(record.forceBonus);
+      let totalForce = forceEarned.plus(forceBonus).dividedBy('1000000000000000000').toString();
+      let summary = {transactionHash:record.transactionHash,totalForce:totalForce,logId:record.logId};
       sails.sockets.blast('ico/summary', summary);
-      sails.log('summary sent on socket', summary);
-
-      let user = await User.findOne({whitelistEthAddress: record.beneficiary, select: ['id', 'socketId']});
-      if(!user || !user.socketId) return;
-
-      const socketId = user.socketId;
-      if (_.includes(sails.sockets.rooms(), socketId)){
-        sails.sockets.broadcast(socketId, 'ico/user/txn', record);
-      }
-    };
-
-    processReq()
-      .then(()=> cb())
-      .catch(err=> cb());
+      cb();
+    }catch(err){
+      sails.log.debug("IcoTransaction.afterCreate err: ",err);
+      cb();
+    }
   }
+
 };
 

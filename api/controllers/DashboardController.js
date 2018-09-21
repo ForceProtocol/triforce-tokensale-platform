@@ -690,6 +690,7 @@ module.exports = {
       let forceQty = parseFloat(req.param("forceQty")),
         selectedCurrency = req.param("selectedCurrency"),
         totalForce = forceQty,
+        forceBonus = 0,
         currentCryptoPrice = 1;
 
 
@@ -706,7 +707,8 @@ module.exports = {
       }
 
       if(currentBonus > 0){
-        totalForce = forceQty + ((forceQty / 100) * currentBonus);
+        forceBonus = (forceQty / 100) * currentBonus;
+        totalForce = forceQty + forceBonus;
       }
 
       let totalForceUsd = (forceQty * 0.15).toFixed(2);
@@ -725,7 +727,9 @@ module.exports = {
 
       // Create charge
       let description = "Authenticated purchase of " + totalForce + " FORCE tokens.";
-      let coinbaseCharge = await CoinbaseService.createCharge(req.session.user.id,req.session.user.email,totalCurrencyRequired,selectedCurrency,description);
+      let coinbaseCharge = await CoinbaseService.createCharge(req.session.user.id,req.session.user.email,
+          totalCurrencyRequired,selectedCurrency,description,
+          forceQty,forceBonus,totalCurrencyRequired);
 
       if(!coinbaseCharge){
         throw new Error("Failed to create an order to complete.");

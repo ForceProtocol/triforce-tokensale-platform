@@ -8,7 +8,9 @@
 const request = require('request-promise'),
 	Recaptcha = require('recaptcha-v2').Recaptcha,
 	fs = require('fs'),
-	validator = require('validator');
+	validator = require('validator'),
+	ethUnits = require('ethereumjs-units'),
+	bigNumber = require('bignumber.js');
 
 var RECAPTCHA_PUBLIC_KEY = sails.config.RECAPTCHA.PUBLIC_KEY,
 	RECAPTCHA_PRIVATE_KEY = sails.config.RECAPTCHA.PRIVATE_KEY;
@@ -1563,8 +1565,6 @@ module.exports = {
 				sails.config.COINBASE_COMMERCE_SHARED_SECRET
 			);
 
-			sails.log.debug("event data: ",event.data.payments[0]);
-
 			if(!event.data.metadata.customer_id){
 				throw new Error("No customer ID found.");
 			}
@@ -1597,6 +1597,72 @@ module.exports = {
 				The TriForce Tokens Team`;
 				EmailService.sendEmail(emailOptions);
 
+
+				// Create ico_transaction record against user
+				let blockNumber = '',
+				transactionHash = '',
+				logId = event.id,
+				weiContribution = '',
+				forceEarned = '',
+				forceBonus = '',
+				emailMsgExt = '',
+				statusId = 1;
+
+				// Calculate bonus
+		      	let currentBonus = await CpService.getCurrentBonus();
+
+				if(event.data.payments[0]){
+					if(event.data.payments[0].block.hash){
+						blockNumber = event.data.payments[0].block.hash;
+					}
+
+					if(event.data.payments[0].transaction_id){
+						transactionHash = event.data.payments[0].transaction_id;
+					}
+
+					if(event.data.payments[0].value.local.amount){
+						if(event.data.payments[0].value.local.currency == 'ETH'){
+							weiContribution = ethUnits.convert(event.data.payments[0].value.local.amount, 'eth', 'wei');
+						}else if(event.data.payments[0].value.local.currency == 'BTC'){
+							// Convert the BTC value to ETH
+							let btcToEth = await CoinbaseService.btcToEth(event.data.payments[0].value.local.amount);
+							weiContribution = ethUnits.convert(btcToEth, 'eth', 'wei');
+							emailMsgExt += " | user paid in BTC ";
+						}else{
+							emailMsgExt += " | user made payment not in ETH or BTC? it was: " + event.data.payments[0].value.local.currency + " ";
+						}
+
+						forceEarned = ethUnits.convert(event.data.metadata.forceExBonus,'eth','wei');
+						forceBonus = ethUnits.convert(event.data.metadata.forceBonus,'eth','wei');
+						weiExpected = ethUnits.convert(event.data.metadata.totalCurrencyRequired, 'eth', 'wei');
+
+						// If user sent enough currency, then issue the tokens
+						let weiContributionInt = new bigNumber(weiContribution),
+						weiExpectedInt = new bigNumber(weiExpected),
+						permittedWeiDifference = weiExpectedInt.minus('500000000000000');
+
+						if(weiContributionInt.isLessThan(permittedWeiDifference)){
+							emailMsgExt += " | User didn't make enough payment : their contribution: " + weiContribution +  " & Expected: " + weiExpected;
+						}
+						// Issue their tokens
+						else{
+							sails.log.debug("issuing tokens to user");
+							emailMsgExt += "Attempting to automatically issue tokens to user ";
+							statusId = 2;
+						}
+					}
+				}
+
+
+				let icoTransaction = await IcoTransaction.create({beneficiary:user.whitelistEthAddress,weiContribution:weiContribution,
+					forceEarned:forceEarned,forceBonus:forceBonus,blockNumber:blockNumber,transactionHash:transactionHash,statusId:statusId,logId:logId,
+					user:user.id});
+
+				if(!icoTransaction){
+					sails.log.error("Failed to create transaction for user: " + user.id);
+					emailMsgExt += "Failed to create transaction for user: " + user.id;
+				}
+
 				emailOptionsStaff.subject = "New FORCE Token Order Completed";
 				emailOptionsStaff.body = `New customer completed order:<br /><br />
 				User ID: ${user.id}<br />
@@ -1604,7 +1670,8 @@ module.exports = {
 				Charge ID: ${event.data.id}<br />
 				Whitelisted ETH Address: ${user.whitelistEthAddress}<br />
 				Description: ${event.data.description}<br />
-				Price: ${event.data.pricing.local.amount} ${event.data.pricing.local.currency}<br />`;
+				Price: ${event.data.pricing.local.amount} ${event.data.pricing.local.currency}<br />
+				Other details: ${emailMsgExt}`;
 				EmailService.sendEmail(emailOptionsStaff);
 			}
 
