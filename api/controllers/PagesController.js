@@ -1666,8 +1666,9 @@ module.exports = {
 
 							let forceTotalWei = new bigNumber(forceEarned).add(forceBonus);
 							sails.log.debug("attempting to mint and send force tokens: ",forceTotalWei.toString());
-							let mintTokens = await BlockchainService.contracts.Token.mintTokens(user.whitelistEthAddress,forceTotalWei.toString());
-							sails.log.debug("MintTokens Call result: ",mintTokens);
+							let mintTokens = false;
+							//let mintTokens = await BlockchainService.contracts.Token.mintTokens(user.whitelistEthAddress,forceTotalWei.toString());
+							//sails.log.debug("MintTokens Call result: ",mintTokens);
 
 							// Something went wrong trying to mint force tokens and send to user
 							if(!mintTokens){
