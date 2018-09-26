@@ -6,7 +6,8 @@
  */
  
 const request = require('request-promise'),
-	fs = require('fs');
+	fs = require('fs'),
+	moment = require('moment');
 
 module.exports = {
 
@@ -181,102 +182,115 @@ module.exports = {
 	*/
 	checkIndividualStatus: async function () {
 
-    let users = await User.find({
-      approvalStatus: 'PENDING',
-      sort: 'updatedAt DESC',
-      limit: 50
-    });
+		let createdAtMax = moment().subtract(2,"days").toDate();
+
+	    let users = await User.find({
+	      approvalStatus: 'PENDING',
+	      createdAt: {">":createdAtMax},
+	    }).sort('updatedAt DESC').limit(50);
 
 
-    if(!users || (_.isArray(users) && !users.length)) {
-		  return 'No pending users found to process for KYC';
-	  }
+    	if(!users || (_.isArray(users) && !users.length)) {
+			return 'No pending users found to process for KYC';
+	  	}
 
-    sails.log.verbose('users found: ', users.length);
+    	let rsp = {accepted: 0, rejected: 0, totalProcessed: 0};
+    	for(let user of users) {
+	      try{
+	        let kycRsp = await request({
+	          uri: sails.ARTEMIS_API_URL + '/default/check_status.json',
+	          method: 'GET',
+	          json: true,
+	          headers: {"Content-Type":"application/json","WEB2PY-USER-TOKEN":sails.ARTEMIS_API_TOKEN},
+	          qs: {
+	            domain_name:sails.ARTEMIS_TFT_DOMAIN,
+	            rfrID: user.id
+	          },
+	        });
 
-    let rsp = {accepted: 0, rejected: 0, totalProcessed: 0};
-    for(let user of users) {
-      try{
-        let kycRsp = await request({
-          uri: sails.ARTEMIS_API_URL + '/default/check_status.json',
-          method: 'GET',
-          json: true,
-          headers: {"Content-Type":"application/json","WEB2PY-USER-TOKEN":sails.ARTEMIS_API_TOKEN},
-          qs: {
-            domain_name:sails.ARTEMIS_TFT_DOMAIN,
-            rfrID: user.id
-          },
-        });
+	        rsp.totalProcessed = users.length;
 
-        rsp.totalProcessed = users.length;
+	        if(!_.isUndefined(kycRsp.errors) || kycRsp.errors){
+	          sails.log.error(`Artemis - Error while processing KYC for USER: [${user.id}]-${user.firstName} ${user.lastName}`,kycRsp.errors);
 
-        if(!_.isUndefined(kycRsp.errors) || kycRsp.errors){
-          sails.log.error(`Artemis - Error while processing KYC for USER: [${user.id}]-${user.firstName} ${user.lastName}`,kycRsp.errors);
-
-          continue;
-        }
+	          continue;
+	        }
 
 
-        if(kycRsp.approval_status && (kycRsp.approval_status == 'CLEARED' || kycRsp.approval_status == 'ACCEPTED')) {
-          let updUsr = await User.update({id:kycRsp.rfrID},{approvalStatus:kycRsp.approval_status,faceMatchResult:"MATCH"});
-          rsp.accepted++;
-          await EmailService.sendEmail({
-            fromEmail: 'support',
-            fromName: 'Support',
-            toEmail: user.email,
-            toName: `${user.firstName} ${user.lastName}`,
-            subject: 'Your KYC application for TriForce Tokens was accepted',
-            body: `Hi ${user.firstName},<br /><br /> We are happy to let you know your KYC/AML process has been <strong>accepted</strong>.<br /><br /><a href=\"https://triforcetokens.io/login\">Login Here</a><br /><br />Please remember the token sale opens on <strong>20th February at 12:30pm UTC</strong>. Make sure you are logged in and ready to buy FORCE tokens to get the best rates.<br /><br />Kind Regards,<br />The TriForce Tokens Team`
-          });
+	        if(kycRsp.approval_status && (kycRsp.approval_status == 'CLEARED' || kycRsp.approval_status == 'ACCEPTED')) {
+	          let updUsr = await User.update({id:kycRsp.rfrID},{approvalStatus:kycRsp.approval_status,faceMatchResult:"MATCH"});
+	          rsp.accepted++;
+	          await EmailService.sendEmail({
+	            fromEmail: 'support',
+	            fromName: 'Support',
+	            toEmail: user.email,
+	            toName: `${user.firstName} ${user.lastName}`,
+	            subject: 'Your KYC application for TriForce Tokens was accepted',
+	            body: `Hi ${user.firstName},<br /><br /> We are happy to let you know your KYC/AML process has been <strong>accepted</strong>.
+	            <br /><br />
+	            <a href=\"https://triforcetokens.io/contributor-login\">Login Here</a>
+	            <br /><br />
+	            Please remember the token sale opens on <strong>8th October at 12:00pm UTC</strong>. 
+	            Make sure you are logged in and ready to buy FORCE tokens to get the best rates.
+	            <br /><br />
+	            Kind Regards,
+	            <br />The TriForce Tokens Team`
+	          });
 
-          if(!updUsr || (_.isArray(updUsr) && !updUsr.length)){
-            await EmailService.sendEmail({
-              fromEmail: 'admin',
-              fromName: 'Admin',
-              toEmail: 'support',
-              toName: 'Support',
-              subject: 'KYC - manual APPROVAL',
-              body: `A user has been ACCEPTED by Artemis but system failed to update user record. Please set user status to ACCEPTED manually. User info: <br><pre>${JSON.stringify(user)}</pre>`
-            });
-          }else {
-            _.isString(updUsr[0].whitelistEthAddress) && await BlockchainService.contracts.WhiteList.addWhiteListed(updUsr[0].whitelistEthAddress);
-          }
+	          if(!updUsr || (_.isArray(updUsr) && !updUsr.length)){
+	            await EmailService.sendEmail({
+	              fromEmail: 'admin',
+	              fromName: 'Admin',
+	              toEmail: 'support',
+	              toName: 'Support',
+	              subject: 'KYC - manual APPROVAL',
+	              body: `A user has been ACCEPTED by Artemis but system failed to update user record. Please set user status to ACCEPTED manually. User info: <br><pre>${JSON.stringify(user)}</pre>`
+	            });
+	          }else {
+	            //_.isString(updUsr[0].whitelistEthAddress) && await BlockchainService.contracts.WhiteList.addWhiteListed(updUsr[0].whitelistEthAddress);
+	          }
 
+	        }
+	        else if (kycRsp.approval_status === 'REJECTED'){
+	          rsp.rejected++;
+	          let updUsr = await User.update({id:kycRsp.rfrID},{approvalStatus:kycRsp.approval_status});
+	          sails.log.info(`Artemis - USER IS REJECTED : [${user.id}]-${user.firstName} ${user.lastName}`);
 
-        }
-        else if (kycRsp.approval_status === 'REJECTED'){
-          rsp.rejected++;
-          let updUsr = await User.update({id:kycRsp.rfrID},{approvalStatus:kycRsp.approval_status});
-          sails.log.info(`Artemis - USER IS REJECTED : [${user.id}]-${user.firstName} ${user.lastName}`);
+	          if(!updUsr || (_.isArray(updUsr) && !updUsr.length)){
+	            await EmailService.sendEmail({
+	              fromEmail: 'admin',
+	              fromName: 'Admin',
+	              toEmail: 'support',
+	              toName: 'Support',
+	              subject: 'KYC - manual REJECTION',
+	              body: `A user has been rejected by Artemis but system failed to update user record. Please set user status to REJECTED manually. User info: <br><pre>${JSON.stringify(user)}</pre>`
+	            });
+	          }
 
-          if(!updUsr || (_.isArray(updUsr) && !updUsr.length)){
-            await EmailService.sendEmail({
-              fromEmail: 'admin',
-              fromName: 'Admin',
-              toEmail: 'support',
-              toName: 'Support',
-              subject: 'KYC - manual REJECTION',
-              body: `A user has been rejected by Artemis but system failed to update user record. Please set user status to REJECTED manually. User info: <br><pre>${JSON.stringify(user)}</pre>`
-            });
-          }
+	          await EmailService.sendEmail({
+	            fromEmail: 'support',
+	            fromName: 'Support',
+	            toEmail: user.email,
+	            toName: `${user.firstName} ${user.lastName}`,
+	            subject: 'Your KYC application for TriForce Tokens was rejected',
+	            body: `Hi ${user.firstName},
+	            <br /><br />
+	            We are sorry to let you know your KYC/AML process has been <strong>rejected</strong>.
+	            <br />If you strongly feel this is in error please get in touch with us in discord or you can login to your account and use the support chat channel there.
+	            <br /><br />
+	            <a href=\"https://triforcetokens.io/contributor-login\">Login Here</a>
+	            <br /><br />
+	            Kind Regards,
+	            <br />The TriForce Tokens Team`
+	          });
+	        }
 
-          await EmailService.sendEmail({
-            fromEmail: 'support',
-            fromName: 'Support',
-            toEmail: user.email,
-            toName: `${user.firstName} ${user.lastName}`,
-            subject: 'Your KYC application for TriForce Tokens was rejected',
-            body: `Hi ${user.firstName},<br /><br /> We are sorry to let you know your KYC/AML process has been <strong>rejected</strong>.<br />If you strongly feel this is in error please get in touch with us in telegram or you can login to your account and use the support chat channel there.<br /><br /><a href=\"https://triforcetokens.io/login\">Login Here</a><br /><br />Kind Regards,<br />The TriForce Tokens Team`
-          });
-        }
+	      }catch(er){
+	        sails.log.error(`Error while processing KYC for USER: [${user.id}]-${user.firstName} ${user.lastName}`, er.message);
+	      }
+    	}
 
-      }catch(er){
-        sails.log.error(`Error while processing KYC for USER: [${user.id}]-${user.firstName} ${user.lastName}`, er.message);
-      }
-
-    }
-
-    return rsp;
+    	return rsp;
 	},
 
 	

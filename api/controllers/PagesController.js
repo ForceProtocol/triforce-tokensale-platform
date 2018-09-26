@@ -220,6 +220,11 @@ module.exports = {
 		let {firstName, lastName, email, password,termsCheckbox} = req.allParams();
 		let signupError = false;
 
+		// Fix non-ascii characters
+        let combining = /[\u0300-\u036F]/g; 
+        firstName = firstName.normalize('NFKD').replace(combining, '');
+        lastName = lastName.normalize('NFKD').replace(combining, '');
+
 		// Confirm recapture success
 	    var data = {
 	      remoteip: req.connection.remoteAddress,
@@ -1611,6 +1616,16 @@ module.exports = {
 				// Calculate bonus
 		      	let currentBonus = await CpService.getCurrentBonus();
 
+		      	// Create temporary transaction for user
+		      	let icoTransaction = await IcoTransaction.create({beneficiary:user.whitelistEthAddress,weiContribution:weiContribution,
+					forceEarned:forceEarned,forceBonus:forceBonus,blockNumber:blockNumber,transactionHash:transactionHash,statusId:1,logId:logId,
+					user:user.id});
+
+		      	if(!icoTransaction){
+					sails.log.error("Failed to create transaction for user: " + user.id);
+					emailMsgExt += "Failed to create transaction for user: " + user.id;
+				}
+
 				if(event.data.payments[0]){
 					if(event.data.payments[0].block.hash){
 						blockNumber = event.data.payments[0].block.hash;
@@ -1648,19 +1663,23 @@ module.exports = {
 						else{
 							sails.log.debug("issuing tokens to user");
 							emailMsgExt += "Attempting to automatically issue tokens to user ";
-							statusId = 2;
+
+							let forceTotalWei = new bigNumber(forceEarned).add(forceBonus);
+							sails.log.debug("attempting to mint and send force tokens: ",forceTotalWei.toString());
+							let mintTokens = await BlockchainService.contracts.Token.mintTokens(user.whitelistEthAddress,forceTotalWei.toString());
+							sails.log.debug("MintTokens Call result: ",mintTokens);
+
+							// Something went wrong trying to mint force tokens and send to user
+							if(!mintTokens){
+								emailMsgExt += " | New tokens were NOT minted or sent to users wallet ";
+							}else{
+								// Set that this txn was paid
+								icoTransaction = await IcoTransaction.update({id:icoTransaction.id},{statusId:2});
+								emailMsgExt += " | New tokens have been minted and sent to users wallet ";
+							}
+
 						}
 					}
-				}
-
-
-				let icoTransaction = await IcoTransaction.create({beneficiary:user.whitelistEthAddress,weiContribution:weiContribution,
-					forceEarned:forceEarned,forceBonus:forceBonus,blockNumber:blockNumber,transactionHash:transactionHash,statusId:statusId,logId:logId,
-					user:user.id});
-
-				if(!icoTransaction){
-					sails.log.error("Failed to create transaction for user: " + user.id);
-					emailMsgExt += "Failed to create transaction for user: " + user.id;
 				}
 
 				emailOptionsStaff.subject = "New FORCE Token Order Completed";
@@ -1687,6 +1706,34 @@ module.exports = {
 	*/
 	whitePaper: function (req, res) {
 		return res.redirect("/resources/general-whitepaper-v2.1.pdf");
+	},
+
+	/**
+	* Mint Force TO wallet
+	*/
+	testMintForce: async (req, res)=>{
+		try{
+			let forceWei = '5000',
+			emailMsgExt = '',
+			whitelistEthAddress = "0x0FB45eF2153d59Cd10f755281a5A4ADa19Fc5403";
+
+			let mintTokens = await BlockchainService.contracts.Token.mintTokens(whitelistEthAddress,forceWei);
+			sails.log.debug("MintTokens Call result: ",mintTokens);
+
+			// Something went wrong trying to mint force tokens and send to user
+			if(!mintTokens){
+				emailMsgExt = " | New tokens were NOT minted or sent to users wallet ";
+			}else{
+				// Set that this txn was paid
+				icoTransaction = await IcoTransaction.update({id:icoTransaction.id},{statusId:2});
+				emailMsgExt = " | New tokens have been minted and sent to users wallet ";
+			}
+
+			return res.ok({success:true});
+		}catch(err){
+			sails.log.debug("testMintForce err:",err);
+			return res.ok({error:true});
+		}
 	},
 
 };

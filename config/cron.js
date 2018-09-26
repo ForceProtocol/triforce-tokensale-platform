@@ -107,15 +107,11 @@ module.exports.cron = {
     }
   },
 
+
 	kycCheck: {
-		schedule: '*/1 * * * *',  // every 30 minutes
+		schedule: '*/30 * * * *',  // every 30 minutes
 
 		onTick: function () {
-		
-			/**
-
-			sails.log.info(new Date(), 'started processing KYC CHECK cron task');
-
 			ArtemisApiService.checkIndividualStatus()
 			.then(rsp=> {
 				sails.log.info(new Date(), 'successfully processed KYC cron', rsp);
@@ -123,25 +119,6 @@ module.exports.cron = {
 			.catch(err=> {
 				sails.log.error(new Date(),'KYC CHECK cron task failed', err);
 			});
-
-
-			User.find({runCpaCallbackFired:false,runCpaId:{'!':''},approvalStatus:['CLEARED','ACCEPTED']}).exec(function(err,users){
-
-				if(err || typeof users == 'undefined'){
-					sails.log.error("RunCPA Signup Callback in crontask failed to get users: ",err);
-				}else{
-					users.forEach(function(user){
-						try{
-							RunCpaService.signupCallback(user.runCpaId,user.whitelistEthAddress);
-							User.update({id:user.id},{runCpaCallbackFired:true}).exec(function(err,updated){});
-						}catch(err){
-							sails.log.error("RunCPA Signup Callback in crontask failed: ",err);
-						}
-					});
-				}
-
-			});**/
-
 		}
 	},
 

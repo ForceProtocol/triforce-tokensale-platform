@@ -1,10 +1,12 @@
 
+module.exports.Token = require('./Token.js');
 module.exports.WhiteList = require('./WhiteList.js');
 module.exports.TriForceNetworkCrowdsale = require('./TriForceNetworkCrowdsale.js');
 
 module.exports.initAll = async ()=> {
   const self = this;
 
+  self.Token.init();
   self.WhiteList.init();
   self.TriForceNetworkCrowdsale.init();
 

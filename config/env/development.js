@@ -88,6 +88,7 @@ module.exports = {
      */
     contracts: {
       WhiteList: '0x8fc1aac5a4083e5466ed6def32b119e704c7b8bf',
+      Token: '0x794eb1f985f472c0b44c4041b4198478366f9940',
       //WhiteList: '0x04b91588ea2465d7A696742f45cC72afC681E52B',
       // WhiteList: '0x5913a4b42BbB8150e016905EdA08C84dE869D203',
       // TriForceNetworkCrowdsale: '0x8b2043FCe78bF09A87b9a149EE3DDcc1fA5D408D'
