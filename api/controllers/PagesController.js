@@ -1570,9 +1570,8 @@ module.exports = {
 				sails.config.COINBASE_COMMERCE_SHARED_SECRET
 			);
 
-			if(!event.data.metadata.customer_id){
-				throw new Error("No customer ID found.");
-			}
+			throw new Error("No customer ID found.");
+			
 			
 			// Find user
 			let user = await User.findOne({id:event.data.metadata.customer_id});
