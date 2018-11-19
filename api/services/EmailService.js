@@ -2,6 +2,17 @@
 const validator = require('validator'),
  nodemailer = require('nodemailer');
 
+
+var mgTransport = require('nodemailer-mailgun-transport'); 
+var mailgunTransport = nodemailer.createTransport(mgTransport({
+  auth: {
+    api_key: sails.config.MAILGUN_KEY,
+    domain: 'mg.triforcetokens.io'
+  }
+}));
+
+
+
 /** Mandrill Transport Method */
 var mTransport = require('nodemailer-mandrill-transport');
 var mandrillTransport = nodemailer.createTransport(mTransport({
@@ -99,10 +110,6 @@ module.exports = {
         // HTML body
         html: body,
 
-        cc:cc,
-
-        bcc:bcc,
-
         //unComment to test the attachment with reply email
         //
         // attachments: [
@@ -136,7 +143,7 @@ module.exports = {
        switch(sails.config.environment){
       
           case 'production':
-            mandrillTransport.sendMail(messageOptions, function(err, info){
+            mailgunTransport.sendMail(messageOptions, function(err, info){
               if(err){
                 return reject(err);
               }
@@ -145,7 +152,7 @@ module.exports = {
             });
             break;
           default:
-           defaultTransport.sendMail(messageOptions, function(err, info){
+           mailgunTransport.sendMail(messageOptions, function(err, info){
              if(err){
                  return reject(err);
                }
