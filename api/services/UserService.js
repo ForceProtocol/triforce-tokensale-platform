@@ -53,13 +53,13 @@ module.exports = {
       user:user.toJSON()
     }, sails.config.ACCOUNT_ACTIVATION_TOKEN_EXPIRY);
 
-    let msg = `Hello and welcome to TriForce Tokens. Please click on the link below to activate your account
+    let msg = `Hello and welcome to Force Protocol. Please click on the link below to activate your account
       <br><br>
       <a href="${sails.config.APP_URL}verify-email?token=${activationToken}">Activate Your Account</a>
       <br>
      <br />
       Kind Regards,<br />
-      Support @ TriForce Tokens
+      Support @ Force Protocol
     `;
 
     return await EmailService.sendEmail({
@@ -92,7 +92,7 @@ module.exports = {
       <br>
      <br />
       Kind Regards,<br />
-      Support @ TriForce Tokens
+      Support @ Force Protocol
     `;
 
     return await EmailService.sendEmail({
@@ -132,18 +132,18 @@ module.exports = {
 	  ${sails.config.APP_URL}reset-password/${activationToken}
 	  <br />
 	  <br />
-      If you experience any difficulty resetting your password, please either email pete@triforcetokens.io or join our telegram https://t.me/triforcetokens
+      If you experience any difficulty resetting your password, please either email pete@forceprotocol.io or join our telegram https://t.me/triforcetokens
 	  <br />
       <br />
       Kind Regards,<br />
-	  Support @ TriForce Tokens`;
+	  Support @ Force Protocol`;
 
     return await EmailService.sendEmail({
       fromEmail: 'support',
       fromName: 'Support',
       toEmail: user.email,
       toName: `${user.firstName} ${user.lastName}`,
-      subject: 'Reset password requested for your TriForce Tokens account',
+      subject: 'Reset password requested for your Force Protocol account',
       body: msg
     })
   },

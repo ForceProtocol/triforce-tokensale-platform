@@ -225,16 +225,16 @@ module.exports = {
 	            fromName: 'Support',
 	            toEmail: user.email,
 	            toName: `${user.firstName} ${user.lastName}`,
-	            subject: 'Your KYC application for TriForce Tokens was accepted',
+	            subject: 'Your KYC application for Force Protocol was accepted',
 	            body: `Hi ${user.firstName},<br /><br /> We are happy to let you know your KYC/AML process has been <strong>accepted</strong>.
 	            <br /><br />
-	            <a href=\"https://triforcetokens.io/contributor-login\">Login Here</a>
+	            <a href=\"https://forceprotocol.io/contributor-login\">Login Here</a>
 	            <br /><br />
 	            Please remember the token sale opens on <strong>8th October at 12:00pm UTC</strong>. 
 	            Make sure you are logged in and ready to buy FORCE tokens to get the best rates.
 	            <br /><br />
 	            Kind Regards,
-	            <br />The TriForce Tokens Team`
+	            <br />The Force Protocol Team`
 	          });
 
 	          if(!updUsr || (_.isArray(updUsr) && !updUsr.length)){
@@ -272,16 +272,16 @@ module.exports = {
 	            fromName: 'Support',
 	            toEmail: user.email,
 	            toName: `${user.firstName} ${user.lastName}`,
-	            subject: 'Your KYC application for TriForce Tokens was rejected',
+	            subject: 'Your KYC application for Force Protocol was rejected',
 	            body: `Hi ${user.firstName},
 	            <br /><br />
 	            We are sorry to let you know your KYC/AML process has been <strong>rejected</strong>.
 	            <br />If you strongly feel this is in error please get in touch with us in discord or you can login to your account and use the support chat channel there.
 	            <br /><br />
-	            <a href=\"https://triforcetokens.io/contributor-login\">Login Here</a>
+	            <a href=\"https://forceprotocol.io/contributor-login\">Login Here</a>
 	            <br /><br />
 	            Kind Regards,
-	            <br />The TriForce Tokens Team`
+	            <br />The Force Protocol Team`
 	          });
 	        }
 

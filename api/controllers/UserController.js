@@ -258,7 +258,7 @@ module.exports = {
 
   enableTFA: function (req, res) {
     if(req.token.user.tfaEnabled)
-      return res.badRequest('Two factor authentication is already enabled on this account. Please contact pete@triforcetokens.io for help');
+      return res.badRequest('Two factor authentication is already enabled on this account. Please contact pete@forceprotocol.io for help');
 
     const speakeasy = require('speakeasy'),
       QRCode = require('qrcode'),

@@ -36,8 +36,8 @@ module.exports = {
 
 		return res.view('public/home', {
 			layout: 'public/layout',
-			title: 'TriForce Tokens Ltd',
-			metaDescription: 'TriForce Tokens is building the future of game publishing, with a full-house technology framework to make games launch successfully and continue to grow.',
+			title: 'Force Protocol Ltd',
+			metaDescription: 'Force Protocol is building the future of game publishing, with a full-house technology framework to make games launch successfully and continue to grow.',
 			recaptchaForm: recaptcha.toHTML()
 		});
 
@@ -53,7 +53,7 @@ module.exports = {
 
 		return res.view('public/login', {
 			layout: 'public/layout',
-			title: 'TriForce Tokens User Account Login',
+			title: 'Force Protocol User Account Login',
 			metaDescription: '',
 			recaptchaForm: recaptcha.toHTML()
 		});
@@ -69,7 +69,7 @@ module.exports = {
 
 		return res.view('public/signup', {
 			layout: 'public/layout',
-			title: 'TriForce Tokens - Enter Token Sale',
+			title: 'Force Protocol - Enter Token Sale',
 			metaDescription: 'Sign up to the greatest technology based game publishing endevour.',
 			recaptchaForm: recaptcha.toHTML()
 		});
@@ -86,8 +86,8 @@ module.exports = {
 
 		return res.view('public/studio-signup', {
 			layout: 'public/layout',
-			title: 'TriForce Tokens - Submit your game',
-			metaDescription: 'Submit your game to become part of the TriForce Tokens family.',
+			title: 'Force Protocol - Submit your game',
+			metaDescription: 'Submit your game to become part of the Force Protocol family.',
 			recaptchaForm: recaptcha.toHTML()
 		});
 	},
@@ -126,7 +126,7 @@ module.exports = {
 	      	Game Details: ${description} `;
 
 			// Submit the email to the team
-			MailchimpService.sendMandrillEmail([{ email: 'pete@triforcetokens.io', name: 'Pete Mardell' }], 'pete@triforcetokens.io', "Studio Game Submission", message);
+			MailchimpService.sendMandrillEmail([{ email: 'pete@forceprotocol.io', name: 'Pete Mardell' }], 'pete@forceprotocol.io', "Studio Game Submission", message);
 
 	        req.addFlash('success', 'Thank you for your game submission, our team will be in touch soon!');
 	        return res.redirect("/studio-signup?email=" + email);
@@ -484,7 +484,7 @@ module.exports = {
 		return res.view('public/team', {
 			layout: 'public/layout',
 			title: 'Meet The Team',
-			metaDescription: 'The TriForce Tokens team.'
+			metaDescription: 'The Force Protocol team.'
 		});
 	},
 
@@ -614,7 +614,7 @@ module.exports = {
 		return res.view('public/forgot-password', {
 			layout: 'public/layout',
 			title: 'Forgot Password',
-			metaDescription: 'TriForce Tokens Forgot Password',
+			metaDescription: 'Force Protocol Forgot Password',
 			recaptchaForm: recaptcha.toHTML()
 		});
 	},
@@ -651,7 +651,7 @@ module.exports = {
 	getPartners: function (req, res) {
 		return res.view('public/partners', {
 			layout: 'public/layout',
-			title: 'TriForce Tokens Partners',
+			title: 'Force Protocol Partners',
 			metaDescription: 'Partners',
 		});
 	},
@@ -735,7 +735,7 @@ module.exports = {
 			let msg = err.error ? err.error.err : err.message;
 
 			if (typeof msg == 'undefined' || msg.length == 0) {
-				req.addFlash('errors', "There was a problem with your link. Please contact us at pete@triforcetokens.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
+				req.addFlash('errors', "There was a problem with your link. Please contact us at pete@forceprotocol.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
 				return res.redirect("/");
 			}
 
@@ -777,7 +777,7 @@ module.exports = {
 			let msg = err.error ? err.error.err : err.message;
 
 			if (typeof msg === 'undefined' || msg.length === 0) {
-				req.addFlash('errors', "Error occurred while processing your request. Please contact us at pete@triforcetokens.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
+				req.addFlash('errors', "Error occurred while processing your request. Please contact us at pete@forceprotocol.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.");
 				return res.redirect("/");
 			}
 
@@ -804,8 +804,8 @@ module.exports = {
 
 		return res.view('public/reset-password', {
 			layout: 'public/layout',
-			title: 'TriForce Tokens | Reset Your Password',
-			metaDescription: 'TriForce Tokens Reset Password Form',
+			title: 'Force Protocol | Reset Your Password',
+			metaDescription: 'Force Protocol Reset Password Form',
 			recaptchaForm: recaptcha.toHTML()
 		});
 	},
@@ -988,7 +988,7 @@ module.exports = {
 				message = "Sent From: " + email.trim() + " \n\r " + message;
 
 				// Submit the email to the team
-				MailchimpService.sendMandrillEmail([{ email: 'pete@triforcetokens.io', name: 'Pete Mardell' }], 'pete@triforcetokens.io', "Website Enquiry", message);
+				MailchimpService.sendMandrillEmail([{ email: 'pete@forceprotocol.io', name: 'Pete Mardell' }], 'pete@forceprotocol.io', "Website Enquiry", message);
 
 				req.addFlash('success', 'Thank you for your enquiry. A member of the team will get back to you very soon.');
 				return res.redirect('/contact');
@@ -1206,7 +1206,7 @@ module.exports = {
 				// await requestPromise();
 				// return {status:'error',errMsgs:["<p>Your document ID and Selfie could not pass the facial recognition. Please make sure the scanned images are clear.</p>",
 				// 	"<p>The most likely cause will be the ID document you uploaded. If you have another type of ID it might be worth trying that instead.</p>",
-				// 	"<p>If you are struggling to get a match on your documents please message us in <a href=\"https://t.me/triforcetokens\">telegram</a> or send an email to jake@triforcetokens.io and we will make sure to get your issue resolved.</p>"]};
+				// 	"<p>If you are struggling to get a match on your documents please message us in <a href=\"https://t.me/triforcetokens\">telegram</a> or send an email to jake@forceprotocol.io and we will make sure to get your issue resolved.</p>"]};
 			} else {
 				// Perform final check if we can auto approve this person with Artemis
 				rsp = await ArtemisApiService.finalReportCheckApi(userId);
@@ -1437,7 +1437,7 @@ module.exports = {
 		/*
 		else if(req.param("action") == 'removeFollowersAsStakes'){
 			var csv = require('fast-csv');
-			var stream = fs.createReadStream("C:/wamp2/www/triforcetokens.io/remove-followers-from-stakes.csv");
+			var stream = fs.createReadStream("C:/wamp2/www/forceprotocol.io/remove-followers-from-stakes.csv");
 
 			var csvStream = csv()
 				.on("data", function(data){
@@ -1580,8 +1580,8 @@ module.exports = {
 				throw new Error("No user was found from customer ID: " + event.data.metadata.customer_id);
 			}
 
-			let emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:user.email,toName:user.firstName,subject:'',body:''},
-			emailOptionsStaff = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:"pete@triforcetokens.io",toName:"Pete Mardell",subject:'',body:''};
+			let emailOptions = {fromEmail:"do-not-reply@forceprotocol.io",fromName:"Force Protocol",toEmail:user.email,toName:user.firstName,subject:'',body:''},
+			emailOptionsStaff = {fromEmail:"do-not-reply@forceprotocol.io",fromName:"Force Protocol",toEmail:"pete@forceprotocol.io",toName:"Pete Mardell",subject:'',body:''};
 
 			if(event.type == "charge:created"){
 				emailOptions.subject = "New pending order for FORCE tokens created";
@@ -1589,7 +1589,7 @@ module.exports = {
 				A new order has been created for you to purchase FORCE tokens. You can complete your order at the following link if you have not already done so:<br /><br />
 				<a href="${event.data.hosted_url}">Complete Order Here</a><br /><br />
 				If you have any difficulties please don't hesistate to <a href="${sails.config.BASE_URL}/contact">contact us</a>.<br />
-				The TriForce Tokens Team`;
+				The Force Protocol Team`;
 				EmailService.sendEmail(emailOptions);
 			}else if(event.type == "charge:confirmed"){
 				emailOptions.subject = "Order Completed";
@@ -1598,7 +1598,7 @@ module.exports = {
 				Please allow our team time to verify the transaction and approve the issuance of your tokens.<br />
 				You will be notified once your tokens have been distributed to the following Ether address: ${user.whitelistEthAddress}<br /><br />
 				If you have any questions in the meantime, please don't hesistate to <a href="${sails.config.BASE_URL}/contact">contact us</a>.<br /><br />
-				The TriForce Tokens Team`;
+				The Force Protocol Team`;
 				EmailService.sendEmail(emailOptions);
 
 

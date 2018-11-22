@@ -7,7 +7,7 @@ module.exports = {
     else msg = err.error ? err.error.err : err.message;
 
     if(!_.isString(msg))
-      msg = "There was a problem setting your ethereum address. Please contact us at pete@triforcetokens.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.";
+      msg = "There was a problem setting your ethereum address. Please contact us at pete@forceprotocol.io or telegram https://t.me/triforcetokens and we will resolve the issue as soon as possible.";
 
     req.addFlash('errors', msg);
 

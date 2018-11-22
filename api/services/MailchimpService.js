@@ -9,7 +9,7 @@ var Mailchimp = require('mailchimp-api-v3')
 var mailchimp = new Mailchimp(sails.config.MAILCHIMP_KEY);
 var mandrill = require('node-mandrill')(sails.config.MANDRILL_KEY);
 
-var domain = 'triforcetokens.io';
+var domain = 'forceprotocol.io';
 var mailgun = require('mailgun-js')({apiKey: sails.config.MAILGUN_KEY, domain: domain});
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 	addSubscriber: async(listId,email,firstName,lastName,subscribeStatus)=>{
 
 		try{
-			var list = mailgun.lists('subscriber@mg.triforcetokens.io');
+			var list = mailgun.lists('subscriber@mg.forceprotocol.io');
 
 			var user = {
 			  subscribed: true,

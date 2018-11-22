@@ -62,7 +62,7 @@ module.exports = {
 
         return res.view('contributor/dashboard', {
           layout: 'contributor/layout',
-          title: 'Contributor Dashboard | TriForce Tokens Ltd',
+          title: 'Contributor Dashboard | Force Protocol Ltd',
           metaDescription: 'Contributor Dashboard.',
           txns: rsp.txns,
           isWlAdded: rsp.isWlAdded,
@@ -567,7 +567,7 @@ module.exports = {
 
       let updatedUser = await User.update({id:user.id},{riskRating:finalKycCheck.risk_rating,approvalStatus:finalKycCheck.approval_status,faceMatchResult:faceMatchResult});
 
-      let emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:user.email,toName:user.firstName,subject:'',body:''};
+      let emailOptions = {fromEmail:"do-not-reply@forceprotocol.io",fromName:"Force Protocol",toEmail:user.email,toName:user.firstName,subject:'',body:''};
 
       if (finalKycCheck.approval_status == 'ACCEPTED' || finalKycCheck.approval_status == 'CLEARED') {
         req.addFlash('success', 'Congratulations! You are now a fully approved contributor and may purchase FORCE tokens.');
@@ -578,7 +578,7 @@ module.exports = {
         Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.<br /><br />
 
         Kind Regards<br />
-        The TriForce Tokens Team`;
+        The Force Protocol Team`;
 
         EmailService.sendEmail(emailOptions);
         return res.redirect("/contributor/kyc");
@@ -592,12 +592,12 @@ module.exports = {
         Remember you can always <a href="${sails.config.BASE_URL}/contributor-login">access your account here</a>.<br /><br />
 
         Kind Regards<br />
-        The TriForce Tokens Team`;
+        The Force Protocol Team`;
 
         EmailService.sendEmail(emailOptions);
 
         // Send email to team about pending KYC application
-        emailOptions = {fromEmail:"do-not-reply@triforcetokens.io",fromName:"TriForce Tokens",toEmail:"pete@triforcetokens.io",toName:"Team",subject:'User has KYC Pending',body:''};
+        emailOptions = {fromEmail:"do-not-reply@forceprotocol.io",fromName:"Force Protocol",toEmail:"pete@forceprotocol.io",toName:"Team",subject:'User has KYC Pending',body:''};
         emailOptions.body = `A user tried to complete KYC. A manual review is required. The user info is:<br /><br />
         Email: ${user.email}<br />
         First Name: ${user.firstName}<br />
@@ -620,7 +620,7 @@ module.exports = {
         If you feel that an error has been made please <a href="${sails.config.BASE_URL}/contact">contact us here</a>.<br /><br />
 
         Kind Regards<br />
-        The TriForce Tokens Team`;
+        The Force Protocol Team`;
 
         EmailService.sendEmail(emailOptions);
         return res.redirect("/contributor/kyc");

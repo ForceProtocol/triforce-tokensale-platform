@@ -46,7 +46,7 @@ module.exports = {
 
   hookTimeout: 120000,
 
-  COMMUNITY_NAME: 'triforce tokens',
+  COMMUNITY_NAME: 'force protocol',
   SLACK_URL: 'triforcetokens.slack.com',
   SLACK_TOKEN: 'xoxp-190493269351-236060420833-241212037735-1f2fb485aab99b212c88e8b1f0a2ff1d',
 
@@ -70,7 +70,7 @@ module.exports = {
   },
   MERCHANT_ID : '3708286360a4e4d788a24a97dd093cba',
 
-  MAILER: 'triforcetokens.io',
+  MAILER: 'forceprotocol.com',
   BASE_URL: 'http://localhost:1337/',
   APP_URL: 'http://localhost:1337/',
   API_URL: 'http://localhost:1337/',
@@ -102,7 +102,7 @@ module.exports = {
   },
 
   contacts: {
-    team: ['pete@triforcetokens.io', 'jake@triforcetokens.io']
+    team: ['pete@forceprotocol.io', 'jake@forceprotocol.io']
   },
   
   /** Twitter - service  Keys */

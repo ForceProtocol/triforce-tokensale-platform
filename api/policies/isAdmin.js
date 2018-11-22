@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
   if(!req.token || !req.token.user)
     return res.json(401, {err: 'Invalid Token'});
 
-  if(['raza@triforcetokens.io', 'pete@triforcetokens.io'].indexOf(req.token.user.email) !== -1){
+  if(['raza@forceprotocol.io', 'pete@forceprotocol.io'].indexOf(req.token.user.email) !== -1){
     next();
   }
   else {

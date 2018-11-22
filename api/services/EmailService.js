@@ -7,7 +7,7 @@ var mgTransport = require('nodemailer-mailgun-transport');
 var mailgunTransport = nodemailer.createTransport(mgTransport({
   auth: {
     api_key: sails.config.MAILGUN_KEY,
-    domain: 'mg.triforcetokens.io'
+    domain: 'mg.forceprotocol.io'
   }
 }));
 
