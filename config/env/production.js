@@ -44,7 +44,7 @@ module.exports = {
   SLACK_URL:'triforcetokens.slack.com',
   SLACK_TOKEN:'xoxp-190493269351-236060420833-241212037735-1f2fb485aab99b212c88e8b1f0a2ff1d',
 
-  API_URL: 'https://forceprotocol.com/',
+  API_URL: 'https://forceprotocol.io/',
 
   COINPAYMENT_OPTS : {
     key: 'b703dffaa0dfedb1695ceb7e6b3c90638c34ea6a73393e2a72a8ad6e8b7067be',
@@ -52,10 +52,10 @@ module.exports = {
   },
   MERCHANT_ID : 'de44fbc0e7ce2316fd8907d52d91026d',
 
-  MAILER: 'forceprotocol.com',
-  BASE_URL: 'https://forceprotocol.com/',
-  CONTRIBUTOR_URL: 'https://forceprotocol.com/',
-  APP_URL: 'https://forceprotocol.com/',
+  MAILER: 'forceprotocol.io',
+  BASE_URL: 'https://forceprotocol.io/',
+  CONTRIBUTOR_URL: 'https://forceprotocol.io/',
+  APP_URL: 'https://forceprotocol.io/',
 
 
   blockchain: {

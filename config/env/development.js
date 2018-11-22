@@ -70,7 +70,7 @@ module.exports = {
   },
   MERCHANT_ID : '3708286360a4e4d788a24a97dd093cba',
 
-  MAILER: 'forceprotocol.com',
+  MAILER: 'forceprotocol.io',
   BASE_URL: 'http://localhost:1337/',
   APP_URL: 'http://localhost:1337/',
   API_URL: 'http://localhost:1337/',
