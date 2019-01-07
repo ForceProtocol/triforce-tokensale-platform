@@ -9,7 +9,7 @@ var Mailchimp = require('mailchimp-api-v3')
 var mailchimp = new Mailchimp(sails.config.MAILCHIMP_KEY);
 var mandrill = require('node-mandrill')(sails.config.MANDRILL_KEY);
 
-var domain = 'forceprotocol.io';
+var domain = 'mg.forceprotocol.io';
 var mailgun = require('mailgun-js')({apiKey: sails.config.MAILGUN_KEY, domain: domain});
 
 module.exports = {
@@ -64,15 +64,17 @@ module.exports = {
 			mailgun.messages().send(data, function (error, body) {
 
 				if(error){
-					sails.log.debug("Error sending email via mailgun: ",err);
+					sails.log.error("Error sending email via mailgun: ",error);
 					return false;
 				}
+
+				sails.log.debug("Body of email sending is: ",body);
 
 				return true;
 			});
 
 		}catch(err){
-			sails.log.debug("Error sending email via mailgun: ",err);
+			sails.log.error("Error sending email via mailgun: ",err);
 			return false;
 		}
 

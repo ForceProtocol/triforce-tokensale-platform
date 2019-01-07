@@ -126,7 +126,8 @@ module.exports = {
 	      	Game Details: ${description} `;
 
 			// Submit the email to the team
-			MailchimpService.sendMandrillEmail([{ email: 'pete@forceprotocol.io', name: 'Pete Mardell' }], 'pete@forceprotocol.io', "Studio Game Submission", message);
+			let toField = {email: 'pete@forceprotocol.io', name: 'Pete Mardell'};
+			MailchimpService.sendMandrillEmail(toField, 'pete@forceprotocol.io', "Studio Game Submission", message);
 
 	        req.addFlash('success', 'Thank you for your game submission, our team will be in touch soon!');
 	        return res.redirect("/studio-signup?email=" + email);
@@ -988,9 +989,11 @@ module.exports = {
 				message = "Sent From: " + email.trim() + " \n\r " + message;
 
 				// Submit the email to the team
-				MailchimpService.sendMandrillEmail([{ email: 'pete@forceprotocol.io', name: 'Pete Mardell' }], 'pete@forceprotocol.io', "Website Enquiry", message);
+				let toField = {email: 'pete@forceprotocol.io', name: 'Pete Mardell'};
+				MailchimpService.sendMandrillEmail(toField, 'pete@forceprotocol.io', "Website Enquiry", message);
 
 				req.addFlash('success', 'Thank you for your enquiry. A member of the team will get back to you very soon.');
+
 				return res.redirect('/contact');
 			}
 			else {
